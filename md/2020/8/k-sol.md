@@ -1,16 +1,11 @@
 2020/avgust/Kolokvijum - Avgust 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja zadataka za 
-kolokvijum iz Operativnih sistema 1 
-avgust 2020. 
-1. (10  poena) Pokazana  je  jedna  jednostavna  implementacija  koja  zadovoljava  uslove,  
+semaphore
+Pokazana  je  jedna  jednostavna  implementacija  koja  zadovoljava  uslove,  
 koristi jedostavan FIFO red zahteva, ali koja ima značajan stepen odbijanja zahteva (red 
 zahteva je opadajući po vremenskoj marki). Moguće su i složenije varijante sa boljim 
 učinkom (manje odbijenih zahteva), ali treba paziti na moguće izgladnjivanje. 
- 
+```cpp
 typedef unsigned long Time; 
 const Time MAXTIME = (Time)-1; 
  
@@ -57,32 +52,38 @@ void Resource::release () {
     holder = 0; last = MAXTIME; 
   } 
   unlock(); 
-} 
+}
+```
 
-2/3 
-2. (10 poena) 
-a)(5) 
-SegDesc* findSegDesc (SegDesc* root, size_t page) { 
-  SegDesc* sd = root; 
-  while (!sd) { 
-    if (sd->pg<=page && page<sd->pg+sd->sz) return sd; 
-    if (page<sd->pg) sd = sd->left; 
-    else sd = sd->right; 
-  } 
-  return nullptr; 
-} 
-b)(5) 
-int handlePageFault (PCB* pcb, size_t page) { 
-  SegDesc* sd = findSegDesc(pcb->segdesc,page); 
-  if (!sd) return -1; // Memory access violation 
-  size_t frame = allocateFrame(); 
-  if (!frame) return -2; // No free memory 
-  int s = sd->vtp->loadPage(page,frame); 
-  if (s<0) return s; // Error loading page 
-  setPMTEntry(pcb,page,frame,sd);   
-  return 0; 
-} 
-3. 
+--------------------------------------------------------------------------------
+segpage
+1. ```cpp
+   SegDesc* findSegDesc (SegDesc* root, size_t page) { 
+     SegDesc* sd = root; 
+     while (!sd) { 
+       if (sd->pg<=page && page<sd->pg+sd->sz) return sd; 
+       if (page<sd->pg) sd = sd->left; 
+       else sd = sd->right; 
+     } 
+     return nullptr; 
+   } 
+   ```
+2. ```cpp
+   int handlePageFault (PCB* pcb, size_t page) { 
+     SegDesc* sd = findSegDesc(pcb->segdesc,page); 
+     if (!sd) return -1; // Memory access violation 
+     size_t frame = allocateFrame(); 
+     if (!frame) return -2; // No free memory 
+     int s = sd->vtp->loadPage(page,frame); 
+     if (s<0) return s; // Error loading page 
+     setPMTEntry(pcb,page,frame,sd);   
+     return 0; 
+   }
+   ```
+
+--------------------------------------------------------------------------------
+io
+```cpp
 static REG* ptr = 0;  // pointer to current data item 
 static int count = 0; // counter 
  
@@ -110,14 +111,16 @@ interrupt void ioInterrupt () {
   *ioCtrl = 0; // Stop the transfer 
   ioHead = ioHead->next; // Remove the request from the list 
   startIO();  // Start a new transfer 
-} 
-4. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+syscall
+```cpp
 int write (int fd, Node* root) { 
   if (!root) return 0; 
   int ret = write(root->left); 
     if (ret<0) return ret; 
-
-3/3 
   ret = write(fd,&(root->contents),sizeof(int)); 
     if (ret<0) return ret; 
   ret = write(root->right); 
@@ -132,4 +135,4 @@ int save (const char* fname, Node* root) {
   close(fd); 
   return ret; 
 } 
- 
+```
