@@ -1,12 +1,7 @@
 2019/maj/IR Kolokvijum 1 - April 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2
-Prvi kolokvijum iz Operativnih sistema 1
-Računarska tehnika i informatika
-April 2019.
-1. (10 poena)
+io
+```cpp
 static IORequest* pending[2] = {0,0}; // Pending requests for two channels
 
 void startIO (int i) { // Helper: start a new transfer with channel i
@@ -46,14 +41,18 @@ void transfer () {
     if (pending[1]) handleIO(1);
   }
 }
-2. (10 poena)
+```
+--------------------------------------------------------------------------------
+interrupt
+```cpp
   *sp-- = arg;
   *sp-- = &exit;
   pcb->sp = sp;
   pcb->pc = pf;
-
-2/  2
-3. (10 poena)
+```
+--------------------------------------------------------------------------------
+syscall
+```cpp
 const int M = ..., N = ...;
 int mat[M][N];
 int sums[M];
@@ -82,3 +81,4 @@ int par_sum () {
   }
   return s;
 }
+```

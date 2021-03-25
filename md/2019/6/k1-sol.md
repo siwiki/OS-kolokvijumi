@@ -1,11 +1,7 @@
 2019/jun/SI, IR Kolokvijum 1 - Jun 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Jun 2019.
-1. (10 poena)
+io
+```cpp
 static REG* ioPtr = 0;
 static int ioCount = 0;
 static int ioCompleted = 0;
@@ -43,9 +39,11 @@ interrupt void io2Interrupt() {
     *io2Ctrl = 0; // Stop I/O 2
   }
 }
+```
 
-2/2
-2. (10 poena)
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 int dispatch (Thread* newT = 0) {
   lock();
   if (newT && !newT->isRunnable) {
@@ -68,7 +66,11 @@ int dispatch (Thread* newT = 0) {
   unlock();
   return 0;
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+syscall
+```cpp
 struct copy_task {
   void* dst;
   const void* src;
@@ -94,3 +96,4 @@ void* par_memcpy (void* dest, const void* source, size_t num) {
   wait(NULL);
   return dest;
 }
+```
