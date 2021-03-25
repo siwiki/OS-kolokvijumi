@@ -1,12 +1,7 @@
 2019/mart/SI Kolokvijum 1 - Mart 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za softversko inženjerstvo
-Mart 2019.
-1. (10 poena)
+io
+```cpp
 void performIO () {
   while (ioHead!=0) {
 
@@ -37,46 +32,50 @@ void transfer (IORequest* req) {
   } else
     ioTail = ioTail->next = req;
 }
+```
 
-2/3
-2. (10 poena)
+--------------------------------------------------------------------------------
+interrupt
+```asm
 dispatch: ; Save the current context
-push r0 ; save r0 temporarily on the stack
-load r0, [running] ; r0 now points to the running PCB
-store r1, #offsR1[r0] ; save r1
-store r2, #offsR2[r0] ; save r2
-...                   ; save r3-r30
-store r31, #offsR31[r0] ; save r31
-pop r1                ; save r0
-store r1, #offsR0[r0]
-pop r1                ; save PC
-store r1, #offsPC[r0]
-pop r1                ; save PSW
-store r1, #offsPSW[r0]
-pop r1                ; save SP
-store r1, #offsSP[r0]
+          push r0 ; save r0 temporarily on the stack
+          load r0, [running] ; r0 now points to the running PCB
+          store r1, #offsR1[r0] ; save r1
+          store r2, #offsR2[r0] ; save r2
+          ...                   ; save r3-r30
+          store r31, #offsR31[r0] ; save r31
+          pop r1                ; save r0
+          store r1, #offsR0[r0]
+          pop r1                ; save PC
+          store r1, #offsPC[r0]
+          pop r1                ; save PSW
+          store r1, #offsPSW[r0]
+          pop r1                ; save SP
+          store r1, #offsSP[r0]
 
-; Select the next running process
-call  scheduler
+          ; Select the next running process
+          call  scheduler
 
-; Restore the new context
-load r0, [running]
-load r1, #offsSP[r0] ; restore SP
-push r1
-load r1, #offsPSW[r0] ; restore PSW
-push r1
-load r1, #offsPC[r0] ; restore PC
-push r1
-load r31, #offsR31[r0] ; restore R31
-...                    ; restore r30-r2
-load r1, #offsR1[r0] ; restore R1
-load r0, #offsR0[r0] ; restore R0
+          ; Restore the new context
+          load r0, [running]
+          load r1, #offsSP[r0] ; restore SP
+          push r1
+          load r1, #offsPSW[r0] ; restore PSW
+          push r1
+          load r1, #offsPC[r0] ; restore PC
+          push r1
+          load r31, #offsR31[r0] ; restore R31
+          ...                    ; restore r30-r2
+          load r1, #offsR1[r0] ; restore R1
+          load r0, #offsR0[r0] ; restore R0
 
-; Return
-iret
+          ; Return
+          iret
+```
 
-3/3
-3. (10 poena)
+--------------------------------------------------------------------------------
+syscall
+```cpp
 const int N = ...;
 const unsigned timeout = 5000;
 int pid[N];
@@ -133,3 +132,4 @@ number %d.\n”,i);
 
   exit(ret);
 }
+```
