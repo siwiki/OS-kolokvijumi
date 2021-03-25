@@ -90,7 +90,7 @@ async function main() {
             }
             categoriesConnected[category].push({
                 ...entry,
-                content: `${content}\n\n#### Rešenje\n\n${solution.content}`,
+                content: `${content}\n\n### Rešenje\n\n${solution.content}`,
                 solutionUrl: solution.url
             });
         }
@@ -102,11 +102,11 @@ async function main() {
         encoding: 'utf-8'
     });
     await writeFile('combined.md', `${header}${Object.entries(categoriesConnected).map(
-        ([category, entries]) => `## ${CATEGORIES[category]}\n${entries.map(
+        ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
             ({url, content, year, month, type, task, solutionUrl}) =>
-                `### ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n- [Postavka](${BASE_URL}${url})\n- [Rešenje](${BASE_URL}${solutionUrl})\n\n${content}`
+                `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n- [Postavka](${BASE_URL}${url})\n- [Rešenje](${BASE_URL}${solutionUrl})\n\n${content}`
         ).join('\n\n')}`
-    ).join('\n\n')}${footer}`, {
+    ).join('\n\\pagebreak\n')}${footer}`, {
         encoding: 'utf-8'
     });
 }

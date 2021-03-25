@@ -7,6 +7,7 @@ output: pdf_document
 header-includes: \usepackage[croatian]{babel}
 urlcolor: blue
 toc: true
+toc-depth: 2
 pdf-engine: xelatex
 ---
 \newcommand{\specialcell}[2][c]{%
