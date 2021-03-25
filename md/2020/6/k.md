@@ -84,6 +84,7 @@ int main (int argc, const char* argv[]) {
 ```
 
 pod sledećim pretpostavkama:
+
 - tip `int` je veličine 32 bita; promenljive `i` i `j` je  prevodilac  formirao  kao  automatske
   promenljive na steku;
 - logički segment za kod ovog programa veličine je jedne stranice i nalazi se na dnu

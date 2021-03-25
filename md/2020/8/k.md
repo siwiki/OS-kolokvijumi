@@ -11,6 +11,7 @@ die*)  koji  funkcioniše  na  sledeći  način.  Svakoj  niti  pri  samom  krei
 jedinstvena „vremenska marka“ (ceo broj dostupan u atributu `Thread::timestamp`), tako da
 starije niti imaju  manju vrednost ove marke. Kada  nit *Ta* zahteva resurs koji drži zauzeta nit
 Tb, onda:
+
 - Ako  je *Ta* starija  nego Tb (*Ta*<*Tb*),  nit *Ta* čeka suspendovana dok ne dobije resurs i tada  operacija `acquire` vraća 1 (istu vrednost ova operacija vraća i kada je resurs slobodan, onda ga nit odmah dobija);
 - Ako je *Ta* mlađa nego *Tb* (*Ta*>*Tb*), niti Ta se odbija zahtev tako što operacija `acquire` vraća 0, a nit onda tu situaciju obrađuje na odgovarajući način (pokušava ponovo ili odustaje).
 
@@ -124,6 +125,7 @@ interrupt void ioInterrupt ();
 --------------------------------------------------------------------------------
 syscall
 Na raspolaganju su sledeći standardni POSIX sistemski pozivi:
+
 - `int close (int fd)`: zatvara fajl sa zadatim deskriptorom;
 - `int write (int fd, const void *buffer, size_t size)`: upisuje dati sadržaj u fajl sa zadatim deskriptorom; ako je fajl otvoren sa postavljenim O_APPEND, onda se pre upisa tekuća pozicija implicitno pomera na kraj fajla i upis uvek vrši iza kraja fajla, proširujući sadržaj;
 - `int open(const char *pathname, int flags, mode_t mode)`: otvara fajl sa zadatom putanjom; argument flags mora da uključi jedno od sledećih prava pristupa: *O_RDONLY*, *O_WRONLY*, ili *O_RDWR*. Ako je uključen i fleg *O_CREAT*, fajl će biti kreiran ukoliko ne postoji; ako je pritom uključen i *O_EXCL*, a fajl već postoji, funkcija će vratiti grešku (-1), a kod greške postavljen u globalnoj sistemskoj promenljivoj *errno* biće jednak *EEXIST*. Ako je uključen *O_TRUNC*, i ako fajl već postoji, njegov sadržaj se pri otvaranju briše. Argument *mode* definiše prava pristupa za fajl koji se kreira samo u slučaju da je uključen *O_CREAT* (tada je i obavezan), i to na sledeći način:
