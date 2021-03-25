@@ -1,12 +1,7 @@
 2020/septembar/Kolokvijum - Septembar 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-kolokvijum iz Operativnih sistema 1
-septembar 2020.
-1. (10 poena)
+concurrency
+```cpp
 Thread* t_fork () {
   lock();
   if (setjmp(Thread::running->context)==0) {
@@ -36,7 +31,11 @@ Thread* t_fork () {
     return 0;
   }
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+syscall
+```cpp
 typedef void (*PF)(void*);
 
 void cobegin (PF f[], void* af[], int n) {
@@ -50,9 +49,11 @@ void cobegin (PF f[], void* af[], int n) {
     wait(ids[i]);
   delete ids;
 }
+```
 
-2/2
-3. (10 poena)
+--------------------------------------------------------------------------------
+segment
+```cpp
 SegDesc* findSegDesc (SegDesc* root, size_t size) {
   SegDesc* sd = root;
   while (sd != nullptr) {
@@ -61,7 +62,11 @@ SegDesc* findSegDesc (SegDesc* root, size_t size) {
   }
   return nullptr;
 }
-4. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 void truncateFile (FCB* fcb) {
   for (size_t i=0; i<SingleIndexSize; i++)
     if (fcb->singleIndex[i]) {
@@ -78,3 +83,4 @@ void truncateFile (FCB* fcb) {
   }
 
   fcb->size = 0;
+```
