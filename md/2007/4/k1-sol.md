@@ -1,10 +1,7 @@
 2007/april/SI Kolokvijum 1 - April 2007 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  5
-1. (10 poena)
-
+io
+```cpp
 enum Status{OK, Error};
 
 class DMA {
@@ -26,21 +23,26 @@ StatusMask, int memToIO, int vel);
  virtual Status getStatus()
 }
 
-2. (10 poena)
-VA
+```
+--------------------------------------------------------------------------------
+page
+
+1. 
+VA:
 Page(24) Offset(8)
-PA
+; PA:
 Block(20) Offset(8)
 
-b)(5)
-void setPageDescr(unsigned int* pmtp, unsigned int page, unsigned int
-frame){
-pmtp[page] = frame | ~((unsigned int)~0 / 2);
+2. 
+```cpp
+void setPageDescr(unsigned int* pmtp, unsigned int page, unsigned int frame){
+    pmtp[page] = frame | ~((unsigned int)~0 / 2);
 }
-3. (10 poena)
+```
+--------------------------------------------------------------------------------
+segpage
 
-a)
-Potrebno je da postoji tabela svih pokrenutih programa.  Za svaki program u tabeli se čuva
+1. Potrebno je da postoji tabela svih pokrenutih programa.  Za svaki program u tabeli se čuva
 lista (pokazivaa na prvi u listi) PCB-ova procesa koji su pokrenuti nad tim programom.  Pri
 pokretanju novog,  potrebno ga je uvezati u odgovarajuću listu.  Ukoliko veu postoji neki
 proces pokrenutim nad istim programom,  potrebno je u SMT i PMT tabele novog procesa
@@ -49,18 +51,22 @@ način da to bude moguće uraditi je da se uz svaki proces pamti u koji dio virt
 prostora tog procesa je učitan program.
 Kada se neka stranica učita u OM, potrebno je ažurirati deskriptore u svim PMT svih procesa
 koji dijele tu stranicu. Isto je i kada neka stranica bude izbačena iz OM. Moguće je i efikasnije
-
-2/  5
 rješenje (razmisliti o još po jednoj tabeli po programu u kojoj se čuvaju deskriptori njegovih
 stranica, a da se u SMT/PMT procesa vrši redirekcija na ovu tabelu).
 
-b) Opisani način se u potpunosti realizuje u OS.
-c) Stek je dio konteksta svakog procesa i kao takav pravi razliku izmedju različitih
+2. Opisani način se u potpunosti realizuje u OS.
+
+3. Stek je dio konteksta svakog procesa i kao takav pravi razliku izmedju različitih
 izvršavanja jednog koda.  Stek je struktura podataka u koju se podaci i upisuju,  a ne samo
 čitaju. To znači da svaki proces ima svoj zaseban stek i iz tog razloga nije moguće djeljenje
 stranica sa stekom.  (Stranice su male da bi u njih moglo stati više stekova koji se neće
 preklopiti).
-4. (10 poena)
+
+
+--------------------------------------------------------------------------------
+concurrency
+
+```cpp
 typedef unsigned int PID;
 #define MaxProc ... // Max number of processes
 struct PCB {
@@ -89,10 +95,13 @@ void yield(PCB* current, PCB* next){
  }
  return;
 }
+```
 
 Drugi način za yield (Neki kompajleri posjeduju registarske
 pseudovarijable, pa je registrima moguće pristupiti i direktno iz C odnosno
 C++ koda. Jedan od takvih je TC.):
+
+```cpp
 void yield(PCB* current, PCB* next){
  asm{
  push R0
@@ -132,10 +141,11 @@ ind=0;
   ready = pid;
  }
 }
+```
+--------------------------------------------------------------------------------
+syscall
 
-5. (10 poena)
-
-4/  5
+```cpp
 #include <stdio.h>
 #define N 3
 int pid[N];
@@ -146,43 +156,18 @@ void main () {
   for (i=0; i<N; i++) pid[i]=fork();
   for (i=0; i<N; i++) printf(“%d ”,pid[i]);
 }
+```
 
 U tri prolaza petlje u sredini kreira se 8 procesa:  u prvom prolazu od 1 nastaju 2,  u
 drugom od svakog od ovih nastaju po 2, što je ukupno 4 i u trećem prolazu od svakog od ova
 4 nastaju po 2, što je ukupno 8. Svaki od njih će imati sopstveni niz pid i ispisaće 3 broja. To
 je ukupno 24 ispisana broja.
-Posle svakog poziva fork()  ostaju po dva identična procesa (roditelj i novokreirani
-potomak) koji se razlikuju samo po rezultatu fork()  funkcije.  U prvom prolazu kroz petlju
-ostaju dva procesa, jedan sa pid[0]=0 i drugi sa pid[0]<>0. Pošto su u kontrolnim strukturama
+Posle svakog poziva `fork()`  ostaju po dva identična procesa (roditelj i novokreirani
+potomak) koji se razlikuju samo po rezultatu `fork()`  funkcije.  U prvom prolazu kroz petlju
+ostaju dva procesa, jedan sa `pid[0]=0` i drugi sa `pid[0]<>0`. Pošto su u kontrolnim strukturama
 ova dva procesa identicna,  to znači da će od svakog od njih nastati isti broj novih procesa,
-odnosno da će polovina svih procesa imati pid[0]=0,  a druga <>0.  Dalje,  problem možemo
-raščlaniti na dva koji imaju za 1 manju dimenziju problema (niz sa elementima pid[1]  i
-pid[2]). To znači da će,  iz istog razloga kao i u prethodnom slučaju, polovina procesa imati
-pid[1]=0,  a druga <>0.  Ovakvim razmatranjem ili direktnim brojanjem dolazi se da je
+odnosno da će polovina svih procesa imati `pid[0]=0`,  a druga `<>0`.  Dalje,  problem možemo
+raščlaniti na dva koji imaju za 1 manju dimenziju problema (niz sa elementima `pid[1]`  i
+`pid[2]`). To znači da će,  iz istog razloga kao i u prethodnom slučaju, polovina procesa imati
+`pid[1]=0`,  a druga `<>0`.  Ovakvim razmatranjem ili direktnim brojanjem dolazi se da je
 polovina ispisanih brojeva jednaka nuli, odnosno 24/2 = 12 nula.
-Drugi način jeste da se sve pažljivo prebroji:
-
-
-
-
-
-
-pid[0]=0
-pid[0]<>0
-pid[1]=0
-pid[1]=0
-pid[2]=0
-pid[2]=0
-pid[1]<>0
-pid[1]<>0
-pid[2]<>0
-pid[2]<>0
-pid[2]<>0
-pid[2]<>0
-pid[2]=0
-pid[2]=0
-Posle prolaza:  prvog                drugog                     trećeg
-
-5/  5
-Sadržaj odgovarajućeg niza se dobija kada se kroz prikazano stablo prođe kroz dato
-stablo od korjena do odgovarajućeg lista. Prebrojavanjem se dobija 12.
