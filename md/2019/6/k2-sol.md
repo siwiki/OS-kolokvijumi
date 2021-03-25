@@ -44,17 +44,12 @@ int shrink (PCB* pcb, size_t by) {
 }
 3. (10 poena) a)(3) VA(32): Page1(9):Page2(10):Offset(13).
 b)(4) Ovaj proces adresira sledeće stranice:
- jednu stranicu segmenta za kod, za dohvatanje instrukcija programa
- samo jednu stranicu iz segmenta za stek, jer je to dovoljno za samo jedan poziv
+
+- jednu stranicu segmenta za kod, za dohvatanje instrukcija programa
+- samo jednu stranicu iz segmenta za stek, jer je to dovoljno za samo jedan poziv
 potprograma main bez automatskih objekata na steku (argumenata i lokalnih varijabli)
- po 2 stranice za svaki niz src i dst, jer svaki niz sadrži 0x1000=2
-12
- elemenata po 4
-bajta, odnosno 2
-14
- bajtova, što je 2 stranice po 2
-13
- bajtova.
+- po 2 stranice za svaki niz src i dst, jer svaki niz sadrži 0x1000=2^12 elemenata po 4 bajta, odnosno 2^14 bajtova, što je 2 stranice po 2^13 bajtova.
+
 Sve ukupno, proces adresira 6 stranica. Kako svaka od njih ostaje u memoriji nakon prvog
 adresiranja i učitavanja, i pošto je procesu dodeljeno dovoljno okvira, ovaj proces će
 generisati isto toliki broj (6) straničnih grešaka.
