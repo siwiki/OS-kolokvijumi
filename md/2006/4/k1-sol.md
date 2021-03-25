@@ -1,34 +1,33 @@
 2006/april/resenja.doc
 --------------------------------------------------------------------------------
+io
 
-
-Kolokvijum, April 2006.
-Rešenja
-
-Zad 1.
-
-a)  NE - Objašnjenje: kod multiprogramskog okruženja POJEDINAČNI posao će trajati
+1.  NE - Objašnjenje: kod multiprogramskog okruženja POJEDINAČNI posao će trajati
 duže zbog konkurentnog izvršavanja i režijskih operacija koje se događaju u toku
 izvršenja posla.
 
-b) DA - Odjašnjenje: Dok jedan posao čeka na I/O, drugi se izvršava, tj. koristi processor,
+2. DA - Objašnjenje: Dok jedan posao čeka na I/O, drugi se izvršava, tj. koristi processor,
 tako da se iskorišćenje procesora povećava.
 
-c) DA - Objašnjenje: Pošto se poslovi izvrsavaju u paraleli (dok jedan ceka na I/O, a
+3. DA - Objašnjenje: Pošto se poslovi izvrsavaju u paraleli (dok jedan ceka na I/O, a
 drugi se izvrsava),  onda se ukupno vreme odziva skraćuje,  pa se samim tim broj
 završenih poslova u jedinici vremena (throughput) povećava.
 
-d) NE - Objašnjenje: Jedino reijsko vreme kod paketnog OSa je dovlačenje posla u radnu
+4. NE - Objašnjenje: Jedino reijsko vreme kod paketnog OSa je dovlačenje posla u radnu
 memoriju, dok kod multiprogramskog OSa postoje režijske operacije i prilikom svake
 zamene poslova.
 
-Zad 2. Operativni sistem treba da nudi uslugu da neki proces može da se uspava i da se
+--------------------------------------------------------------------------------
+io
+
+Operativni sistem treba da nudi uslugu da neki proces može da se uspava i da se
 probuti posle tačno odredjenog vremena (ili malo kasnije od tog vremena).   Npr
 operativni sistem treba da obezbedi primitivu void sleep(int time),  koja
 obezbedjuje da se proces uspava time milisekunti (odnosno stavi u red uspavanih, engl.
 Sleep), a da se posle toga može probuditi (odnosno proces vrati u red spremnih, engl.
 Ready). Proces za obradu ulazno/izlazne operacije treba da radi sledeće:
 
+```cpp
  const int maxTime = ...; // response time (worst case)
 
  While (!end){
@@ -36,25 +35,30 @@ Ready). Proces za obradu ulazno/izlazne operacije treba da radi sledeće:
   sleep(maxTime);
   process_IO_result();
  }
+ ```
 
-Zad 3.
+--------------------------------------------------------------------------------
+segpage
 
 VA(16): seg(2), page(6), offset(8)
 PA(32): block(24), offset(8)
 
-Zad 4. Ne treba, pošto je identifikator procesa ujedno i ulaz u opisani niz. Nije potrebno
+--------------------------------------------------------------------------------
+page
+
+Ne treba, pošto je identifikator procesa ujedno i ulaz u opisani niz. Nije potrebno
 dodatno čuvati tu informaciju.
 
+--------------------------------------------------------------------------------
+concurrency
 
-
-
-
-Zad 5. Potrebno je dodati sledeću deklaraciju, koja će predstavljati pokazivač na listu
+Potrebno je dodati sledeću deklaraciju, koja će predstavljati pokazivač na listu
 suspendovanih (blokiranih) procesa.
 
-PCB* blocked;
-
 Implementacije traženih funkcija:
+```cpp
+
+PCB* blocked;
 
 void suspend () {
   lock ();
@@ -96,11 +100,13 @@ if (blocked == 0) return;
 
  unlock();
 }
-
-Zad 6.
+```
+--------------------------------------------------------------------------------
+syscall
 
 U protected sekciju klase Thread potrebno je dodati sledeći metod:
 
+```cpp
 Class Thread{
    ...
 Protected:
@@ -119,4 +125,4 @@ U tom slučaju implementacija metoda start izgleda:
 void Thread::start(){
  pid = create_thread(&starter, this);
 }
-
+```
