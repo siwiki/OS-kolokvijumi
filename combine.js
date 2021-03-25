@@ -44,7 +44,7 @@ async function processFile(year, month, type, categories) {
         ++task;
         const sectionTrimmed = section.trim();
         const category = sectionTrimmed.split('\n', 1)[0].trim();
-        const content = sectionTrimmed.replace(/.*\n/, '');
+        const content = sectionTrimmed.replace(/.*[\r\n]*/, '');
         if (!categories[category]) {
             categories[category] = [];
         }
