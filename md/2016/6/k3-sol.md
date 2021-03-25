@@ -20,7 +20,7 @@ private:
   int rdCursor, wrCursor;
   Semaphore mutex, spaceAvailable, itemAvailable;
 };
-Buffer::Buffer () : rdCursor(0), wrCursor(0), 
+Buffer::Buffer () : rdCursor(0), wrCursor(0),
   mutex(1), spaceAvailable(BufferSize), itemAvailable(0) {}
 void Buffer::put (Byte b) {
   spaceAvailable.wait();

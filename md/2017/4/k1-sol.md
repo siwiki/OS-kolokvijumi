@@ -15,13 +15,13 @@ void transfer (unsigned* blk1, int count1, unsigned* blk2, int count2) {
   io1Count = count1;
   *io1Ctrl = 1; // Start I/O 1
   *io1Data = *io1Ptr++;
-  *timer = timeout; // Start timer 
+  *timer = timeout; // Start timer
   // I/O 2:
   io2Ptr = blk2;
   io2Count = count2;
   *io2Ctrl = 1; // Start I/O 2
   *io2Data = *io2Ptr++;
- 
+
   // Busy wait for I/O completion:
   while (io1Count || io2Count);
 }
@@ -35,7 +35,7 @@ interrupt void timerInterrupt () {
   if (--io1Count) {
     *io1Data = *io1Ptr++; // New output request
     *timer = timeout; // Restart timer
-  } else 
+  } else
     *io1Ctrl = 0; // Stop I/O 1
 }
 1/2
