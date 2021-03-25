@@ -15,8 +15,6 @@ pokazivača mora da se završi elementom sa vrednošću `NULL`. Ovaj sistemski p
 slučaju uspeha, a vrednost manju od 0 u slučaju greške. Parametar `mode` definiše modalitet  
 kreiranja procesa deteta sledećim simboličkim konstantama: 
 
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 \begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
