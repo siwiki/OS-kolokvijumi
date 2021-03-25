@@ -1,12 +1,7 @@
 2020/jul/Kolokvijum - Jul 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja zadataka za 
-kolokvijum iz Operativnih sistema 1 
-jul 2020. 
-1. (10 poena) 
+syscall
+```cpp
 typedef struct ChunkDesc { 
   int offset, size; 
 } ChunkDesc; 
@@ -30,8 +25,12 @@ void parallelProcessing (int n) {
      offset+= myChunkSz; 
      thread_create(dataProcessor,chunk); 
    } 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+page
+```cpp
 void* vmalloc (SegDesc* head, void* addr, size_t size) { 
   size_t sz = (size+PAGE_SIZE-1)>>PAGE_OFFS_SZ; 
   SegDesc* sg = head; 
@@ -56,11 +55,12 @@ void* vmalloc (SegDesc* head, void* addr, size_t size) {
     } 
     return 0; 
   } 
-} 
+}
+```
 
-2/3 
- 
-3. 
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 class DoubleBuffer { 
 public: 
   DoubleBuffer (size_t size, size_t chunkSizeProd, size_t chunkSizeCons); 
@@ -112,9 +112,11 @@ void DoubleBuffer::get (char* buf) {
   if (items==0) 
     inputBufReady.signal(); 
 } 
+```
 
-3/3 
-4. (10 poena) 
+--------------------------------------------------------------------------------
+ipc
+```cpp
 const char* fname = "../buffer.bin"; 
 const unsigned int SLEEP_TIME = 5; 
  
@@ -129,5 +131,5 @@ int send (const void* buffer, size_t size) {
   ret = write(fd,buffer,size) < 0 ? -1:0; 
   ret |= close(fd); 
   return ret; 
-} 
- 
+}
+```
