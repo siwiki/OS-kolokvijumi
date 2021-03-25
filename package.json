@@ -1,0 +1,16 @@
+{
+    "name": "os1-pdf",
+    "version": "0.0.1",
+    "author": {
+        "name": "Luka Simić",
+        "email": "git@kocka.tech",
+        "url": "https://kocka.tech"
+    },
+    "type": "module",
+    "license": "CC-BY-SA-4.0",
+    "dependencies": {
+        "any-text": ">=1.2.0",
+        "got": ">=11.8.2"
+    },
+    "private": true
+}
