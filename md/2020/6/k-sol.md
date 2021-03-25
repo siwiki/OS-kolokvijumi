@@ -65,7 +65,7 @@ page
   - samo jednu stranicu segmenta za stek, jer je to dovoljno za samo jedan poziv 
     potprograma `main` sa argumentima ove funkcije i njene dve automatske celobrojne 
     promenljive na steku 
-  - po 16 celih stranica za svaki niz `src` i `dst`, jer svaki niz sadrži 4\*0x1000=4\*2<sup>12</sup> elemenata po 4 bajta, odnosno 2<sup>16</sup> bajtova, što je po 16 stranica po 2<sup>12</sup> bajtova. 
+  - po 16 celih stranica za svaki niz `src` i `dst`, jer svaki niz sadrži $4 \cdot 0x1000 = 4 \cdot 2^{12}$ elemenata po 4 bajta, odnosno $2^16$ bajtova, što je po 16 stranica po $2^{12}$ bajtova. 
 
 Sve ukupno, proces regularno adresira 34 stranice. Kako svaka od njih ostaje u memoriji 
 nakon prvog adresiranja i eventaulnog učitavanja, i pošto je procesu dodeljeno dovoljno 
