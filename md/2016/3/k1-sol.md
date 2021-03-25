@@ -1,12 +1,7 @@
 2016/mart/SI Kolokvijum 1 - Mart 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za softversko inženjerstvo
-Mart 2016.
-1. (10 poena)
+io
+```cpp
 IORequest *dma1Pending = 0, *dma2Pending = 0; // Currently pending requests
 
 void startDMA1 () {
@@ -61,34 +56,40 @@ interrupt void dmaInterrupt () {
     startDMA2();
   }
 }
+```
 
-2/2
-2. (10 poena)
+--------------------------------------------------------------------------------
+interrupt
+```asm
 dispatch:   ; Save the current context
-load  rx,running
-store r0,#offsR0[rx] ; save regs
-store r1,#offsR1[rx]
-...
-store r31,#offsR31[rx]
-store pc,#offsPC[rx] ; save pc
-store psw,#offsPSW[rx] ; same psw
-store sp,#offsSP[rx] ; save sp
+            load  rx,running
+            store r0,#offsR0[rx] ; save regs
+            store r1,#offsR1[rx]
+            ...
+            store r31,#offsR31[rx]
+            store pc,#offsPC[rx] ; save pc
+            store psw,#offsPSW[rx] ; same psw
+            store sp,#offsSP[rx] ; save sp
 
-; Select the next running process
-call  scheduler
+            ; Select the next running process
+            call  scheduler
 
-; Restore the new context
-load  rx,running
-load  sp,#offsSP[rx] ; restore sp
-load  psw,#offsPSW[rx] ; restore psw
-load  pc,#offsPC[rx] ; restore pc
-load  r0,#offsR0[rx] ; restore regs
-load  r1,#offsR1[rx]
-...
-load  r31,#offsR31[rx]
-; Return
-iret
-3. (10 poena)
+            ; Restore the new context
+            load  rx,running
+            load  sp,#offsSP[rx] ; restore sp
+            load  psw,#offsPSW[rx] ; restore psw
+            load  pc,#offsPC[rx] ; restore pc
+            load  r0,#offsR0[rx] ; restore regs
+            load  r1,#offsR1[rx]
+            ...
+            load  r31,#offsR31[rx]
+            ; Return
+            iret
+```
+
+--------------------------------------------------------------------------------
+syscall
+```cpp
 // Wrapper, for type-casting only:
 inline void* _createSubtree (void* n) {
   return createSubtree(*(int*)n);
@@ -109,3 +110,4 @@ Node* createSubtree (int n) {
   pthread_join(pid,&node->rightChild);
   return node;
 }
+```

@@ -4,6 +4,7 @@ import {readFile, readdir, writeFile} from 'fs/promises';
 
 const BASE_URL = 'http://os.etf.bg.ac.rs/OS1/kolokvijumi/';
 const CATEGORIES = {
+    linker: 'Linker',
     page: 'Stranična organizacija',
     cont: 'Kontinualna alokacija',
     segment: 'Segmentna organizacija',

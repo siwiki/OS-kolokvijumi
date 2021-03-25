@@ -1,11 +1,7 @@
 2016/jun/SI, IR Kolokvijum 3 - Jun 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-Rešenja zadataka za
-treći kolokvijum iz Operativnih sistema 1
-Jun 2016.
-1.(10 poena)
+semaphore
+```cpp
 typedef unsigned short Byte;
 const int BlockSize = ...;
 const int NumOfBlocks = ...;
@@ -40,9 +36,11 @@ void Buffer::read (Byte block[]) {
   mutex.signal();
   spaceAvailable.signal(BlockSize);
 }
-1/2
+```
 
-2.(10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 Node* Node::getNode (PCB* pcb, const char* path) {
   static const char delimiter = '/';
   if (pcb==0 || path==0) return 0; // Exception!
@@ -62,7 +60,11 @@ Node* Node::getNode (PCB* pcb, const char* path) {
   };
   return node;
 }
-3.(10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 unsigned long append (FCB* fcb) {
   if (fcb==0 || freeHead==0) return 0;
   unsigned long last=0, next=fcb->head, ret=freeHead;
@@ -76,4 +78,4 @@ unsigned long append (FCB* fcb) {
   fat[oldHead] = 0;
   return ret;
 }
-2/2
+```

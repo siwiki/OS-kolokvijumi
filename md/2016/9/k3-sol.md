@@ -1,11 +1,7 @@
 2016/septembar/SI, IR Kolokvijum 3 - Septembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za treći kolokvijum iz
-Operativnih sistema 1, septembar 2016.
-1. (10 poena)
+io
+```cpp
 class IOStream {
 public:
   IOStream (BlockIOHandle d) : dev(d), cursor(-1), curBlock(-1)
@@ -50,9 +46,11 @@ int IOStream::getchar (char& c) {
   c = buffer[(cursor++)%BlockSize];
   return 0;
 }
+```
 
-2/2
-2. (10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 #include <stdio.h>
 
 int fcopyreverse (const char* filenamefrom, const char* filenameto) {
@@ -75,7 +73,11 @@ int fcopyreverse (const char* filenamefrom, const char* filenameto) {
   if (ret==EOF) return -6; // Error with closing output file
   return ret;
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 void* getFileBlock (FCB* fcb, ulong lBlockNo) {
   if (fcb==0) return 0; // Exception
   ulong entry0 = lBlockNo/IndexSize;
@@ -91,3 +93,4 @@ void* getFileBlock (FCB* fcb, ulong lBlockNo) {
   if (index1==0) return 0; // Exception
   return getBlock(index1[entry1]);
 }
+```

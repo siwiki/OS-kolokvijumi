@@ -1,12 +1,7 @@
 2016/maj/SI, IR Kolokvijum 2 - Maj 2016 Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Maj 2016.
-1. (10 poena)
+semaphore
+```cpp
 class Mutex {
 public:
   Mutex () : val(1), lck(0), holder(0) {}
@@ -43,7 +38,10 @@ int Mutex::signal () {
   unlock(&lck);
   return 0;
 }
-2. (10 poena)
+```
+--------------------------------------------------------------------------------
+overlay
+```cpp
 void ensureOverlay (int procedureID) {
   OverlayDescr* ovrl = procedureMap[procedureID];
   if (!ovrl->isLoaded) {
@@ -53,33 +51,111 @@ void ensureOverlay (int procedureID) {
     ovrl->isLoaded = true;
   }
 }
+```
 
+--------------------------------------------------------------------------------
+page
+\begin{figure}[H]
+\subfloat[Rešenje pod a)]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 210h & 001 \\
+\hline
+01h & 211h & 001 \\
+\hline
+A0h & 212h & 100 \\
+\hline
+A1h & 213h & 100 \\
+\hline
+A2h & 214h & 100 \\
+\hline
+A3h & 215h & 100 \\
+\hline
+C1h & 216h & 110 \\
+\hline
+C2h & 217h & 110 \\
+\hline
+C3h & 218h & 110 \\
+\hline
+\end{tabular}
+}
+\subfloat[PMT procesa-roditelja]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 210h & 001 \\
+\hline
+01h & 211h & 001 \\
+\hline
+A0h & 212h & 100 \\
+\hline
+A1h & 213h & 100 \\
+\hline
+A2h & 214h & 100 \\
+\hline
+A3h & 215h & 100 \\
+\hline
+C1h & 216h & 100 \\
+\hline
+C2h & 217h & 100 \\
+\hline
+C3h & 218h & 100 \\
+\hline
+\end{tabular}
+}
+\subfloat[PMT procesa-roditelja]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 210h & 001 \\
+\hline
+01h & 211h & 001 \\
+\hline
+A0h & 212h & 100 \\
+\hline
+A1h & 213h & 100 \\
+\hline
+A2h & 214h & 100 \\
+\hline
+A3h & 215h & 100 \\
+\hline
+C1h & 216h & 100 \\
+\hline
+C2h & 219h* & 110 \\
+\hline
+C3h & 218h & 100 \\
+\hline
+\end{tabular}
+}
+\subfloat[PMT procesa-deteta]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 210h & 001 \\
+\hline
+01h & 211h & 001 \\
+\hline
+A0h & 212h & 100 \\
+\hline
+A1h & 213h & 100 \\
+\hline
+A2h & 214h & 100 \\
+\hline
+A3h & 215h & 100 \\
+\hline
+C1h & 216h & 100 \\
+\hline
+C2h & 217h* & 110 \\
+\hline
+C3h & 218h & 100 \\
+\hline
+\end{tabular}
+}
+\end{figure}
 
-2/2
-3. (10 poena)
-a)(2)
-Page#   Frame#    RWX
-00h 210h 001
-01h 211h 001
-A0h 212h 100
-A1h 213h 100
-A2h 214h 100
-A3h 215h 100
-C1h 216h 110
-C2h 217h 110
-C3h 218h 110
-b) PMT procesa-roditelja: c) PMT procesa-roditelja: c) PMT procesa-deteta:
-Page#   Frame#    RWX    Page#    Frame#    RWX
-  Page#    Frame#   RWX
-00h 210h 001  00h 210h 001      00h 210h 001
-01h 211h 001  01h 211h 001      01h 211h 001
-A0h 212h 100  A0h 212h 100      A0h 212h 100
-A1h 213h 100  A1h 213h 100      A1h 213h 100
-A2h 214h 100  A2h 214h 100      A2h 214h 100
-A3h 215h 100  A3h 215h 100      A3h 215h 100
-C1h 216h 100  C1h 216h 100      C1h 216h 100
-C2h 217h 100  C2h 219h* 110      C2h 217h* 110
-C3h 218h 100  C3h 218h 100      C3h 218h 100
-
-*) Moguće je i da je OS alocirao nov okvir za proces-dete, pa je korektan odgovor i ako 217h
-i 219h zamene mesta.
+*) Moguće je i da je OS alocirao nov okvir za proces-dete, pa je korektan odgovor i ako 217h i 219h zamene mesta.

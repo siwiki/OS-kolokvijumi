@@ -1,13 +1,7 @@
 2016/maj/IR Kolokvijum 1 - April 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-prvi kolokvijum iz Operativnih sistema 1
-Odsek za računarsku tehniku i informatiku
-April 2016.
-1. (10 poena)
+io
+```cpp
 IORequest* ioPending = 0; // Currently pending request
 
 void performIO () {
@@ -40,16 +34,17 @@ interrupt void ioInterrupt () {
   ioPending = 0;
   performIO();
 }
+```
 
-2/2
-2. (10 poena)
-U  klasu
-Thread  dodati  su  sledeći  privatni,  nestatički  podaci-članovi  sa  datim  inicijalnim
-vrednostima:
+--------------------------------------------------------------------------------
+concurrency
+U  klasu `Thread`  dodati  su  sledeći  privatni,  nestatički  podaci-članovi  sa  datim  inicijalnim vrednostima:
+```cpp
 Thread* Thread::parent = 0;
 bool Thread::isWaitingForChildren = false;
 unsigned long Thread::activeChildrenCounter = 0;
-
+```
+```cpp
 void Thread::created (Thread* parent) {
   this->parent = parent;
   if (parent) parent->activeChildrenCounter++;
@@ -75,7 +70,11 @@ void Thread::wait () {
   yield(old,new);
   unlock();
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+syscall
+```cpp
 int multiexec (int number, const char* filename, const char* const args[]){
   int ret = 0;
   // Prepare the arguments for the children:
@@ -94,3 +93,4 @@ int multiexec (int number, const char* filename, const char* const args[]){
   }
   return ret;
 }
+```

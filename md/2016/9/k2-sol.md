@@ -1,15 +1,12 @@
 2016/septembar/SI, IR Kolokvijum 2 - Septembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Septembar 2016.
-1. (10 poena) U klasu Thread treba dodati sledeće članove:
+ipc
+U klasu `Thread` treba dodati sledeće članove:
+```cpp
 char* Thread::message(0);
 Semaphore msgEmpty(1), msgAvailable(0);
-
+```
+```cpp
 void Thread::send (char* msg) {
   this->msgEmpty.wait();
   this->message = msg;
@@ -22,7 +19,11 @@ char* Thread::receive () {
   Thread::running->msgEmpty.signal();
   return msg;
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+linker
+```cpp
 typedef unsigned long ulong;
 const ulong OffsBinaryStartOffset = 0,
          OffsNumOfImportedSymbols = OffsBinaryStartOffset + sizeof(ulong),
@@ -44,11 +45,15 @@ int resolveSymbols (char* inputObj, char* output) {
   }
   return 0;
 }
-3. (10 poena) a)(3) VA(64): Page1(24):Page2(24):Offset(16).
-    PA(42): Frame(26):Offset(16).
-b)(7)
+```
 
-2/2
+--------------------------------------------------------------------------------
+page
+1. VA(64): Page1(24):Page2(24):Offset(16).
+   
+   PA(42): Frame(26):Offset(16).
+2. 
+```cpp
 const unsigned short pg1w = 24, pg2w = 24, offsw = 16;
 cont unsigned pmt1size = 1<<pg1w, pmt2size = 1<<pg2w;
 
@@ -63,3 +68,4 @@ void releasePMTEntry (unsigned* pmt1, unsigned long page) {
   dealloc_pmt(pmt2);
   pmt1[pmt1entry] = 0;
 }
+```

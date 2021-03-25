@@ -1,11 +1,7 @@
 2016/septembar/SI, IR Kolokvijum 1 - Septembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Septembar 2016.
-1. (10 poena)
+io
+```cpp
 void transfer () {
   // Start the controller:
   *ioCtrl = 1;
@@ -19,7 +15,11 @@ void transfer () {
   // Stop the controller:
   *ioCtrl = 0;
 }
-2. (10 poena) a)(7)
+```
+
+--------------------------------------------------------------------------------
+semaphore
+```cpp
 class Join {
 public:
   Join (Thread* thread1, Thread* thread2);
@@ -56,9 +56,11 @@ int Join::wait () {
   unlock();
   return ret;
 }
+```
 
-2/2
-3. (10 poena)
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 class DataProcessor : public Thread {
 public:
   DataProcessor (int offs, int sz) : offset(offs), size(sz) {}
@@ -83,3 +85,4 @@ void parallelProcessing (int n) {
      offset+=myChunk;
    }
 }
+```

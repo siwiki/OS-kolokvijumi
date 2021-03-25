@@ -4,7 +4,7 @@ author: Luka Simić i Aleksa Marković
 date: Mart 2021
 geometry: margin=2cm
 output: pdf_document
-header-includes: \usepackage[croatian]{babel}
+header-includes: \usepackage[croatian]{babel}\usepackage{subfig}\usepackage{float}
 urlcolor: blue
 toc: true
 toc-depth: 2
