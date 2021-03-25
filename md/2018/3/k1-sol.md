@@ -69,7 +69,8 @@ void scheduler () {
   do {
     running = processes + (running - processes + 1) % NUM_OF_PROCESSES;
   } while (running->status!=ready);
-}```
+}
+```
 
 --------------------------------------------------------------------------------
 syscall

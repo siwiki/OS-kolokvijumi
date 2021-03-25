@@ -59,8 +59,8 @@ int BoundedBuffer::get (int* pi, double* pd) {
   }
   return s;
 }
-
 ```
+
 --------------------------------------------------------------------------------
 cont
 
@@ -113,10 +113,9 @@ Zapis broj & Adresa početka & Veličina \\
 
 --------------------------------------------------------------------------------
 page
-1. 
+1. VA(32): Page1(9):Page2(9):Offset(14).
 
-VA(32): Page1(9):Page2(9):Offset(14).
-PA(24): Frame(10):Offset(14).
+   PA(24): Frame(10):Offset(14).
 2. 
 ```cpp
 const unsigned offsw = 14;
