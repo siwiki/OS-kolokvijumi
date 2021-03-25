@@ -1,12 +1,7 @@
 2018/mart/SI Kolokvijum 1 - Mart 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za softversko inženjerstvo
-Mart 2018.
-1. (10 poena)
+io
+```cpp
 static unsigned *io1Ptr = 0, *io2Ptr = 0;
 static int io1Count = 0, io2Count = 0;
 static const unsigned timeout = 50;
@@ -39,8 +34,11 @@ interrupt void timerInterrupt () {
     *io1Ctrl = 0; // Stop I/O 1
 }
 
-2/2
-2. (10 poena)
+```
+--------------------------------------------------------------------------------
+interrupt
+
+```asm
 dispatch: ; Save the current context
 push r0 ; save regs
 push r1
@@ -64,12 +62,19 @@ pop r0
 
 ; Return
 iret
+```
+
+```cpp
 void scheduler () {
   do {
     running = processes + (running - processes + 1) % NUM_OF_PROCESSES;
   } while (running->status!=ready);
-}
-3. (10 poena)
+}```
+
+--------------------------------------------------------------------------------
+syscall
+
+```cpp
 #include <stdio.h>
 
 char command[33];
@@ -91,3 +96,4 @@ void main () {
       execlp(command);
   }
 }
+```

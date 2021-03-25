@@ -1,12 +1,8 @@
 2018/april/IR Kolokvijum 1 - April 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
+io
 
-
-1/3
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za računarsku tehniku i informatiku
-April 2018.
-1. (10 poena)
+```cpp
 const REG ESC = 0;
 bool complete = false;
 
@@ -48,10 +44,12 @@ interrupt void device2 () {
     *io3Ctrl = 0;
     *io4Ctrl = 0;
   }
-}
+}```
 
-2/3
-2. (10 poena)
+--------------------------------------------------------------------------------
+interrupt 
+
+```asm
 sys_call: ; Save r0 and r1 on the (kernel) stack
 push r0
 push r1
@@ -98,9 +96,11 @@ load  r1,#offsR1[r0]
 load  r0,#offsR0[r0] ; restore r0
 ; and return
 iret
+```
+--------------------------------------------------------------------------------
+syscall
 
-3/3
-3. (10 poena)
+```cpp
 extern D fun (A a, B b, C c);
 typedef void (*CallbackD)(D);
 
@@ -121,3 +121,4 @@ void fun_wrapper (void* params) {
   delete p;
   callback(d);
 }
+```

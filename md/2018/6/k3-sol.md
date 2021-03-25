@@ -1,18 +1,17 @@
 2018/jun/SI, IR Kolokvijum 3 - Jun 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
+io
 
-
-1/2
-Rešenja zadataka za
-treći kolokvijum iz Operativnih sistema 1
-Jun 2018.
-1. (10 poena)
+```cpp
 void readBlock (char* addr) {
   for (int i=0; i<BlockSize; i++)
     addr[i] = getchar();
 }
+```
 
-2. (10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 #include <unistd.h>
 #include <fctl.h>
 
@@ -52,9 +51,12 @@ int fcopy (const char *filenamefrom, const char *filenameto) {
   close(fto);
   return 0;
 }
-3. (10 poena)
+```
 
-2/2
+--------------------------------------------------------------------------------
+filesystem
+
+```cpp
 unsigned long extend (FCB* fcb, unsigned extension) {
   if (fcb==0) return 0;
 
@@ -77,3 +79,4 @@ unsigned long extend (FCB* fcb, unsigned extension) {
 
   fcb->size = newSize;
   return newSize-oldSize;
+``` 

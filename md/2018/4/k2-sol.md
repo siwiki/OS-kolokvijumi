@@ -1,12 +1,8 @@
 2018/april/SI, IR Kolokvijum 2 - April 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
+syscall
 
-
-1/3
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-April 2018.
-1. (10 poena)
+```cpp
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <semaphore.h>
@@ -42,9 +38,11 @@ int Mutex::exit () {
 Mutex::~Mutex () {
   sem_close(this->mutex);
 }
+```
+--------------------------------------------------------------------------------
+cont
 
-2/3
-2. (10 poena)
+```cpp
 int proc_relocate (PCB* pcb) {
   FreeMem *cur=fmem_head, *prev=0;
   for (; cur && (char*)cur+cur->size!=pcb->mem_base_addr;
@@ -76,11 +74,14 @@ int proc_relocate (PCB* pcb) {
 
   return 1;
 }
+```
 
-3/3
-3. (10 poena)
+--------------------------------------------------------------------------------
+page
+
 VA(64): Page1(25):Page2(25):Offset(14)
 PA(40): Frame(26):Offset(14)
+```cpp
 const unsigned short pg1w = 25, pg2w = 25, offsw = 14;
 
 inline unsigned getPMT1EntryForPage (unsigned long pg) {
@@ -106,4 +107,5 @@ void initPMT (unsigned* pmt, unsigned long pageFrom, unsigned long nPages,
   for (unsigned long i=0; i<nPages; i++) {
     unsigned descr = (frameFrom+i) | (((01<<3)|rwx)<<27);
     setPMTEntryForPage(pmt,pageFrom+i,descr);
-  }
+}
+```

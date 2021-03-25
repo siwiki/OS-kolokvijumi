@@ -1,11 +1,8 @@
 2018/jun/SI, IR Kolokvijum 1 - Jun 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
+io
 
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Jun 2018.
-1. (10 poena)
+```cpp
 const REG ESC = 0;
 
 void transfer () {
@@ -35,7 +32,12 @@ void transfer () {
   *io2Ctrl = 0;
   *io3Ctrl = 0;
 }
-2. (10 poena) a)(7)
+```
+--------------------------------------------------------------------------------
+interrupt
+
+1. 
+```asm
 dispatch: ; Save the current context
   push r0 ; save regs
   push r1
@@ -54,13 +56,15 @@ dispatch: ; Save the current context
   pop r0
   ; Return
   iret
-b)(3) Ne  treba.  Ova  prekidna  rutina  pristupa  samo  registrima  procesora,  strukturi  PCB
+```
+2.  Ne  treba.  Ova  prekidna  rutina  pristupa  samo  registrima  procesora,  strukturi  PCB
 tekućeg procesa i njegovom sistemskom steku. Kako su sve tri stvari korišćene isključivo od
 strane tog procesora (jer je taj proces raspoređen samo tom procesoru), nema potrebe za
 međusobnim isključenjem.
 
-2/2
-3. (10 poena)
+--------------------------------------------------------------------------------
+syscall
+```cpp
 const int N = ...;
 int mat[N][N];
 int sums[N];
@@ -90,3 +94,4 @@ int par_sum () {
   }
   return s;
 }
+```

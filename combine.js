@@ -14,7 +14,8 @@ const CATEGORIES = {
     concurrency: 'Konkurentnost',
     io: 'Ulaz/izlaz',
     ipc: 'Komunikacija između procesa',
-    filesystem: 'Fajl sistem'
+    filesystem: 'Fajl sistem',
+    cont: 'Kontinualna alokacija'
 };
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
 const TYPES = {

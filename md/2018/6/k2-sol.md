@@ -1,12 +1,7 @@
 2018/jun/SI, IR Kolokvijum 2 - Jun 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Jun 2018.
-1. (10 poena)
+semaphore 
+```cpp
 const int N = ...;  // Capacity of the buffer
 
 class BoundedBuffer {
@@ -65,28 +60,65 @@ int BoundedBuffer::get (int* pi, double* pd) {
   return s;
 }
 
-2/2
-2. (10 poena)
-a)(4)
-Zapis broj Adresa početka Veličina
-1 34B0 10
-2 3510 20
-3 3680 30
-4 35A0 90
+```
+--------------------------------------------------------------------------------
+cont
 
-b)(3)
-Zapis broj Adresa početka Veličina
-1 34B0 10
-2 3680 30
-3 3510 120
+1. 
 
-c)(3)
-Zapis broj Adresa početka Veličina
-1 3550 160
 
-3. (10 poena) a)(3) VA(32): Page1(9):Page2(9):Offset(14).
-    PA(24): Frame(10):Offset(14).
-b)(7)
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+\hline
+Zapis broj & Adresa početka & Veličina \\
+\hline
+1 & 34B0 & 10 \\ 
+\hline
+2 & 3510 & 20 \\
+\hline 
+3 & 3680 & 30 \\ 
+\hline
+4 & 35A0 & 90 \\
+\hline 
+\end{tabular}
+\end{center}
+
+2. 
+
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+\hline
+Zapis broj & Adresa početka & Veličina \\
+\hline
+1 & 34B0 & 10 \\ 
+\hline
+2 & 3680 & 30 \\
+\hline 
+3 & 3510 & 120 \\ 
+\hline
+\end{tabular}
+\end{center}
+
+3. 
+
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+\hline
+Zapis broj & Adresa početka & Veličina \\
+\hline
+1 & 3550 & 160 \\ 
+\hline
+\end{tabular}
+\end{center}
+
+--------------------------------------------------------------------------------
+page
+1. 
+
+VA(32): Page1(9):Page2(9):Offset(14).
+PA(24): Frame(10):Offset(14).
+2. 
+```cpp
 const unsigned offsw = 14;
 enum AddrExcKind {pageFault, opDenied};
 
@@ -110,3 +142,4 @@ int resolveVAddrExc (PCB* pcb, unsigned long vaddr, AddrExcKind kind,
   *ret = 0;
   return MEM_ACCESS_FAULT;
 }
+```
