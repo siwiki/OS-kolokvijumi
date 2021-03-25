@@ -18,7 +18,7 @@ int writeBlock(int diskNo, BlkNo block, Byte* buffer) {
   return (disks[diskNo]->writeBlock)(block,buffer);
 }
 
-2.         (10         poena)
+2.         (10     poena)
 int isAllowed(FCB* f, unsigned long int uid, unsigned int op) {
   if (f==0) return 0; // Exception!
   unsigned int prot = f->protection;
@@ -32,7 +32,7 @@ int isAllowed(FCB* f, unsigned long int uid, unsigned int op) {
     prot &= 7;
   return (op&prot)?1:0;
 }
-3.         (10         poena)
+3.         (10     poena)
 BlockNo getFreeBlock () {
   static const int numOfEntries = blockSize/sizeof(BlockNo);
 

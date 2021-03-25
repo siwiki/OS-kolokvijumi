@@ -64,6 +64,6 @@ b)(5) Neće. Taj korisnik (u čije ime se izvršava drugi proces) je pripadnik �
 ni vlasnik fajla niti pripadnik iste grupe, pa nema nikakva prava nad fajlom, a traži otvaranje
 tog (sada postojećeg) fajla sa mogućnošću čitanja i upisa.
 3. (10 poena)
-a)(3) 1401  b)(3) 2503
+a)(3) 1401 b)(3) 2503
 c)(4) Jedan indeksni blok sadrži najviše 512B:4B = 128 ulaza.
  Maksimalna veličina fajla je: 2·512B + 4·128·512B = 257KB.

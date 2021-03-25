@@ -11,8 +11,8 @@ shared var
   sa, sb : boolean := 0;
 
 process a;                  process b;
-begin                   begin
-  loop                    loop
+begin               begin
+  loop                loop
     compute_a(b);                     while (sa==0) do null; sa:=0;
     sa:=1;                           compute_b(a);
     while (sb==0) do null; sb:=0;          sb:=1;
@@ -33,7 +33,7 @@ preklop smeštena je jedna kolona (j) matrice B. Tako se iz njih može izračuna
 u unutrašnjoj petlji varira j (j:=1..n), u jednoj iteraciji spoljašnje petlje dobija se jedna vrsta i
 matrice C. Ova vrsta je u svom, trećem preklopu. U narednoj iteraciji spoljašnje petlje po i, u
 prvi preklop biće učitana nova vrsta matrice A, u drugom preklopu biće učitavana jedna po
-jedna  kolona (j:=1..n) matrice  B u unutrašnjoj petlji, a u trećem preklopu biće izračunavana
+jedna kolona (j:=1..n) matrice B u unutrašnjoj petlji, a u trećem preklopu biće izračunavana
 nova vrsta matrice C.
 4. (10 poena)
 a)(3) VA(64): Page1(26):Page2(26):Offset(12).

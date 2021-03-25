@@ -67,12 +67,12 @@ B0140 P
 C02AB D672AB
 3. (10 poena)
 yield: ; Save current context
-load  base,#cur[sp]
-add   base,base,#offsContext
+load base,#cur[sp]
+add base,base,#offsContext
 saveregs
 ; Restore new context
 load base,#nxt[sp]
-add   base,base,#offsContext
+add base,base,#offsContext
 loadregs
 ; Return
 ret
@@ -82,7 +82,7 @@ int create_thread (void (*f)(void*), void* arg) {
     load r0,#0
     load r1,#f[sp]
     load r2,#arg[sp]
-    int  44h
+    int 44h
   }
 }
 

@@ -44,23 +44,23 @@ b)(5) FF00FFh
 3. (10 poena) a)(7)
 gcd:  LOAD R0,#x[SP] ; R0:=x
    LOAD R1,#y[SP] ; R1:=y
-  CMP R1,#0  ; if (y==0)
+  CMP R1,#0 ; if (y==0)
   JMPNE gcd_else
-gcd_then: POP PC  ; return x (already in R0)
-gcd_else: PUSH R1  ; push y for call of remainder
-   PUSH R0  ; push x for call of remainder
+gcd_then: POP PC ; return x (already in R0)
+gcd_else: PUSH R1 ; push y for call of remainder
+   PUSH R0 ; push x for call of remainder
    CALL remainder
-   POP R1  ; remove x from the stack
-  POP R1  ; remove y from the stack
-   PUSH R0  ; push remainder(...) for call of gcd
-   PUSH R1  ; push y for call of gcd
+   POP R1 ; remove x from the stack
+  POP R1 ; remove y from the stack
+   PUSH R0 ; push remainder(...) for call of gcd
+   PUSH R1 ; push y for call of gcd
    CALL gcd
-   POP R1  ; stack cleanup
+   POP R1 ; stack cleanup
    POP R1
-  POP PC  ; return (the result is already in R0)
+  POP PC ; return (the result is already in R0)
 
 2/2
-b)(3)  Jeste  bezbedna  (ovakvi  potprogrami se  ponekad  nazivaju reentrant), pošto uopšte ne
+b)(3)  Jeste bezbedna (ovakvi potprogrami se ponekad nazivaju reentrant), pošto uopšte ne
 pristupa statičkim (globalnim) podacima, već sve podatke ima ili na steku, ili u registrima, što
 je deo konteksta niti.
 4. (10 poena)

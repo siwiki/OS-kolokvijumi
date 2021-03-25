@@ -8,8 +8,8 @@ Operativnih sistema 1
 1.(10)
 class Semaphore {
 public:
-  Semaphore  (unsigned int value=1);
-  void wait  ();
+  Semaphore (unsigned int value=1);
+  void wait ();
   void signal();
 protected:
   inline void lock();    // inline nije semantički bitan

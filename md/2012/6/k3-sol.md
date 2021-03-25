@@ -27,6 +27,6 @@ Byte* getDiskBlock (BlkNo blk) {
 }
 2. (10 poena) Neuspešna je operacija 2), ostale su uspešne.
 3. (10 poena)
-a)(3) 1001  b)(3) 4601
+a)(3) 1001 b)(3) 4601
 c)(4) Jedan indeksni blok sadrži najviše 1024B:4B = 256 ulaza.
  Maksimalna veličina fajla je: 2·1KB + 2·256·1KB = 514KB.

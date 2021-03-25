@@ -48,13 +48,13 @@ load r0, running
 store sp, #savedSP[r0] ; save sp
 
 ; Select the next running process
-call  scheduler
+call scheduler
 
 ; Restore the new context
 load r0, running
-load  r1, #timeSlice[r0]; restart timer
+load r1, #timeSlice[r0]; restart timer
 store r1, [Timer]
-load  sp, #savedSP[r0] ; restore sp
+load sp, #savedSP[r0] ; restore sp
 pop r31
 pop r30 ; restore regs
 ...

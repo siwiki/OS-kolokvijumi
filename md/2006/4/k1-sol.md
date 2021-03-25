@@ -7,24 +7,24 @@ Rešenja
 
 Zad 1.
 
-a)  NE  - Objašnjenje: kod multiprogramskog okruženja POJEDINAČNI posao će trajati
-duže  zbog  konkurentnog  izvršavanja  i  režijskih  operacija  koje  se  događaju  u  toku
+a)  NE - Objašnjenje: kod multiprogramskog okruženja POJEDINAČNI posao će trajati
+duže zbog konkurentnog izvršavanja i režijskih operacija koje se događaju u toku
 izvršenja posla.
 
 b) DA - Odjašnjenje: Dok jedan posao čeka na I/O, drugi se izvršava, tj. koristi processor,
 tako da se iskorišćenje procesora povećava.
 
 c) DA - Objašnjenje: Pošto se poslovi izvrsavaju u paraleli (dok jedan ceka na I/O, a
-drugi  se  izvrsava),  onda  se  ukupno  vreme  odziva  skraćuje,  pa  se  samim  tim  broj
+drugi se izvrsava),  onda se ukupno vreme odziva skraćuje,  pa se samim tim broj
 završenih poslova u jedinici vremena (throughput) povećava.
 
 d) NE - Objašnjenje: Jedino reijsko vreme kod paketnog OSa je dovlačenje posla u radnu
-memoriju, dok kod multiprogramskog OSa postoje režijske operacije i  prilikom  svake
+memoriju, dok kod multiprogramskog OSa postoje režijske operacije i prilikom svake
 zamene poslova.
 
 Zad 2. Operativni sistem treba da nudi uslugu da neki proces može da se uspava i da se
-probuti   posle   tačno   odredjenog   vremena   (ili   malo   kasnije   od   tog   vremena).   Npr
-operativni   sistem   treba   da   obezbedi   primitivu   void  sleep(int  time),  koja
+probuti posle tačno odredjenog vremena (ili malo kasnije od tog vremena).   Npr
+operativni sistem treba da obezbedi primitivu void sleep(int time),  koja
 obezbedjuje da se proces uspava time milisekunti (odnosno stavi u red uspavanih, engl.
 Sleep), a da se posle toga može probuditi (odnosno proces vrati u red spremnih, engl.
 Ready). Proces za obradu ulazno/izlazne operacije treba da radi sledeće:

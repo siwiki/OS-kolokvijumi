@@ -22,12 +22,12 @@ void Semaphore::signal () {
   unlock(lck);
 }
 Pomoćne operacije block() i unblock() više nisu potrebne (izbacuju se). Ostatak definicije klase
-Semaphore osta   je isti.
+Semaphore osta je isti.
 2.(10)
 shared var mutexA : semaphore:=N;
            mutexB, mutexC : semaphore:=1;
 
-type P  = process begin
+type P = process begin
   ...
   wait(mutexA);
     <critical section A>
@@ -45,13 +45,13 @@ type P  = process begin
 end;
 3.(10)
 a)(5)     Ne.    Kada se iz pozivajućeg potprograma pozove onaj drugi, na isto mesto modula kome
-pripada  pozivajući  potprogram se  učitava  modul  u  kome  je pozvani  potprogram.  Kada  se  vrši
-povratak  iz  tog   pozvanog potprograma,  ukoliko prevodilac generiše  samo  kod  za  jednostavni
+pripada pozivajući potprogram se učitava modul u kome je pozvani potprogram.  Kada se vrši
+povratak iz tog pozvanog potprograma,  ukoliko prevodilac generiše samo kod za jednostavni
 indirektni skok preko adrese skinute sa steka, skok će biti na adresu unutar istog modula, a ne na
 kod unutar pozivajućeg potprograma, jer je on u modulu koji je izbačen, što nije korekno.
 Prema tome, potprogrami koji su u relaciji pozivalac-pozvani se mogu nalaziti ili u istom modulu,
 ili u dva modula koji se ne preklapaju (ne učitavaju na isto mesto jedan preko drugog).
-b)(5)     Obe  konfiguracije  su  korektne,  pošto  je  za  sve  grane  zadovoljen  uslov  iz  zaključka
+b)(5)     Obe konfiguracije su korektne,  pošto je za sve grane zadovoljen uslov iz zaključka
 prethodne tačke.
 
 4.(10)
@@ -74,13 +74,13 @@ B = 2
 16
 B, pa je širina polja za pomeraj unutar stranice i
 okvira 16 bita.
-Odatle sledi da je širina polja unutar virtuelne adrese za broj stranice 32-  16   = 16 bita, širina polja za
+Odatle sledi da je širina polja unutar virtuelne adrese za broj stranice 32-  16 = 16 bita, širina polja za
 broj okvira unutar fizičke adrese 32-16 = 16 bita, a širina deskriptora (ulaza u PMT drugog nivoa)
 isto toliko – 16 bita, odnosno 2 bajta.
 Stranica prvog nivoa ima 1K = 2
 10
  ulaza, pa je širina polja za indeksiranje PMT prvog nivoa 10
-bita, a za indeksiranje PMT drugog nivoa 16-10   = 6 bita.
+bita, a za indeksiranje PMT drugog nivoa 16-10 = 6 bita.
 Prema tome, struktura virtuelne adrese je: Page_L1(10):Page_L2(6):Offset(16).
 b)    Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s
 tim da vrednost 0 može da označava nekorišćeni opseg stranica (invalidan ulaz), pošto se ni PMT
@@ -105,7 +105,7 @@ nivoa) = 2
 B + 2
 17
 B, što iznosi 132KB.
-d) D ati proces ima validna   samo prvih sedam i poslednji ulaz u PMT prvog nivoa, dakle za njega
+d) D ati proces ima validna samo prvih sedam i poslednji ulaz u PMT prvog nivoa, dakle za njega
 postoje samo osam PMT drugog nivoa u memoriji. Ukupna veličina PMT za ovaj proces je zato:
 4⋅2
 10
@@ -123,5 +123,5 @@ void relocate(PCB* p, void* newPlace) {
   if (newPlace==p->memLocation || p->memSize==0) return; // Nothing to do
   memcpy(newPlace,p->memLocation,p->memSize); // Move memory contents
   free(p->memLocation,p->memSize); // Free the old memory space
-  p  ->memLocation=newPlace;  // Move relocation register
+  p ->memLocation=newPlace;  // Move relocation register
 }

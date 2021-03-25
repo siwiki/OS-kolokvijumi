@@ -56,34 +56,34 @@ interrupt void ioInterrupt () {
 2. (10 poena)
 a)(7)
 sys_call:   ; Save the current context
-push  r0 ; save r0 temporarily on the stack
-load  r0,userRunning
+push r0 ; save r0 temporarily on the stack
+load r0,userRunning
 store r1,#offsR1[r0] ; save regs
-pop   r1
+pop r1
 store r1,#offsR0[r0]
 store r2,#offsR2[r0]
 ...
 store r31,#offsR31[r0]
-pop   r1 ; save pc
+pop r1 ; save pc
 store r1,#offsPC[r0]
-pop   r1 ; save psw
+pop r1 ; save psw
 store r1,#offsPSW[r0]
-pop   r1 ; save original sp
+pop r1 ; save original sp
 store r1,#offsSP[r0]
 
 ; Restore the new context
-load  r0,kernelRunning
-load  r1,#offsSP[r0] ; restore original sp
-push  r1
-load  r1,#offsPSW[r0] ; restore original psw
-push  r1
-load  r1,#offsPC[r0] ; restore pc
-push  r1
-load  r1,#offsR1[r0] ; restore regs
-load  r2,#offsR2[r0]
+load r0,kernelRunning
+load r1,#offsSP[r0] ; restore original sp
+push r1
+load r1,#offsPSW[r0] ; restore original psw
+push r1
+load r1,#offsPC[r0] ; restore pc
+push r1
+load r1,#offsR1[r0] ; restore regs
+load r2,#offsR2[r0]
 ...
-load  r31,#offsR31[r0]
-load  r0,#offsR0[r0]
+load r31,#offsR31[r0]
+load r0,#offsR0[r0]
 ; Return (but stay in kernel mode)
 iret
 b)(3)    Procedura switch_to_user izgleda potpuno analogno (skoro potpuno isto) kao i data

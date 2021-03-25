@@ -79,8 +79,8 @@ load r0, [runningKernelThread]
 load sp, offsSP[r0]
 iret
 5. (10 poena)
-a)(4) Svaka  nit  napreduje  kroz  hodnike  lavirinta  i  u  svakom  koraku,  na  datom  polju  u
-kvadratnom koordinatnom sistemu, radi sledeće. Najpre  pogleda  da  li  je  pronašla  izlaz  i  ako
+a)(4) Svaka nit napreduje kroz hodnike lavirinta i u svakom koraku,  na datom polju u
+kvadratnom koordinatnom sistemu, radi sledeće. Najpre pogleda da li je pronašla izlaz i ako
 jeste, ispisuje to i završava se. Zatim od lavirinta dobije najviše tri susedna slobodna polja u
 koja može da pređe (osim onoga iz koga je stigla). Ako ni jedno od takvih ne postoji, ta nit je
 udarila u slepi hodnik, pa ispisuje rečenicu „I have reached a dead end and I am giving up“ i

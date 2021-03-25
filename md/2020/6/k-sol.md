@@ -9,17 +9,17 @@ sys_call: ; Save the current context
           store r2, #offsR2[r0] ; save r2
           ...                   ; save r3-r30
           store r31, #offsR31[r0] ; save r31
-          pop r1                ; save r0
-          push  r1
+          pop r1            ; save r0
+          push r1
           store r1, #offsR0[r0]
           store SPC, #offsPC[r0] ; save PC
           store SPSW,#offsPSW[r0] ; save PSW
           store SP, #offsSP[r0] ; save SP
-          load  r1, #offstR1[r0]  ; restore sys call args in r1
-          pop   r0                ; and r0
+          load r1, #offstR1[r0]  ; restore sys call args in r1
+          pop r0            ; and r0
 
           ; Execute the system call
-          call  s_call
+          call s_call
 
           ; Restore the new context
           load r0, [running]

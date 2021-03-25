@@ -99,16 +99,16 @@ while (1) {
   startDMA(r->buffer, r->size);
   dmaEvent.wait();
 
-  r  ->isCompleted = 1;
-  r  ->toSignal->signal();
+  r ->isCompleted = 1;
+  r ->toSignal->signal();
 }
 
 Zad 3. Statička biblioteka sadrži zaglavlje sa spiskom simbola koje izvozi i uvozi, i samo
 telo biblioteke (kod), drugim rečima, proizvod je istog oblika kao i proizvod prevođenja,
 dok izvršni fajl sadrži telo (kod) i zaglavlje u kome se nalazi adresa prve instrukcije koja
 treba da se izvrši. Zbog ove razlike u proizvodima, linkeru je potrebna informacija šta da
-napravi. Osim  toga,  u  samom  postupku  razrešavanja  simbola,  prilikom  pravljenja
-izvršnog  fajla,  postojanje  nedefinisanog  a  referisanog  simbola se nakon prvog prolaza
+napravi. Osim toga,  u samom postupku razrešavanja simbola,  prilikom pravljenja
+izvršnog fajla,  postojanje nedefinisanog a referisanog simbola se nakon prvog prolaza
 prijavljuje kao greška. U slučaju pravljenja biblioteke, ovakav slučaj je dozvoljen.
 
 Zad 4.
@@ -117,15 +117,15 @@ Fizička adresa (PA), 29 bita
 
 Swap 1GB => Disk adr. (30)
 Deskriptor stranice: Da li je u memoriji (1) : RWE(3) : Size(24) : Segment
-adr.  (29) ili   Disk Adr. (30)
+adr.  (29) ili Disk Adr. (30)
 Odatle sledi da je deskriptor segmenta veličine 58 bita, SMT ima po jedan ulaz za
 svaki segment, što znači 64 ulaza. Tako da je veličina SMTa 58*64/8 B = 464B
 
-Napomena: Nije logično da se descriptori pakuju tako  “gusto”,  tako  da  se  jedan
-descriptor  rasprostire  u  više  bajtova/reči,  jer  se  njima  pristupa  prilikom
-preslikavanja  adresa,  što  bi  bilo  neefikasno.  Nije  nemoguće,  ali  nije  baš  ni
-logično.  Tako  da  je  rešenje  u  kome  se jedan  descriptor  zaokruže  na  cveo  broj
-bajtova/reči  takođe  prihvatljivo.  Odnosno  velivina  deskriptora  64b=8B  =>
+Napomena: Nije logično da se descriptori pakuju tako “gusto”,  tako da se jedan
+descriptor rasprostire u više bajtova/reči,  jer se njima pristupa prilikom
+preslikavanja adresa,  što bi bilo neefikasno.  Nije nemoguće,  ali nije baa ni
+logično.  Tako da je rešenje u kome se jedan descriptor zaokruže na cveo broj
+bajtova/reči takođe prihvatljivo.  Odnosno velivina deskriptora 64b=8B =>
 veličina SMT 8*64B = 512B. Na ovaj način je SMT veća za 10%, ali su zato
 performanse drastično bolje.
 

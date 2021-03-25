@@ -62,14 +62,14 @@ setjmp(), nakon skoka iz funkcije longjmp(),
 oslanja na sačuvanu vrednost povratne adrese originalnog pozivaoca funkcije setjmp(), kao i
 na sačuvanu vrednost r1. Međutim, nakon povratka iz „običnog“ poziva funkcije setjmp(), u
 kontekstu pozivajuće funkcije može se pozvati neka druga funkcija ili dogoditi prekid, koji će
-onda  prepisati  te vrednosti povratne  adrese i  sačuvanog
-r1  koje  su  ostale iznad  vrha  steka.
-Drugim  rečima,  prilikom  povratka  iz  „običnog“  poziva  funkcike setjmp(),  povratna  adresa
-na  koju  se  oslanja  povratak  nakon  skoka  iz longjmp() ostala  je  iznad  vrha  steka  i  može  se
-lako  dogoditi  da  bude  „pregažena“  nekom  drugom  vrednošću.  Tada  povratak  iz
+onda prepisati te vrednosti povratne adrese i sačuvanog
+r1 koje su ostale iznad vrha steka.
+Drugim rečima,  prilikom povratka iz „običnog“  poziva funkcike setjmp(),  povratna adresa
+na koju se oslanja povratak nakon skoka iz longjmp() ostala je iznad vrha steka i može se
+lako dogoditi da bude „pregažena“  nekom drugom vrednošću.  Tada povratak iz
 setjmp()
-nakon  skoka  iz  longjmp() neće  biti  korektan. Jedan  primer  je  kod funkcije dispatch()
-školskog   jezgra,   a   koji   nakon   poziva   setjmp() ima  pozive  drugih  funkcija  (klase
+nakon skoka iz longjmp() neće biti korektan. Jedan primer je kod funkcije dispatch()
+školskog jezgra,   a koji nakon poziva setjmp() ima pozive drugih funkcija (klase
 Scheduler).
 4. (10 poena)
 class Thread {
@@ -83,7 +83,7 @@ private:
 };
 
 int Thread::start () {
-  int id   = clone();
+  int id = clone();
   if (id<0) return id;  // Failure
   if (id>0) {  // Successful start in the parent’s context
     myID=id;

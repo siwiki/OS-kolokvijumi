@@ -9,9 +9,9 @@ public:
 
   BoundedBuffer ();
 
-  void  put1 (int);
-  void  put2 (double);
-  int   get  (int*, double*);
+  void put1 (int);
+  void put2 (double);
+  int get (int*, double*);
 
 private:
   Semaphore mutex;

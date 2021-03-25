@@ -38,7 +38,7 @@ interrupt void ioInterrupt () {
 
 --------------------------------------------------------------------------------
 concurrency
-U  klasu `Thread`  dodati  su  sledeći  privatni,  nestatički  podaci-članovi  sa  datim  inicijalnim vrednostima:
+U klasu `Thread`  dodati su sledeći privatni,  nestatički podaci-članovi sa datim inicijalnim vrednostima:
 ```cpp
 Thread* Thread::parent = 0;
 bool Thread::isWaitingForChildren = false;
@@ -88,7 +88,7 @@ int multiexec (int number, const char* filename, const char* const args[]){
     if (status<0) continue; // fork failed
     if (status==0) // Child's context
       if (execvp(filename,childArgs)<0) exit();
-    else  // Parent's context
+    else // Parent's context
       ret++;
   }
   return ret;

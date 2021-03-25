@@ -54,11 +54,11 @@ dynload
 ```
 2. ```asm
               load r1, [r0] ; Load module's base address
-              and  r1, r1, r1 ; If loaded,
-              jnz  call_fun ; call the subroutine
-              push r0   ; Else, load the module
+              and r1, r1, r1 ; If loaded,
+              jnz call_fun ; call the subroutine
+              push r0 ; Else, load the module
               call load_module
-              pop  r0
+              pop r0
               load r1, [r0] ; Load module's base address
    call_fun:  call #fun[r1] ; Add the subroutine's offset
               ; to the module's base addr and call it

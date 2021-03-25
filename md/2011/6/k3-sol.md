@@ -11,7 +11,7 @@ class Data;
 class DoubleBuffer {
 public:
   DoubleBuffer (int size);
-  void  put (Data*);
+  void put (Data*);
   Data* get ();
 private:
   Semaphore inputBufReady, outputBufReady;

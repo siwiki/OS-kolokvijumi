@@ -11,8 +11,8 @@ shared var
   sb : Semaphore:=0;
 
 process A;              process B;
-begin               begin
-  loop                loop
+begin           begin
+  loop            loop
     wait(sa);                          wait(sb);
     <critical-section>                <critical-section>
     signal(sb);                        signal(sa);
@@ -50,10 +50,10 @@ Zapis broj Adresa početka Veličina
 3 2500 120
 4. (10 poena)
 Sistem ne mora da kreira novu PMT za novokreirani proces prilikom izvršavanja sistemskog poziva fork,
-jer  oba  procesa inicijalno dele sve stranice,  pa  su  njihove  PMT  inicijalno  potpuno  iste.  Isto  važi  i  za
+jer oba procesa inicijalno dele sve stranice,  pa su njihove PMT inicijalno potpuno iste.  Isto važi i za
 PMTP koji ukazuje na istu PMT, pa su i oni isti. Kada bilo koji od ovih procesa generiše izuzetak zbog
-zabranjenog  upisa  u  deljenu  stranicu,  sistem  mora  da  razdvoji  stranice  kopiranjem  u  različite  fizičke
-okvire  (copy-on-write).  Kako sada  procesi  imaju    razdvojenu  stranicu  preslikanu  u  različite  fizičke
-okvire,  njihove  PMT  postaju  različite  (različit je sadržaj  deskriptora  za  razdvojenu  stranicu),  pa  je  to
-najkasniji  trenutak  kada  sistem  mora  da  formira sopstvenu PMT  za  novokreirani  proces.  Kako  sada
+zabranjenog upisa u deljenu stranicu,  sistem mora da razdvoji stranice kopiranjem u različite fizičke
+okvire (copy-on-write).  Kako sada procesi imaju razdvojenu stranicu preslikanu u različite fizičke
+okvire,  njihove PMT postaju različite (različit je sadržaj deskriptora za razdvojenu stranicu),  pa je to
+najkasniji trenutak kada sistem mora da formira sopstvenu PMT za novokreirani proces.  Kako sada
 procesi imaju različite PMT, i njihovi PMTP postaju tada različiti.

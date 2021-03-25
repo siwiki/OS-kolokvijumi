@@ -1,7 +1,7 @@
 2020/avgust/Kolokvijum - Avgust 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
 semaphore
-Pokazana  je  jedna  jednostavna  implementacija  koja  zadovoljava  uslove,
+Pokazana je jedna jednostavna implementacija koja zadovoljava uslove,
 koristi jedostavan FIFO red zahteva, ali koja ima značajan stepen odbijanja zahteva (red
 zahteva je opadajući po vremenskoj marki). Moguće su i složenije varijante sa boljim
 učinkom (manje odbijenih zahteva), ali treba paziti na moguće izgladnjivanje.
@@ -12,7 +12,7 @@ const Time MAXTIME = (Time)-1;
 class Resource {
 public:
   Resource () : holder(0), last(MAXTIME) {}
-  int  acquire();
+  int acquire();
   void release();
 protected:
   void block (); // Implementacija ista kao i za Semaphore

@@ -2,12 +2,12 @@
 --------------------------------------------------------------------------------
 interrupt
 Neki procesor obrađuje prekide (hardverske i softverske) tako što tokom izvršavanja prekidne
-rutine  koristi  poseban stek  koji  se  koristi  u  sistemskom,  privilegovanom  režimu  rada
+rutine koristi poseban stek koji se koristi u sistemskom,  privilegovanom režimu rada
 procesora, u kome se izvršava kod kernela (čiji je deo i prekidna rutina). Taj stek alociran je u
 delu memorije koju koristi kernel, a na vrh tog steka ukazuje poseban registar SSP procesora
 koji je dostupan samo u privilegovanom režimu.
 
-Prilikom  obrade  prekida,  procesor  ništa  ne  stavlja  na  stek,  pa  tako  ni  ne  menja  sadržaj
+Prilikom obrade prekida,  procesor ništa ne stavlja na stek,  pa tako ni ne menja sadržaj
 pokazivača vrha korisničkog steka (SP) koji je koristio prekinuti proces (SP zadržava staru
 vrednost), dok tekuću (staru) vrednost statusnog registra (PSW) i programskog brojača (PC)
 sačuva u posebne, za to namenjene registre, SPSW i SPC, respektivno. Prilikom povratka iz
@@ -15,10 +15,10 @@ prekidne rutine instrukcijom `iret`, procesor restaurira registre PSW i PC prepi
 iz registara SPSW i SPC i vraća se u korisnički režim, a time i na korisnički stek.
 
 Ovaj isti sistemski stek se koristi tokom izvršavanja bilo kog koda kernela; kernel ima samo
-jedan  takav  stek  (nema  više  niti). Prilikom  promene  konteksta,  kontekst  procesora  treba
+jedan takav stek (nema više niti). Prilikom promene konteksta,  kontekst procesora treba
 sačuvati u odgovarajućim poljima strukture PCB, u kojoj postoji polje za čuvanje svakog od
-programski  dostupnih  registara;  pomeraj  ovog  polja  u  odnosu  na  početak  strukture  PCB
-označen  je  simboličkim  konstantama `offsPC`, `offsSP`, `offsPSW`, `offsR0`, `offsR1` itd.
+programski dostupnih registara;  pomeraj ovog polja u odnosu na početak strukture PCB
+označen je simboličkim konstantama `offsPC`, `offsSP`, `offsPSW`, `offsR0`, `offsR1` itd.
 Procesor je RISC, sa *load/store* arhitekturom i ima 32 registra opšte namene (R0..R31).
 
 U kodu kernela postoji statički definisan pokazivač `running` koji ukazuje na PCB tekućeg
@@ -26,14 +26,14 @@ procesa. Potprogram `s_call`, koji nema argumente, realizuje sistemski poziv zad
 korisničkog procesa vrednostima u registrima i po potrebi raspoređivanje, tako što smešta
 PCB na koji ukazuje pokazivač `running` u listu spremnih procesa ili na drugo mesto, a iz liste
 spremnih uzima jedan odabrani proces i postavlja pokazivač `running` na njega.
-Na  asembleru  datog  procesora  napisati  kod  prekidne  rutine `sys_call` koja vrši sistemski
+Na asembleru datog procesora napisati kod prekidne rutine `sys_call` koja vrši sistemski
 poziv korišćenjem potprograma `s_call`. Ova prekidna rutina poziva se softverskim prekidom
 iz korisničkog procesa, pri čemu se sistemski poziv realizuje softverskim prekidom.
 
 --------------------------------------------------------------------------------
 semaphore
-Korišćenjem školskog jezgra i date klase `RowAdder`,  implementirati  funkciju mat_add koja
-sabira  elemente  svake  vrste  matrice mat i  rezultat  tog  sabiranja  smešta  u  odgovoarajući
+Korišćenjem školskog jezgra i date klase `RowAdder`,  implementirati funkciju mat_add koja
+sabira elemente svake vrste matrice mat i rezultat tog sabiranja smešta u odgovoarajući
 element niza res, i to radi uporedo i tako da kontrolu vraća pozivaocu tek kada su uporedna
 sabiranja svih vrsta matrice završena.
 
@@ -64,7 +64,7 @@ void mat_add ();
 
 --------------------------------------------------------------------------------
 page
-Virtuelni  adresni  prostor  nekog  sistema  je  8TB  (terabajta)  i  organizovan  je  stranično,
+Virtuelni adresni prostor nekog sistema je 8TB (terabajta)  i organizovan je stranično,
 adresibilna jedinica je bajt, a stranica je veličine 4KB. PMT (*page map table*) je organizovana
 u dva nivoa, s tim da je broj ulaza u PMT prvog nivoa dva puta manji od broja ulaza u PMT
 drugog nivoa.
@@ -85,12 +85,12 @@ int main (int argc, const char* argv[]) {
 
 pod sledećim pretpostavkama:
 
-- tip `int` je veličine 32 bita; promenljive `i` i `j` je  prevodilac  formirao  kao  automatske
+- tip `int` je veličine 32 bita; promenljive `i` i `j` je prevodilac formirao kao automatske
   promenljive na steku;
 - logički segment za kod ovog programa veličine je jedne stranice i nalazi se na dnu
-  virtuelnog  adresnog  prostora  procesa (na najnižim adresama),  a  segment  za  stek  je
+  virtuelnog adresnog prostora procesa (na najnižim adresama),  a segment za stek je
   veličine 32 stranice i nalazi se odmah iznad segmenta za kod;
-- nizovi `src` i `dst` smešteni  su  jedan  odmah  iza  drugog,  tim  redom,  u  isti  logički
+- nizovi `src` i `dst` smešteni su jedan odmah iza drugog,  tim redom,  u isti logički
   segment memorije alociran za statičke podatke koji se nalazi iznad segmenta za stek;
   ovaj segment je onoliki koliko je najmanje stranica potrebno za smeštanje ovih nizova
   i dozvoljen je za upis;
@@ -98,21 +98,21 @@ pod sledećim pretpostavkama:
   učitava tek na zahtev (*demand paging*).
 
 1. Prikazati logičku strukturu virtuelne adrese i označiti veličinu svakog polja.
-2. Za koje vredosti  promenljivih `i` i `j` i pristup do kog od dva niza `src` i `dst` će procesor
+2. Za koje vredosti promenljivih `i` i `j` i pristup do kog od dva niza `src` i `dst` će procesor
    prvi put generisati izuzetak koji će operativni sistem smatrati kao prestup (grešku) procesa?
    Obrazložiti.
 3. Koliko straničnih grešaka (*page fault*) će operativni sistem obraditi uspešno za ovaj
-   proces  dok  ga  ne  ugasi  zbog  prestupa,  ako  je  operativni  sistem  za  ovaj  proces  odvojio
-   dovoljno  okvira  operativne  memorije  da  smesti  sve  stranice  koje  taj  proces  regularno
+   proces dok ga ne ugasi zbog prestupa,  ako je operativni sistem za ovaj proces odvojio
+   dovoljno okvira operativne memorije da smesti sve stranice koje taj proces regularno
    adresira? Obrazložiti.
 
 --------------------------------------------------------------------------------
 filesystem
 U implementaciji nekog fajl sistema evidencija slobodnih blokova na particiji vodi se pomoću
-bit-vektora  koji  se  kešira  u  memoriji  u  nizu `blocks` veličine `NumOfBytes` (konstanta
-`NumOfBlocks` predstavlja  broj  blokova  na  particiji).  Svaki  element  ovog  niza  je  veličine
+bit-vektora koji se kešira u memoriji u nizu `blocks` veličine `NumOfBytes` (konstanta
+`NumOfBlocks` predstavlja broj blokova na particiji).  Svaki element ovog niza je veličine
 jednog bajta, a svaki bit odgovara jednom bloku na disku (1-zauzet, 0-slobodan). Pretpostaviti
-da  je `NumOfBlocks` umnožak broja 8 (`BITS_IN_BYTE`). Date su pomoćne funkcije i funkcija
+da je `NumOfBlocks` umnožak broja 8 (`BITS_IN_BYTE`). Date su pomoćne funkcije i funkcija
 `allocateBlock` koja vrši alokaciju slobodnog bloka tražeći prvi slobodan blok počev od onog
 datog argumentom. Blok 0 je uvek zauzet.
 
@@ -154,5 +154,5 @@ ulong allocateBlock (ulong startingFrom) {
 }
 ```
 
-Modifikovati  funkciju `allocateBlock` tako da alocira blok koji je najbliži onom koji je tad
+Modifikovati funkciju `allocateBlock` tako da alocira blok koji je najbliži onom koji je tad
 argumentom, i to najbliži sa bilo koje strane.

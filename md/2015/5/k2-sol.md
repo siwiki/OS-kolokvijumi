@@ -62,15 +62,15 @@ Page#   Frame#    RWX
 1Ah 17h 110
 1Bh 18h 110
 b) PMT procesa-roditelja: PMT procesa-deteta: c) PMT procesa-deteta:
-Page#   Frame#    RWX    Page#    Frame#    RWX
+Page#   Frame#    RWX Page#    Frame#    RWX
   Page#    Frame#   RWX
-00h 10h 001  00h 10h 001      00h 10h 001
-01h 11h 001  01h 11h 001      01h 11h 001
-02h 12h 001  02h 12h 001      02h 12h 001
-03h 13h 001  03h 13h 001      03h 13h 001
-12h 14h 100  12h 14h 100      12h 14h 100
-13h 15h 100  13h 15h 100      13h 15h 100
-14h 16h 100  14h 16h 100      14h 16h 100
-1Ah 17h 100  1Ah 17h 100      1Ah 19h 110
-1Bh 18h 100  1Bh 18h 100      1Bh 18h 100
+00h 10h 001 00h 10h 001  00h 10h 001
+01h 11h 001 01h 11h 001  01h 11h 001
+02h 12h 001 02h 12h 001  02h 12h 001
+03h 13h 001 03h 13h 001  03h 13h 001
+12h 14h 100 12h 14h 100  12h 14h 100
+13h 15h 100 13h 15h 100  13h 15h 100
+14h 16h 100 14h 16h 100  14h 16h 100
+1Ah 17h 100 1Ah 17h 100  1Ah 19h 110
+1Bh 18h 100 1Bh 18h 100  1Bh 18h 100
 

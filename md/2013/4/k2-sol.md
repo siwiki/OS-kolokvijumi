@@ -39,7 +39,7 @@ end;
 2. (10 poena)
 Data implementacija nije dobra jer je moguće utrkivanje (race condition) između izvršavanja
 istog ovog koda za isti semafor na dva (ili više) procesora. I jedan i drugi procesor mogu da
-izvrše petlju while i iz nje izađu, uporedno pročitavši iz atributa lck vrednost  1,  a  potom
+izvrše petlju while i iz nje izađu, uporedno pročitavši iz atributa lck vrednost 1,  a potom
 izvrše swap i izađu iz operacije lock, odnosno uđu u operaciju semafora. Ispravljena verzija
 je sledeća (ima i nešto malo efikasnijih, kako je prikazano na predavanjima):
 void Semaphore::lock() {

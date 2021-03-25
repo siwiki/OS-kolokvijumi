@@ -59,12 +59,12 @@ void DoubleBuffer::get (char* buf) {
 2/2
 2. (10 poena)
 a)(5)
-jane    <file>
-chld    <dir>
-foo     <file>
+jane <file>
+chld <dir>
+foo <file>
 b)(5)
-foo     <file>
-txt     <dir>
+foo <file>
+txt <dir>
 3. (10 poena)
 Byte* getFileBlock (FCB* file, unsigned int block) {
   if (file==0 || file->index==0) return 0;

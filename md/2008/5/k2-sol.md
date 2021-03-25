@@ -31,7 +31,7 @@ const int N = ...;
 class BoundedBuffer {
 public:
   BoundedBuffer();
-  void  put (Data*);
+  void put (Data*);
   Data* get (int consumerID);  // consumerID should be 1 or 2
 private:
   Data* buf[N];
@@ -85,7 +85,7 @@ class BoundedBuffer
 {
 public:
   BoundedBuffer();
-  void  put (Data*);
+  void put (Data*);
   Data* get (int consumerID);  // consumerID should be 1 or 2
 private:
   Data* buf[N];
@@ -143,8 +143,8 @@ Data* BoundedBuffer::get (int myID) {
 Iako ovakvi entiteti imaju isto nekvalifikovano ime u datom programu, oni imaju različita potpuno
 kvalifikovana imena (engl. fully qualified name) koja se sastoje od pune staze imena njihovih
 okružujućih prostora imena. Na primer, statički podatak-član
-m klase X ima    potpuno kvalifikovano
-ime X::m, dok istoimeni član klase Y ima    potpuno kvalifikovano ime Y::m; slično važi za
+m klase X ima potpuno kvalifikovano
+ime X::m, dok istoimeni član klase Y ima potpuno kvalifikovano ime Y::m; slično važi za
 ugnežđene prostore imena (npr. P::Q::R::S::t). Da bi se omogućilo definisanje istoimenih
 simbola u različitim prostorima imena, prevodilac jednostavno kao simbol u .obj fajlu definiše
 potpuno kvalifikovano ime, a ne nekvalifikovano ime, tako da linker vidi to jednoznačno puno ime.
@@ -226,7 +226,7 @@ B = 10KB.
 Informacija Da li se nalazi u PMT?
 Indikator da li se stranica nalazi u fizičkoj memoriji. Da
 
-Indikator  da  li  je  stranica  uopšte  dozvoljena  za  pristup
+Indikator da li je stranica uopšte dozvoljena za pristup
 (registrovana kao korišćeni deo virtuelnog adresnog prostora).
 Ne
 Indikator da li je hardveru dozvoljena upis u stranicu. Da

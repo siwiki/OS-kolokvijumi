@@ -47,12 +47,12 @@ public:
   DLArray (int size, int blockSize, FHANDLE fromFile);
 
   inline double get (int i);  // Get element [i]
-  inline void   set (int i, double x); // Set element [i]
+  inline void set (int i, double x); // Set element [i]
 
 protected:
   inline void save(int slot);
   inline void load(int blockNo, int slot);
-  inline int  fetch(int blockNo);
+  inline int fetch(int blockNo);
 
 private:
   FHANDLE file;

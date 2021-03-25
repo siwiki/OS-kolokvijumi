@@ -44,12 +44,12 @@ koji žele da uđu u svoju kritičnu sekciju će se blokirati na semaforu
 mutex. Poslednji proces tipa A
 koji izlazi iz svoje kritične sekcije izvršiće
 signal na semaforu gate. Kako samo jedan proces
-može proći operaciju wait na semaforu gate bez    blokiranja, to znači da će ili prvi proces tipa A ili
+može proći operaciju wait na semaforu gate bez blokiranja, to znači da će ili prvi proces tipa A ili
 samo jedan proces tipa B to moći da uradi i tako uđe u svoju kritičnu sekciju. Odatle sledi dati
 odgovor.
 
 3.(10)
-static  void* module_p = NULL;
+static void* module_p = NULL;
 
 int f (int x, int y) {
   if (module_p == NULL) module_p = load_module(“p.obj”);
@@ -82,13 +82,13 @@ B = 2
 14
 B, pa je širina polja za pomeraj unutar stranice i
 okvira 14 bita.
-Odatle sledi da je širina polja unutar virtuelne adrese za broj stranice 32-  14   = 18 bita, širina polja za
+Odatle sledi da je širina polja unutar virtuelne adrese za broj stranice 32-  14 = 18 bita, širina polja za
 broj okvira unutar fizičke adrese 30-14 = 16 bita, a širina deskriptora (ulaza u PMT drugog nivoa)
 isto toliko – 16 bita, odnosno 2 bajta.
 Stranica prvog nivoa ima 2K = 2
 11
  ulaza, pa je širina polja za indeksiranje PMT prvog nivoa 11
-bita, a za indeksiranje PMT drugog nivoa 18-11   = 7 bita.
+bita, a za indeksiranje PMT drugog nivoa 18-11 = 7 bita.
 Prema tome, struktura virtuelne adrese je: Page_L1(11):Page_L2(7):Offset(14).
 b)    Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s
 tim da vrednost 0 može da označava nekorišćeni ospeg stranica (invalidan ulaz), pošto se ni PMT
@@ -99,8 +99,8 @@ c)    PMT prvog nivoa zauzima 2K ulaza po 4 bajta, dakle 8KB.
 Jedan ulaz u PMT drugog nivoa sadrži broj okvira, koji je širine 16 bita, pa zauzima 2 bajta.
 PMT drugog nivoa ima 2
 7
- = 128 ulaza, pa zauzima 256B   .
-Prema tome, PMT   ukupno zauzimaju maksimalno:
+ = 128 ulaza, pa zauzima 256B .
+Prema tome, PMT ukupno zauzimaju maksimalno:
 4⋅2
 11
 B (veličina PMT prvog nivoa) + 2

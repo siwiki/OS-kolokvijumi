@@ -29,7 +29,7 @@ interrupt void timerInterrupt () {
   if (--count) {
     *ioCtrl = 1; // New input request
     *timer = timeout; // Restart timer
-  } else  // Completed
+  } else // Completed
     completed = 1;
 }
 2. (10 poena)
@@ -37,31 +37,31 @@ a)(5) VA: Segment(8):Page(16):Offset(8); PA: Frame(20):Offset(8).
 b)(5) FF00DDh
 3. (10 poena) a)(7)
 dispatch:  ; Save the current context
-            LOAD  Rx,Rp       ; Rx:=# of current processor
-            SHL   Rx,2        ; Rx:=Rx*4
-            LOAD  Rx,#runningProcesses[Rx]; Rx:=&running process' PCB
-            STORE #offs_r0[Rx],R0   ; store R0
-            STORE #offs_r1[Rx],R1   ; store R1
+            LOAD Rx,Rp   ; Rx:=# of current processor
+            SHL Rx,2    ; Rx:=Rx*4
+            LOAD Rx,#runningProcesses[Rx]; Rx:=&running process' PCB
+            STORE #offs_r0[Rx],R0 ; store R0
+            STORE #offs_r1[Rx],R1 ; store R1
             ...
             STORE #offs_psw[Rx],PSW ; store PSW
-            STORE #offs_sp[Rx],SP   ; store SP
+            STORE #offs_sp[Rx],SP ; store SP
             ; Call scheduler
-            CALL  schedule
+            CALL schedule
             ; Restore the next context
-            LOAD  Rx,Rp       ; Rx:=# of current processor
-            SHL   Rx,2        ; Rx:=Rx*4
-            LOAD  Rx,#runningProcesses[Rx]; Rx:=&next process' PCB
-            LOAD  R0,#offs_r0[Rx]   ; restore R0
-            LOAD  R1,#offs_r1[Rx]   ; restore R1
+            LOAD Rx,Rp   ; Rx:=# of current processor
+            SHL Rx,2    ; Rx:=Rx*4
+            LOAD Rx,#runningProcesses[Rx]; Rx:=&next process' PCB
+            LOAD R0,#offs_r0[Rx]   ; restore R0
+            LOAD R1,#offs_r1[Rx]   ; restore R1
             ...
-            LOAD  PSW,#offs_psw[Rx] ; restore PSW
-            LOAD  SP,#offs_sp[Rx]   ; restore SP
-            RTS                     ; return from subroutine
+            LOAD PSW,#offs_psw[Rx] ; restore PSW
+            LOAD SP,#offs_sp[Rx]   ; restore SP
+            RTS                 ; return from subroutine
 
 2/2
 b)(3) Nije potrebno, jer svaki procesor jedini pristupa samo svom odgovaraju
 ćem elementu n
-niza runningProcesses,  pa  nema  potencijalnog  konflikta  između  procesora  (nema  deljenih
+niza runningProcesses,  pa nema potencijalnog konflikta između procesora (nema deljenih
 podataka u memoriji kojima pristupaju različiti procesori u ovoj operaciji).
 4. (10 poena)
 class Search : public Thread {

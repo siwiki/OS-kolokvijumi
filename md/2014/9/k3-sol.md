@@ -24,7 +24,7 @@ public:
   File (const char *pathname, int flags, mode_t mode) throw Exception;
  ~File () throw Exception;
 
-  void read  (byte* buffer, unsigned long size) throw Exception;
+  void read (byte* buffer, unsigned long size) throw Exception;
   void write (byte* buffer, unsigned long size) throw Exception;
 
 private:

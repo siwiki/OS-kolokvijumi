@@ -37,8 +37,8 @@ void longjmp (jmp_buf buf, int val) {
   asm {
 
     load r0,-2*4[sp]; // r0:=val
-    and  r0,r0,r0;    // fix r0 if it is zero
-    jnz  continue
+    and r0,r0,r0;    // fix r0 if it is zero
+    jnz continue
     load r0,#1
 
 continue:

@@ -19,7 +19,7 @@ Byte* getDiskBlock (BlkNo blk) {
   diskRead(blk,diskCache[hash]);
   return diskCache[hash];
 }
-2. (10 poena) Na  standardni  izlaz  ispisuje  sadržaj  tekućeg  direktorijuma,  tačnije,
+2. (10 poena) Na standardni izlaz ispisuje sadržaj tekućeg direktorijuma,  tačnije,
 nazive ulaza u tekućem direktorijumu (po jedan u redu).
 3. (10 poena)
 int fread (FCB* f, Byte* buf, int n) {

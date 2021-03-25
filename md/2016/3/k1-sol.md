@@ -62,7 +62,7 @@ interrupt void dmaInterrupt () {
 interrupt
 ```asm
 dispatch:   ; Save the current context
-            load  rx,running
+            load rx,running
             store r0,#offsR0[rx] ; save regs
             store r1,#offsR1[rx]
             ...
@@ -72,17 +72,17 @@ dispatch:   ; Save the current context
             store sp,#offsSP[rx] ; save sp
 
             ; Select the next running process
-            call  scheduler
+            call scheduler
 
             ; Restore the new context
-            load  rx,running
-            load  sp,#offsSP[rx] ; restore sp
-            load  psw,#offsPSW[rx] ; restore psw
-            load  pc,#offsPC[rx] ; restore pc
-            load  r0,#offsR0[rx] ; restore regs
-            load  r1,#offsR1[rx]
+            load rx,running
+            load sp,#offsSP[rx] ; restore sp
+            load psw,#offsPSW[rx] ; restore psw
+            load pc,#offsPC[rx] ; restore pc
+            load r0,#offsR0[rx] ; restore regs
+            load r1,#offsR1[rx]
             ...
-            load  r31,#offsR31[rx]
+            load r31,#offsR31[rx]
             ; Return
             iret
 ```

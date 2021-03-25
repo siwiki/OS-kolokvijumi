@@ -11,8 +11,8 @@ shared var
   sa, sb : semaphore := 0;
 
 process a;   process b;
-begin    begin
-  loop     loop
+begin begin
+  loop loop
     compute_a(b);      sa.wait();
     sa.signal();      compute_b(a);
     sb.wait();      sb.signal();
@@ -31,7 +31,7 @@ public:
   inline DLArray (int size, int blockSize, FHANDLE fromFile);
 
   inline double get (int i);  // Get element [i]
-  inline void   set (int i, double x); // Set element [i]
+  inline void set (int i, double x); // Set element [i]
 
 protected:
   inline void save();
@@ -101,13 +101,13 @@ VMStruct
 
 
 Proces Child: Sve isto.
-Napomena:  Primetiti  da  se  u  opisanom  sistemu  bit  Copy-On-Write  (u  daljem  tekstu  CoW)
+Napomena:  Primetiti da se u opisanom sistemu bit Copy-On-Write (u daljem tekstu CoW)
 odnosi na čitav set stranica. Zbog toga ovaj bit nije dovoljan da bi se odredilo da li pri upisu u
 neku stranicu iz seta, tu stranicu treba kopirati. Stranice koje pri upisu stvarno treba kopirati
 su one koje pripadaju regionu za koji je postavljen bit CoW i kojima je u trnutku upisa bitom
 W u PMT zabranjen upis. Kada jednom dođe do upisa i samim tim i do kopiranja stranice, za
 novu kopiju se setuje bit W u PMT i pri kasnijim upisima u tu stranicu ne treba vršiti
-kopiranje te stranice bez obzira što stranic  a pripada regionu za koji je setovan CoW bit. Stoga
+kopiranje te stranice bez obzira što stranic a pripada regionu za koji je setovan CoW bit. Stoga
 bi se sistem mogao implementirati tako da se u CoW bit jednom upiše vrednost pri pokretanju
 procesa i više nikada ne menja. U takvoj varijanti, CoW bit bi čak bio suvišan jer bi uvek
 imao istu vrednost kao i W bit u VMStruct strukturi.

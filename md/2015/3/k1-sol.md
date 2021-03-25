@@ -47,33 +47,33 @@ interrupt void ioInterrupt () {
 2/2
 2. (10 poena)
 dispatch:   ; Save the current context
-load  rx,running
+load rx,running
 store r0,#offsR0[rx] ; save regs
 store r1,#offsR1[rx]
 ...
 store r31,#offsR31[rx]
-pop   r0 ; save pc
+pop r0 ; save pc
 store r0,#offsPC[rx]
-pop   r0 ; save psw
+pop r0 ; save psw
 store r0,#offsPSW[rx]
-pop   r0 ; save original sp
+pop r0 ; save original sp
 store r0,#offsSP[rx]
 
 ; Select the next running process
-call  scheduler
+call scheduler
 
 ; Restore the new context
-load  rx,running
-load  r0,#offsSP[rx] ; restore original sp
-push  r0
-load  r0,#offsPSW[rx] ; restore original psw
-push  r0
-load  r0,#offsPC[rx] ; restore pc
-push  r0
-load  r0,#offsR0[rx] ; restore regs
-load  r1,#offsR1[rx]
+load rx,running
+load r0,#offsSP[rx] ; restore original sp
+push r0
+load r0,#offsPSW[rx] ; restore original psw
+push r0
+load r0,#offsPC[rx] ; restore pc
+push r0
+load r0,#offsR0[rx] ; restore regs
+load r1,#offsR1[rx]
 ...
-load  r31,#offsR31[rx]
+load r31,#offsR31[rx]
 ; Return
 iret
 3. (10 poena)

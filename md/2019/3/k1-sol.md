@@ -44,17 +44,17 @@ dispatch: ; Save the current context
           store r2, #offsR2[r0] ; save r2
           ...                   ; save r3-r30
           store r31, #offsR31[r0] ; save r31
-          pop r1                ; save r0
+          pop r1            ; save r0
           store r1, #offsR0[r0]
-          pop r1                ; save PC
+          pop r1            ; save PC
           store r1, #offsPC[r0]
-          pop r1                ; save PSW
+          pop r1            ; save PSW
           store r1, #offsPSW[r0]
-          pop r1                ; save SP
+          pop r1            ; save SP
           store r1, #offsSP[r0]
 
           ; Select the next running process
-          call  scheduler
+          call scheduler
 
           ; Restore the new context
           load r0, [running]

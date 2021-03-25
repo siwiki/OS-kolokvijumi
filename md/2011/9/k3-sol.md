@@ -4,7 +4,7 @@
 
 1/  2
 Rešenja zadataka za nadoknadu trećeg kolokvijuma
-iz  Operativnih sistema 1
+iz Operativnih sistema 1
 Septembar 2011.
 1. (10 poena)
 class CharDevice {

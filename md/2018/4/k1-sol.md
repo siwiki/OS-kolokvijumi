@@ -75,13 +75,13 @@ store r3,#offsR3[r0]
 ...
 store r31,#offsR31[r0]
 store sp,#offsSP[r0] ; save sp
-pop   r1  ; save r1 through r1
+pop r1 ; save r1 through r1
 store r1,#offsR1[r0]
-pop   r1  ; save r0 through r1
+pop r1 ; save r0 through r1
 store r1,#offsR0[r0]
-pop   r1  ; save psw through r1
+pop r1 ; save psw through r1
 store r1,#offsPSW[r0]
-pop   r1  ; save pc through r1
+pop r1 ; save pc through r1
 store r1,#offsPC[r0]
 
 ; Restore the context of the new running
@@ -90,11 +90,11 @@ load r1, #offsPC[r0] ; restore pc through the stack
 push r1
 load r1, #offsPSW[r0] ; restore psw through the stack
 push r1
-load  sp,#offsSP[r0] ; restore sp
-load  r31,#offsR31[r0] ; restore r31
+load sp,#offsSP[r0] ; restore sp
+load r31,#offsR31[r0] ; restore r31
 ...  ; restore other regs
-load  r1,#offsR1[r0]
-load  r0,#offsR0[r0] ; restore r0
+load r1,#offsR1[r0]
+load r0,#offsR0[r0] ; restore r0
 ; and return
 iret
 ```

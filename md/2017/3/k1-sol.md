@@ -38,23 +38,23 @@ void transfer (IORequest* req) {
 interrupt
 ```asm
 dispatch:   ; Save the current context
-            push  r0    ; save regs
-            push  r1
+            push r0 ; save regs
+            push r1
             ...
-            push  r31
-            load  r0, running
+            push r31
+            load r0, running
             store ssp, #offsSSP[r0] ; save ssp
 
             ; Select the next running process
-            call  scheduler
+            call scheduler
 
             ; Restore the new context
-            load  r0, running
-            load  ssp, #offsSSP[r0] ; restore ssp
-            pop   r31
-            pop   r30 ; restore regs
+            load r0, running
+            load ssp, #offsSSP[r0] ; restore ssp
+            pop r31
+            pop r30 ; restore regs
             ...
-            pop   r0
+            pop r0
             ; Return
             iret
 ```

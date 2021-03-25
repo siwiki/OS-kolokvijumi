@@ -41,10 +41,10 @@ CDAB X
 2/2
 3. (10 poena)
 yield: ; Save current context
-push  r0
+push r0
 load r0,#cur[sp]
 store r1,#offsR1[r0] ; save r1
-pop   r1  ; save r0 through r1
+pop r1 ; save r0 through r1
 store r1,#offsR0[r0]
 store r2,#offsR2[r0] ; save other regs
 store r3,#offsR3[r0]
@@ -55,12 +55,12 @@ store sp,#offsSP[r0] ; save sp
 
 ; Restore new context
 load r0,#nxt[sp]
-load  sp,#offsSP[r0] ; restore sp
-load  psw,#offsPSW[r0] ; restore psw
-load  r31,#offsR31[r0] ; restore r31
+load sp,#offsSP[r0] ; restore sp
+load psw,#offsPSW[r0] ; restore psw
+load r31,#offsR31[r0] ; restore r31
 ...  ; restore other regs
-load  r1,#offsR1[r0]
-load  r0,#offsR0[r0] ; restore r0
+load r1,#offsR1[r0]
+load r0,#offsR0[r0] ; restore r0
 ; Return
 ret
 4. (10 poena)

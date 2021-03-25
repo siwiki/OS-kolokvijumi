@@ -59,16 +59,16 @@ Za dati slučaj, program pristupa elementima niza sa sledećim indeksima ($ni:=2
 
 0, 2, 6, 14, 30, 62, 126, 254, 510, 1022, 2046, 4094.
 
-Svaki  element  niza  zauzima  4=$2^2$ bajta, a blok je veličine 512B=$2^9$B, pa jedan blok sadrži
-$2^7$=128  elemenata  niza.  Zato  prvih  7  adresiranih  elemenata  niza  pripada  istom  bloku  sa
+Svaki element niza zauzima 4=$2^2$ bajta, a blok je veličine 512B=$2^9$B, pa jedan blok sadrži
+$2^7$=128 elemenata niza.  Zato prvih 7 adresiranih elemenata niza pripada istom bloku sa
 sadržajem fajla (bloku broj 0), dok su svi ostali elementi u različitim blokovima.
 Navedeni elementi pripadaju redom sledećim logičkim blokovima sadržaja fajla:
 
 0, 0, 0, 0, 0, 0, 0, 1, 3, 7, 15, 31.
 
-1.  Za  slučaj  indeksa  u  jednom  nivou,  dohvata  se  ukupno  1+5=6  blokova  sa  sadržajem
+1.  Za slučaj indeksa u jednom nivou,  dohvata se ukupno 1+5=6 blokova sa sadržajem
 (indeksni blok je već učitan).
 2. Za slučaj indeksa u dva nivoa, jedan ulaz u indeksu prvog nivoa, odnosno jedan indeksni
-blok  drugog  nivoa,  pokriva  $2^6$=64  blokova  sa  sadržajem,  pa  su  svi  adresirani  elementi
-pokriveni  jednim  indeksnim  blokom  drugog  nivoa.  Zato  se  ukupno  dohvata  jedan  indeksni
+blok drugog nivoa,  pokriva $2^6$=64 blokova sa sadržajem,  pa su svi adresirani elementi
+pokriveni jednim indeksnim blokom drugog nivoa.  Zato se ukupno dohvata jedan indeksni
 blok drugog nivoa i 6 blokova sa sadržajem, ukupno 7.
