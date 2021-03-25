@@ -9,12 +9,14 @@ const CATEGORIES = {
     segment: 'Segmentna organizacija',
     segpage: 'Segmentno-stranična organizacija',
     dynload: 'Dinamičko učitavanje',
+    overlay: 'Preklopi',
     interrupt: 'Prekidi',
     syscall: 'Sistemski pozivi',
     semaphore: 'Semafori',
     // Same as above?
     concurrency: 'Konkurentnost',
     io: 'Ulaz/izlaz',
+    cmd: 'Komandna linija',
     ipc: 'Komunikacija između procesa',
     filesystem: 'Fajl sistem'
 };
@@ -108,7 +110,7 @@ async function main() {
             ({url, content, year, month, type, task, solutionUrl}) =>
                 `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n- [Postavka](${BASE_URL}${url})\n- [Rešenje](${BASE_URL}${solutionUrl})\n\n${content}`
         ).join('\n\n')}`
-    ).join('\n\\pagebreak\n')}${footer}`, {
+    ).join('\n\n\\pagebreak\n')}${footer}`, {
         encoding: 'utf-8'
     });
 }

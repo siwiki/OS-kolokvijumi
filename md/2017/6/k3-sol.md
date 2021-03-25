@@ -1,12 +1,7 @@
 2017/jun/k3_resenja_2017.pdf
 --------------------------------------------------------------------------------
-
-
-1/1
-Rešenja zadataka za
-treći kolokvijum iz Operativnih sistema 1
-Jun 2017.
-1. (10 poena)
+io
+```cpp
 Byte* BlockIOCache::getBlock (BlkNo blk) {
   // Find the requested block in the cache and return it if present:
   int i, free = -1;
@@ -37,11 +32,16 @@ void BlockIOCache::releaseBlock (Byte* buffer) {
   this->flags[i] &= ~F_DIRTY;
   this->refCounter[i]--;
 }
-7
-2.   (10 poena)
-a)(5) jane   chld   foo
-b)(5) txt
-3.   (10 poena)
+```
+
+--------------------------------------------------------------------------------
+cmd
+1. jane   chld   foo
+2. txt
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 void truncate (FCB* fcb) {
   if (fcb==0) return;
   unsigned long cur=fcb->head, next;
@@ -53,3 +53,4 @@ void truncate (FCB* fcb) {
   fcb->head = 0;
   fcb->size = 0;
 }
+```

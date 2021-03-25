@@ -1,12 +1,7 @@
 2017/april/SI, IR Kolokvijum 2 - April 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-April 2017.
-1. (10 poena)
+concurrency
+```cpp
 struct ProcessorPrivate {
   int lock_count; // Counts the number of locks (nested critical sections)
   ...
@@ -24,7 +19,10 @@ void unlock (short* lck) {
   if (--processor_private[this_processor()].lock_count==0)
     enable_interrupts();
 }
-2. (10 poena)
+```
+--------------------------------------------------------------------------------
+cont
+```cpp
 int extend (PCB* pcb, size_t by) {
   if (pcb==0) return -1; // Exception
   if (mem_allocate_at(by,pcb->base+pcb->size)) {
@@ -43,13 +41,15 @@ int extend (PCB* pcb, size_t by) {
   }
   return -1; // No free memory, cannot extend
 }
+```
 
-
-2/2
-3. (10 poena)
-a)(3) VA(64): Page1(25):Page2(25):Offset(14).
-PA(40): Frame(26):Offset(14).
-b)(7)
+--------------------------------------------------------------------------------
+page
+1. VA(64): Page1(25):Page2(25):Offset(14).
+   
+   PA(40): Frame(26):Offset(14).
+2. 
+```cpp
 const unsigned short pg1w = 25, pg2w = 25, offsw = 14;
 
 inline unsigned getPMT1Entry (unsigned long vaddr) {
@@ -91,3 +91,4 @@ int sharePage (unsigned* pmtFrom, unsigned long pageFrom,
   setPMTEntry(pmtTo,vaddrTo,&value);
   return 0;
 }
+```

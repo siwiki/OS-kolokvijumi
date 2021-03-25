@@ -1,12 +1,7 @@
 2017/mart/SI Kolokvijum 1 - Mart 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za softversko inženjerstvo
-Mart 2017.
-1. (10 poena)
+io
+```cpp
 void performIO () {
   while (ioHead!=0) {
 
@@ -37,30 +32,36 @@ void transfer (IORequest* req) {
   } else
     ioTail = ioTail->next = req;
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+interrupt
+```asm
 dispatch:   ; Save the current context
-push  r0    ; save regs
-push  r1
-...
-push  r31
-load  r0, running
-store ssp, #offsSSP[r0] ; save ssp
+            push  r0    ; save regs
+            push  r1
+            ...
+            push  r31
+            load  r0, running
+            store ssp, #offsSSP[r0] ; save ssp
 
-; Select the next running process
-call  scheduler
+            ; Select the next running process
+            call  scheduler
 
-; Restore the new context
-load  r0, running
-load  ssp, #offsSSP[r0] ; restore ssp
-pop   r31
-pop   r30 ; restore regs
-...
-pop   r0
-; Return
-iret
+            ; Restore the new context
+            load  r0, running
+            load  ssp, #offsSSP[r0] ; restore ssp
+            pop   r31
+            pop   r30 ; restore regs
+            ...
+            pop   r0
+            ; Return
+            iret
+```
 
-2/2
-3. (10 poena)
+--------------------------------------------------------------------------------
+syscall
+```cpp
 #include <stdio.h>
 const int N = ..., M = ...;
 FILE* streams[N];
@@ -96,3 +97,4 @@ void read_text () {
   for (i=0; i<N; i++)
     printf(“%s\n”,text[i]);
 }
+```

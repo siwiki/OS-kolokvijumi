@@ -1,14 +1,11 @@
 2017/jun/k2_resenja_2017.pdf
 --------------------------------------------------------------------------------
-
-
-1/3
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Jun 2017.
-1. (10 poena) U klasu Thread treba dodati sledeći član:
+semaphore
+U klasu `Thread` treba dodati sledeći član:
+```cpp
 Barrier* blockedOnBarrier(0);
-
+```
+```cpp
 class Barrier {
 public:
   Barrier (int open=1) : isOpen(open), owner(Thread::running) {}
@@ -46,9 +43,11 @@ void Barrier::open () {
 inline void Barrier::close () {
   this->isOpen = 0;
 }
+```
 
-2/3
-2. (10 poena)
+--------------------------------------------------------------------------------
+overlay
+```cpp
 union OverlaidData {
   struct Phase1Data p1data;
   struct Phase2Data p2data;
@@ -93,11 +92,15 @@ int main () {
   fclose(fd2);
   return ret;
 }
-3. (10 poena) a)(3)   VA(32): Page1(10):Page2(10):Offset(12).
-    PA(28): Frame(16):Offset(12).
+```
 
-3/3
-b)(7)
+--------------------------------------------------------------------------------
+page
+1. VA(32): Page1(10):Page2(10):Offset(12).
+
+   PA(28): Frame(16):Offset(12).
+2. 
+```cpp
 const unsigned offsw = 12;
 
 int resolvePageFault (PCB* pcb, unsigned long addr, SegDesc** ret) {
@@ -113,3 +116,4 @@ int resolvePageFault (PCB* pcb, unsigned long addr, SegDesc** ret) {
   }
   return MEM_ACCESS_FAULT;
 }
+```

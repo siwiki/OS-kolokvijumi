@@ -1,11 +1,7 @@
 2017/april/IR Kolokvijum 1 - April 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za računarsku tehniku i informatiku
-April 2017.
-1.(10 poena)
+io
+```cpp
 static unsigned *io1Ptr = 0, *io2Ptr = 0;
 static int io1Count = 0, io2Count = 0;
 static unsigned timeout = 50;
@@ -38,9 +34,11 @@ interrupt void timerInterrupt () {
   } else
     *io1Ctrl = 0; // Stop I/O 1
 }
-1/2
+```
 
-2.(10 poena)
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 void IOThread::suspend () {
   IOThread::running->isReady = 0;
   int newRunning = -1;
@@ -56,5 +54,8 @@ void IOThread::suspend () {
   IOThread::running = newThread;
   yield(oldThread,newThread);
 }
-3. (10 poena) 2349, ili 2439, ili 3249, ili 3429, ili 4239, ili 4329 i ništa više osim toga.
-2/2
+```
+
+--------------------------------------------------------------------------------
+concurrency
+2349, ili 2439, ili 3249, ili 3429, ili 4239, ili 4329 i ništa više osim toga.

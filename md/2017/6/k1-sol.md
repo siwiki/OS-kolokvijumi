@@ -1,11 +1,7 @@
 2017/jun/k1_resenja_2017.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Jun 2017.
-1. (10 poena)
+io
+```cpp
 interrupt void intNet () {
   if (bufTail==bufHead) {
     // Buffer full, reject the packet:
@@ -21,15 +17,20 @@ interrupt void intNet () {
 interrupt void intDMA () {
   ++bufTail %= BUF_SIZE;
 }
-2. (10 poena) a)(7)
-U klasu Thread dodati su sledeći privatni, nestatički podaci-članovi sa datim inicijalnim
+```
+
+--------------------------------------------------------------------------------
+concurrency
+U klasu `Thread` dodati su sledeći privatni, nestatički podaci-članovi sa datim inicijalnim
 vrednostima:
+```cpp
 Thread* Thread::parent = 0;
 bool Thread::isActive = false;
 bool Thread::isWaitingForAllChildren = false;
 unsigned long Thread::activeChildrenCounter = 0;
 Thread* Thread::isWaitingForChild = 0;
-
+```
+```cpp
 void Thread::created (Thread* par) {
   this->isActive = true;
   this->parent = par;
@@ -48,8 +49,6 @@ void Thread::completed () {
     Scheduler::put(this->parent);
   }
 }
-
-2/2
 
 void Thread::wait (Thread* forChild=0) {
   lock();
@@ -71,8 +70,12 @@ void Thread::wait (Thread* forChild=0) {
   yield(old,new);
   unlock();
 }
-3. (10 poena)
-a)
+```
+
+--------------------------------------------------------------------------------
+concurrency
+1. 
+```cpp
 class ThreadFnCaller : public Thread {
 public:
   ThreadFnCaller (void (*fn)(void*), void* arg) : myFn(fn), myArg(arg) {}
@@ -81,5 +84,8 @@ private:
   void (*myFn)(void*);
   void* myArg;
 };
-b)
+```
+2. 
+```cpp
 for (int i=0; i<N; i++) (new ThreadFnCaller(fn,args[i]))->start();
+```
