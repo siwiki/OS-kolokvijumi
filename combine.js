@@ -5,8 +5,10 @@ import {readFile, readdir, writeFile} from 'fs/promises';
 const BASE_URL = 'http://os.etf.bg.ac.rs/OS1/kolokvijumi/';
 const CATEGORIES = {
     page: 'Stranična organizacija',
+    cont: 'Kontinualna alokacija',
     segment: 'Segmentna organizacija',
     segpage: 'Segmentno-stranična organizacija',
+    dynload: 'Dinamičko učitavanje',
     interrupt: 'Prekidi',
     syscall: 'Sistemski pozivi',
     semaphore: 'Semafori',
@@ -14,8 +16,7 @@ const CATEGORIES = {
     concurrency: 'Konkurentnost',
     io: 'Ulaz/izlaz',
     ipc: 'Komunikacija između procesa',
-    filesystem: 'Fajl sistem',
-    cont: 'Kontinualna alokacija'
+    filesystem: 'Fajl sistem'
 };
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
 const TYPES = {
