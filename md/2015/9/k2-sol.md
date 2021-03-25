@@ -1,12 +1,7 @@
 2015/septembar/SI, IR Kolokvijum 2 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Septembar 2015.
-1. (10 poena)
+semaphore
+```cpp
 void Semaphore::wait (unsigned int n = 1) {
   lock(lck);
   val -= n;
@@ -29,8 +24,12 @@ void Semaphore::signal () {
     val++;
   unlock(lck);
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+cont
 Jednostavnije, ali manje efikasno rešenje:
+```cpp
 // Helper: Try to join cur with the cur->next free segment:
 int tryToJoin (FreeMem* cur) {
   if (!cur) return 0;
@@ -44,7 +43,6 @@ int tryToJoin (FreeMem* cur) {
     return 0;
 }
 
-2/4
 int mem_free(char* addr, size_t size) {
   // Find the place where to insert the new free segment (just after cur):
   FreeMem* cur=0;
@@ -68,9 +66,9 @@ int mem_free(char* addr, size_t size) {
   tryToJoin(newSeg);
   tryToJoin(cur);
 }
+```
 Složenije, ali nešto efikasnije rešenje:
-
-3/4
+```cpp
 int mem_free(char* addr, size_t size) {
   // Find the place where to insert the new free segment (just after cur):
   FreeMem* cur=0;
@@ -118,12 +116,15 @@ int mem_free(char* addr, size_t size) {
   if (cur) cur->next = newSeg;
   else fmem_head = newSeg;
 }
-3. (10 poena)
-a)(3)    VA(60): Page1(16):Page2(16):Page3(16):Offset(12).
- PA(42): Frame(30):Offset(12).
-b)(7)
+```
 
-4/4
+--------------------------------------------------------------------------------
+page
+1. VA(60): Page1(16):Page2(16):Page3(16):Offset(12).
+   
+   PA(42): Frame(30):Offset(12).
+2. 
+```cpp
 const unsigned short pg1w = 16, pg2w = 16, pg3w = 16, offsw = 12;
 const unsigned pmt1Size = 1U<<pg1w,
                pmt2Size = 1U<<pg2w, pmt3Size = 1U<<pg3w;
@@ -153,3 +154,4 @@ void deallocateAllFrames (PCB* pcb) {
     }
   }
 }
+```

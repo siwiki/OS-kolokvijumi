@@ -1,12 +1,7 @@
 2015/jun/SI, IR Kolokvijum 3 - Jun 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-treći kolokvijum iz Operativnih sistema 1
-Jun 2015.
-1. (10 poena)
+io
+```cpp
 int readBlock(int diskNo, BlkNo block, Byte* buffer) {
   if (diskNo<0 || diskNo>=MaxNumOfDisks) return -1; // Error
   if (disks[diskNo].isValid==0) return -2; // Error
@@ -28,8 +23,11 @@ int registerDriver(int diskNo, DiskOperation read, DiskOperation write) {
   disks[diskNo].readBlock = read;
   disks[diskNo].writeBlock = write;
 }
+```
 
-2. (10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 int lock(FCB* f, unsigned int op) {
   if (f==0) return -1; // Exception!
   if ((op & OP_WR) && (!f->sharedLock && !f->exclLock))
@@ -38,8 +36,12 @@ int lock(FCB* f, unsigned int op) {
     return f->sharedLock = 1;
   return 0;
 }
-3. (10 poena)
-a)(3)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+1. 
+```cpp
 void blockToBit(unsigned long blkNo, unsigned long& bt, byte& mask) {
   bt = blkNo/BITS_IN_BYTE;
   mask = 1<<(blkNo%BITS_IN_BYTE);
@@ -49,16 +51,15 @@ void bitToBlk(unsigned long& blkNo, unsigned long bt, byte mask) {
   blkNo = bt*BITS_IN_BYTE;
   for (; !(mask&1); mask>>=1) blkNo++;
 }
-b)(7)
+```
+2. 
+```cpp
 void freeBlock (unsigned long blk) {
   if (blk>=NumOfBlocks) return;
   unsigned long bt = 0; byte msk = 0;
   blockToBit(blk,bt,msk);
   blocks[bt] &= ~msk;
 }
-
-
-2/2
 unsigned long allocateBlock (unsigned long startingFrom) {
   unsigned long bt = 0; byte msk = 0;
   for (unsigned long blk = startingFrom; blk<NumOfBlocks; blk++) {
@@ -78,9 +79,9 @@ unsigned long allocateBlock (unsigned long startingFrom) {
   }
   return 0;
 }
-
-Nešto efikasnija implementacija:
-
+```
+   Nešto efikasnija implementacija:
+```cpp
 unsigned long allocateBlock (unsigned long startingFrom) {
   if (startingFrom>=NumOfBlocks) return 0;
   unsigned long bt = 0; byte msk = 0;
@@ -106,3 +107,4 @@ unsigned long allocateBlock (unsigned long startingFrom) {
 
   return 0;
 }
+```

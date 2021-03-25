@@ -1,11 +1,7 @@
 2015/septembar/SI, IR Kolokvijum 1 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Septembar 2015.
-1. (10 poena)
+io
+```cpp
 void transfer () {
   int curBuffer = 0;
   // Start input controller:
@@ -32,7 +28,11 @@ void transfer () {
 interrupt void dmaInterrupt () {
   *dmaCtrl = 0;
 }
-2. (10 poena) a)(7)
+```
+
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 void yield (jmp_buf old, jmp_buf new) {
   if (setjmp(old)==0)
     longjmp(new,1);
@@ -51,9 +51,11 @@ void dispatch () {
     Thread::running->signal = 0;
   }
 }
+```
 
-2/2
-3. (10 poena)
+--------------------------------------------------------------------------------
+syscall
+```cpp
 void cobegin (void (*f)(), void (*g)()) {
   int id1 = 0, id2 = 0;
   if (id1 = fork())
@@ -70,4 +72,4 @@ void cobegin (void (*f)(), void (*g)()) {
     exit(0);
   }
 }
-
+```

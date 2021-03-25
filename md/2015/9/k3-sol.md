@@ -1,11 +1,7 @@
 2015/septembar/SI, IR Kolokvijum 3 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1
-Rešenja zadataka za treći kolokvijum iz
-Operativnih sistema 1, septembar 2015.
-1. (10 poena)
+io
+```cpp
 void putchar (IOHandle handle, char c) {
  static char buffer[BlockSize];
  static int cursor = 0;
@@ -15,8 +11,11 @@ void putchar (IOHandle handle, char c) {
    cursor = 0;
  }
 }
+```
 
-2. (10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 int append (int fhandle, byte* buffer, unsigned long sz) {
   int ret = 0;
   unsigned long oldSize = 0;
@@ -30,7 +29,11 @@ int append (int fhandle, byte* buffer, unsigned long sz) {
   ret = fwrite(fhandle,buffer,sz);
   return ret;
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 unsigned extendFile (FCB* fcb, unsigned by) {
   if (fcb==0) return 0; // Exception
   // Find the first free block:
@@ -57,3 +60,4 @@ unsigned extendFile (FCB* fcb, unsigned by) {
   }
   return extendedBy;
 }
+```

@@ -1,12 +1,7 @@
 2015/maj/IR Kolokvijum 1 - Maj 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za računarsku tehniku i informatiku
-Maj 2015.
-1. (10 poena)
+io
+```cpp
 static IORequest* pending[2] = {0,0}; // Pending requests for two channels
 
 void startIO (int i) { // Helper: start a new transfer with channel i
@@ -51,55 +46,58 @@ interrupt void ioInterrupt () {
   else
     handleInterrupt(1);
 }
+```
 
-2/2
-2. (10 poena)
-a)(7)
+--------------------------------------------------------------------------------
+interrupt
+1. 
+```asm
 sys_call:   ; Save the current context
-push r0 ; save r0 temporarily on the stack
-load r0,userRunning
-store r1,#offsR1[r0] ; save regs
-pop r1
-store r1,#offsR0[r0]
-store r2,#offsR2[r0]
-...
-store r31,#offsR31[r0]
-pop r1 ; save pc
-store r1,#offsPC[r0]
-pop r1 ; save psw
-store r1,#offsPSW[r0]
-pop r1 ; save original sp
-store r1,#offsSP[r0]
+            push r0 ; save r0 temporarily on the stack
+            load r0,userRunning
+            store r1,#offsR1[r0] ; save regs
+            pop r1
+            store r1,#offsR0[r0]
+            store r2,#offsR2[r0]
+            ...
+            store r31,#offsR31[r0]
+            pop r1 ; save pc
+            store r1,#offsPC[r0]
+            pop r1 ; save psw
+            store r1,#offsPSW[r0]
+            pop r1 ; save original sp
+            store r1,#offsSP[r0]
 
-; Restore the new context
-load r0,kernelRunning
-load r1,#offsSP[r0] ; restore original sp
-push r1
-load r1,#offsPSW[r0] ; restore original psw
-push r1
-load r1,#offsPC[r0] ; restore pc
-push r1
-load r1,#offsR1[r0] ; restore regs
-load r2,#offsR2[r0]
-...
-load r31,#offsR31[r0]
-load r0,#offsR0[r0]
-; Return (but stay in kernel mode)
-iret
-b)(3)    Procedura switch_to_user izgleda potpuno analogno (skoro potpuno isto) kao i data
-procedura sys_call, samo što promenljive userRunning i kernelRunning zamenjuju mesta
-(uloge), a neposredno pre instrukcije
-iret stoji još samo 1instrukcija setusr.
-3. (10 poena)
-a)(5) Problem je u neispravnim kontrolnim strukturama u telu funkcije pipe. Početna
-(roditeljska) nit izvršava then granu prve if naredbe, u kojoj se poziva funkcija writer i koja
-se onda neograni
-čeno (beskonačno) izvršava, pa ta prva nit nikada ne izlazi iz ove funkcije.
-Nit-dete, kreirana u prvom fork pozivu, izvršava else granu iste prve if naredbe, u kojoj se
+            ; Restore the new context
+            load r0,kernelRunning
+            load r1,#offsSP[r0] ; restore original sp
+            push r1
+            load r1,#offsPSW[r0] ; restore original psw
+            push r1
+            load r1,#offsPC[r0] ; restore pc
+            push r1
+            load r1,#offsR1[r0] ; restore regs
+            load r2,#offsR2[r0]
+            ...
+            load r31,#offsR31[r0]
+            load r0,#offsR0[r0]
+            ; Return (but stay in kernel mode)
+            iret
+```
+2. Procedura `switch_to_user` izgleda potpuno analogno (skoro potpuno isto) kao i data
+procedura `sys_call`, samo što promenljive `userRunning` i `kernelRunning` zamenjuju mesta
+(uloge), a neposredno pre instrukcije `iret` stoji još samo instrukcija `setusr`.
+
+--------------------------------------------------------------------------------
+concurrency
+1. Problem je u neispravnim kontrolnim strukturama u telu funkcije pipe. Početna
+(roditeljska) nit izvršava then granu prve `if` naredbe, u kojoj se poziva funkcija `writer` i koja
+se onda neograničeno (beskonačno) izvršava, pa ta prva nit nikada ne izlazi iz ove funkcije.
+Nit-dete, kreirana u prvom `fork` pozivu, izvršava else granu iste prve `if` naredbe, u kojoj se
 poziva funkcija reader koja se takođe neograničeno izvršava. Prema tome, ni jedna od ove
-dve niti ne
-će nikada doći do druge if naredbe, pa se drugi par niti nikada neće kreirati.
-b)(5)
+dve niti neće nikada doći do druge `if` naredbe, pa se drugi par niti nikada neće kreirati.
+2. 
+```cpp
 void pipe () {
   for (int i=0; i<N; i++)
     if (fork())
@@ -108,3 +106,4 @@ void pipe () {
       if (fork())
         reader(&c[i],&flag[i]);
 }
+```

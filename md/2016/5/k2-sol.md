@@ -56,7 +56,7 @@ void ensureOverlay (int procedureID) {
 --------------------------------------------------------------------------------
 page
 \begin{figure}[H]
-\subfloat[Rešenje pod a)]{
+\subfloat[Rešenje pod a]{
 \begin{tabular}{ |c|c|c| }
 \hline
 Page\# & Frame\# & RWX \\

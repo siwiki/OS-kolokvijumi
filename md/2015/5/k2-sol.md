@@ -1,12 +1,8 @@
 2015/maj/SI, IR Kolokvijum 2 - Maj 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Maj 2015.
-1. (10 poena) Deo koda oba procesa izgleda isto:
+semaphore
+Deo koda oba procesa izgleda isto:
+```cpp
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <semaphore.h>
@@ -24,7 +20,11 @@ sem_post(mutex);
 
 // Release the semaphore when it is no longer needed:
 sem_close(mutex);
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+cont
+```cpp
 void proc_relocate (PCB* pcb, char* to) {
   if (pcb->mem_base_addr==to) return;
   memcpy(to,pcb->mem_base_addr,pcb->mem_size);
@@ -46,31 +46,109 @@ void mem_compact () {
   }
   else mem_free_head = 0; // No more free memory (should not ever happen)
 }
+```
 
-
-2/2
-3. (10 poena)
-a)(2)
-Page#   Frame#    RWX
-00h 10h 001
-01h 11h 001
-02h 12h 001
-03h 13h 001
-12h 14h 100
-13h 15h 100
-14h 16h 100
-1Ah 17h 110
-1Bh 18h 110
-b) PMT procesa-roditelja: PMT procesa-deteta: c) PMT procesa-deteta:
-Page#   Frame#    RWX Page#    Frame#    RWX
-  Page#    Frame#   RWX
-00h 10h 001 00h 10h 001  00h 10h 001
-01h 11h 001 01h 11h 001  01h 11h 001
-02h 12h 001 02h 12h 001  02h 12h 001
-03h 13h 001 03h 13h 001  03h 13h 001
-12h 14h 100 12h 14h 100  12h 14h 100
-13h 15h 100 13h 15h 100  13h 15h 100
-14h 16h 100 14h 16h 100  14h 16h 100
-1Ah 17h 100 1Ah 17h 100  1Ah 19h 110
-1Bh 18h 100 1Bh 18h 100  1Bh 18h 100
-
+--------------------------------------------------------------------------------
+page
+\begin{figure}[H]
+\subfloat[Rešenje pod a]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 10h & 001 \\
+\hline
+01h & 11h & 001 \\
+\hline
+02h & 12h & 001 \\
+\hline
+03h & 13h & 001 \\
+\hline
+12h & 14h & 100 \\
+\hline
+13h & 15h & 100 \\
+\hline
+14h & 16h & 100 \\
+\hline
+1Ah & 17h & 110 \\
+\hline
+1Bh & 18h & 110 \\
+\hline
+\end{tabular}
+}
+\subfloat[PMT procesa-roditelja]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 10h & 001 \\
+\hline
+01h & 11h & 001 \\
+\hline
+02h & 12h & 001 \\
+\hline
+03h & 13h & 001 \\
+\hline
+12h & 14h & 100 \\
+\hline
+13h & 15h & 100 \\
+\hline
+14h & 16h & 100 \\
+\hline
+1Ah & 17h & 100 \\
+\hline
+1Bh & 18h & 100 \\
+\hline
+\end{tabular}
+}
+\subfloat[PMT procesa-deteta]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 10h & 001 \\
+\hline
+01h & 11h & 001 \\
+\hline
+02h & 12h & 001 \\
+\hline
+03h & 13h & 001 \\
+\hline
+12h & 14h & 100 \\
+\hline
+13h & 15h & 100 \\
+\hline
+14h & 16h & 100 \\
+\hline
+1Ah & 17h & 100 \\
+\hline
+1Bh & 18h & 100 \\
+\hline
+\end{tabular}
+}
+\subfloat[PMT procesa-deteta]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWX \\
+\hline
+00h & 10h & 001 \\
+\hline
+01h & 11h & 001 \\
+\hline
+02h & 12h & 001 \\
+\hline
+03h & 13h & 001 \\
+\hline
+12h & 14h & 100 \\
+\hline
+13h & 15h & 100 \\
+\hline
+14h & 16h & 100 \\
+\hline
+1Ah & 19h & 110 \\
+\hline
+1Bh & 18h & 100 \\
+\hline
+\end{tabular}
+}
+\end{figure}
