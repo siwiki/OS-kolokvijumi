@@ -4,13 +4,17 @@ import {readFile, readdir, writeFile} from 'fs/promises';
 
 const BASE_URL = 'http://os.etf.bg.ac.rs/OS1/kolokvijumi/';
 const CATEGORIES = {
-    interrupt: 'Prekidi',
-    semaphore: 'Semafori',
     page: 'Stranična organizacija',
-    filesystem: 'Fajl sistem',
-    syscall: 'Sistemski pozivi',
     segment: 'Segmentna organizacija',
-    io: 'Ulaz/izlaz'
+    segpage: 'Segmentno-stranična organizacija',
+    interrupt: 'Prekidi',
+    syscall: 'Sistemski pozivi',
+    semaphore: 'Semafori',
+    // Same as above?
+    concurrency: 'Konkurentnost',
+    io: 'Ulaz/izlaz',
+    ipc: 'Komunikacija između procesa',
+    filesystem: 'Fajl sistem'
 };
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
 const TYPES = {
@@ -101,8 +105,8 @@ async function main() {
         ([category, entries]) => `## ${CATEGORIES[category]}\n${entries.map(
             ({url, content, year, month, type, task, solutionUrl}) =>
                 `### ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n- [Postavka](${BASE_URL}${url})\n- [Rešenje](${BASE_URL}${solutionUrl})\n\n${content}`
-        ).join('\n')}`
-    ).join('\n')}${footer}`, {
+        ).join('\n\n')}`
+    ).join('\n\n')}${footer}`, {
         encoding: 'utf-8'
     });
 }
