@@ -12,3 +12,4 @@ pdf-engine: xelatex
 ---
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newpage
