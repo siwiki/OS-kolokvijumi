@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 import {readFile, readdir, writeFile} from 'fs/promises';
+import {argv} from 'process';
 
 const BASE_URL = 'http://os.etf.bg.ac.rs/OS1/kolokvijumi/';
 const CATEGORIES = {
@@ -57,9 +58,18 @@ async function processFile(year, month, type, categories) {
     }
 }
 
+async function getYears() {
+    const arg = argv.find(arg => arg.startsWith('--year='));
+    if (arg) {
+        return arg.substring(7).split(',').map(year => year.trim());
+    } else {
+        return (await readdir('md')).reverse();
+    }
+}
+
 async function main() {
     const categories = {};
-    for (const year of await readdir('md')) {
+    for (const year of await getYears()) {
         for (const month of await readdir(`md/${year}`)) {
             for (const typeExt of await readdir(`md/${year}/${month}`)) {
                 await processFile(year, month, typeExt.split('.')[0], categories);
