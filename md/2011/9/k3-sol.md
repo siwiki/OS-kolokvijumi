@@ -1,12 +1,7 @@
 2011/septembar/SI, IR Kolokvijum 3 - Septembar 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  2
-Rešenja zadataka za nadoknadu trećeg kolokvijuma
-iz Operativnih sistema 1
-Septembar 2011.
-1. (10 poena)
+io
+```cpp
 class CharDevice {
 public:
   CharDevice (BlockDevice* bd) : myDev(bd), cursor(BlockSize) {
@@ -45,7 +40,10 @@ void main () {
   for (char c=input.getchar(); c!=’\0’; c=input.getchar())
     ...
 }
-2. (10 poena)
+```
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 class File {
 public:
   File (char* fname, int accessFlags);
@@ -58,7 +56,6 @@ private:
   unsigned int cursor;
 };
 
-2/  2
 File::File (char* fname, int af) : cursor(0) {
   fh=fopen(fname,af);
 }
@@ -83,7 +80,11 @@ int File::seek (unsigned int offset) {
   else cursor=offset;
   return 1;
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 void* f_getblk(FCB* file, BLKNO lb) {
   if (file==0) return 0; // Exception: null FCB
 
@@ -102,3 +103,4 @@ void* f_getblk(FCB* file, BLKNO lb) {
   entry = lb%INDEXSIZE;
   return f_getblk(index[entry]);
 }
+```

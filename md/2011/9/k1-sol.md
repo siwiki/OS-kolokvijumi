@@ -1,12 +1,7 @@
 2011/septembar/SI, IR Kolokvijum 1 - Septembar 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  2
-Rešenja zadataka za nadoknadu prvog kolokvijuma
-iz Operativnih sistema 1
-Septembar 2011.
-1. (10 poena)
+io
+```cpp
 const REG ESC = 0;
 
 void main () {
@@ -24,10 +19,24 @@ void main () {
   *io1Ctrl = 0;
   *io2Ctrl = 0;
 }
-2. (10 poena)
-Virtuelna adresa 222 FF32 4002D8 FE3A FE14
-Rezultat adresiranja 000023 PF MAV T CDD026
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+segment
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+\hline
+Virtuelna adresa & 222 & FF32 & 4002D8 & FE3A & FE14 \\
+\hline
+Rezultat adresiranja & 000023 & PF & MAV & T & CDD026 \\
+\hline
+\end{tabular}
+\end{center}
+
+--------------------------------------------------------------------------------
+interrupt
+```cpp
 interrupt void yield () {
   if (setjmp(Thread::running->context)==0) {
 
@@ -39,9 +48,11 @@ interrupt void yield () {
 
   }
 }
+```
 
-2/  2
-4. (10 poena)
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 int visit (Node* node) {
   if (node==0) return;
 
@@ -59,3 +70,5 @@ int visit (Node* node) {
   node->visit();
 
   if (ln) visit(ln);
+}
+```

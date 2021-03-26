@@ -1,11 +1,7 @@
 2011/jun/SI, IR Kolokvijum 3 - Jun 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  2
-Treći kolokvijum iz Operativnih sistema 1
-Jun 2011.
-1. (10 poena)
+semaphore
+```cpp
 class Data;
 
 class DoubleBuffer {
@@ -54,13 +50,19 @@ Data* DoubleBuffer::get () {
     inputBufReady.signal();
   return d;
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 void check_access (PCB* p, FHANDLE f, int write) {
   return p->open_files[FHANDLE].access || !write;
 }
+```
 
-2/  2
-3. (10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 int check_consistency (FCB* file) {
   if (file==0) return 0;
   FID fid = file->id;
@@ -73,3 +75,4 @@ int check_consistency (FCB* file) {
     }
   return 1;
 }
+```
