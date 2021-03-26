@@ -1,11 +1,7 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 2 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Drugi kolokvijum iz Operativnih sistema 1
-Septembar 2013.
-1. (10 poena)
+semaphore
+```cpp
 #include <semaphore.h>
 
 void main () {
@@ -23,7 +19,11 @@ void main () {
   <noncritical_section>
   sem_unlink(mutex);
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+semaphore
+```cpp
 void Event::wait () {
   lock(lck);
   if (--val<0) {
@@ -33,7 +33,6 @@ void Event::wait () {
   unlock(lck);
 }
 
-
 void Event::signal () {
   lock(lck);
   if (val++<0)
@@ -41,7 +40,11 @@ void Event::signal () {
   else val = 1;
   unlock(lck);
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+dynload
+```cpp
 class DLArray {
 public:
   DLArray (int size, int blockSize, FHANDLE fromFile);
@@ -60,10 +63,7 @@ private:
   int curBlock[2];
   int dirty[2];
   double* block[2];
-
-2/2
 };
-
 
 DLArray::DLArray (int s, int bs, FHANDLE f) :
   file(f), size(s), blockSize(bs) {
@@ -110,24 +110,15 @@ void DLArray::set (int i, double x) {
     dirty[slot]=1;
   }
 }
-4. (10 poena)
-a)(3) VA(64): Page1(25):Page2(25):Offset(14).
-PA(40): Frame(26):Offset(14).
-b)(3) Širina PMT2 je 32 bita, od koga 26 sadrže broj okvira, 2 bite zaštite, a ostali su
-neiskorišćeni. Ista je i širina PMT1.
- PMT1 ima 2
-25
- ulaza širine 32 bita (4B), što je ukupno: 2
-27
-B=128MB.
-c)(4) Ovaj proces koristio je 2
-38
- svojih najnižih adresa, što je 2
-38-14
-=2
-24
- stranica. Jedna PMT
-drugog nivoa pokriva 2
-25
- stranica, pa je ovaj proces alocirao PMT prvog nivoa i jednu PMT
-drugog nivoa. Zato ukupna veličina PMT iznosi: 2128MB=256MB.
+```
+
+--------------------------------------------------------------------------------
+page
+1. VA(64): Page1(25):Page2(25):Offset(14).
+
+   PA(40): Frame(26):Offset(14).
+2. Širina PMT2 je 32 bita, od koga 26 sadrže broj okvira, 2 bite zaštite, a ostali su
+neiskorišćeni. Ista je i širina PMT1. PMT1 ima $2^{25}$ ulaza širine 32 bita (4B), što je ukupno: $2^{27}$B=128MB.
+3. Ovaj proces koristio je $2^{38}$ svojih najnižih adresa, što je $2^{38-14}=2^{24}$ stranica. Jedna PMT
+drugog nivoa pokriva $2^{25}$ stranica, pa je ovaj proces alocirao PMT prvog nivoa i jednu PMT
+drugog nivoa. Zato ukupna veličina PMT iznosi: $2 \cdot 128$MB=256MB.

@@ -1,12 +1,7 @@
 2013/mart/SI Kolokvijum 1 - Mart 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za softversko inženjerstvo
-Mart 2013.
-1. (10 poena)
+io
+```cpp
 static REG* ioPtr = 0;
 static int ioCount = 0;
 static int ioCompleted = 0;
@@ -44,25 +39,35 @@ interrupt void io1Interrupt() {
     *io1Ctrl = 0; // Stop I/O 1
   }
 }
-2. (10 poena)
-VA: Segment(2):Page(6):Offset(8); PA: Frame(24):Offset(8).
-3. (10 poena) Kada se pri obradi prekida kontekst procesora prepisuje u memoriju, bitno
-je da u registru SPX bude adresa polja context iz PCB-a tekuće niti koja gubi procesor.  Isto
-važi pri svakoj promeni konteksta, pa i pri napuštanju kernel niti. Vrednost samog SPX se ne
-mora čuvati, jer se jednostavno restaurira dodavanjem pomeraja polja context na vrednost
-adrese PCB-a. Dakle, jedino što je prilikom promene konteksta potrebno uraditi jeste postaviti
-SPX na vrednost adrese polja context niti koja dobija procesor. Tako rutina sys_call izgleda
-ovako:
-sys_call: load spx, [runningKernelThread]
-add spx, #offsContext
-iret
+```
 
-2/2
+--------------------------------------------------------------------------------
+segpage
+VA: Segment(2):Page(6):Offset(8); PA: Frame(24):Offset(8).
+
+--------------------------------------------------------------------------------
+interrupt
+Kada se pri obradi prekida kontekst procesora prepisuje u memoriju, bitno
+je da u registru SPX bude adresa polja *context* iz PCB-a tekuće niti koja gubi procesor.  Isto
+važi pri svakoj promeni konteksta, pa i pri napuštanju kernel niti. Vrednost samog SPX se ne
+mora čuvati, jer se jednostavno restaurira dodavanjem pomeraja polja *context* na vrednost
+adrese PCB-a. Dakle, jedino što je prilikom promene konteksta potrebno uraditi jeste postaviti
+SPX na vrednost adrese polja *context* niti koja dobija procesor. Tako rutina `sys_call` izgleda
+ovako:
+```asm
+sys_call: load spx, [runningKernelThread]
+          add spx, #offsContext
+          iret
+```
+
 Povratak iz rutine će restaurirati kontekst kernel niti iz strukture context PCB-a niti koja je
 dobila procesor,  jer na tu strukturu tada ukazuje SPX. Potpuno analogno izgleda i rutina
 kojom se kontrola iz kernel niti predaje korisničkoj niti,  samo što je umesto
-runningKernelThread upotrebljen runningUserProcess.
-4. (10 poena)
+`runningKernelThread` upotrebljen `runningUserProcess`.
+
+--------------------------------------------------------------------------------
+syscall
+```cpp
 const int N = ...;
 int f(int,int);
 #include <iostream.h>
@@ -90,3 +95,4 @@ void main () {
     cout<<params[k].r<<’ ‘;
   }
 }
+```

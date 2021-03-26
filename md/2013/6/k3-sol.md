@@ -1,11 +1,7 @@
 2013/jun/SI, IR Kolokvijum 3 - Jun 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1
-Treći kolokvijum iz Operativnih sistema 1
-Jun 2013.
-1. (10 poena)
+io
+```cpp
 Byte* getDiskBlock (BlkNo blk) {
   // Find the requested block in the cache and return it if present:
   int hash = blk%CACHESIZE;
@@ -19,9 +15,15 @@ Byte* getDiskBlock (BlkNo blk) {
   diskRead(blk,diskCache[hash]);
   return diskCache[hash];
 }
-2. (10 poena) Na standardni izlaz ispisuje sadržaj tekućeg direktorijuma,  tačnije,
-nazive ulaza u tekućem direktorijumu (po jedan u redu).
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+Na standardni izlaz ispisuje sadržaj tekućeg direktorijuma,  tačnije, nazive ulaza u tekućem direktorijumu (po jedan u redu).
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 int fread (FCB* f, Byte* buf, int n) {
   if (f==0) return 0;
   if (f->cur+n>f->size) n = f->size – f->cur;
@@ -38,3 +40,4 @@ int fread (FCB* f, Byte* buf, int n) {
   }
   return read;
 }
+```

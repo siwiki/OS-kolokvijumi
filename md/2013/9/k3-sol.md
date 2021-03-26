@@ -1,11 +1,7 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 3 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Treći kolokvijum iz Operativnih sistema 1
-Septembar 2013.
-1. (10 poena)
+io
+```cpp
 class DoubleBuffer {
 public:
   DoubleBuffer (int size, int chunkSize);
@@ -56,14 +52,17 @@ char DoubleBuffer::get () {
     inputBufReady.signal();
   return ret;
 }
+```
 
-2/2
-2. (10 poena)
-a)(5) open(”./test.txt”, O_CREAT|O_RDWR, S_IRUSR|S_IWUSR|S_IRGRP);
-b)(5) Neće. Taj korisnik (u čije ime se izvršava drugi proces) je pripadnik „ostalih“, pošto nije
+--------------------------------------------------------------------------------
+filesystem
+1. `open(”./test.txt”, O_CREAT|O_RDWR, S_IRUSR|S_IWUSR|S_IRGRP);`
+2. Neće. Taj korisnik (u čije ime se izvršava drugi proces) je pripadnik „ostalih“, pošto nije
 ni vlasnik fajla niti pripadnik iste grupe, pa nema nikakva prava nad fajlom, a traži otvaranje
 tog (sada postojećeg) fajla sa mogućnošću čitanja i upisa.
-3. (10 poena)
-a)(3) 1401 b)(3) 2503
-c)(4) Jedan indeksni blok sadrži najviše 512B:4B = 128 ulaza.
- Maksimalna veličina fajla je: 2·512B + 4·128·512B = 257KB.
+
+--------------------------------------------------------------------------------
+filesystem
+1. 1401
+2. 2503
+3. Jedan indeksni blok sadrži najviše 512B:4B = 128 ulaza. Maksimalna veličina fajla je: $2 \cdot 512$B + $4 \cdot 128 \cdot 512$B = 257KB.
