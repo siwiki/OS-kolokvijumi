@@ -130,4 +130,4 @@ pretpostavku da roditeljska nit nastavlja desnim od mogućih puteva, a potomci o
 
 3. Tri puta.
 
-![Rešenje](./images/2010-03-k1-5-s2.png)
+![Rešenje](images/2010/03-k1-5-s2.png)
