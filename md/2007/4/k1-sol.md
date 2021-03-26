@@ -33,8 +33,7 @@ Page(24) Offset(8)
 ; PA:
 Block(20) Offset(8)
 
-2. 
-```cpp
+2.  ```cpp
 void setPageDescr(unsigned int* pmtp, unsigned int page, unsigned int frame){
     pmtp[page] = frame | ~((unsigned int)~0 / 2);
 }

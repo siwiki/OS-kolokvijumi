@@ -1,15 +1,19 @@
 2008/april/SI Kolokvijum 1 - April 2008 - Resenja.doc
 --------------------------------------------------------------------------------
+os
 
+1. Netačno. 
 
-1/  2
-Rešenja zadataka sa Prvog kolokvijuma iz
-Operativnih sistema
-Odsek za softversko inženjerstvo
-April 2008.
-1. (10 poena)
-a) Netačno. b) Tačno. c) Tačno. d) Netačno.
-2. (10 poena)
+2. Tačno. 
+
+3. Tačno. 
+
+4. Netačno.
+
+--------------------------------------------------------------------------------
+io
+
+```cpp
 void main () {
   int i1=0, i2=0;
   *ioCtrl1=1; *ioCtrl2=1;  // Start them both
@@ -19,28 +23,42 @@ void main () {
   }
   *ioCtrl1=0; *ioCtrl2=0;  // Stop them both
 }
-3. (10 poena)
-Virtuelna
-adresa
-FFC2673 D385A FF7FB32 FFFA8C4 10012EB8
-Rezultat
-adresiranja
-PF 3FC1385A NAV PF 512EB8
+```
 
-4. (10 poena) Odgovor: 4
-Početni proces kreira tri procesa-potomka, za svaku iteraciju (spoljne) for petlje (i=0, 1,
-2
-). U svakoj od tih iteracija, naredba if označena sa if1 izvršava svoju then granu, jer je
-pid[i] uvek 0 (tako je inicijalizovan). U tom procesu then grana naredbe if2 se ne izvršava,
+--------------------------------------------------------------------------------
+page
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Virtuelna adresa & FFC2673 & D385A & FF7FB32 & FFFA8C4 & 10012EB8 \\
+\hline
+Rezultat adresiranja & PF & 3FC1385A & NAV & PF & 512EB8  \\
+\hline
+\end{tabular}
+\end{center}
+
+--------------------------------------------------------------------------------
+syscall
+
+Odgovor: 4
+
+Početni proces kreira tri procesa-potomka, za svaku iteraciju (spoljne) for petlje `(i=0, 1, 2)`
+. U svakoj od tih iteracija, naredba if označena sa if1 izvršava svoju then granu, jer je
+`pid[i]` uvek 0 (tako je inicijalizovan). U tom procesu then grana naredbe if2 se ne izvršava,
 jer je
-pid[i] tada različit od 0 (pošto je fork() vratio ID kreiranog procesa). U svakom od
+pid[i] tada različit od 0 (pošto je `fork()` vratio ID kreiranog procesa). U svakom od
 kreiranih procesa-potomaka,
-fork() vraća 0,  pa je u naredbi if2 pid[i]==0,  odnosno
+`fork()` vraća 0,  pa je u naredbi `if2 pid[i]==0`,  odnosno
 izvršava se ugneđžena
-for petlja (po j) koja u sve elemente niza pid iza i-tog upisuje 1.
+for petlja (po j) koja u sve elemente niza `pid` iza i-tog upisuje 1.
 Zbog toga se u ovim procesima-potomcima, u svim narednim iteracijama glavne for petlje
-(po i), neće izvršiti fork() u naredbi if1, pa oni više neće kreirati svoje potomke.
-5. (10 poena)
+(po i), neće izvršiti `fork()` u naredbi `if1`, pa oni više neće kreirati svoje potomke.
+
+--------------------------------------------------------------------------------
+interrupt
+
+```cpp
 // Auxiliary list operations:
 
 void put(Thread* t, Thread*& head, Thread*& tail) {
@@ -50,13 +68,11 @@ void put(Thread* t, Thread*& head, Thread*& tail) {
   else head=t;
   tail=t;
 };
-Thred* get(Thread*& head, Thread*& tail) {
+Thread* get(Thread*& head, Thread*& tail) {
   Thread* t = head;
   if (t==0) return;
   t ->next=0;
   head=head->next;
-
-2/  2
   if (head==0) tail=0;
 }
 
@@ -105,3 +121,4 @@ void resume (InterruptID intID) {
   if (t==0) return; // No effect
   put(t,readyFirst,readyLast);
 }
+```
