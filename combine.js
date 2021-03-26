@@ -20,7 +20,8 @@ const CATEGORIES = {
     io: 'Ulaz/izlaz',
     cmd: 'Komandna linija',
     ipc: 'Komunikacija između procesa',
-    filesystem: 'Fajl sistem'
+    filesystem: 'Fajl sistem',
+    os : 'Uvod u operativne sisteme'
 };
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
 const TYPES = {
@@ -72,7 +73,8 @@ async function main() {
     for (const year of await getYears()) {
         for (const month of await readdir(`md/${year}`)) {
             for (const typeExt of await readdir(`md/${year}/${month}`)) {
-                await processFile(year, month, typeExt.split('.')[0], categories);
+                
+                    await processFile(year, month, typeExt.split('.')[0], categories);
             }
         }
     }

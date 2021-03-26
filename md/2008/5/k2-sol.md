@@ -180,7 +180,7 @@ Prema tome, struktura virtuelne adrese je: Page_L1(10):Page_L2(10):Offset(12).
 Jedan ulaz u PMT drugog nivoa sadrži broj okvira, koji je širine 16 bita, pa zauzima 2 bajta.
 PMT drugog nivoa ima $2^{10} = 1K$ ulaza, pa zauzima 2KB.
 Prema tome, PMT ukupno zauzimaju maksimalno:
-$4\times 2^{10}B$ (veličina PMT prvog nivoa) $+ 2^{10}$ (broj PMT drugog nivoa) $\times 2^{11}B$ (veličina PMT drugog nivoa) $= 4*2^{10} B + 2^{21}B$, što je približno (odnosno nešto veće od) $2^{21}B= 2MB$.
+$4\times 2^{10}B$ (veličina PMT prvog nivoa) $+ 2^{10}$ (broj PMT drugog nivoa) $\times 2^{11}B$ (veličina PMT drugog nivoa) $= 4\times 2^{10} B + 2^{21}B$, što je približno (odnosno nešto veće od) $2^{21}B= 2MB$.
 
 4. Dati proces ima validna samo prva dva i poslednji ulaz u PMT prvog nivoa, dakle za njega postoje samo tri PMT drugog nivoa u memoriji. 
 Ukupna veličina PMT za ovaj proces je zato:
