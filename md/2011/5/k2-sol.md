@@ -1,31 +1,44 @@
 2011/maj/SI, IR Kolokvijum 2 - Maj 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  2
-Drugi kolokvijum iz Operativnih sistema 1
-Maj 2011.
-1. (10 poena)
+semaphore
+```ada
 shared var
   a, b : integer := 0;
   sa, sb : semaphore := 0;
 
-process a;   process b;
-begin begin
-  loop loop
-    compute_a(b);      sa.wait();
-    sa.signal();      compute_b(a);
-    sb.wait();      sb.signal();
-  end;     end;
-end;    end;
-2. (10 poena)
+process a;
+begin
+  loop
+    compute_a(b);
+    sa.signal();
+    sb.wait();
+  end;
+end;
+
+process b;
+begin
+  loop
+    sa.wait();
+    compute_b(a);
+    sb.signal();
+  end;
+end;
+```
+
+--------------------------------------------------------------------------------
+semaphore
+```cpp
 void Semaphore::lock () {
   for (int acquired = 0; !acquired;) {
     while (this->isLocked);
     acquired = !test_and_set(this->isLocked);
   }
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+overlay
+```cpp
 class DLArray {
 public:
   inline DLArray (int size, int blockSize, FHANDLE fromFile);
@@ -56,7 +69,6 @@ DLArray::DLArray (int s, int bs, FHANDLE f) :
 void DLArray::save () {
   fwrite(file,curBlock*blockSize,block,blockSize);
 
-2/  2
   dirty=0;
 }
 
@@ -88,19 +100,43 @@ void DLArray::set (int i, double x) {
     dirty=1;
   }
 }
-4. (10 poena)
-Proces Parent:
-PMT
-Page# Frame# RWE
-A04h 23h 001
-BF0h 14h 100
-C0Ah 7Ah 100
-VMStruct
+```
 
+--------------------------------------------------------------------------------
+page
+*Proces Parent:*
 
+\begin{figure}[H]
+\subfloat[PMT]{
+\begin{tabular}{ |c|c|c| }
+\hline
+Page\# & Frame\# & RWE \\
+\hline
+A04h & 23h & 001 \\
+\hline
+BF0h & 14h & 100 \\
+\hline
+C0Ah & 7Ah & 100 \\
+\hline
+\end{tabular}
+}
+\subfloat[VMStruct]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+StartPage\# & Region Length & RWE-Copy-On-Write & Opis \\
+\hline
+A00h & 50h & 001-0 & Code Region \\
+\hline
+B00h & FFh & 110-0 & Data Region \\
+\hline
+C00h & 70h & 100-0 & Input Buffer Region \\
+\hline
+\end{tabular}
+}
+\end{figure}
 
+*Proces Child:* Sve isto.
 
-Proces Child: Sve isto.
 Napomena:  Primetiti da se u opisanom sistemu bit Copy-On-Write (u daljem tekstu CoW)
 odnosi na čitav set stranica. Zbog toga ovaj bit nije dovoljan da bi se odredilo da li pri upisu u
 neku stranicu iz seta, tu stranicu treba kopirati. Stranice koje pri upisu stvarno treba kopirati
@@ -111,7 +147,3 @@ kopiranje te stranice bez obzira što stranic a pripada regionu za koji je setov
 bi se sistem mogao implementirati tako da se u CoW bit jednom upiše vrednost pri pokretanju
 procesa i više nikada ne menja. U takvoj varijanti, CoW bit bi čak bio suvišan jer bi uvek
 imao istu vrednost kao i W bit u VMStruct strukturi.
-StartPage# Region Length RWE-Copy-On-Write Opis
-A00h 50h 001-0 Code Region
-B00h FFh 110-1 Data Region
-C00h 70h 100-0 Input Buffer Region

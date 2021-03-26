@@ -1,12 +1,7 @@
 2011/septembar/SI, IR Kolokvijum 2 - Septembar 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  2
-Rešenja zadataka za nadoknadu drugog
-kolokvijuma iz Operativnih sistema 1
-Septembar 2011.
-1. (10 poena)
+semaphore
+```ada
 type Coord = record {
   x : integer;
   y : integer;
@@ -37,7 +32,11 @@ begin
     moveTo(nextCoord);
   end;
 end;
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+semaphore
+```ada
 void Semaphore::wait () {
   for (int i=SemWaitLimit; val<=0 && i>0; i--);
   lock(lck);
@@ -45,7 +44,11 @@ void Semaphore::wait () {
     block();
   unlock(lck);
 }
-3. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+dynload
+```cpp
 class GeoRegion {
 public:
   static GeoRegion* load (char* regionName);
@@ -53,7 +56,6 @@ public:
   double getHighestPeak ();
 };
 
-2/  2
 class GeoRegionProxy {
 public:
   GeoRegionProxy (char* regionName);
@@ -84,12 +86,16 @@ double GeoRegionProxy::getSurface () {
 double GeoRegionProxy::getHighestPeak () {
   return getServer()->getHighestPeak();
 }
-4. (10 poena)
+```
 
-32
-24
-8 28
-26
-48
-36 56
-34 1
+--------------------------------------------------------------------------------
+cont
+```
+        32
+      /    \
+    24      48
+   /  \    /  \
+  8   28  36  56
+ /    /  /
+1    26 34
+```
