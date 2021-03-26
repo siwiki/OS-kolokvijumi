@@ -1,11 +1,7 @@
 2014/jun/SI, IR Kolokvijum 3 - Jun 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1
-Treći kolokvijum iz Operativnih sistema 1
-Jun 2014.
-1. (10 poena)
+io
+```cpp
 int readBlock(int diskNo, BlkNo block, Byte* buffer) {
   if (diskNo<0 || diskNo>=MaxNumOfDisks) return -1; // Error
   if (disks[diskNo]==NULL) return -1; // Error
@@ -17,8 +13,11 @@ int writeBlock(int diskNo, BlkNo block, Byte* buffer) {
   if (disks[diskNo]==NULL) return -1; // Error
   return (disks[diskNo]->writeBlock)(block,buffer);
 }
+```
 
-2.         (10     poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 int isAllowed(FCB* f, unsigned long int uid, unsigned int op) {
   if (f==0) return 0; // Exception!
   unsigned int prot = f->protection;
@@ -32,7 +31,11 @@ int isAllowed(FCB* f, unsigned long int uid, unsigned int op) {
     prot &= 7;
   return (op&prot)?1:0;
 }
-3.         (10     poena)
+```
+
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 BlockNo getFreeBlock () {
   static const int numOfEntries = blockSize/sizeof(BlockNo);
 
@@ -49,3 +52,5 @@ BlockNo getFreeBlock () {
   ret = freeBlocksHead;
   freeBlocksHead = index[numOfEntries-1];
   return ret;
+}
+```

@@ -1,12 +1,7 @@
 2014/april/IR Kolokvijum 1 - April 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za računarsku tehniku i informatiku
-April 2014.
-1. (10 poena)
+io
+```cpp
 IORequest *dma1Pending = 0, *dma2Pending = 0; // Currently pending requests
 
 void startDMA1 () {
@@ -54,29 +49,46 @@ interrupt void dmaInterrupt () {
     startDMA2();
   }
 }
+```
 
+--------------------------------------------------------------------------------
+segment
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Virtual address (hex) & Mapping result (hex) \\
+\hline
+12FA0 & X \\
+\hline
+C0FF0 & D670F0 \\
+\hline
+70750 & X \\
+\hline
+B0140 & P \\
+\hline
+C02AB & D672AB \\
+\hline
+\end{tabular}
+\end{center}
 
-2/2
-2. (10 poena)
+--------------------------------------------------------------------------------
+interrupt
+```asm
+yield:  ; Save current context
+        load base,#cur[sp]
+        add base,base,#offsContext
+        saveregs
+        ; Restore new context
+        load base,#nxt[sp]
+        add base,base,#offsContext
+        loadregs
+        ; Return
+        ret
+```
 
-Virtual address (hex)  Mapping result (hex)
-12FA0 X
-C00F0 D670F0
-70750 X
-B0140 P
-C02AB D672AB
-3. (10 poena)
-yield: ; Save current context
-load base,#cur[sp]
-add base,base,#offsContext
-saveregs
-; Restore new context
-load base,#nxt[sp]
-add base,base,#offsContext
-loadregs
-; Return
-ret
-4. (10 poena)
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 int create_thread (void (*f)(void*), void* arg) {
   asm {
     load r0,#0
@@ -96,3 +108,4 @@ int Thread::start () {
   else
     return pid = create_thread(&wrapper,this);
 }
+```

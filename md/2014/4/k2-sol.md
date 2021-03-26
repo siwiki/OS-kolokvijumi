@@ -1,12 +1,7 @@
 2014/april/SI, IR Kolokvijum 2 - April 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1
-Rešenja zadataka za drugi kolokvijum iz
-Operativnih sistema 1
-April 2014.
-1. (10 poena)
+semaphore
+```cpp
 int Semaphore::wait (int toBlock) {
   lock(lck);
   int ret = 0;
@@ -20,7 +15,11 @@ int Semaphore::wait (int toBlock) {
   unlock(lck);
   return ret;
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+cont
+```cpp
 int mem_alloc(void* addr, size_t size) {
   for (FreeMem* cur=fmem_head; cur!=0; cur=cur->next) {
     if (cur!=addr || cur->size<size) continue;
@@ -44,23 +43,12 @@ int mem_alloc(void* addr, size_t size) {
   }
   return -1;
 }
-3. (10 poena)
-a)(3) VA(60): Page1(16):Page2(16):Page3(16):Offset(12).
-PA(42): Frame(30):Offset(12).
-b)(3) Širina PMT3 je 30+2=32 bita. Ista je i širina PMT1 i PMT2.
- PMT1 ima 2
-16
- ulaza širine 32 bita (4B), što je ukupno: 2
-18
-B=256KB.
-c)(4) Ovaj proces koristio je 2
-30
- svojih najnižih adresa, što je 2
-30-12
-=2
-18
- stranica. Jedna PMT
-trećeg nivoa pokriva 2
-16
- stranica, pa je ovaj proces alocirao PMT prvog nivoa, jednu PMT
-drugog nivoa i četiri PMT trećeg nivoa. Zato ukupna veličina PMT iznosi 6B=1,5MB.
+```
+
+--------------------------------------------------------------------------------
+page
+1. VA(60): Page1(16):Page2(16):Page3(16):Offset(12).
+
+   PA(42): Frame(30):Offset(12).
+2. Širina PMT3 je 30+2=32 bita. Ista je i širina PMT1 i PMT2. PMT1 ima $2^{16}$ ulaza širine 32 bita (4B), što je ukupno: $2^{18}$B=256KB.
+3. Ovaj proces koristio je $2^{30}$ svojih najnižih adresa, što je $2^{30-12}=2^{18}$ stranica. Jedna PMT trećeg nivoa pokriva $2^{16}$ stranica, pa je ovaj proces alocirao PMT prvog nivoa, jednu PMT drugog nivoa i četiri PMT trećeg nivoa. Zato ukupna veličina PMT iznosi $6 \cdot 256$B=1,5MB.

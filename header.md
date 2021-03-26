@@ -1,6 +1,7 @@
 ---
 title: OS1 kolokvijumi
-author: Luka Simić i Aleksa Marković
+author: pripremili Luka Simić i Aleksa Marković
+subtitle: kategorisani zadaci sa kolokvijuma 2006-2020 sa stranice predmeta
 date: Mart 2021
 geometry: margin=2cm
 output: pdf_document

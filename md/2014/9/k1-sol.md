@@ -1,11 +1,7 @@
-2014/septembar%20-%20nadoknade/SI, IR Kolokvijum 1 - Septembar 2014 - Resenja.pdf
+2014/septembar - nadoknade/SI, IR Kolokvijum 1 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Septembar 2014.
-1. (10 poena)
+io
+```cpp
 static const unsigned int timeout = 50; // 50 ms
 static int completed = 0;
 static REG* ptr = 0;
@@ -32,10 +28,18 @@ interrupt void timerInterrupt () {
   } else // Completed
     completed = 1;
 }
-2. (10 poena)
-a)(5) VA: Segment(8):Page(16):Offset(8); PA: Frame(20):Offset(8).
-b)(5) FF00DDh
+```
+
+--------------------------------------------------------------------------------
+segpage
+1. VA: Segment(8):Page(16):Offset(8); PA: Frame(20):Offset(8).
+2. FF00DDh
 3. (10 poena) a)(7)
+
+--------------------------------------------------------------------------------
+interrupt
+1. 
+```asm
 dispatch:  ; Save the current context
             LOAD Rx,Rp   ; Rx:=# of current processor
             SHL Rx,2    ; Rx:=Rx*4
@@ -57,13 +61,15 @@ dispatch:  ; Save the current context
             LOAD PSW,#offs_psw[Rx] ; restore PSW
             LOAD SP,#offs_sp[Rx]   ; restore SP
             RTS                 ; return from subroutine
-
-2/2
-b)(3) Nije potrebno, jer svaki procesor jedini pristupa samo svom odgovaraju
+```
+2. Nije potrebno, jer svaki procesor jedini pristupa samo svom odgovaraju
 ćem elementu n
 niza runningProcesses,  pa nema potencijalnog konflikta između procesora (nema deljenih
 podataka u memoriji kojima pristupaju različiti procesori u ovoj operaciji).
-4. (10 poena)
+
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 class Search : public Thread {
 public:
   Search (int a[], int i, int j, int x) : array(a), ii(i), jj(j), xx(x)  {}
@@ -88,3 +94,4 @@ void Search::find (int i, int j) {
   t->start();
   find(i,k);
 }
+```

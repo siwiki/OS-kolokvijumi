@@ -77,7 +77,6 @@ pokazivač na odgovarajući deskriptor.
 ```cpp
 SegDesc* findSegDesc (SegDesc* root, size_t size);
 ```
-Rešenje:
 
 --------------------------------------------------------------------------------
 filesystem

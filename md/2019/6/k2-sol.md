@@ -48,7 +48,7 @@ page
 2. Ovaj proces adresira sledeće stranice:
    - jednu stranicu segmenta za kod, za dohvatanje instrukcija programa
    - samo jednu stranicu iz segmenta za stek, jer je to dovoljno za samo jedan poziv potprograma `main` bez automatskih objekata na steku (argumenata i lokalnih varijabli)
-   - po 2 stranice za svaki niz `src` i `dst`, jer svaki niz sadrži $0x1000=2^12$ elemenata po 4 bajta, odnosno $2^14$ bajtova, što je 2 stranice po $2^13$ bajtova.
+   - po 2 stranice za svaki niz `src` i `dst`, jer svaki niz sadrži $0x1000=2^{12}$ elemenata po 4 bajta, odnosno $2^{14}$ bajtova, što je 2 stranice po $2^{13}$ bajtova.
    
    Sve ukupno, proces adresira 6 stranica. Kako svaka od njih ostaje u memoriji nakon prvog
 adresiranja i učitavanja, i pošto je procesu dodeljeno dovoljno okvira, ovaj proces će

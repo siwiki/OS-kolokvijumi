@@ -1,12 +1,7 @@
-2014/septembar%20-%20nadoknade/SI, IR Kolokvijum 2 - Septembar 2014 - Resenja.pdf
+2014/septembar - nadoknade/SI, IR Kolokvijum 2 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za
-drugi kolokvijum iz Operativnih sistema 1
-Septembar 2014.
-1. (10 poena)
+semaphore
+```cpp
 class Event {
 public:
   Event () : mySem(0), mutex(1) {}
@@ -22,7 +17,11 @@ inline void Event::signal () {
   if (mySem.val()<1) mySem.signal();
   mutex.signal();
 }
-2. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+linker
+```cpp
 void Linker::firstPass () {
   this.status = OK;
   this.binarySize = 0;
@@ -53,12 +52,15 @@ void Linker::firstPass () {
     this.binarySize += size;
   }
 }
-4. (10 poena)
-a)(3)    VA(64): Page1(25):Page2(25):Offset(14).
-PA(40): Frame(26):Offset(14).
-b)(7)
+```
 
-2/2
+--------------------------------------------------------------------------------
+page
+1. VA(64): Page1(25):Page2(25):Offset(14).
+
+   PA(40): Frame(26):Offset(14).
+2. 
+```cpp
 const unsigned short pg1w = 25, pg2w = 25, offsw = 14;
 
 void setPMTEntry (unsigned* pmt1, unsigned long vaddr, unsigned fr,
@@ -70,3 +72,4 @@ void setPMTEntry (unsigned* pmt1, unsigned long vaddr, unsigned fr,
   unsigned pmt2entry = (vaddr>>offsw) & ~(-1L<<pg2w);
   pmt2[pmt2entry] = (fr<<2) | ((r||w)<<1) | (x||w);
 }
+```

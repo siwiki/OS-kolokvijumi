@@ -1,12 +1,7 @@
-2014/septembar%20-%20nadoknade/SI, IR Kolokvijum 3 - Septembar 2014 - Resenja.pdf
+2014/septembar - nadoknade/SI, IR Kolokvijum 3 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Rešenja zadataka za treći kolokvijum iz
-Operativnih sistema 1
-Septembar 2014.
-1. (10 poena)
+io
+```cpp
 char getchar () {
  static char buffer[BlockSize];
  static int cursor = BlockSize;
@@ -16,9 +11,11 @@ char getchar () {
  }
  return buffer[cursor++];
 }
+```
 
-2. (10 poena)
-
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 class File {
 public:
   File (const char *pathname, int flags, mode_t mode) throw Exception;
@@ -51,9 +48,11 @@ void File::write (byte* b, unsigned long sz) throw Exception {
   int s = write(fh,b,sz);
   if (s<0) throw Exception(s);
 }
+```
 
-2/2
-3. (10 poena)
+--------------------------------------------------------------------------------
+filesystem
+```cpp
 PBlock getFilePBlockNo (FCB* fcb, unsigned long bt) {
   if (fcb==0) return -1; // Exception
   unsigned long lblk = bt/BlockSize;  // Logical block number
@@ -68,3 +67,4 @@ PBlock getFilePBlockNo (FCB* fcb, unsigned long bt) {
   if (dblIndex1==0) return -1; // Exception
   return dblIndex1[dblIndex1Entry];
 }
+```
