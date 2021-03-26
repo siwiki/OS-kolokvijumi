@@ -1,11 +1,7 @@
 2012/jun/SI, IR Kolokvijum 3 - Jun 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1
-Treći kolokvijum iz Operativnih sistema 1
-Jun 2012.
-1. (10 poena)
+io
+```cpp
 Byte* getDiskBlock (BlkNo blk) {
   // Search for the requested block in the cache and return it if found:
   int hash = blk%CACHESIZE;
@@ -25,8 +21,18 @@ Byte* getDiskBlock (BlkNo blk) {
   diskRead(blk,diskCache[cursor]);
   return diskCache[cursor];
 }
-2. (10 poena) Neuspešna je operacija 2), ostale su uspešne.
-3. (10 poena)
-a)(3) 1001 b)(3) 4601
-c)(4) Jedan indeksni blok sadrži najviše 1024B:4B = 256 ulaza.
- Maksimalna veličina fajla je: 2·1KB + 2·256·1KB = 514KB.
+```
+--------------------------------------------------------------------------------
+filesystem
+
+Neuspešna je operacija 2), ostale su uspešne.
+
+--------------------------------------------------------------------------------
+filesystem
+
+1. 1001 
+
+2. 4601
+
+3. Jedan indeksni blok sadrži najviše 1024B:4B = 256 ulaza.
+   Maksimalna veličina fajla je: 2·1KB + 2·256·1KB = 514KB.

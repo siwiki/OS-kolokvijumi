@@ -1,12 +1,7 @@
 2012/maj/IR Kolokvijum 1 - Maj 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Odsek za računarsku tehniku i informatiku
-Maj 2012.
-1. (10 poena)
+io
+```cpp
 static int dmaCompleted = 0;
 
 void transfer (OutputRequest* ioHead) {
@@ -24,10 +19,17 @@ void transfer (OutputRequest* ioHead) {
 interrupt void dmaInterrupt () {
   dmaCompleted = 1;
 }
-2. (10 poena)
-a)(5) VA: Segment(8):Page(16):Offset(8); PA: Frame(20):Offset(8).
-b)(5) FF0015h
-3. (10 poena)
+```
+--------------------------------------------------------------------------------
+segpage
+
+1. VA: Segment(8):Page(16):Offset(8); PA: Frame(20):Offset(8).
+
+2. FF0015h
+
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 void yield (jmp_buf old, jmp_buf new) {
   if (setjmp(old)==0)
     longjmp(new,1);
@@ -42,9 +44,11 @@ void dispatch () {
   yield(old,new);
   unlock();
 }
+```
+--------------------------------------------------------------------------------
+concurrency
 
-2/2
-4. (10 poena)
+```cpp
 // Helper recursive function: traverse the tree, compute its size,
 // and store its size in sz (sz is external to the thread’s stack):
 
@@ -73,3 +77,4 @@ int size (Node* node) {
   size_(node,&sz);
   return sz;
 }
+```

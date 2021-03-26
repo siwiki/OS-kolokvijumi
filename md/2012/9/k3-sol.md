@@ -1,11 +1,7 @@
 2012/septembar/SI, IR Kolokvijum 3 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2
-Treći kolokvijum iz Operativnih sistema 1
-Septembar 2012.
-1. (10 poena)
+io
+```cpp
 class DoubleBuffer {
 public:
   DoubleBuffer (int size, int chunkSize);
@@ -55,17 +51,24 @@ void DoubleBuffer::get (char* buf) {
   if (items==0)
     inputBufReady.signal();
 }
+```
+--------------------------------------------------------------------------------
+filesystem
 
-2/2
-2. (10 poena)
-a)(5)
-jane <file>
-chld <dir>
-foo <file>
-b)(5)
-foo <file>
-txt <dir>
-3. (10 poena)
+1. ```
+  jane <file>
+  chld <dir>
+  foo <file>
+  ```
+2. ```
+  foo <file>
+  txt <dir>
+  ```
+
+--------------------------------------------------------------------------------
+filesystem
+
+```cpp
 Byte* getFileBlock (FCB* file, unsigned int block) {
   if (file==0 || file->index==0) return 0;
   BlkNo* index = (BlkNo*)getDiskBlock(file->index);
@@ -79,3 +82,4 @@ Byte* getFileBlock (FCB* file, unsigned int block) {
   if (index[block]==0) return 0;
   return getDiskBlock(index[block]);
 }
+```

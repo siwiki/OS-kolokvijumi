@@ -1,11 +1,8 @@
 2012/septembar/SI, IR Kolokvijum 1 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
+io
 
-
-1/2
-Prvi kolokvijum iz Operativnih sistema 1
-Septembar 2012.
-1. (10 poena)
+```cpp
 static unsigned* io2Ptr = 0;
 static int io2Count = 0;
 static int io2Completed = 0;
@@ -50,30 +47,59 @@ interrupt void io2Interrupt() {
   }
 }
 
-2/2
-2. (10 poena)
+```
+--------------------------------------------------------------------------------
+page
+
 VA: Page(8):Offset(16)
+
 PA: Frame(8):Offset(16)
-Sekvenca stranica koje se traže: 3, 3, 3, 8, 8, 3, 3, 3, 5, 5, 6, 6
+
+Sekvenca stranica koje se traže: $3, 3, 3, 8, 8, 3, 3, 3, 5, 5, 6, 6$
+
 PMT na kraju sekvence:
-Entry Flag Frame
-0 0
-1 0
-2 0
-3 1 20h
-4 0
-5 1 22h
-6 1 23h
-7 0
-8 1 21h
-9 0
-A 0
-B 0
-C 0
-D 0
-E 0
-F 0
-3. (10 poena)
+\begin{tabular}{|l|l|l|}
+\hline
+Entry & Flag & Frame \\
+\hline
+0 & 0 & \\
+\hline
+1 & 0 & \\
+\hline
+2 & 0 & \\
+\hline
+3 & 1 & 20h \\
+\hline
+4 & 0 & \\
+\hline
+5 & 1 & 22h \\
+\hline
+6 & 1 & 23h \\
+\hline
+7 & 0 & \\
+\hline
+8 & 1 & 21h \\
+\hline
+9 & 0 & \\
+\hline
+A & 0 & \\
+\hline
+B & 0 & \\
+\hline
+C & 0 & \\
+\hline
+D & 0 & \\
+\hline
+E & 0 & \\
+\hline
+F & 0 & \\
+\hline
+\end{tabular}
+
+--------------------------------------------------------------------------------
+concurrency
+```cpp
+
 void Thread::suspend () {
   lock();
   jmp_buf old = Thread::running->context;
@@ -93,7 +119,11 @@ void Thread::resume () {
   yield(old,new);
   unlock();
 }
-4. (10 poena)
+```
+
+--------------------------------------------------------------------------------
+concurrency
+```cpp
 int create_thread (void (*fun)(void*), void* p) {
   int ret = fork();
   if (ret<0) return ret;  // Error
@@ -102,3 +132,4 @@ int create_thread (void (*fun)(void*), void* p) {
   (*fun)(p);
   exit();
 }
+```

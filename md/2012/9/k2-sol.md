@@ -1,25 +1,25 @@
 2012/septembar/SI, IR Kolokvijum 2 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
+semaphore
 
-
-1/1
-Drugi kolokvijum iz Operativnih sistema 1
-Septembar 2012.
-1. (10 poena)
+```
 shared var
   sa : Semaphore:=1,
   sb : Semaphore:=0;
 
-process A;              process B;
-begin           begin
-  loop            loop
-    wait(sa);                          wait(sb);
-    <critical-section>                <critical-section>
-    signal(sb);                        signal(sa);
-    <non-critical-section>          <non-critical-section>
-  end;                end;
-end;               end;
-2. (10 poena)
+process A;                  process B;
+begin                         begin
+  loop                          loop
+    wait(sa);                     wait(sb);
+    <critical-section>            <critical-section>
+    signal(sb);                   signal(sa);
+    <non-critical-section>        <non-critical-section>
+  end;                          end;
+end;                           end;
+```
+--------------------------------------------------------------------------------
+semaphore
+```cpp
 class Semaphore {
 public:
   Semaphore (int init=1) : v(init), lck(0) {}
@@ -43,12 +43,27 @@ void Semaphore::signal () {
   v++;
   unlock(lck);
 }
-3. (10 poena)
-Zapis broj Adresa početka Veličina
-1 2670 30
-2 2460 40
-3 2500 120
-4. (10 poena)
+```
+--------------------------------------------------------------------------------
+cont
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Zapis broj & Adresa  početka & Veličina \\
+\hline
+1 & 2670 & 30 \\
+\hline
+2 & 2460 & 40 \\
+\hline
+3 & 2500 & 120 \\
+\hline
+\end{tabular}
+\end{center}
+
+--------------------------------------------------------------------------------
+page
+
 Sistem ne mora da kreira novu PMT za novokreirani proces prilikom izvršavanja sistemskog poziva fork,
 jer oba procesa inicijalno dele sve stranice,  pa su njihove PMT inicijalno potpuno iste.  Isto važi i za
 PMTP koji ukazuje na istu PMT, pa su i oni isti. Kada bilo koji od ovih procesa generiše izuzetak zbog
