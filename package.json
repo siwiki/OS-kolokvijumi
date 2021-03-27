@@ -1,10 +1,21 @@
 {
-    "name": "os1-pdf",
-    "version": "0.0.1",
+    "name": "os1-kolokvijumi",
+    "version": "1.0.0",
     "author": {
         "name": "Luka Simić",
         "email": "git@kocka.tech",
         "url": "https://kocka.tech"
+    },
+    "contributors": [
+        {
+            "name": "Aleksa Marković",
+            "email": "aleksamarkovice14@gmail.com",
+            "url": "https://github.com/topofkeks"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KockaAdmiralac/OS1-kolokvijumi"
     },
     "type": "module",
     "license": "CC-BY-SA-4.0",
