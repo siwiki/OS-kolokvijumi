@@ -1,6 +1,6 @@
 2020/septembar/Kolokvijum - Septembar 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 Thread* t_fork () {
   lock();

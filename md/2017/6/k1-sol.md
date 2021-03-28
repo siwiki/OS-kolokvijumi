@@ -20,7 +20,7 @@ interrupt void intDMA () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+context
 U klasu `Thread` dodati su sledeći privatni, nestatički podaci-članovi sa datim inicijalnim
 vrednostima:
 ```cpp
@@ -73,7 +73,7 @@ void Thread::wait (Thread* forChild=0) {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 1. 
 ```cpp
 class ThreadFnCaller : public Thread {

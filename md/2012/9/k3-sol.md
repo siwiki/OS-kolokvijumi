@@ -1,6 +1,6 @@
 2012/septembar/SI, IR Kolokvijum 3 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-concurrency
+buffer
 ```cpp
 class DoubleBuffer {
 public:

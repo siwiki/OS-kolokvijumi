@@ -68,7 +68,7 @@ void* vmalloc (SegDesc* head, void* addr, size_t size);
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+buffer
 Realizovati u potpunosti klasu `DoubleBuffer` čiji je interfejs dat. Ova klasa implementira
 dvostruki bafer. Proizvođaa stavlja u „izlazni“  bafer blokove veličine `chunkSizeProd`
 znakova pozivom operacije `put()`;  potrošaa uzima iz „ulaznog“  bafera blokove veličine

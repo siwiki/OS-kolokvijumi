@@ -31,7 +31,7 @@ interrupt void dmaInterrupt () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 void yield (jmp_buf old, jmp_buf new) {
   if (setjmp(old)==0)

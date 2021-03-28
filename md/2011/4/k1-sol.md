@@ -77,7 +77,7 @@ continue:
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 ```cpp
 class TreeVisitor : public Thread {
 public:

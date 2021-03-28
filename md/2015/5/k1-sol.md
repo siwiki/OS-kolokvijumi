@@ -89,7 +89,7 @@ procedura `sys_call`, samo što promenljive `userRunning` i `kernelRunning` zame
 (uloge), a neposredno pre instrukcije `iret` stoji još samo instrukcija `setusr`.
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 1. Problem je u neispravnim kontrolnim strukturama u telu funkcije pipe. Početna
 (roditeljska) nit izvršava then granu prve `if` naredbe, u kojoj se poziva funkcija `writer` i koja
 se onda neograničeno (beskonačno) izvršava, pa ta prva nit nikada ne izlazi iz ove funkcije.

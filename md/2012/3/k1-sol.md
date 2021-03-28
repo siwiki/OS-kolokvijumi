@@ -81,7 +81,7 @@ restauriraju registri procesora, odnosno analogno odvajanju zasebnog kontrolnog 
 svaku nit.
 
 --------------------------------------------------------------------------------
-concurrency
+syscall
 
 ```cpp
 void visit (void* nd) {

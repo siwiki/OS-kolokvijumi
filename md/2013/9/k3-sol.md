@@ -1,6 +1,6 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 3 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-concurrency
+buffer
 ```cpp
 class DoubleBuffer {
 public:

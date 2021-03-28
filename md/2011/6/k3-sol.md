@@ -1,6 +1,6 @@
 2011/jun/SI, IR Kolokvijum 3 - Jun 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-concurrency
+buffer
 ```cpp
 class Data;
 

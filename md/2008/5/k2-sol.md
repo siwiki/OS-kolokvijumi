@@ -19,7 +19,7 @@ operacije nad jednim semaforom na jednom procesoru zbog toga što je drugi proce
 u operaciju nad drugim semaforom, kako to čini prva varijanta.
 
 --------------------------------------------------------------------------------
-concurrency
+buffer
 
 ```cpp
 class Data;

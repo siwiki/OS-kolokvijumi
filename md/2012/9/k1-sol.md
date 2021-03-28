@@ -95,7 +95,7 @@ F & 0 & \\
 \end{tabular}
 
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 void Thread::suspend () {
   lock();
@@ -119,7 +119,7 @@ void Thread::resume () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+syscall
 ```cpp
 int create_thread (void (*fun)(void*), void* p) {
   int ret = fork();

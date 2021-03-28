@@ -76,7 +76,7 @@ dispatch:   ; Save the current context
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 1. Problem je što su promenljive `flag` i `c` koje bi trebalo da budu deljene (zajedničke)
 između niti, jer preko njih treba da razmenjuju podatke i sinhronizuju se, definisane kao
 automatske (alociraju se na steku), što znači da zapravo neće biti deljene, već će svaka nit

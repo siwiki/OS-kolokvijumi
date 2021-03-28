@@ -51,7 +51,7 @@ interrupt void yield () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+syscall
 ```cpp
 int visit (Node* node) {
   if (node==0) return;

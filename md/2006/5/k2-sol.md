@@ -83,7 +83,7 @@ void ExternalEvent::signal () {
 }
 ```
 --------------------------------------------------------------------------------
-concurrency
+semaphore
 ```cpp
 ExternalEvent dmaEvent(N);
 

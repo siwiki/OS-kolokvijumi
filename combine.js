@@ -14,9 +14,10 @@ const CATEGORIES = {
     overlay: 'Preklopi',
     interrupt: 'Prekidi',
     syscall: 'Sistemski pozivi',
-    semaphore: 'Semafori',
-    // Same as above?
-    concurrency: 'Konkurentnost',
+    thread: 'Interfejs niti',
+    context: 'Promena konteksta',
+    semaphore: 'Sinhronizacija procesa, semafori',
+    buffer: 'Baferi, proizvođač/potrošač',
     io: 'Ulaz/izlaz',
     ioblock: 'Ulaz/izlaz (blokovski uređaji)',
     cmd: 'Komandna linija',

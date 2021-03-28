@@ -56,7 +56,7 @@ Vrednost & 0 & 12 & 14 & 01AD & 0 & 22 & 01AE & 0 & 0 \\
 \end{center}
 
 --------------------------------------------------------------------------------
-concurrency
+context
 
 \begin{tabular}{|l|p{3cm}|p{3cm}|}
 \hline
@@ -96,7 +96,7 @@ sys_call: load r0, [runningUserProcess]
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 
 1. Svaka nit napreduje kroz hodnike lavirinta i u svakom koraku, na datom polju u
 kvadratnom koordinatnom sistemu, radi sledeće. Najpre pogleda da li je pronašla izlaz i ako

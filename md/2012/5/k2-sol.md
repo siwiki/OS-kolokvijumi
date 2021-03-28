@@ -1,6 +1,6 @@
 2012/maj/SI, IR Kolokvijum 2 - Maj 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-concurrency
+semaphore
 ```ada
 shared var
   a, b : integer := 0;
@@ -25,7 +25,7 @@ begin
 end;
 ```
 --------------------------------------------------------------------------------
-concurrency
+thread
 ```cpp
 void insert (Record** head, Record* e) {
   do {

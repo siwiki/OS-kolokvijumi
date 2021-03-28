@@ -29,7 +29,7 @@ segpage
 2. FF0015h
 
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 void yield (jmp_buf old, jmp_buf new) {
   if (setjmp(old)==0)
@@ -47,7 +47,7 @@ void dispatch () {
 }
 ```
 --------------------------------------------------------------------------------
-concurrency
+syscall
 
 ```cpp
 // Helper recursive function: traverse the tree, compute its size,

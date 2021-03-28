@@ -42,7 +42,7 @@ interrupt void io2Interrupt() {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 int dispatch (Thread* newT = 0) {
   lock();

@@ -45,7 +45,7 @@ void Semaphore::signal () {
 }
 ```
 --------------------------------------------------------------------------------
-concurrency
+buffer
 
 ```cpp
 class BoundedBuffer {

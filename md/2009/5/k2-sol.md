@@ -31,7 +31,7 @@ void Semaphore::signal () {
 Pomoćne operacije `block()` i `unblock()` više nisu potrebne (izbacuju se). Ostatak definicije klase `Semaphore` ostaje isti.
 
 --------------------------------------------------------------------------------
-concurrency
+semaphore
 
 Ili proizvoljno mnogo procesa tipa *A* u svojim kritičnim sekcijama i ni jedan
 proces tipa *B* u svojoj, ili samo jedan proces tipa *B* i ni jedan proces tipa *A*.

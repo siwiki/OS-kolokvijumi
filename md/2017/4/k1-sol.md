@@ -37,7 +37,7 @@ interrupt void timerInterrupt () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 void IOThread::suspend () {
   IOThread::running->isReady = 0;
@@ -57,5 +57,5 @@ void IOThread::suspend () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 2349, ili 2439, ili 3249, ili 3429, ili 4239, ili 4329 i ništa više osim toga.

@@ -68,7 +68,7 @@ niza `runningProcesses`, pa nema potencijalnog konflikta između procesora (nema
 podataka u memoriji kojima pristupaju različiti procesori u ovoj operaciji).
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 ```cpp
 class Search : public Thread {
 public:

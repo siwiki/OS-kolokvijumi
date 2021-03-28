@@ -87,7 +87,7 @@ yield: ; Save current context
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+context
 ```cpp
 int create_thread (void (*f)(void*), void* arg) {
   asm {

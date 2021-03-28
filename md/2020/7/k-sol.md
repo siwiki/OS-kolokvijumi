@@ -59,7 +59,7 @@ void* vmalloc (SegDesc* head, void* addr, size_t size) {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+buffer
 ```cpp
 class DoubleBuffer {
 public:

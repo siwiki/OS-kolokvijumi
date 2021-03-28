@@ -47,7 +47,7 @@ Ne treba, pošto je identifikator procesa ujedno i ulaz u opisani niz. Nije potr
 dodatno čuvati tu informaciju.
 
 --------------------------------------------------------------------------------
-concurrency
+context
 
 Potrebno je dodati sledeću deklaraciju, koja će predstavljati pokazivač na listu
 suspendovanih (blokiranih) procesa.

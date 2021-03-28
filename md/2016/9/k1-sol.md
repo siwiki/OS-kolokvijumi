@@ -59,7 +59,7 @@ int Join::wait () {
 ```
 
 --------------------------------------------------------------------------------
-concurrency
+thread
 ```cpp
 class DataProcessor : public Thread {
 public:

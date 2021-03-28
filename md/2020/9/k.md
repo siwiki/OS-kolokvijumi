@@ -1,6 +1,6 @@
 2020/septembar/Kolokvijum - Septembar 2020.pdf
 --------------------------------------------------------------------------------
-concurrency
+context
 Dostupni su sledeći delovi školskog jezgra, kao i funkcije iz standardne biblioteke:
 
 - `Thread::running`: statički član – pokazivač na objekat klase `Thread` koji predstavlja tekuću nit;
