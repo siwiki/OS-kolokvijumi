@@ -24,20 +24,20 @@ StatusMask, int memToIO, int vel);
 }
 
 ```
+
 --------------------------------------------------------------------------------
 page
 
-1. 
-VA:
-Page(24) Offset(8)
-; PA:
-Block(20) Offset(8)
+1. VA: Page(24) Offset(8)
 
-2.  ```cpp
+   PA: Block(20) Offset(8)
+2. s
+```cpp
 void setPageDescr(unsigned int* pmtp, unsigned int page, unsigned int frame){
     pmtp[page] = frame | ~((unsigned int)~0 / 2);
 }
 ```
+
 --------------------------------------------------------------------------------
 segpage
 
@@ -48,13 +48,12 @@ proces pokrenutim nad istim programom,  potrebno je u SMT i PMT tabele novog pro
 upisati trenutno stanje prisutnosti stranica u memoriji i odgovarajuće brojeve okvira.  Jedan
 način da to bude moguće uraditi je da se uz svaki proces pamti u koji dio virtuelnog adresnog
 prostora tog procesa je učitan program.
-Kada se neka stranica učita u OM, potrebno je ažurirati deskriptore u svim PMT svih procesa
+
+   Kada se neka stranica učita u OM, potrebno je ažurirati deskriptore u svim PMT svih procesa
 koji dijele tu stranicu. Isto je i kada neka stranica bude izbačena iz OM. Moguće je i efikasnije
 rješenje (razmisliti o još po jednoj tabeli po programu u kojoj se čuvaju deskriptori njegovih
 stranica, a da se u SMT/PMT procesa vrši redirekcija na ovu tabelu).
-
 2. Opisani način se u potpunosti realizuje u OS.
-
 3. Stek je dio konteksta svakog procesa i kao takav pravi razliku izmedju različitih
 izvršavanja jednog koda.  Stek je struktura podataka u koju se podaci i upisuju,  a ne samo
 čitaju. To znači da svaki proces ima svoj zaseban stek i iz tog razloga nije moguće djeljenje
@@ -78,67 +77,62 @@ PID running; // The running process
 PID ready;   // Head of Ready list
 
 void yield(PCB* current, PCB* next){
- asm{
- push R0
- ...
- push Rn
+  asm{
+    push R0
+    ...
+    push Rn
 
- load R0, #current[BP]
- load #sp[R0], SP //#sp je pomjeraj odgovarajuceg polja strukture
- load R0, #next[BP]   // i u ovom slucaju je #sp=0
- load SP, #sp[R0]
+    load R0, #current[BP]
+    load #sp[R0], SP //#sp je pomjeraj odgovarajuceg polja strukture
+    load R0, #next[BP]   // i u ovom slucaju je #sp=0
+    load SP, #sp[R0]
 
- pop Rn
- ...
- pop R0
- }
- return;
+    pop Rn
+    ...
+    pop R0
+  }
+  return;
 }
 ```
-
-Drugi način za yield (Neki kompajleri posjeduju registarske
+Drugi način za `yield` (Neki kompajleri posjeduju registarske
 pseudovarijable, pa je registrima moguće pristupiti i direktno iz C odnosno
 C++ koda. Jedan od takvih je TC.):
-
 ```cpp
 void yield(PCB* current, PCB* next){
- asm{
- push R0
+  asm{
+    push R0
+    ...
+    push Rn
+  }
+  current->sp = _SP;    //_SP je pseudovarijabla za SP
+  _SP = next->sp;
 
-3/  5
- ...
- push Rn
- }
- current->sp = _SP;    //_SP je pseudovarijabla za SP
- _SP = next->sp;
-
- asm{
- pop Rn
- ...
- pop R0
- }
- return;
+  asm{
+    pop Rn
+    ...
+    pop R0
+  }
+  return;
 }
 
 
 void suspend(){
- PCB* old = allProcesses[running];
- running = ready;
-ready = allProcesses[ready]->next;
-PCB* new = allProcesses[running];
-allProcesses[running]->next=0;
- yield(old, new);
- return;
+  PCB* old = allProcesses[running];
+  running = ready;
+  ready = allProcesses[ready]->next;
+  PCB* new = allProcesses[running];
+  allProcesses[running]->next=0;
+  yield(old, new);
+  return;
 }
 
 resume(PID pid){
- int ind=(running != pid);
- for(PID i = 0;i < MaxProc;i++) if (allProcesses[i].next == pid)
-ind=0;
- if (ind){
-  allProcesses[pid]->next = ready;
-  ready = pid;
- }
+  int ind=(running != pid);
+  for(PID i = 0;i < MaxProc;i++) if (allProcesses[i].next == pid) ind=0;
+  if (ind){
+    allProcesses[pid]->next = ready;
+    ready = pid;
+  }
 }
 ```
 --------------------------------------------------------------------------------
@@ -161,6 +155,7 @@ U tri prolaza petlje u sredini kreira se 8 procesa:  u prvom prolazu od 1 nastaj
 drugom od svakog od ovih nastaju po 2, što je ukupno 4 i u trećem prolazu od svakog od ova
 4 nastaju po 2, što je ukupno 8. Svaki od njih će imati sopstveni niz pid i ispisaće 3 broja. To
 je ukupno 24 ispisana broja.
+
 Posle svakog poziva `fork()`  ostaju po dva identična procesa (roditelj i novokreirani
 potomak) koji se razlikuju samo po rezultatu `fork()`  funkcije.  U prvom prolazu kroz petlju
 ostaju dva procesa, jedan sa `pid[0]=0` i drugi sa `pid[0]<>0`. Pošto su u kontrolnim strukturama

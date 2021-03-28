@@ -51,74 +51,77 @@ concurrency
 
 Potrebno je dodati sledeću deklaraciju, koja će predstavljati pokazivač na listu
 suspendovanih (blokiranih) procesa.
-
+```cpp
+PCB* blocked;
+```
 Implementacije traženih funkcija:
 ```cpp
-
-PCB* blocked;
-
 void suspend () {
-  lock ();
+  lock();
   if (setjmp(running->context)==0) {
- // stavlja running proces u listu blokiranih
-running->next = blocked;
-blocked = running;
+    // stavlja running proces u listu blokiranih
+    running->next = blocked;
+    blocked = running;
 
-// uzima prvi spreman proces i dodeljuje mu procesor
-running = ready;
-ready = ready->next;
+    // uzima prvi spreman proces i dodeljuje mu procesor
+    running = ready;
+    ready = ready->next;
 
-     longjmp(running->context,1);
+    longjmp(running->context,1);
   } else {
      unlock ();
-return;
+     return;
+  }
 }
 
 void resume(PID pid){
-if (blocked == 0) return;
+  if (blocked == 0) return;
 
- lock();
+  lock();
 
- // pronalazi PCB procesa koji treba deblokirati
- PCB *prev = 0, *curr = blocked;
- while (curr != 0 && curr->pid != pid){
-  prev = curr;
-  curr = curr->next;
- }
+  // pronalazi PCB procesa koji treba deblokirati
+  PCB *prev = 0, *curr = blocked;
+  while (curr != 0 && curr->pid != pid){
+     prev = curr;
+     curr = curr->next;
+  }
 
- if (curr == 0) { unlock(); return; }
+  if (curr == 0) {
+    unlock();
+    return;
+  }
 
- // vraća nađeni PCB u listu spremnih
- if (prev == 0) blocked = blocked->next;
- else prev->next = curr->next;
+  // vraća nađeni PCB u listu spremnih
+  if (prev == 0) blocked = blocked->next;
+  else prev->next = curr->next;
 
- curr->next = ready;
- ready = curr;
+  curr->next = ready;
+  ready = curr;
 
- unlock();
+  unlock();
 }
 ```
 --------------------------------------------------------------------------------
 syscall
 
-U protected sekciju klase Thread potrebno je dodati sledeći metod:
+U `protected` sekciju klase `Thread` potrebno je dodati sledeći metod:
 
 ```cpp
 class Thread{
-   ...
+  ...
 protected:
-   static void starter(void*);
-   ...
+  static void starter(void*);
+  ...
 }
 
 void Thread::starter(void* toStart){
- Thread* t = (Thread*)toStart;
- if (t) t->run();
+  Thread* t = (Thread*)toStart;
+  if (t) t->run();
 }
 
 U tom slučaju implementacija metoda start izgleda:
 
 void Thread::start(){
- pid = create_thread(&starter, this);
+  pid = create_thread(&starter, this);
 }
 ```

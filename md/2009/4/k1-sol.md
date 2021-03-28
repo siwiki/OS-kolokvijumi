@@ -93,8 +93,8 @@ U tri prolaza petlje kreira se 8 procesa: u prvom prolazu od 1 nastaju 2, u drug
 svakog od ovih nastaju po 2, što je ukupno 4 i u trećem prolazu od svakog od ova 4 nastaju po
 2, što je ukupno 8. Svaki od njih će računati sumu s u svom adresnom prostoru, koja će imati
 vrednost 0+1+2 = 3.
-Međutim, kako pri pozivu
-`fork()` samo jedan proces dobije povratnu vrednost 0,
+
+Međutim, kako pri pozivu `fork()` samo jedan proces dobije povratnu vrednost 0,
 jedan od prva dva procesa će u f izračunati 1,  a drugi 0.  Zbog logičke funkcije „ili“,  svi
 procesi koji nastanu od procesa u kojem je `f = 1` će takođe imati `f = 1` i zbog toga nikada neće
 stići do ispisa. Onaj koji ima vrednost `f = 0` se na isti način deli na dva procesa, gde f u
@@ -103,6 +103,7 @@ imaju šansu da dođu do ispisa su oni koji nastaju od onog koji u f ima vrednos
 posmatramo proces koji u f ima vrednost 0. Taj proces se još jednom deli na dva od kojih
 samo jedan u f ima vrednost 0 i samo taj proces će pri izvršavanju doći do ispisa, što znači da
 će biti ispisana samo jedna suma, 3.
+
 Rezonovanje bi se moglo nastaviti na isti način dalje, i upotrebom indukcije bi se
 moglo pokazati da će za proizvoljnu vrednost N biti ispisana samo jedna suma brojeva od 1
 do N.

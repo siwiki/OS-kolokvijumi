@@ -34,18 +34,21 @@ private:
 
 ExternalEvent::ExternalEvent(int interruptNo) : val(0),
 intNo(interruptNo){
-   if (intNo>=0 &&   intNo<NumOfInterruptEntries) {
+   if (intNo>=0 && intNo<NumOfInterruptEntries) {
+      // Razmisliti zašto je ovo neophodno.
+      // Uputstvo: šta ako je pokazivač veličine više reči koje se upisuju neatomično u narednoj naredbi?
       int_mask();
-        // add the event to the event list
-        events[intNo]=this;
-        int_unmask();
+      // add the event to the event list
+      events[intNo]=this;
+      int_unmask();
    }
 }
 
 ExternalEvent::~ExternalEvent(){
-   int_mask();
-   events[intNo]=0;
-   int_unmask();
+  // Isto kao i gore!
+  int_mask();
+  events[intNo]=0;
+  int_unmask();
 }
 
 void ExternalEvent::interruptOccurrence(int interruptNo){
@@ -53,14 +56,7 @@ void ExternalEvent::interruptOccurrence(int interruptNo){
   && events[interruptNo])
      events[interruptNo]->signal();
 }
-```
-Komentar [DM1]: Razmisliti zašto je ovo neophodno. 
 
-Uputstvo: šta ako je pokazivač veličine više reči koje se upisuju neatomično u
-narednoj naredbi?
-Komentar [DM2]: Isto kao i gore!
-
-```cpp
 void ExternalEvent::block () {
   if (setjmp(Thread::runningThread->context)==0) {
     // Blocking:

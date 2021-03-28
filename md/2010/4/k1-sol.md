@@ -62,41 +62,24 @@ concurrency
 \hline
 Operacija & Promena konteksta procesa & Promena konteksta niti \\
 \hline
-
-
-
-Restauracija programski dostupnih registara procesora 
-za podatke & Da & Da \\
+Restauracija programski dostupnih registara procesora za podatke & Da & Da \\
 \hline
-Invalidacija TLB-a čiji ključevi ne sadrže identifikaciju
-procesa & Da & Ne \\
+Invalidacija TLB-a čiji ključevi ne sadrže identifikaciju procesa & Da & Ne \\
 \hline
-Invalidacija TLB-a čiji ključevi sadrže identifikaciju
-procesa & Ne & Ne \\
+Invalidacija TLB-a čiji ključevi sadrže identifikaciju procesa & Ne & Ne \\
 \hline
-
-Restauracija registra koji čuva identifikaciju korisničkog
-procesa & Da & Ne \\
+Restauracija registra koji čuva identifikaciju korisničkog procesa & Da & Ne \\
 \hline
-
-Restauracija pokazivača na tabelu preslikavanja stranica
-(PMTP) & Da & Ne \\
+Restauracija pokazivača na tabelu preslikavanja stranica (PMTP) & Da & Ne \\
 \hline
-
 Restauracija procesorske statusne reči (PSW) & Da & Da \\
 \hline
-
-Invalidacija procesorskog keša koji kao ključeve čuva
-virtuelne adrese & Da & Ne \\
+Invalidacija procesorskog keša koji kao ključeve čuva virtuelne adrese & Da & Ne \\
 \hline
-
-Invalidacija procesorskog keša koji kao ključeve čuva
-fizičke adrese & Ne & Ne \\
+Invalidacija procesorskog keša koji kao ključeve čuva fizičke adrese & Ne & Ne \\
 \hline
-
 Zatvaranje otvorenih fajlova & Ne & Ne \\
 \hline
-
 Restauracija pokazivača steka (SP) & Da & Da \\
 \hline
 \end{tabular}
@@ -124,10 +107,8 @@ gasi se. Inače, ta nit nastavlja da ide prvom dobijenom opcijom, tako da joj je
 susedno polje dobijeno kao prva opcija, u tom smeru. Ako postoje druga i treća opcija, onda
 ova nit kreira nove niti, po jednu za svaku od tih raspoloživih opcija (drugu i treću), tako da te
 niti nastavljaju od tih susednih polja, u odgovarajućim smerovima.
-
 2. Četiri niti. Na slici je prikazan jedan mogući raspored puteva kojim tragaju te niti, uz
 pretpostavku da roditeljska nit nastavlja desnim od mogućih puteva, a potomci ostalim.
-
 3. Tri puta.
 
 ![Rešenje](images/2010/03-k1-5-s2.png)

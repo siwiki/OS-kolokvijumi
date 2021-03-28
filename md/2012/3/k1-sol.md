@@ -68,12 +68,11 @@ linker
           inc r0 ; return f(n-1)+1
           ret
   ```
-
 2. Problem je to što je svakoj lokalnoj promenljivoj i argumentu pridružen jedan i samo
 jedan globalni i statički alocirani stek. Zbog toga taj stek može da „prati“ samo instance
 lokalnih promenljivih samo jedne niti, a ne više njih. Na primer, jedna nit bi mogla da pozove
-funkciju f sa datim argumentom n i druga učini to isto i uporedo, pokvarivši i tekuću vrednost
-i stek starih vrednosti za n prve niti.  Za potrebe uporednih niti neophodno je imati zaseban
+funkciju f sa datim argumentom `n` i druga učini to isto i uporedo, pokvarivši i tekuću vrednost
+i stek starih vrednosti za `n` prve niti.  Za potrebe uporednih niti neophodno je imati zaseban
 skup instanci lokalnih promenljivih i argumenata pridružen svakoj niti. Prema tome, ceo skup
 statički alociranih lokalnih promenljivih i argumenata, zajedno sa njima pridruženim LIFO
 strukturama (pojedinačnim stekovima), mora da bude deo konteksta niti, što znači da se mora

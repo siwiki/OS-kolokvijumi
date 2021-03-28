@@ -22,17 +22,13 @@ Byte* getDiskBlock (BlkNo blk) {
   return diskCache[cursor];
 }
 ```
+
 --------------------------------------------------------------------------------
 fsintr
-
 Neuspešna je operacija 2), ostale su uspešne.
 
 --------------------------------------------------------------------------------
 fsimpl
-
 1. 1001 
-
 2. 4601
-
-3. Jedan indeksni blok sadrži najviše 1024B:4B = 256 ulaza.
-   Maksimalna veličina fajla je: 2·1KB + 2·256·1KB = 514KB.
+3. Jedan indeksni blok sadrži najviše 1024B:4B = 256 ulaza. Maksimalna veličina fajla je: 2·1KB + 2·256·1KB = 514KB.

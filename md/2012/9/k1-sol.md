@@ -1,7 +1,6 @@
 2012/septembar/SI, IR Kolokvijum 1 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
 io
-
 ```cpp
 static unsigned* io2Ptr = 0;
 static int io2Count = 0;
@@ -50,7 +49,6 @@ interrupt void io2Interrupt() {
 ```
 --------------------------------------------------------------------------------
 page
-
 VA: Page(8):Offset(16)
 
 PA: Frame(8):Offset(16)
@@ -99,7 +97,6 @@ F & 0 & \\
 --------------------------------------------------------------------------------
 concurrency
 ```cpp
-
 void Thread::suspend () {
   lock();
   jmp_buf old = Thread::running->context;
