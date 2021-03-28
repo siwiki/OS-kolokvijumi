@@ -60,7 +60,7 @@ dynload
               call load_module
               pop r0
               load r1, [r0] ; Load module's base address
-   call_fun:  call #fun[r1] ; Add the subroutine's offset
+   call_fun: call #fun[r1] ; Add the subroutine's offset
               ; to the module's base addr and call it
    ```
 

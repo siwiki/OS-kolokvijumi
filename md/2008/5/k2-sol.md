@@ -186,7 +186,7 @@ page
 - Indikator da li se stranica nalazi u fizičkoj memoriji. Da
 - Indikator da li je stranica uopšte dozvoljena za pristup (registrovana kao korišćeni deo virtuelnog adresnog prostora). Ne
 - Indikator da li je hardveru dozvoljena upis u stranicu. Da
-- Indikator da li je dozvoljen upis u stranicu, ali je ona deljena sa *copy-on-write* semantikom.  Ne
+- Indikator da li je dozvoljen upis u stranicu, ali je ona deljena sa *copy-on-write* semantikom. Ne
 - Indikator da li je stranica „prljava“, odnosno menjana od svog učitavanja. Da
 - Broj okvira u koji se stranica preslikava. Da
 - Broj bloka na particiji za zamenu stranica. Ne

@@ -54,7 +54,7 @@ page
 linker
 
 
-1.  
+1. 
   ```asm
     f:    load r0,[n] ; if (n==0)
           cmp r0,#0
@@ -72,12 +72,12 @@ linker
 jedan globalni i statički alocirani stek. Zbog toga taj stek može da „prati“ samo instance
 lokalnih promenljivih samo jedne niti, a ne više njih. Na primer, jedna nit bi mogla da pozove
 funkciju f sa datim argumentom `n` i druga učini to isto i uporedo, pokvarivši i tekuću vrednost
-i stek starih vrednosti za `n` prve niti.  Za potrebe uporednih niti neophodno je imati zaseban
+i stek starih vrednosti za `n` prve niti. Za potrebe uporednih niti neophodno je imati zaseban
 skup instanci lokalnih promenljivih i argumenata pridružen svakoj niti. Prema tome, ceo skup
 statički alociranih lokalnih promenljivih i argumenata, zajedno sa njima pridruženim LIFO
 strukturama (pojedinačnim stekovima), mora da bude deo konteksta niti, što znači da se mora
 čuvati i restaurirati iz PCB prilikom promene konteksta niti, na sličan način kako se čuvaju i
-restauriraju registri procesora,  odnosno analogno odvajanju zasebnog kontrolnog steka za
+restauriraju registri procesora, odnosno analogno odvajanju zasebnog kontrolnog steka za
 svaku nit.
 
 --------------------------------------------------------------------------------

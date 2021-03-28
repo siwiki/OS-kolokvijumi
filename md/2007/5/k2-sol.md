@@ -77,7 +77,7 @@ Operacija `get` analogno.
 --------------------------------------------------------------------------------
 dynload
 ```cpp
-double h (double _1,   int _2) {
+double h (double _1, int _2) {
   typedef double (*PFUN)(double,int);
   static PFUN _my_impl = NULL;
   if (_my_impl == NULL) {
@@ -112,10 +112,10 @@ jednaka širini fizičke adrese, što je 40 bita. Drugim rečima, jedan ulaz u P
 Jedan ulaz u PMT drugog nivoa sadrži broj okvira, koji je širine 16 bita, pa zauzima 2 bajta.
 PMT drugog nivoa ima $2^{20}$ = 1M ulaza, pa zauzima 2MB.
 Prema tome, PMT ukupno zauzimaju maksimalno:
-$5 \times 2^{20} B$(veličina PMT prvog nivoa) $+ 2^{20}$ (broj PMT drugog nivoa)  $\times  2^{21} B$ (veličina PMT drugog nivoa) $= 5 \times 2 ^ {20} B + 2 ^{41} B$, što je približno (odnosno nešto veće od) $2^{41} B = 2TB$ (terabajta).
+$5 \times 2^{20} B$(veličina PMT prvog nivoa) $+ 2^{20}$ (broj PMT drugog nivoa) $\times  2^{21} B$ (veličina PMT drugog nivoa) $= 5 \times 2 ^ {20} B + 2 ^{41} B$, što je približno (odnosno nešto veće od) $2^{41} B = 2TB$ (terabajta).
 4. Dati proces ima validan samo prvi i poslednji ulaz u PMT prvog nivoa, dakle za njega postoje
 samo dve PMT drugog nivoa u memoriji. Ukupna veličina PMT za ovaj proces je zato:
-$5 \times 2^{20} B$ (veličina PMT prvog nivoa) + 2 (broj PMT drugog nivoa)  $\times  2^{21} B$ (veličina PMT drugog nivoa) $= 5 \times 2 ^ {20} B + 4 \times 2 ^ {20} B = 9 MB$, što je značajno manje od fizičkog adresnog prostora.
+$5 \times 2^{20} B$ (veličina PMT prvog nivoa) + 2 (broj PMT drugog nivoa) $\times  2^{21} B$ (veličina PMT drugog nivoa) $= 5 \times 2 ^ {20} B + 4 \times 2 ^ {20} B = 9 MB$, što je značajno manje od fizičkog adresnog prostora.
 
 --------------------------------------------------------------------------------
 cont

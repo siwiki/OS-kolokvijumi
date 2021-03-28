@@ -51,7 +51,7 @@ CDAB & X \\
 --------------------------------------------------------------------------------
 interrupt
 ```asm
-yield:  ; Save current context
+yield: ; Save current context
         push r0
         load r0,#cur[sp]
         store r1,#offsR1[r0] ; save r1
@@ -69,7 +69,7 @@ yield:  ; Save current context
         load sp,#offsSP[r0] ; restore sp
         load psw,#offsPSW[r0] ; restore psw
         load r31,#offsR31[r0] ; restore r31
-        ...  ; restore other regs
+        ... ; restore other regs
         load r1,#offsR1[r0]
         load r0,#offsR0[r0] ; restore r0
         ; Return

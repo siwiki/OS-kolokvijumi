@@ -95,7 +95,7 @@ svakog od ovih nastaju po 2, što je ukupno 4 i u trećem prolazu od svakog od o
 vrednost 0+1+2 = 3.
 
 Međutim, kako pri pozivu `fork()` samo jedan proces dobije povratnu vrednost 0,
-jedan od prva dva procesa će u f izračunati 1,  a drugi 0.  Zbog logičke funkcije „ili“,  svi
+jedan od prva dva procesa će u f izračunati 1, a drugi 0. Zbog logičke funkcije „ili“, svi
 procesi koji nastanu od procesa u kojem je `f = 1` će takođe imati `f = 1` i zbog toga nikada neće
 stići do ispisa. Onaj koji ima vrednost `f = 0` se na isti način deli na dva procesa, gde f u
 jednom procesu ima vrednost 1, a u drugom 0. Kao i u prethodnom slučaju, jedini procesi koji

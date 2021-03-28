@@ -60,7 +60,7 @@ sys_call: ; Save current context
           load r0,[running]
           load sp,#offsSP[r0] ; restore sp
           load r31,#offsR31[r0] ; restore r31
-          ...  ; restore other regs
+          ... ; restore other regs
           load r1,#offsR1[r0]
           load r0,#offsR0[r0] ; restore r0
           ; Return

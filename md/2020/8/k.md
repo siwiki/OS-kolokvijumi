@@ -2,17 +2,17 @@
 --------------------------------------------------------------------------------
 semaphore
 Školsko jezgro proširuje se konceptom koji služi za alokaciju i dealokaciju nedeljivog resursa
-u sistemu,  ponaša se kao binarni semafor,  a implementiran je klasom `Resource` čiji je
+u sistemu, ponaša se kao binarni semafor, a implementiran je klasom `Resource` čiji je
 interfejs dat u nastavku. Kada želi da zauzme neki deljeni resurs, nit treba da pozove operaciju
 `acquire` objekta ove klase koji služi za međusobno isključenje pristupa tom resursu, a kada
 ga oslobodi, treba da pozove operaciju `release`.
 Da bi se sprečila pojava mrtve blokade (*deadlock*), koristi se algoritam „čekaj ili umri“ (*wait-
-die*)  koji funkcioniše na sledeći način.  Svakoj niti pri samom kreiranju pridružuje se
+die*) koji funkcioniše na sledeći način. Svakoj niti pri samom kreiranju pridružuje se
 jedinstvena „vremenska marka“ (ceo broj dostupan u atributu `Thread::timestamp`), tako da
 starije niti imaju manju vrednost ove marke. Kada nit *Ta* zahteva resurs koji drži zauzeta nit
 Tb, onda:
 
-- Ako je *Ta* starija nego *Tb* (*Ta*<*Tb*),  nit *Ta* čeka suspendovana dok ne dobije resurs i tada operacija `acquire` vraća 1 (istu vrednost ova operacija vraća i kada je resurs slobodan, onda ga nit odmah dobija);
+- Ako je *Ta* starija nego *Tb* (*Ta*<*Tb*), nit *Ta* čeka suspendovana dok ne dobije resurs i tada operacija `acquire` vraća 1 (istu vrednost ova operacija vraća i kada je resurs slobodan, onda ga nit odmah dobija);
 - Ako je *Ta* mlađa nego *Tb* (*Ta*>*Tb*), niti Ta se odbija zahtev tako što operacija `acquire` vraća 0, a nit onda tu situaciju obrađuje na odgovarajući način (pokušava ponovo ili odustaje).
 
 Implementirati u potpunosti klasu `Resource`.
@@ -30,7 +30,7 @@ segpage
 Neki sistem koristi segmentno-straničnu organizaciju memorije. Logičke segmente koje je
 proces alocirao sistem opisuje strukturama tipa `SegDesc` za svaki proces. Kako bi se pretraga
 za logičkim segmentom kom odgovara adresirana stranica koja je generisala straničnu grešku
-što efikasnije izvršila,  ovi deskriptori organizovani su u uređeno binarno stablo za svaki
+što efikasnije izvršila, ovi deskriptori organizovani su u uređeno binarno stablo za svaki
 proces, tako da su u levom podstablu svakog čvora segmenti koji zauzimaju niže adrese, a
 desno oni koji zauzimaju više adrese od segmenta datog čvora. Logički segment je uvek
 poravnat i zaokružen na stranice. U strukturi `SegDesc` polja `left` i `right` ukazuju na koren
@@ -53,7 +53,7 @@ struct SegDesc {
 strukture stabla deskriptora logičkih segmenata tog procesa. U strukturi `SegDesc` postoji polje
 `vtp` (*virtual table pointer*) kao pokazivač na strukturu (tabelu) pokazivača na funkcije koje za
 dati tip logičkog segmenta implementiraju operacije koje kernel poziva u različitim
-situacijama.  Ova struktura ima polje `loadPage` koje ukazuje na funkciju koja datu stranicu
+situacijama. Ova struktura ima polje `loadPage` koje ukazuje na funkciju koja datu stranicu
 učitava u dati okvir i ima sledeći potpis (vraća negativnu vrednost u slučaju greške):
    ```cpp
    int loadPage (size_t page, size_t frame);
@@ -63,15 +63,15 @@ učitava u dati okvir i ima sledeći potpis (vraća negativnu vrednost u slučaj
 operativnoj memoriji i vraća njegov broj tipa `size_t`, a 0 u slučaju neuspeha. Konačno,
 postoji funkcija kernela koja postavlja vrednost ulaza u PMT procesa na čiji PCB ukazuje prvi
 parametar, za stranicu datu drugim parametrom, i u taj ulaz upisuje broj okvira dat trećim
-parametrom,  a prava pristupa podešava prema zapisu u deskriptoru segmenta datom
+parametrom, a prava pristupa podešava prema zapisu u deskriptoru segmenta datom
 poslednjim parametrom:
    ```cpp
    void setPMTEntry (PCB* pcb, size_t page, size_t frame, SegDesc* sd);
    ```
 2. Implementirati internu funkciju kernela `handlePageFault` koju kernel poziva kada
 treba da obradi straničnu grešku procesa na čiji PCB ukazuje prvi parametar, generisanu za
-stranicu datu drugim parametrom.  Ova funkcija treba da vrati 0 u slučaju uspeha, a različite
-negativne kodove u slučaju različitih grešaka.  Ova funkcija ne treba da rukuje stanjem
+stranicu datu drugim parametrom. Ova funkcija treba da vrati 0 u slučaju uspeha, a različite
+negativne kodove u slučaju različitih grešaka. Ova funkcija ne treba da rukuje stanjem
 procesa (to rade drugi delovi).
    ```cpp
    int handlePageFault (PCB* pcb, size_t page);
@@ -93,7 +93,7 @@ Uređaj je blokovski, što znači da jedna ulazna operacija uvek prenosi jedan b
 najniži bit je bit *Start* kojim se pokreće prenos. Za svaki nov prenos jednog bloka potrebno je
 upisati 1 u bit *Start*, a na kraju prenosa bloka u taj bit upisati 0. U statusnom registru najniži
 bit je bit *Ready* koji signalizira spremnost jedne reči u registru za podatke, a bit do njega bit
-greške (*Error*).  Svi registri su veličine jedne mašinske reči (tip `unsigned int`). U slučaju
+greške (*Error*). Svi registri su veličine jedne mašinske reči (tip `unsigned int`). U slučaju
 greške u prenosu, uređaj generiše isti prekid kao i u slučaju spremnosti za prenos novog
 podatka.
 
@@ -106,16 +106,16 @@ struct IORequest {
   IORequest* next; // Next in the list
 };
 ```
-Na prvi zahtev u listi pokazuje globali pokazivač `ioHead`.  Kada u praznu listu kernel stavi
+Na prvi zahtev u listi pokazuje globali pokazivač `ioHead`. Kada u praznu listu kernel stavi
 prvi zahtev, pozvaće operaciju `transfer()` koja treba da pokrene prenos za taj prvi zahtev.
 Kada se završi prenos bloka zadat jednim zahtevom, potrebno je u polje `status` date strukture
-preneti status završene operacije (0 – ispravno završeno do kraja, -1 – greška),  izbaciti
+preneti status završene operacije (0 – ispravno završeno do kraja, -1 – greška), izbaciti
 obrađeni zahtev iz liste i pokrenuti prenos za sledeći zapis u listi. Ako zahteva u listi više
 nema, ne treba uraditi više ništa (kada bude stavljao novi zahtev u listu, kernel će proveriti i
 videti da je ona bila prazna, pa pozvati ponovo operaciju `transfer()` itd.)
 
-Potrebno je napisati kod operacije `transfer()`,  zajedno sa odgovarajućom prekidnom
-rutinom `ioInterrupt()` za prekid od uređaja,  pri čemu prenos treba vršiti tehnikom
+Potrebno je napisati kod operacije `transfer()`, zajedno sa odgovarajućom prekidnom
+rutinom `ioInterrupt()` za prekid od uređaja, pri čemu prenos treba vršiti tehnikom
 programiranog ulaza-izlaza uz korišćenje prekida.
 ```cpp
 void transfer ();
@@ -160,7 +160,7 @@ S\_IXOTH & 0x0001 & others have execute permission \\
 \end{center}
 
 U nekom programu koristi se u uređeno binarno stablo sa čvorom tipa strukture `Node` sa celim
-brojevima kao sadržajem čvora (polje `contents` tipa `int`),  tako da su u levom podstablu
+brojevima kao sadržajem čvora (polje `contents` tipa `int`), tako da su u levom podstablu
 (polje `left` tipa `Node*`) svakog čvora brojevi koji su manji, a u desnom (polje `right`) oni koji
 su veći ili jednaki od sadržaja datog čvora. Implementirati funkciju koja u fajl sa datim
 imenom upisuje niz celih brojeva iz ovakvog stabla sa datim korenom, uređen neopadajuće

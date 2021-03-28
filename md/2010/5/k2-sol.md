@@ -47,13 +47,13 @@ end;
 --------------------------------------------------------------------------------
 overlay
 1. Ne. Kada se iz pozivajućeg potprograma pozove onaj drugi, na isto mesto modula kome
-pripada pozivajući potprogram se učitava modul u kome je pozvani potprogram.  Kada se vrši
-povratak iz tog pozvanog potprograma,  ukoliko prevodilac generiše samo kod za jednostavni
+pripada pozivajući potprogram se učitava modul u kome je pozvani potprogram. Kada se vrši
+povratak iz tog pozvanog potprograma, ukoliko prevodilac generiše samo kod za jednostavni
 indirektni skok preko adrese skinute sa steka, skok će biti na adresu unutar istog modula, a ne na
 kod unutar pozivajućeg potprograma, jer je on u modulu koji je izbačen, što nije korekno.
 Prema tome, potprogrami koji su u relaciji pozivalac-pozvani se mogu nalaziti ili u istom modulu,
 ili u dva modula koji se ne preklapaju (ne učitavaju na isto mesto jedan preko drugog).
-2. Obe konfiguracije su korektne,  pošto je za sve grane zadovoljen uslov iz zaključka
+2. Obe konfiguracije su korektne, pošto je za sve grane zadovoljen uslov iz zaključka
 prethodne tačke.
 
 --------------------------------------------------------------------------------

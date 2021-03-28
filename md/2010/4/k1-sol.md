@@ -98,7 +98,7 @@ sys_call: load r0, [runningUserProcess]
 --------------------------------------------------------------------------------
 concurrency
 
-1. Svaka nit napreduje kroz hodnike lavirinta i u svakom koraku,  na datom polju u
+1. Svaka nit napreduje kroz hodnike lavirinta i u svakom koraku, na datom polju u
 kvadratnom koordinatnom sistemu, radi sledeće. Najpre pogleda da li je pronašla izlaz i ako
 jeste, ispisuje to i završava se. Zatim od lavirinta dobije najviše tri susedna slobodna polja u
 koja može da pređe (osim onoga iz koga je stigla). Ako ni jedno od takvih ne postoji, ta nit je

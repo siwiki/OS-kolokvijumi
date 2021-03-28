@@ -57,7 +57,7 @@ dispatch: ; Save the current context
   ; Return
   iret
 ```
-2.  Ne treba.  Ova prekidna rutina pristupa samo registrima procesora,  strukturi PCB
+2. Ne treba. Ova prekidna rutina pristupa samo registrima procesora, strukturi PCB
 tekućeg procesa i njegovom sistemskom steku. Kako su sve tri stvari korišćene isključivo od
 strane tog procesora (jer je taj proces raspoređen samo tom procesoru), nema potrebe za
 međusobnim isključenjem.

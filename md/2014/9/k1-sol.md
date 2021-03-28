@@ -41,7 +41,7 @@ segpage
 interrupt
 1. 
 ```asm
-dispatch:  ; Save the current context
+dispatch: ; Save the current context
             LOAD Rx,Rp   ; Rx:=# of current processor
             SHL Rx,2    ; Rx:=Rx*4
             LOAD Rx,#runningProcesses[Rx]; Rx:=&running process' PCB
@@ -64,7 +64,7 @@ dispatch:  ; Save the current context
             RTS                 ; return from subroutine
 ```
 2. Nije potrebno, jer svaki procesor jedini pristupa samo svom odgovarajućem elementu `n`
-niza `runningProcesses`,  pa nema potencijalnog konflikta između procesora (nema deljenih
+niza `runningProcesses`, pa nema potencijalnog konflikta između procesora (nema deljenih
 podataka u memoriji kojima pristupaju različiti procesori u ovoj operaciji).
 
 --------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ concurrency
 ```cpp
 class Search : public Thread {
 public:
-  Search (int a[], int i, int j, int x) : array(a), ii(i), jj(j), xx(x)  {}
+  Search (int a[], int i, int j, int x) : array(a), ii(i), jj(j), xx(x) {}
 protected:
   virtual void run () { find(ii,jj); }
   void find (int i, int j);

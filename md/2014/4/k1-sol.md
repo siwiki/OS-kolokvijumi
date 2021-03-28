@@ -74,7 +74,7 @@ C02AB & D672AB \\
 --------------------------------------------------------------------------------
 interrupt
 ```asm
-yield:  ; Save current context
+yield: ; Save current context
         load base,#cur[sp]
         add base,base,#offsContext
         saveregs

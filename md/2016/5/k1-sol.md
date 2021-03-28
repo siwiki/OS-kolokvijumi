@@ -38,7 +38,7 @@ interrupt void ioInterrupt () {
 
 --------------------------------------------------------------------------------
 concurrency
-U klasu `Thread`  dodati su sledeći privatni,  nestatički podaci-članovi sa datim inicijalnim vrednostima:
+U klasu `Thread`  dodati su sledeći privatni, nestatički podaci-članovi sa datim inicijalnim vrednostima:
 ```cpp
 Thread* Thread::parent = 0;
 bool Thread::isWaitingForChildren = false;

@@ -92,7 +92,7 @@ sys_call: ; Save r0 and r1 on the (kernel) stack
           push r1
           load sp,#offsSP[r0] ; restore sp
           load r31,#offsR31[r0] ; restore r31
-          ...  ; restore other regs
+          ... ; restore other regs
           load r1,#offsR1[r0]
           load r0,#offsR0[r0] ; restore r0
           ; and return

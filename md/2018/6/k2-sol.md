@@ -30,7 +30,7 @@ BoundedBuffer::BoundedBuffer () :
   spaceAvailable1(N), itemAvailable1(0),
   head1(0), tail1(0),
   spaceAvailable2(N), itemAvailable2(0),
-  head2(0), tail2(0)  {}
+  head2(0), tail2(0) {}
 
 void BoundedBuffer::put1 (int d) {
   spaceAvailable1.wait();

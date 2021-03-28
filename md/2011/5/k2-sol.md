@@ -137,7 +137,7 @@ C00h & 70h & 100-0 & Input Buffer Region \\
 
 *Proces Child:* Sve isto.
 
-Napomena:  Primetiti da se u opisanom sistemu bit Copy-On-Write (u daljem tekstu CoW)
+Napomena: Primetiti da se u opisanom sistemu bit Copy-On-Write (u daljem tekstu CoW)
 odnosi na čitav set stranica. Zbog toga ovaj bit nije dovoljan da bi se odredilo da li pri upisu u
 neku stranicu iz seta, tu stranicu treba kopirati. Stranice koje pri upisu stvarno treba kopirati
 su one koje pripadaju regionu za koji je postavljen bit CoW i kojima je u trnutku upisa bitom

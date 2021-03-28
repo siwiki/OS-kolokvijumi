@@ -19,7 +19,7 @@ Byte* getDiskBlock (BlkNo blk) {
 
 --------------------------------------------------------------------------------
 fsintr
-Na standardni izlaz ispisuje sadržaj tekućeg direktorijuma,  tačnije, nazive ulaza u tekućem direktorijumu (po jedan u redu).
+Na standardni izlaz ispisuje sadržaj tekućeg direktorijuma, tačnije, nazive ulaza u tekućem direktorijumu (po jedan u redu).
 
 --------------------------------------------------------------------------------
 fsimpl

@@ -48,7 +48,7 @@ VA: Segment(2):Page(6):Offset(8); PA: Frame(24):Offset(8).
 --------------------------------------------------------------------------------
 interrupt
 Kada se pri obradi prekida kontekst procesora prepisuje u memoriju, bitno
-je da u registru SPX bude adresa polja *context* iz PCB-a tekuće niti koja gubi procesor.  Isto
+je da u registru SPX bude adresa polja *context* iz PCB-a tekuće niti koja gubi procesor. Isto
 važi pri svakoj promeni konteksta, pa i pri napuštanju kernel niti. Vrednost samog SPX se ne
 mora čuvati, jer se jednostavno restaurira dodavanjem pomeraja polja *context* na vrednost
 adrese PCB-a. Dakle, jedino što je prilikom promene konteksta potrebno uraditi jeste postaviti
@@ -61,8 +61,8 @@ sys_call: load spx, [runningKernelThread]
 ```
 
 Povratak iz rutine će restaurirati kontekst kernel niti iz strukture context PCB-a niti koja je
-dobila procesor,  jer na tu strukturu tada ukazuje SPX. Potpuno analogno izgleda i rutina
-kojom se kontrola iz kernel niti predaje korisničkoj niti,  samo što je umesto
+dobila procesor, jer na tu strukturu tada ukazuje SPX. Potpuno analogno izgleda i rutina
+kojom se kontrola iz kernel niti predaje korisničkoj niti, samo što je umesto
 `runningKernelThread` upotrebljen `runningUserProcess`.
 
 --------------------------------------------------------------------------------
