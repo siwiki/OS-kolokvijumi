@@ -1,6 +1,6 @@
 2019/jun/SI, IR Kolokvijum 3 - Jun 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 U klasi `BlockIOCache` potreban je još sledeći nestatički podatak član:
 ```cpp
 int BlockIOCache::toReplace = 0;
@@ -30,7 +30,7 @@ void BlockIOCache::read(BlkNo blk, byte* buffer, size_t offset, size_t sz)
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 #include <cstdio>
 using namespace std;
@@ -54,7 +54,7 @@ int binary_search (const char* filename, unsigned n, int x) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 Za dati slučaj, program pristupa elementima niza sa sledećim indeksima ($ni:=2ni+2$):
 
 0, 2, 6, 14, 30, 62, 126, 254, 510, 1022, 2046, 4094.

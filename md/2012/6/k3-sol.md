@@ -1,6 +1,6 @@
 2012/jun/SI, IR Kolokvijum 3 - Jun 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 Byte* getDiskBlock (BlkNo blk) {
   // Search for the requested block in the cache and return it if found:
@@ -23,12 +23,12 @@ Byte* getDiskBlock (BlkNo blk) {
 }
 ```
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 
 Neuspešna je operacija 2), ostale su uspešne.
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 
 1. 1001 
 

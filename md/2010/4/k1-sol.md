@@ -106,10 +106,10 @@ interrupt
 
 ```asm
 sys_call: load r0, [runningUserProcess]
-store sp, offsSP[r0]
-load r0, [runningKernelThread]
-load sp, offsSP[r0]
-iret
+          store sp, offsSP[r0]
+          load r0, [runningKernelThread]
+          load sp, offsSP[r0]
+          iret
 ```
 
 --------------------------------------------------------------------------------

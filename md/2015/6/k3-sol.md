@@ -1,6 +1,6 @@
 2015/jun/SI, IR Kolokvijum 3 - Jun 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 int readBlock(int diskNo, BlkNo block, Byte* buffer) {
   if (diskNo<0 || diskNo>=MaxNumOfDisks) return -1; // Error
@@ -26,7 +26,7 @@ int registerDriver(int diskNo, DiskOperation read, DiskOperation write) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 int lock(FCB* f, unsigned int op) {
   if (f==0) return -1; // Exception!
@@ -39,7 +39,7 @@ int lock(FCB* f, unsigned int op) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 1. 
 ```cpp
 void blockToBit(unsigned long blkNo, unsigned long& bt, byte& mask) {

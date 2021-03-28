@@ -1,6 +1,6 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 3 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+concurrency
 ```cpp
 class DoubleBuffer {
 public:
@@ -55,14 +55,14 @@ char DoubleBuffer::get () {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 1. `open(”./test.txt”, O_CREAT|O_RDWR, S_IRUSR|S_IWUSR|S_IRGRP);`
 2. Neće. Taj korisnik (u čije ime se izvršava drugi proces) je pripadnik „ostalih“, pošto nije
 ni vlasnik fajla niti pripadnik iste grupe, pa nema nikakva prava nad fajlom, a traži otvaranje
 tog (sada postojećeg) fajla sa mogućnošću čitanja i upisa.
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 1. 1401
 2. 2503
 3. Jedan indeksni blok sadrži najviše 512B:4B = 128 ulaza. Maksimalna veličina fajla je: $2 \cdot 512$B + $4 \cdot 128 \cdot 512$B = 257KB.

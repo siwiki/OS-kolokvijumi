@@ -115,7 +115,7 @@ void DoubleBuffer::get (char* buf) {
 ```
 
 --------------------------------------------------------------------------------
-ipc
+fsintr
 ```cpp
 const char* fname = "../buffer.bin";
 const unsigned int SLEEP_TIME = 5;

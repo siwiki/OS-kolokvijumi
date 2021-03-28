@@ -1,6 +1,6 @@
 2015/septembar/SI, IR Kolokvijum 3 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 void putchar (IOHandle handle, char c) {
  static char buffer[BlockSize];
@@ -14,7 +14,7 @@ void putchar (IOHandle handle, char c) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 int append (int fhandle, byte* buffer, unsigned long sz) {
   int ret = 0;
@@ -32,7 +32,7 @@ int append (int fhandle, byte* buffer, unsigned long sz) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 unsigned extendFile (FCB* fcb, unsigned by) {
   if (fcb==0) return 0; // Exception

@@ -2,12 +2,9 @@
 --------------------------------------------------------------------------------
 os
 
-1. Netačno. 
-
-2. Tačno. 
-
-3. Tačno. 
-
+1. Netačno.
+2. Tačno.
+3. Tačno.
 4. Netačno.
 
 --------------------------------------------------------------------------------
@@ -33,7 +30,7 @@ page
 \hline
 Virtuelna adresa & FFC2673 & D385A & FF7FB32 & FFFA8C4 & 10012EB8 \\
 \hline
-Rezultat adresiranja & PF & 3FC1385A & NAV & PF & 512EB8  \\
+Rezultat adresiranja & PF & 3FC1385A & MAV & PF & 512EB8  \\
 \hline
 \end{tabular}
 \end{center}

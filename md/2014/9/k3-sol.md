@@ -1,6 +1,6 @@
 2014/septembar - nadoknade/SI, IR Kolokvijum 3 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 char getchar () {
  static char buffer[BlockSize];
@@ -14,7 +14,7 @@ char getchar () {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 class File {
 public:
@@ -51,7 +51,7 @@ void File::write (byte* b, unsigned long sz) throw Exception {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 PBlock getFilePBlockNo (FCB* fcb, unsigned long bt) {
   if (fcb==0) return -1; // Exception

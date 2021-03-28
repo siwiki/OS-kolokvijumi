@@ -32,9 +32,10 @@ interrupt void timerInterrupt () {
 
 --------------------------------------------------------------------------------
 segpage
-1. VA: Segment(8):Page(16):Offset(8); PA: Frame(20):Offset(8).
+1. VA: Segment(8):Page(16):Offset(8)
+
+   PA: Frame(20):Offset(8).
 2. FF00DDh
-3. (10 poena) a)(7)
 
 --------------------------------------------------------------------------------
 interrupt
@@ -62,9 +63,8 @@ dispatch:  ; Save the current context
             LOAD SP,#offs_sp[Rx]   ; restore SP
             RTS                 ; return from subroutine
 ```
-2. Nije potrebno, jer svaki procesor jedini pristupa samo svom odgovaraju
-ćem elementu n
-niza runningProcesses,  pa nema potencijalnog konflikta između procesora (nema deljenih
+2. Nije potrebno, jer svaki procesor jedini pristupa samo svom odgovarajućem elementu `n`
+niza `runningProcesses`,  pa nema potencijalnog konflikta između procesora (nema deljenih
 podataka u memoriji kojima pristupaju različiti procesori u ovoj operaciji).
 
 --------------------------------------------------------------------------------

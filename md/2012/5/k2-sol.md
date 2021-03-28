@@ -1,19 +1,28 @@
 2012/maj/SI, IR Kolokvijum 2 - Maj 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
 concurrency
-```
+```ada
 shared var
   a, b : integer := 0;
   sa, sb : boolean := 0;
 
-process a;                        process b;
-begin                               begin
-  loop                                loop
-    compute_a(b);                       while (sa==0) do null; sa:=0;
-    sa:=1;                              compute_b(a);
-    while (sb==0) do null; sb:=0;       sb:=1;
-  end;                                end;
-end;                                end;
+process a;
+begin
+  loop
+    compute_a(b);
+    sa:=1;
+    while (sb==0) do null; sb:=0;
+  end;
+end;
+
+process b;
+begin
+  loop
+    while (sa==0) do null; sa:=0;
+    compute_b(a);
+    sb:=1;
+  end;
+end;
 ```
 --------------------------------------------------------------------------------
 concurrency

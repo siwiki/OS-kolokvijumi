@@ -28,27 +28,19 @@ void Semaphore::signal () {
   unlock();
 }
 ```
+Pomoćne operacije `block()` i `unblock()` više nisu potrebne (izbacuju se). Ostatak definicije klase `Semaphore` ostaje isti.
 
-Pomoćne operacije `block()` i `unblock()` više nisu potrebne (izbacuju se). Ostatak definicije klase
-Semaphore ostaje isti.
 --------------------------------------------------------------------------------
 concurrency
 
-Ili proizvoljno mnogo procesa tipa A u svojim kritičnim sekcijama i ni jedan
-proces tipa B u svojoj, ili samo jedan proces tipa B i ni jedan proces tipa A.
-Semafor
-`mutex` služi da obezbedi međusobno isključenje pristupa deljenoj promeljivoj count od
-strane uporednih procesa tipa A. Promenjliva count je brojač procesa tipa A koji su ušli u svoju
-kritičnu sekciju. Kada prvi ovakav proces ulazi u svoju kritičnu sekciju, izvršiće wait na semaforu
-gate i ili proći taj semafor (i zatvoriti ga), ili se blokirati na njemu. U prvom slučaju, svi naredni
-procesi tipa A slobodno ulaze u svoju kritičnu sekciju. U drugom slučaju, svi naredni procesi tipa A
-koji žele da uđu u svoju kritičnu sekciju će se blokirati na semaforu
-`mutex`. Poslednji proces tipa A
-koji izlazi iz svoje kritične sekcije izvršiće
-signal na semaforu gate. Kako samo jedan proces
-može proći operaciju wait na semaforu gate bez blokiranja, to znači da će ili prvi proces tipa A ili
-samo jedan proces tipa B to moći da uradi i tako uđe u svoju kritičnu sekciju. Odatle sledi dati
-odgovor.
+Ili proizvoljno mnogo procesa tipa *A* u svojim kritičnim sekcijama i ni jedan
+proces tipa *B* u svojoj, ili samo jedan proces tipa *B* i ni jedan proces tipa *A*.
+Semafor `mutex` služi da obezbedi međusobno isključenje pristupa deljenoj promeljivoj `count` od
+strane uporednih procesa tipa *A*. Promenjliva `count` je brojač procesa tipa *A* koji su ušli u svoju
+kritičnu sekciju. Kada prvi ovakav proces ulazi u svoju kritičnu sekciju, izvršiće `wait` na semaforu
+`gate` i ili proći taj semafor (i zatvoriti ga), ili se blokirati na njemu. U prvom slučaju, svi naredni
+procesi tipa *A* slobodno ulaze u svoju kritičnu sekciju. U drugom slučaju, svi naredni procesi tipa *A*
+koji žele da uđu u svoju kritičnu sekciju će se blokirati na semaforu `mutex`. Poslednji proces tipa *A* koji izlazi iz svoje kritične sekcije izvršiće `signal` na semaforu `gate`. Kako samo jedan proces može proći operaciju `wait` na semaforu `gate` bez blokiranja, to znači da će ili prvi proces tipa *A* ili samo jedan proces tipa *B* to moći da uradi i tako uđe u svoju kritičnu sekciju. Odatle sledi dati odgovor.
 
 --------------------------------------------------------------------------------
 dynload

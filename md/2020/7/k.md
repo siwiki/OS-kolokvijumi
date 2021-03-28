@@ -89,7 +89,7 @@ private:
 ```
 
 --------------------------------------------------------------------------------
-ipc
+fsintr
 Dva procesa, pošiljalac i primalac, komuniciraju slanjem, odnosno prijemom „poruke“ preko
 fajla kao deljenog objekta. Kada pripremi poruku određene veličine u svom baferu, pošiljalac
 kreira fajl sa nazivom „*buffer.bin*“ u roditeljskom direktorijumu svog tekućeg direktorijuma,

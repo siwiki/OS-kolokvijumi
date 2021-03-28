@@ -72,7 +72,7 @@ interrupt void dmaInterrupt () {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 size_t getPBlock (FCB* fcb, size_t bt) {
   if (bt>=fcb->size) return 0;

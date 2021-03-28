@@ -52,51 +52,51 @@ interrupt
 
 ```asm
 sys_call: ; Save r0 and r1 on the (kernel) stack
-push r0
-push r1
-load r0, [running] ; the old running is in r0
+          push r0
+          push r1
+          load r0, [running] ; the old running is in r0
 
-; Perform the system call:
-call sys_call_proc
+          ; Perform the system call:
+          call sys_call_proc
 
-; Compare the old and the new running,
-load r1, [running] ; the new running is in r1
-cmp r0, r1
-jne switch
+          ; Compare the old and the new running,
+          load r1, [running] ; the new running is in r1
+          cmp r0, r1
+          jne switch
 
-; and do not switch the context if they are equal,
-; but restore r0 and r1, and return
-pop r1
-pop r0
-iret
-switch: ; Save the context of the old running
-store r2,#offsR2[r0] ; save other regs
-store r3,#offsR3[r0]
-...
-store r31,#offsR31[r0]
-store sp,#offsSP[r0] ; save sp
-pop r1 ; save r1 through r1
-store r1,#offsR1[r0]
-pop r1 ; save r0 through r1
-store r1,#offsR0[r0]
-pop r1 ; save psw through r1
-store r1,#offsPSW[r0]
-pop r1 ; save pc through r1
-store r1,#offsPC[r0]
+          ; and do not switch the context if they are equal,
+          ; but restore r0 and r1, and return
+          pop r1
+          pop r0
+          iret
+          switch: ; Save the context of the old running
+          store r2,#offsR2[r0] ; save other regs
+          store r3,#offsR3[r0]
+          ...
+          store r31,#offsR31[r0]
+          store sp,#offsSP[r0] ; save sp
+          pop r1 ; save r1 through r1
+          store r1,#offsR1[r0]
+          pop r1 ; save r0 through r1
+          store r1,#offsR0[r0]
+          pop r1 ; save psw through r1
+          store r1,#offsPSW[r0]
+          pop r1 ; save pc through r1
+          store r1,#offsPC[r0]
 
-; Restore the context of the new running
-load r0,[running]
-load r1, #offsPC[r0] ; restore pc through the stack
-push r1
-load r1, #offsPSW[r0] ; restore psw through the stack
-push r1
-load sp,#offsSP[r0] ; restore sp
-load r31,#offsR31[r0] ; restore r31
-...  ; restore other regs
-load r1,#offsR1[r0]
-load r0,#offsR0[r0] ; restore r0
-; and return
-iret
+          ; Restore the context of the new running
+          load r0,[running]
+          load r1, #offsPC[r0] ; restore pc through the stack
+          push r1
+          load r1, #offsPSW[r0] ; restore psw through the stack
+          push r1
+          load sp,#offsSP[r0] ; restore sp
+          load r31,#offsR31[r0] ; restore r31
+          ...  ; restore other regs
+          load r1,#offsR1[r0]
+          load r0,#offsR0[r0] ; restore r0
+          ; and return
+          iret
 ```
 
 --------------------------------------------------------------------------------

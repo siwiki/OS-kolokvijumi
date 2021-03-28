@@ -1,6 +1,6 @@
 2013/jun/SI, IR Kolokvijum 3 - Jun 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 Byte* getDiskBlock (BlkNo blk) {
   // Find the requested block in the cache and return it if present:
@@ -18,11 +18,11 @@ Byte* getDiskBlock (BlkNo blk) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 Na standardni izlaz ispisuje sadržaj tekućeg direktorijuma,  tačnije, nazive ulaza u tekućem direktorijumu (po jedan u redu).
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 int fread (FCB* f, Byte* buf, int n) {
   if (f==0) return 0;

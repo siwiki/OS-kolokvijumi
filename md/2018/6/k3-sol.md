@@ -1,6 +1,6 @@
 2018/jun/SI, IR Kolokvijum 3 - Jun 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 
 ```cpp
 void readBlock (char* addr) {
@@ -10,7 +10,7 @@ void readBlock (char* addr) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 #include <unistd.h>
 #include <fctl.h>
@@ -54,7 +54,7 @@ int fcopy (const char *filenamefrom, const char *filenameto) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 
 ```cpp
 unsigned long extend (FCB* fcb, unsigned extension) {

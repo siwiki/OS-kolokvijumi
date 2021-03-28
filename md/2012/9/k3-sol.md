@@ -1,6 +1,6 @@
 2012/septembar/SI, IR Kolokvijum 3 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+concurrency
 ```cpp
 class DoubleBuffer {
 public:
@@ -66,7 +66,7 @@ cmd
   ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 
 ```cpp
 Byte* getFileBlock (FCB* file, unsigned int block) {

@@ -1,6 +1,6 @@
 2011/jun/SI, IR Kolokvijum 3 - Jun 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+concurrency
 ```cpp
 class Data;
 
@@ -53,7 +53,7 @@ Data* DoubleBuffer::get () {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 void check_access (PCB* p, FHANDLE f, int write) {
   return p->open_files[FHANDLE].access || !write;
@@ -61,7 +61,7 @@ void check_access (PCB* p, FHANDLE f, int write) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 int check_consistency (FCB* file) {
   if (file==0) return 0;

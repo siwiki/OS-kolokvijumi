@@ -39,7 +39,7 @@ void Buffer::read (Byte block[]) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 Node* Node::getNode (PCB* pcb, const char* path) {
   static const char delimiter = '/';
@@ -63,7 +63,7 @@ Node* Node::getNode (PCB* pcb, const char* path) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 unsigned long append (FCB* fcb) {
   if (fcb==0 || freeHead==0) return 0;

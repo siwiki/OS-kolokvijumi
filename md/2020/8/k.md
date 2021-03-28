@@ -12,7 +12,7 @@ jedinstvena „vremenska marka“ (ceo broj dostupan u atributu `Thread::timesta
 starije niti imaju manju vrednost ove marke. Kada nit *Ta* zahteva resurs koji drži zauzeta nit
 Tb, onda:
 
-- Ako je *Ta* starija nego Tb (*Ta*<*Tb*),  nit *Ta* čeka suspendovana dok ne dobije resurs i tada operacija `acquire` vraća 1 (istu vrednost ova operacija vraća i kada je resurs slobodan, onda ga nit odmah dobija);
+- Ako je *Ta* starija nego *Tb* (*Ta*<*Tb*),  nit *Ta* čeka suspendovana dok ne dobije resurs i tada operacija `acquire` vraća 1 (istu vrednost ova operacija vraća i kada je resurs slobodan, onda ga nit odmah dobija);
 - Ako je *Ta* mlađa nego *Tb* (*Ta*>*Tb*), niti Ta se odbija zahtev tako što operacija `acquire` vraća 0, a nit onda tu situaciju obrađuje na odgovarajući način (pokušava ponovo ili odustaje).
 
 Implementirati u potpunosti klasu `Resource`.

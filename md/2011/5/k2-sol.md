@@ -143,7 +143,7 @@ neku stranicu iz seta, tu stranicu treba kopirati. Stranice koje pri upisu stvar
 su one koje pripadaju regionu za koji je postavljen bit CoW i kojima je u trnutku upisa bitom
 W u PMT zabranjen upis. Kada jednom dođe do upisa i samim tim i do kopiranja stranice, za
 novu kopiju se setuje bit W u PMT i pri kasnijim upisima u tu stranicu ne treba vršiti
-kopiranje te stranice bez obzira što stranic a pripada regionu za koji je setovan CoW bit. Stoga
+kopiranje te stranice bez obzira što stranica pripada regionu za koji je setovan CoW bit. Stoga
 bi se sistem mogao implementirati tako da se u CoW bit jednom upiše vrednost pri pokretanju
 procesa i više nikada ne menja. U takvoj varijanti, CoW bit bi čak bio suvišan jer bi uvek
 imao istu vrednost kao i W bit u VMStruct strukturi.

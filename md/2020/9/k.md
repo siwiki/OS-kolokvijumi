@@ -79,7 +79,7 @@ SegDesc* findSegDesc (SegDesc* root, size_t size);
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 Neki fajl sistem primenjuje kombinovanu tehniku indeksirane alokacije sadržaja fajla. U FCB
 fajla polje `singleIndex` predstavlja direktni indeks kao niz od `SingleIndexSize`
 elemenata, pri čemu svaki element sadrži broj fizičkog bloka sa sadržajem fajla (ili 0, ako je

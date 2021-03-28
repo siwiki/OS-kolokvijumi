@@ -73,7 +73,7 @@ okvira, ovaj proces će generisati isto toliki broj (34) straničnih grešaka ko
 obrađene.
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 #define max(a,b) ((a)>=(b)?(a):(b))
 

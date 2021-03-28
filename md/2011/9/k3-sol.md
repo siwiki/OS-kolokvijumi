@@ -1,6 +1,6 @@
 2011/septembar/SI, IR Kolokvijum 3 - Septembar 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 class CharDevice {
 public:
@@ -42,7 +42,7 @@ void main () {
 }
 ```
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 class File {
 public:
@@ -83,7 +83,7 @@ int File::seek (unsigned int offset) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 void* f_getblk(FCB* file, BLKNO lb) {
   if (file==0) return 0; // Exception: null FCB

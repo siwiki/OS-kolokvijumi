@@ -3,11 +3,7 @@
 semaphore
 
 Prva varijanta zaključava semafor (kao deljeni resurs) maskiranjem prekida i uposlenim čekanjem
-(operacijom tipa *test and set*) nad jednom zajedničkom varijablom (`
-commonLock`) koja se koristi za
-sve semafore (instance klase Semaphore), dok druga varijanta radi to isto samo korišćenjem
-posebne varijable za svaki semafor (
-`myLock`). Prva varijanta ne dozvoljava ulaz u kod operacije nad
+(operacijom tipa *test and set*) nad jednom zajedničkom varijablom (`commonLock`) koja se koristi za sve semafore (instance klase `Semaphore`), dok druga varijanta radi to isto samo korišćenjem posebne varijable za svaki semafor (`myLock`). Prva varijanta ne dozvoljava ulaz u kod operacije nad
 semaforom nekom procesoru ako je bilo koji drugi procesor ušao u kod operacije nad bilo kojim
 drugim semaforom, dok su kod druge varijante moguća paralelna izvršavanja koda operacija nad
 različitim semaforima. Odatle slede zaključci:
@@ -18,7 +14,6 @@ suprotnom, ukoliko ovaj kod uzrokuje ovakve konflikte, npr. korišćenjem istog 
 spremnih procesa za različite procesore bez obezbeđenja međusobnog isključenja nad tom
 strukturom, onda je samo prva varijanta korektna (pod uslovom da ne pravi konflikte sa
 drugim uslugama operativnog sistema), a druge ne.
-
 - Druga varijanta omogućava znatno veći stepen paralelizma, jer ne zaustavlja napredovanje
 operacije nad jednim semaforom na jednom procesoru zbog toga što je drugi procesor ušao
 u operaciju nad drugim semaforom, kako to čini prva varijanta.

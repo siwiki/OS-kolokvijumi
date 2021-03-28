@@ -113,7 +113,7 @@ interrupt void dmaInterrupt ();
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 Da bi smanjio internu fragmentaciju, a povećao efikasnost, neki fajl sistem za alokaciju
 sadržaja fajla koristi klastere (*cluster*) različite veličine. Klaster uvek sadrži susedne blokove
 na disku (blokove sa susednim brojevima). Za sadržaj fajla pre njegovog kraja koriste se

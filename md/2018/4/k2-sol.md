@@ -1,6 +1,6 @@
 2018/april/SI, IR Kolokvijum 2 - April 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-syscall
+semaphore
 
 ```cpp
 #include <fcntl.h>
@@ -80,6 +80,7 @@ int proc_relocate (PCB* pcb) {
 page
 
 VA(64): Page1(25):Page2(25):Offset(14)
+
 PA(40): Frame(26):Offset(14)
 ```cpp
 const unsigned short pg1w = 25, pg2w = 25, offsw = 14;

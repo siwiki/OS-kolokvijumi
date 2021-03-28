@@ -65,7 +65,7 @@ SegDesc* findSegDesc (SegDesc* root, size_t size) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 void truncateFile (FCB* fcb) {
   for (size_t i=0; i<SingleIndexSize; i++)

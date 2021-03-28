@@ -1,6 +1,6 @@
 2016/septembar/SI, IR Kolokvijum 3 - Septembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 class IOStream {
 public:
@@ -49,7 +49,7 @@ int IOStream::getchar (char& c) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 #include <stdio.h>
 
@@ -76,7 +76,7 @@ int fcopyreverse (const char* filenamefrom, const char* filenameto) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 void* getFileBlock (FCB* fcb, ulong lBlockNo) {
   if (fcb==0) return 0; // Exception

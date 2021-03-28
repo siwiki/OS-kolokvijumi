@@ -32,9 +32,9 @@ iz korisničkog procesa, pri čemu se sistemski poziv realizuje softverskim prek
 
 --------------------------------------------------------------------------------
 semaphore
-Korišćenjem školskog jezgra i date klase `RowAdder`,  implementirati funkciju mat_add koja
-sabira elemente svake vrste matrice mat i rezultat tog sabiranja smešta u odgovoarajući
-element niza res, i to radi uporedo i tako da kontrolu vraća pozivaocu tek kada su uporedna
+Korišćenjem školskog jezgra i date klase `RowAdder`,  implementirati funkciju `mat_add` koja
+sabira elemente svake vrste matrice mat i rezultat tog sabiranja smešta u odgovarajući
+element niza `res`, i to radi uporedo i tako da kontrolu vraća pozivaocu tek kada su uporedna
 sabiranja svih vrsta matrice završena.
 
 ```cpp
@@ -107,7 +107,7 @@ pod sledećim pretpostavkama:
    adresira? Obrazložiti.
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 U implementaciji nekog fajl sistema evidencija slobodnih blokova na particiji vodi se pomoću
 bit-vektora koji se kešira u memoriji u nizu `blocks` veličine `NumOfBytes` (konstanta
 `NumOfBlocks` predstavlja broj blokova na particiji).  Svaki element ovog niza je veličine

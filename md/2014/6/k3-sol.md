@@ -1,6 +1,6 @@
 2014/jun/SI, IR Kolokvijum 3 - Jun 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 int readBlock(int diskNo, BlkNo block, Byte* buffer) {
   if (diskNo<0 || diskNo>=MaxNumOfDisks) return -1; // Error
@@ -16,7 +16,7 @@ int writeBlock(int diskNo, BlkNo block, Byte* buffer) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsintr
 ```cpp
 int isAllowed(FCB* f, unsigned long int uid, unsigned int op) {
   if (f==0) return 0; // Exception!
@@ -34,7 +34,7 @@ int isAllowed(FCB* f, unsigned long int uid, unsigned int op) {
 ```
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 BlockNo getFreeBlock () {
   static const int numOfEntries = blockSize/sizeof(BlockNo);

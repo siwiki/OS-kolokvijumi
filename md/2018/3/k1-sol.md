@@ -40,28 +40,28 @@ interrupt
 
 ```asm
 dispatch: ; Save the current context
-push r0 ; save regs
-push r1
-...
-push r31
-load r0, running
-store sp, #savedSP[r0] ; save sp
+          push r0 ; save regs
+          push r1
+          ...
+          push r31
+          load r0, running
+          store sp, #savedSP[r0] ; save sp
 
-; Select the next running process
-call scheduler
+          ; Select the next running process
+          call scheduler
 
-; Restore the new context
-load r0, running
-load r1, #timeSlice[r0]; restart timer
-store r1, [Timer]
-load sp, #savedSP[r0] ; restore sp
-pop r31
-pop r30 ; restore regs
-...
-pop r0
+          ; Restore the new context
+          load r0, running
+          load r1, #timeSlice[r0]; restart timer
+          store r1, [Timer]
+          load sp, #savedSP[r0] ; restore sp
+          pop r31
+          pop r30 ; restore regs
+          ...
+          pop r0
 
-; Return
-iret
+          ; Return
+          iret
 ```
 
 ```cpp

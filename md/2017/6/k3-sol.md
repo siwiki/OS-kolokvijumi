@@ -1,6 +1,6 @@
 2017/jun/k3_resenja_2017.pdf
 --------------------------------------------------------------------------------
-io
+ioblock
 ```cpp
 Byte* BlockIOCache::getBlock (BlkNo blk) {
   // Find the requested block in the cache and return it if present:
@@ -40,7 +40,7 @@ cmd
 2. txt
 
 --------------------------------------------------------------------------------
-filesystem
+fsimpl
 ```cpp
 void truncate (FCB* fcb) {
   if (fcb==0) return;

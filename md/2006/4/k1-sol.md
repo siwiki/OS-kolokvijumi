@@ -1,18 +1,15 @@
 2006/april/resenja.doc
 --------------------------------------------------------------------------------
-io
+os
 
 1.  NE - Objašnjenje: kod multiprogramskog okruženja POJEDINAČNI posao će trajati
 duže zbog konkurentnog izvršavanja i režijskih operacija koje se događaju u toku
 izvršenja posla.
-
 2. DA - Objašnjenje: Dok jedan posao čeka na I/O, drugi se izvršava, tj. koristi processor,
 tako da se iskorišćenje procesora povećava.
-
 3. DA - Objašnjenje: Pošto se poslovi izvrsavaju u paraleli (dok jedan ceka na I/O, a
 drugi se izvrsava),  onda se ukupno vreme odziva skraćuje,  pa se samim tim broj
-završenih poslova u jedinici vremena (throughput) povećava.
-
+završenih poslova u jedinici vremena (*throughput*) povećava.
 4. NE - Objašnjenje: Jedino reijsko vreme kod paketnog OSa je dovlačenje posla u radnu
 memoriju, dok kod multiprogramskog OSa postoje režijske operacije i prilikom svake
 zamene poslova.
@@ -22,15 +19,15 @@ io
 
 Operativni sistem treba da nudi uslugu da neki proces može da se uspava i da se
 probuti posle tačno odredjenog vremena (ili malo kasnije od tog vremena).   Npr
-operativni sistem treba da obezbedi primitivu void sleep(int time),  koja
+operativni sistem treba da obezbedi primitivu `void sleep(int time)`,  koja
 obezbedjuje da se proces uspava time milisekunti (odnosno stavi u red uspavanih, engl.
-Sleep), a da se posle toga može probuditi (odnosno proces vrati u red spremnih, engl.
-Ready). Proces za obradu ulazno/izlazne operacije treba da radi sledeće:
+*Sleep*), a da se posle toga može probuditi (odnosno proces vrati u red spremnih, engl.
+*Ready*). Proces za obradu ulazno/izlazne operacije treba da radi sledeće:
 
 ```cpp
  const int maxTime = ...; // response time (worst case)
 
- While (!end){
+ while (!end){
   initialize_IO_operation();
   sleep(maxTime);
   process_IO_result();
@@ -40,8 +37,8 @@ Ready). Proces za obradu ulazno/izlazne operacije treba da radi sledeće:
 --------------------------------------------------------------------------------
 segpage
 
-VA(16): seg(2), page(6), offset(8)
-PA(32): block(24), offset(8)
+- VA(16): seg(2), page(6), offset(8)
+- PA(32): block(24), offset(8)
 
 --------------------------------------------------------------------------------
 page
@@ -107,14 +104,13 @@ syscall
 U protected sekciju klase Thread potrebno je dodati sledeći metod:
 
 ```cpp
-Class Thread{
+class Thread{
    ...
-Protected:
- Static void starter(void*);
+protected:
+   static void starter(void*);
    ...
 }
 
-protected:
 void Thread::starter(void* toStart){
  Thread* t = (Thread*)toStart;
  if (t) t->run();

@@ -2,20 +2,30 @@
 --------------------------------------------------------------------------------
 semaphore
 
-```
+```ada
 shared var
   sa : Semaphore:=1,
   sb : Semaphore:=0;
 
-process A;                  process B;
-begin                         begin
-  loop                          loop
-    wait(sa);                     wait(sb);
-    <critical-section>            <critical-section>
-    signal(sb);                   signal(sa);
-    <non-critical-section>        <non-critical-section>
-  end;                          end;
-end;                           end;
+process A;
+begin
+  loop
+    wait(sa);
+    <critical-section>
+    signal(sb);
+    <non-critical-section>
+  end;
+end;
+
+process B;
+begin
+  loop
+    wait(sb);
+    <critical-section>
+    signal(sa);
+    <non-critical-section>
+  end;
+end;
 ```
 --------------------------------------------------------------------------------
 semaphore
