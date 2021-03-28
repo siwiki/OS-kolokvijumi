@@ -18,9 +18,10 @@ const CATEGORIES = {
     // Same as above?
     concurrency: 'Konkurentnost',
     io: 'Ulaz/izlaz',
+    ioblock: 'Ulaz/izlaz (blokovski uređaji)',
     cmd: 'Komandna linija',
-    ipc: 'Komunikacija između procesa',
-    filesystem: 'Fajl sistem',
+    fsintr: 'Fajl sistem (interfejs)',
+    fsimpl: 'Fajl sistem (implementacija)',
     os : 'Uvod u operativne sisteme'
 };
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
@@ -30,6 +31,7 @@ const TYPES = {
     k2: 'drugi kolokvijum',
     k3: 'treći kolokvijum'
 };
+const isWeb = !process.argv.includes('--print');
 
 async function processFile(year, month, type, categories) {
     const text = await readFile(`md/${year}/${month}/${type}.md`, {
@@ -68,13 +70,22 @@ async function getYears() {
     }
 }
 
+function formatUrls(url, solutionUrl) {
+    const urlRow = (url && isWeb) ?
+        `- [Postavka](${BASE_URL}${url})\n` :
+        '';
+    const solutionUrlRow = (solutionUrl && isWeb) ?
+        `- [Rešenje](${BASE_URL}${solutionUrl})\n` :
+        '';
+    return `${urlRow}${solutionUrlRow}`;
+}
+
 async function main() {
     const categories = {};
     for (const year of await getYears()) {
         for (const month of await readdir(`md/${year}`)) {
             for (const typeExt of await readdir(`md/${year}/${month}`)) {
-                
-                    await processFile(year, month, typeExt.split('.')[0], categories);
+                await processFile(year, month, typeExt.split('.')[0], categories);
             }
         }
     }
@@ -118,14 +129,18 @@ async function main() {
     const footer = await readFile('footer.md', {
         encoding: 'utf-8'
     });
-    await writeFile('combined.md', `${header}${Object.entries(categoriesConnected).map(
-        ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
-            ({url, content, year, month, type, task, solutionUrl}) =>
-                `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n- [Postavka](${BASE_URL}${url})\n- [Rešenje](${BASE_URL}${solutionUrl})\n\n${content}`
-        ).join('\n\n')}`
-    ).join('\n\n\\pagebreak\n')}${footer}`, {
-        encoding: 'utf-8'
-    });
+    await writeFile(
+        isWeb ? 'combined-web.md' : 'combined-print.md',
+        `${header}${Object.entries(categoriesConnected).map(
+            ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
+                ({url, content, year, month, type, task, solutionUrl}) =>
+                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${formatUrls(url, solutionUrl)}\n${content}`
+            ).join('\n\n')}`
+        ).join('\n\n\\pagebreak\n')}${footer}`,
+        {
+            encoding: 'utf-8'
+        }
+    );
 }
 
 main();

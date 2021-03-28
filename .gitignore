@@ -1,6 +1,5 @@
 doc
 pdf
 doc2pdf
-combined.md
-combined.pdf
+combined-*
 node_modules
