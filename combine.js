@@ -5,7 +5,7 @@ import {argv} from 'process';
 
 const BASE_URL = 'http://os.etf.bg.ac.rs/OS1/kolokvijumi/';
 const CATEGORIES = {
-    linker: 'Linker',
+    linker: 'Kompajler/linker',
     page: 'Stranična organizacija',
     cont: 'Kontinualna alokacija',
     segment: 'Segmentna organizacija',
@@ -130,9 +130,12 @@ async function main() {
     const footer = await readFile('footer.md', {
         encoding: 'utf-8'
     });
+    const categoryKeys = Object.keys(CATEGORIES);
     await writeFile(
         isWeb ? 'combined-web.md' : 'combined-print.md',
-        `${header}${Object.entries(categoriesConnected).map(
+        `${header}${Object.entries(categoriesConnected).sort(
+            ([category1], [category2]) => categoryKeys.indexOf(category1) - categoryKeys.indexOf(category2)
+        ).map(
             ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
                 ({url, content, year, month, type, task, solutionUrl}) =>
                     `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${formatUrls(url, solutionUrl)}\n${content}`
