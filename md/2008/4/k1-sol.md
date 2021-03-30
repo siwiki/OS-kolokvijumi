@@ -50,7 +50,7 @@ Zbog toga se u ovim procesima-potomcima, u svim narednim iteracijama glavne `for
 (po `i`), neće izvršiti `fork()` u naredbi `if1`, pa oni više neće kreirati svoje potomke.
 
 --------------------------------------------------------------------------------
-interrupt
+context
 
 ```cpp
 // Auxiliary list operations:

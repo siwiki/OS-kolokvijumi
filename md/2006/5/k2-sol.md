@@ -1,6 +1,6 @@
 2006/maj/SI Kolokvijum 2 - Maj 2006 - Resenja.doc
 --------------------------------------------------------------------------------
-interrupt
+context
 
 ```cpp
 // ExternalEvent.h
