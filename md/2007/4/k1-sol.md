@@ -31,12 +31,11 @@ page
 1. VA: Page(24) Offset(8)
 
    PA: Block(20) Offset(8)
-2. s
-```cpp
-void setPageDescr(unsigned int* pmtp, unsigned int page, unsigned int frame){
-    pmtp[page] = frame | ~((unsigned int)~0 / 2);
-}
-```
+2. ```cpp
+  void setPageDescr(unsigned int* pmtp, unsigned int page, unsigned int frame){
+      pmtp[page] = frame | ~((unsigned int)~0 / 2);
+  }
+   ```
 
 --------------------------------------------------------------------------------
 segpage
