@@ -137,7 +137,7 @@ veličina SMT $8\cdot64$B = 512B. Na ovaj način je SMT veća za 10%, ali su zat
 performanse drastično bolje.
 
 --------------------------------------------------------------------------------
-linker
+page
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|}

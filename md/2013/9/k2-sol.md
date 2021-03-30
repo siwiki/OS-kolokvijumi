@@ -43,7 +43,7 @@ void Event::signal () {
 ```
 
 --------------------------------------------------------------------------------
-dynload
+overlay
 ```cpp
 class DLArray {
 public:

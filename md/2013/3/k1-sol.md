@@ -43,7 +43,9 @@ interrupt void io1Interrupt() {
 
 --------------------------------------------------------------------------------
 segpage
-VA: Segment(2):Page(6):Offset(8); PA: Frame(24):Offset(8).
+VA(16): Segment(2):Page(6):Offset(8)
+
+PA(32): Frame(24):Offset(8)
 
 --------------------------------------------------------------------------------
 interrupt

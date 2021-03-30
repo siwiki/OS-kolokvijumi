@@ -39,7 +39,7 @@ void mem_compact () {
     to+=pcb->mem_size;
   }
   size_t free_mem = user_proc_mem_end–to+1;
-  if (free_mem>=sizeof(FreeSegment) {
+  if (free_mem>=sizeof(FreeSegment)) {
     mem_free_head = (FreeSegment*)to;
     mem_free_head->size = free_mem;
     mem_free_head->next = 0;

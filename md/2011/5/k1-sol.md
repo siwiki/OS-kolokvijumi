@@ -83,11 +83,11 @@ F & 0 & \\
 linker
 Problem je u tome što se povratak iz funkcije `setjmp()`, nakon skoka iz funkcije `longjmp()`,
 oslanja na sačuvanu vrednost povratne adrese originalnog pozivaoca funkcije `setjmp()`, kao i
-na sačuvanu vrednost `r1`. Međutim, nakon povratka iz „običnog“ poziva funkcije setjmp(), u
+na sačuvanu vrednost `r1`. Međutim, nakon povratka iz „običnog“ poziva funkcije `setjmp()`, u
 kontekstu pozivajuće funkcije može se pozvati neka druga funkcija ili dogoditi prekid, koji će
 onda prepisati te vrednosti povratne adrese i sačuvanog `r1` koje su ostale iznad vrha steka.
 
-Drugim rečima, prilikom povratka iz „običnog“  poziva funkcike `setjmp()`, povratna adresa
+Drugim rečima, prilikom povratka iz „običnog“  poziva funkcije `setjmp()`, povratna adresa
 na koju se oslanja povratak nakon skoka iz `longjmp()` ostala je iznad vrha steka i može se
 lako dogoditi da bude „pregažena“  nekom drugom vrednošću. Tada povratak iz `setjmp()`
 nakon skoka iz `longjmp()` neće biti korektan. Jedan primer je kod funkcije `dispatch()`

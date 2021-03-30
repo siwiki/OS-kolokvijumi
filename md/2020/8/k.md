@@ -6,11 +6,10 @@ u sistemu, ponaša se kao binarni semafor, a implementiran je klasom `Resource` 
 interfejs dat u nastavku. Kada želi da zauzme neki deljeni resurs, nit treba da pozove operaciju
 `acquire` objekta ove klase koji služi za međusobno isključenje pristupa tom resursu, a kada
 ga oslobodi, treba da pozove operaciju `release`.
-Da bi se sprečila pojava mrtve blokade (*deadlock*), koristi se algoritam „čekaj ili umri“ (*wait-
-die*) koji funkcioniše na sledeći način. Svakoj niti pri samom kreiranju pridružuje se
+Da bi se sprečila pojava mrtve blokade (*deadlock*), koristi se algoritam „čekaj ili umri“ (*wait-die*) koji funkcioniše na sledeći način. Svakoj niti pri samom kreiranju pridružuje se
 jedinstvena „vremenska marka“ (ceo broj dostupan u atributu `Thread::timestamp`), tako da
 starije niti imaju manju vrednost ove marke. Kada nit *Ta* zahteva resurs koji drži zauzeta nit
-Tb, onda:
+*Tb*, onda:
 
 - Ako je *Ta* starija nego *Tb* (*Ta*<*Tb*), nit *Ta* čeka suspendovana dok ne dobije resurs i tada operacija `acquire` vraća 1 (istu vrednost ova operacija vraća i kada je resurs slobodan, onda ga nit odmah dobija);
 - Ako je *Ta* mlađa nego *Tb* (*Ta*>*Tb*), niti Ta se odbija zahtev tako što operacija `acquire` vraća 0, a nit onda tu situaciju obrađuje na odgovarajući način (pokušava ponovo ili odustaje).
