@@ -1,5 +1,6 @@
 doc
 pdf
 doc2pdf
-combined-*
+combined*
 node_modules
+rsvg-*

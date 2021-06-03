@@ -42,7 +42,7 @@ segpage
 
 1. Potrebno je da postoji tabela svih pokrenutih programa. Za svaki program u tabeli se čuva
 lista (pokazivaa na prvi u listi) PCB-ova procesa koji su pokrenuti nad tim programom. Pri
-pokretanju novog, potrebno ga je uvezati u odgovarajuću listu. Ukoliko veu postoji neki
+pokretanju novog, potrebno ga je uvezati u odgovarajuću listu. Ukoliko već postoji neki
 proces pokrenutim nad istim programom, potrebno je u SMT i PMT tabele novog procesa
 upisati trenutno stanje prisutnosti stranica u memoriji i odgovarajuće brojeve okvira. Jedan
 način da to bude moguće uraditi je da se uz svaki proces pamti u koji dio virtuelnog adresnog

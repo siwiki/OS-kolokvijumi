@@ -51,4 +51,4 @@ page
 
    PA(42): Frame(30):Offset(12).
 2. Širina PMT3 je 30+2=32 bita. Ista je i širina PMT1 i PMT2. PMT1 ima $2^{16}$ ulaza širine 32 bita (4B), što je ukupno: $2^{18}$B=256KB.
-3. Ovaj proces koristio je $2^{30}$ svojih najnižih adresa, što je $2^{30-12}=2^{18}$ stranica. Jedna PMT trećeg nivoa pokriva $2^{16}$ stranica, pa je ovaj proces alocirao PMT prvog nivoa, jednu PMT drugog nivoa i četiri PMT trećeg nivoa. Zato ukupna veličina PMT iznosi $6 \cdot 256$B=1,5MB.
+3. Ovaj proces koristio je $2^{30}$ svojih najnižih adresa, što je $2^{30-12}=2^{18}$ stranica. Jedna PMT trećeg nivoa pokriva $2^{16}$ stranica, pa je ovaj proces alocirao PMT prvog nivoa, jednu PMT drugog nivoa i četiri PMT trećeg nivoa. Zato ukupna veličina PMT iznosi $6 \cdot 256$KB=1,5MB.

@@ -55,7 +55,7 @@ page
 2. 
 ```cpp
 const unsigned short pg1w = 24, pg2w = 24, offsw = 16;
-cont unsigned pmt1size = 1<<pg1w, pmt2size = 1<<pg2w;
+const unsigned pmt1size = 1<<pg1w, pmt2size = 1<<pg2w;
 
 void releasePMTEntry (unsigned* pmt1, unsigned long page) {
   unsigned pmt1entry = page>>(pg2w);
