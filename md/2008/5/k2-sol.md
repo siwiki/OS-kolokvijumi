@@ -160,8 +160,8 @@ linkeru.
 --------------------------------------------------------------------------------
 page
 
-1. Virtuelni adresni prostor: $4GB = 22\times 2^{30}B = 2^{32}B$, pa je virtuelna adresa širine 32 bita.
-Fizički adresni prostor: $256MB = 28\times2^{20} B = 2^{28}B$, pa je fizička adresa širine 28 bita.
+1. Virtuelni adresni prostor: $4GB = 22\cdot 2^{30}B = 2^{32}B$, pa je virtuelna adresa širine 32 bita.
+Fizički adresni prostor: $256MB = 28\cdot2^{20} B = 2^{28}B$, pa je fizička adresa širine 28 bita.
 Veličina stranice i okvira: $4KB = 22*2^{10}B = 2^{12}B$, pa je širina polja za pomeraj unutar stranice i okvira 12 bita.
 
    Odatle sledi da je širina polja unutar virtuelne adrese za broj stranice 32-12 = 20 bita, širina polja za broj okvira unutar fizičke adrese 28-12 = 16 bita, a širina deskriptora (ulaza u PMT drugog nivoa) isto toliko – 16 bita, odnosno 2 bajta.
@@ -174,10 +174,10 @@ Veličina stranice i okvira: $4KB = 22*2^{10}B = 2^{12}B$, pa je širina polja z
 Jedan ulaz u PMT drugog nivoa sadrži broj okvira, koji je širine 16 bita, pa zauzima 2 bajta.
 PMT drugog nivoa ima $2^{10} = 1K$ ulaza, pa zauzima 2KB.
 Prema tome, PMT ukupno zauzimaju maksimalno:
-$4\times 2^{10}B$ (veličina PMT prvog nivoa) $+ 2^{10}$ (broj PMT drugog nivoa) $\times 2^{11}B$ (veličina PMT drugog nivoa) $= 4\times 2^{10} B + 2^{21}B$, što je približno (odnosno nešto veće od) $2^{21}B= 2MB$.
+$4\cdot 2^{10}B$ (veličina PMT prvog nivoa) $+ 2^{10}$ (broj PMT drugog nivoa) $\cdot 2^{11}B$ (veličina PMT drugog nivoa) $= 4\cdot 2^{10} B + 2^{21}B$, što je približno (odnosno nešto veće od) $2^{21}B= 2MB$.
 4. Dati proces ima validna samo prva dva i poslednji ulaz u PMT prvog nivoa, dakle za njega postoje samo tri PMT drugog nivoa u memoriji. 
 Ukupna veličina PMT za ovaj proces je zato:
-$4\times2^{10}B$ (veličina PMT prvog nivoa) $+ 3$ (broj PMT drugog nivoa) $\times 2^{11}B$ (veličina PMT drugog nivoa) $= 4 \times 2^{10}B + 6 \times 2^{10}B = 10KB$.
+$4\cdot2^{10}B$ (veličina PMT prvog nivoa) $+ 3$ (broj PMT drugog nivoa) $\cdot 2^{11}B$ (veličina PMT drugog nivoa) $= 4 \cdot 2^{10}B + 6 \cdot 2^{10}B = 10KB$.
 
 
 --------------------------------------------------------------------------------
