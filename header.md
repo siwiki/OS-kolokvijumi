@@ -12,11 +12,14 @@ toc: true
 toc-depth: 2
 pdf-engine: xelatex
 ---
+\raggedbottom
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\rightmark}
 \fancyhead[LO,RE]{\leftmark}
 \fancyfoot[C]{\thepage}
+
+
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 # Predgovor

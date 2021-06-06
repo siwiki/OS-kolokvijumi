@@ -101,7 +101,7 @@ void main (int argc, char* const argv[]){
   if (status==0) // Child's context
     execvp(argv[0],childArgs);
   else {  // Parent's context
-    printf(“%s\n“,myArg);
+    printf(“%d\n“,myArg);
     wait(NULL);
   }
 }
