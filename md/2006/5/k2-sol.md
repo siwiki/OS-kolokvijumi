@@ -83,7 +83,7 @@ void ExternalEvent::signal () {
 }
 ```
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```cpp
 ExternalEvent dmaEvent(N);
 

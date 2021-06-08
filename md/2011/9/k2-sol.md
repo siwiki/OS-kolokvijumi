@@ -1,6 +1,6 @@
 2011/septembar/SI, IR Kolokvijum 2 - Septembar 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```ada
 type Coord = record {
   x : integer;
@@ -35,8 +35,9 @@ end;
 ```
 
 --------------------------------------------------------------------------------
-semaphore
-```ada
+semimpl
+
+```cpp
 void Semaphore::wait () {
   for (int i=SemWaitLimit; val<=0 && i>0; i--);
   lock(lck);

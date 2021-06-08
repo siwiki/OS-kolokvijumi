@@ -1,6 +1,6 @@
 2016/jun/SI, IR Kolokvijum 3 - Jun 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```cpp
 typedef unsigned short Byte;
 const int BlockSize = ...;

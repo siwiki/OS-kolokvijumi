@@ -1,6 +1,6 @@
 2007/maj/SI Kolokvijum 2 - Maj 2007 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 class Semaphore {
 public:

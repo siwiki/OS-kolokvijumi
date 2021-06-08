@@ -1,6 +1,6 @@
 2019/maj/SI, IR Kolokvijum 2 - April 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 class Mutex {
 public:

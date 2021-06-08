@@ -1,6 +1,6 @@
 2016/maj/SI, IR Kolokvijum 2 - Maj 2016 Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 class Mutex {
 public:

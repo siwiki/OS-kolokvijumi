@@ -1,6 +1,6 @@
 2017/jun/k2_resenja_2017.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 U klasu `Thread` treba dodati sledeći član:
 ```cpp
 Barrier* blockedOnBarrier(0);

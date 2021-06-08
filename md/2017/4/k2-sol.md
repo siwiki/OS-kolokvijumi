@@ -1,6 +1,6 @@
 2017/april/SI, IR Kolokvijum 2 - April 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 struct ProcessorPrivate {
   int lock_count; // Counts the number of locks (nested critical sections)

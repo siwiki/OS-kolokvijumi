@@ -1,6 +1,6 @@
 2020/avgust/Kolokvijum - Avgust 2020.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 Školsko jezgro proširuje se konceptom koji služi za alokaciju i dealokaciju nedeljivog resursa
 u sistemu, ponaša se kao binarni semafor, a implementiran je klasom `Resource` čiji je
 interfejs dat u nastavku. Kada želi da zauzme neki deljeni resurs, nit treba da pozove operaciju

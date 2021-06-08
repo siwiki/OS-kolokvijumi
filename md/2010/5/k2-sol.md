@@ -1,6 +1,6 @@
 2010/drugi/SI Kolokvijum 2 - Maj 2010 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 void Semaphore::wait () {
   lock(lck);
@@ -21,7 +21,7 @@ void Semaphore::signal () {
 Pomoćne operacije `block()` i `unblock()` više nisu potrebne (izbacuju se). Ostatak definicije klase `Semaphore` ostaje isti.
 
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```ada
 shared var mutexA : semaphore:=N;
            mutexB, mutexC : semaphore:=1;

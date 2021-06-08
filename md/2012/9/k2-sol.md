@@ -1,6 +1,6 @@
 2012/septembar/SI, IR Kolokvijum 2 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 
 ```ada
 shared var
@@ -28,7 +28,7 @@ begin
 end;
 ```
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 class Semaphore {
 public:

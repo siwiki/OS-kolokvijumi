@@ -1,6 +1,6 @@
 2008/maj/SI Kolokvijum 2 - Maj 2008 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 
 Prva varijanta zaključava semafor (kao deljeni resurs) maskiranjem prekida i uposlenim čekanjem
 (operacijom tipa *test and set*) nad jednom zajedničkom varijablom (`commonLock`) koja se koristi za sve semafore (instance klase `Semaphore`), dok druga varijanta radi to isto samo korišćenjem posebne varijable za svaki semafor (`myLock`). Prva varijanta ne dozvoljava ulaz u kod operacije nad

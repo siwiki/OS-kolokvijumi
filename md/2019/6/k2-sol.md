@@ -1,6 +1,6 @@
 2019/jun/SI, IR Kolokvijum 2 - Jun 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```cpp
 const int N = ...;
 struct sem_t;

@@ -1,6 +1,6 @@
 2011/maj/SI, IR Kolokvijum 2 - Maj 2011 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```ada
 shared var
   a, b : integer := 0;
@@ -26,7 +26,7 @@ end;
 ```
 
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 void Semaphore::lock () {
   for (int acquired = 0; !acquired;) {

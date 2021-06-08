@@ -1,6 +1,6 @@
 2015/septembar/SI, IR Kolokvijum 2 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 void Semaphore::wait (unsigned int n = 1) {
   lock(lck);

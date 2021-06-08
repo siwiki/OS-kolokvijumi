@@ -1,6 +1,6 @@
 2014/septembar - nadoknade/SI, IR Kolokvijum 2 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 class Event {
 public:

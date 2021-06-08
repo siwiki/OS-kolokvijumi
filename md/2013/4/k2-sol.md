@@ -1,6 +1,6 @@
 2013/april/SI, IR Kolokvijum 2 - April 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```ada
 type Coord = record {
   x : integer;
@@ -34,7 +34,7 @@ end;
 ```
 
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 Data implementacija nije dobra jer je moguće utrkivanje (*race condition*) između izvršavanja
 istog ovog koda za isti semafor na dva (ili više) procesora. I jedan i drugi procesor mogu da
 izvrše petlju `while` i iz nje izađu, uporedno pročitavši iz atributa `lck` vrednost 1, a potom

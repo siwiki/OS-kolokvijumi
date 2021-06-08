@@ -1,6 +1,6 @@
 2009/maj/SI Kolokvijum 2 - Maj 2009 - Resenja.doc
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 
 ```cpp
 void Semaphore::wait () {
@@ -31,7 +31,7 @@ void Semaphore::signal () {
 Pomoćne operacije `block()` i `unblock()` više nisu potrebne (izbacuju se). Ostatak definicije klase `Semaphore` ostaje isti.
 
 --------------------------------------------------------------------------------
-semaphore
+semintr
 
 Ili proizvoljno mnogo procesa tipa *A* u svojim kritičnim sekcijama i ni jedan
 proces tipa *B* u svojoj, ili samo jedan proces tipa *B* i ni jedan proces tipa *A*.

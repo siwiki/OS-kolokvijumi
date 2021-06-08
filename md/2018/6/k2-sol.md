@@ -1,6 +1,6 @@
 2018/jun/SI, IR Kolokvijum 2 - Jun 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore 
+semintr
 ```cpp
 const int N = ...;  // Capacity of the buffer
 

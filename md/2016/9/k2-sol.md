@@ -1,6 +1,6 @@
 2016/septembar/SI, IR Kolokvijum 2 - Septembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 U klasu `Thread` treba dodati sledeće članove:
 ```cpp
 char* Thread::message(0);

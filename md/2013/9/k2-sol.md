@@ -1,6 +1,6 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 2 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```cpp
 #include <semaphore.h>
 
@@ -22,7 +22,7 @@ void main () {
 ```
 
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 void Event::wait () {
   lock(lck);

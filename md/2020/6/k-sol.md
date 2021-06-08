@@ -36,7 +36,7 @@ sys_call: ; Save the current context
 ```
 
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```cpp
 void mat_add () {
   Thread* thr[M];

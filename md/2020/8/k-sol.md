@@ -1,6 +1,6 @@
 2020/avgust/Kolokvijum - Avgust 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 Pokazana je jedna jednostavna implementacija koja zadovoljava uslove,
 koristi jedostavan FIFO red zahteva, ali koja ima značajan stepen odbijanja zahteva (red
 zahteva je opadajući po vremenskoj marki). Moguće su i složenije varijante sa boljim

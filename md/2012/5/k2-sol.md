@@ -1,6 +1,6 @@
 2012/maj/SI, IR Kolokvijum 2 - Maj 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semintr
 ```ada
 shared var
   a, b : integer := 0;

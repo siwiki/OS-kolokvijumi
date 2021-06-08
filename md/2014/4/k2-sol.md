@@ -1,6 +1,6 @@
 2014/april/SI, IR Kolokvijum 2 - April 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-semaphore
+semimpl
 ```cpp
 int Semaphore::wait (int toBlock) {
   lock(lck);
