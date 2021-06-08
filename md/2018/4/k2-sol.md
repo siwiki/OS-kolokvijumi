@@ -1,6 +1,6 @@
 2018/april/SI, IR Kolokvijum 2 - April 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-semposix
+semintr
 
 ```cpp
 #include <fcntl.h>

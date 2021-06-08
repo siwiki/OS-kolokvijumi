@@ -1,6 +1,6 @@
 2015/maj/SI, IR Kolokvijum 2 - Maj 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-semposix
+semintr
 Deo koda oba procesa izgleda isto:
 ```cpp
 #include <fcntl.h>
