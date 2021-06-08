@@ -18,6 +18,7 @@ void transfer (OutputRequest* ioHead) {
 
 interrupt void dmaInterrupt () {
   dmaCompleted = 1;
+  *dmaCtrl = 0;
 }
 ```
 --------------------------------------------------------------------------------

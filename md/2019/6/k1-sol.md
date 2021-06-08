@@ -33,7 +33,7 @@ void transfer (int count) {
 }
 
 interrupt void io2Interrupt() {
-  *io1Data = *ioPtr++;
+  *io2Data = *ioPtr++;
   if (--ioCount == 0) {
     ioCompleted = 1;
     *io2Ctrl = 0; // Stop I/O 2
