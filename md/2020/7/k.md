@@ -32,7 +32,7 @@ pokrivaju najniže i najviše adrese virtuelnog adresnog prostora procesa (presl
 prostor koji koristi kernel). Logički segment je uvek poravnat i zaokružen na stranice. U
 strukturi `SegDesc` polja `next` i `prev` služe za ulančavanje u listu, polje `pg` sadrži broj prve
 stranice logičkog segmenta, a polje `sz` sadrži veličinu segmenta izraženu u broju stranica. Tip
-size_t je neoznačen celobrojni tip dovoljno velik da predstavi veličinu virtuelnog adresnog
+`size_t` je neoznačen celobrojni tip dovoljno velik da predstavi veličinu virtuelnog adresnog
 prostora. Konstanta `PAGE_SZ` predstavlja veličinu stranice u bajtovima (adresibilnim
 jedinicama), a konstanta `PAGE_OFFS_SZ` veličinu polja u virtuelnoj adresi za broj bajta unutar
 stranice;  obe ove konstante su tipa `size_t`. Data je i pomoćna funkcija `insert_seg_desc`
