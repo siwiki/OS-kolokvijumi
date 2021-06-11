@@ -18,6 +18,7 @@ const CATEGORIES = {
     context: 'Promena konteksta',
     semimpl : 'Sinhronizacija procesa (implementacija)',
     semintr : 'Sinhronizacija procesa (interfejs)',
+    semposix: 'Sinhronizacija procesa (POSIX)',
     buffer: 'Baferi, proizvođač/potrošač',
     io: 'Ulaz/izlaz',
     ioblock: 'Ulaz/izlaz (blokovski uređaji)',
