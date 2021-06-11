@@ -69,7 +69,7 @@ sys_call: ; Save r0 and r1 on the (kernel) stack
           pop r1
           pop r0
           iret
-          switch: ; Save the context of the old running
+switch:   ; Save the context of the old running
           store r2,#offsR2[r0] ; save other regs
           store r3,#offsR3[r0]
           ...

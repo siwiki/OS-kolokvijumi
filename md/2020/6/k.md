@@ -34,7 +34,7 @@ iz korisničkog procesa, pri čemu se sistemski poziv realizuje softverskim prek
 semintr
 Korišćenjem školskog jezgra i date klase `RowAdder`, implementirati funkciju `mat_add` koja
 sabira elemente svake vrste matrice `mat` i rezultat tog sabiranja smešta u odgovarajući
-element niza `res`, i to radi uporedo i tako da kontrolu vraća pozivaocu tek kada su uporedna
+element niza `res`, i to radi uporedo tako da kontrolu vraća pozivaocu tek kada su uporedna
 sabiranja svih vrsta matrice završena.
 
 ```cpp

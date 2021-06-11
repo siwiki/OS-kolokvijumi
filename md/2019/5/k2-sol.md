@@ -45,7 +45,7 @@ int Mutex::signal () {
 --------------------------------------------------------------------------------
 dynload
 1. ```cpp
-   void load_module (ModuleDesc* mod) {
+   void load_module (ModDesc* mod) {
      mem_extend(mod->size);  // Extend memory
      mod->base = (char*)0 + mem_size;
      mem_size += mod->size;

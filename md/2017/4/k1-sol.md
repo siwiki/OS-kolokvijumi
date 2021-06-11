@@ -43,7 +43,7 @@ void IOThread::suspend () {
   IOThread::running->isReady = 0;
   int newRunning = -1;
   while (newRunning==-1) {
-    for (int i=0; i<IOThread::NumOfIOThreads; i++)
+    for (int i=0; i<IOThread::NumberOfThreads; i++)
       if (IOThread::allThreads[i].isReady) {
         newRunning = i;
         break;
