@@ -3,12 +3,13 @@ Cilj projekta je izvoženje teksta sa [OS1](http://os.etf.bg.ac.rs/OS1/) kolokvi
 
 Poslednju PDF i Markdown verziju dokumenta možete preuzeti iz [Releases](https://github.com/KockaAdmiralac/OS1-kolokvijumi/releases/latest).
 
-## Kompilacija
+## Kompajliranje
 Prvo je potrebno da imate:
 - [Node.js](https://nodejs.org/)
 - [Pandoc](https://pandoc.org/)
 - [XeTeX](http://xetex.sourceforge.net/)
 - [Git](https://git-scm.com/)
+- [librsvg](https://wiki.gnome.org/Projects/LibRsvg)
 
 Zatim pokrenite sledeće komande:
 ```console
@@ -17,7 +18,11 @@ $ cd OS1-kolokvijumi
 $ npm install
 $ ./combine.sh
 ```
-i dobijate PDF (`combined.pdf`) i Markdown (`combined.md`) dokument sa svim OS1 kolokvijumima.
+i dobijate PDF (`combined-web.pdf`) i Markdown (`combined-web.md`) dokumente sa svim OS1 kolokvijumima. Ukoliko vam treba za štampu, pokrenite umesto poslednje komande:
+```console
+$ ./combine.sh print
+```
+i dobijate PDF (`combined-print.pdf`) i Markdown (`combined-print.md`) dokumente sa malo manjim brojem strana.
 
 ## Razvijanje
 Ukoliko planirate da doprinosite projektu, mogu vam biti korisne sledeće informacije:
