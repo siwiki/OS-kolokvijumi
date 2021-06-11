@@ -22,6 +22,8 @@ pdf-engine: xelatex
 
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\newpage
 # Predgovor
 Svrha ovog dokumenta jeste da objedini sve do sada dostupne kolokvijume iz Operativnih sistema 1 iz nekoliko razloga:
 
