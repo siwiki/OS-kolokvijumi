@@ -14,7 +14,9 @@ else
 fi
 if [ "$1" == "print" ]
 then
-    pandoc combined-print.md -o combined-print.pdf
+    pandoc combined-print.md -s -t latex -o combined-print.tex
+    xelatex combined-print.md 
 else
-    pandoc combined-web.md -o combined-web.pdf
+    pandoc combined-web.md -s -t latex -o combined-web.tex
+    xelatex combined-web.md 
 fi
