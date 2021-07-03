@@ -27,8 +27,8 @@ const CATEGORIES = {
     os : 'Uvod u operativne sisteme'
 };
 const KEYWORDS = {
-    pthreads : 'POSIX niti',
-    psemaphore : 'POSIX semafor'
+    pthreads : 'Sinhronizacija!POSIX niti',
+    psemaphore : 'Sinhronizacija!POSIX semafori',
 };
 
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
@@ -89,6 +89,10 @@ function formatUrls(url, solutionUrl) {
     return `${urlRow}${solutionUrlRow}`;
 }
 
+function addIndices(keywords){
+    return keywords.map(keyword => `\\index{${KEYWORDS[keyword]}}`).join(' ');
+}
+
 async function main() {
     const categories = {};
     for (const year of await getYears()) {
@@ -146,7 +150,7 @@ async function main() {
         ).map(
             ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
                 ({url, content, year, month, type, task, solutionUrl, keywords}) =>
-                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${formatUrls(url, solutionUrl)}\n${content}`
+                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n ${addIndices(keywords)} ${formatUrls(url, solutionUrl)}\n${content}`
             ).join('\n\n')}`
         ).join('\n\n\\pagebreak\n')}${footer}`,
         {
