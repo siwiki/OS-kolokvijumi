@@ -26,6 +26,11 @@ const CATEGORIES = {
     fsimpl: 'Fajl sistem (implementacija)',
     os : 'Uvod u operativne sisteme'
 };
+const KEYWORDS = {
+    pthreads : 'Sinhronizacija!POSIX niti',
+    psemaphore : 'Sinhronizacija!POSIX semafori',
+};
+
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
 const TYPES = {
     k: 'kolokvijum',
@@ -54,12 +59,14 @@ async function processFile(year, month, type, categories) {
     for (const section of sections) {
         ++task;
         const sectionTrimmed = section.trim();
-        const category = sectionTrimmed.split('\n', 1)[0].trim();
+        const firstLine = sectionTrimmed.split('\n', 1)[0].trim().split(' ');
+        const category = firstLine[0];
+        const keywords = firstLine.slice(1);
         const content = sectionTrimmed.replace(/.*[\r\n]*/, '');
         if (!categories[category]) {
             categories[category] = [];
         }
-        categories[category].push({url, content, year, month, type, task});
+        categories[category].push({url, content, year, month, type, task, keywords});
     }
 }
 
@@ -80,6 +87,10 @@ function formatUrls(url, solutionUrl) {
         `- [Rešenje](${BASE_URL}${solutionUrl})\n` :
         '';
     return `${urlRow}${solutionUrlRow}`;
+}
+
+function addIndices(keywords){
+    return keywords.map(keyword => `\\index{${KEYWORDS[keyword]}}`).join(' ');
 }
 
 async function main() {
@@ -138,8 +149,8 @@ async function main() {
             ([category1], [category2]) => categoryKeys.indexOf(category1) - categoryKeys.indexOf(category2)
         ).map(
             ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
-                ({url, content, year, month, type, task, solutionUrl}) =>
-                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${formatUrls(url, solutionUrl)}\n${content}`
+                ({url, content, year, month, type, task, solutionUrl, keywords}) =>
+                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n ${addIndices(keywords)} ${formatUrls(url, solutionUrl)}\n${content}`
             ).join('\n\n')}`
         ).join('\n\n\\pagebreak\n')}${footer}`,
         {
