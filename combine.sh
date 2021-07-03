@@ -15,8 +15,8 @@ fi
 if [ "$1" == "print" ]
 then
     pandoc combined-print.md -s -t latex -o combined-print.tex
-    xelatex combined-print.md 
+    pdflatex --enable-installer --shell-escape combined-print.tex
 else
     pandoc combined-web.md -s -t latex -o combined-web.tex
-    xelatex combined-web.md 
+    pdflatex --enable-installer --shell-escape combined-web.tex 
 fi

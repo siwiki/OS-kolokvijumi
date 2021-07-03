@@ -28,7 +28,7 @@ const CATEGORIES = {
 };
 const KEYWORDS = {
     pthreads : 'Sinhronizacija!POSIX niti',
-    psemaphore : 'Sinhronizacija!POSIX semafori'
+    psemaphore : 'Sinhronizacija!POSIX semafori',
 };
 
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
@@ -90,7 +90,7 @@ function formatUrls(url, solutionUrl) {
 }
 
 function addIndices(keywords){
-    return keywords.map(keyword => `\index{${KEYWORDS[keyword]}}`).join(' ');
+    return keywords.map(keyword => `\\index{${KEYWORDS[keyword]}}`).join(' ');
 }
 
 async function main() {
