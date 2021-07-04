@@ -69,7 +69,7 @@ Veličina stranice i okvira: $16KB = 2^{4}\cdot 2^{10}B = 2^{14}B$, pa je širin
 Odatle sledi da je širina polja unutar virtuelne adrese za broj stranice 32-14 = 18 bita, širina polja za broj okvira unutar fizičke adrese 30-14 = 16 bita, a širina deskriptora (ulaza u PMT drugog nivoa) isto toliko – 16 bita, odnosno 2 bajta.
 Stranica prvog nivoa ima $2K = 2^{11}$ ulaza, pa je širina polja za indeksiranje PMT prvog nivoa 11 bita, a za indeksiranje PMT drugog nivoa 18-11 = 7 bita.
 Prema tome, struktura virtuelne adrese je: Page_L1(11):Page_L2(7):Offset(14).
-2. Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s tim da vrednost 0 može da označava nekorišćeni opseg stranica (invalidan ulaz), pošto se ni PMT drugog nivoa ne može smestiti počev od adrese 0. Prema tome, širina ulaza u PMT prvog nivoa je najmanje jednaka širini fizičke adrese, što je 30 bita. Drugim rečima, jedan ulaz u PMT prvog nivoa zauzima 4 bajta.
+2. Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s tim da vrednost 0 može da označava nekorišćeni ospeg stranica (invalidan ulaz), pošto se ni PMT drugog nivoa ne može smestiti počev od adrese 0. Prema tome, širina ulaza u PMT prvog nivoa je najmanje jednaka širini fizičke adrese, što je 30 bita. Drugim rečima, jedan ulaz u PMT prvog nivoa zauzima 4 bajta.
 3. PMT prvog nivoa zauzima 2K ulaza po 4 bajta, dakle 8KB.
 Jedan ulaz u PMT drugog nivoa sadrži broj okvira, koji je širine 16 bita, pa zauzima 2 bajta.
 PMT drugog nivoa ima 27 = 128 ulaza, pa zauzima 256B.

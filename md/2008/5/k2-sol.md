@@ -169,7 +169,7 @@ Veličina stranice i okvira: $4KB = 22*2^{10}B = 2^{12}B$, pa je širina polja z
    Stranica prvog nivoa ima $1K = 2^{10}$ ulaza, pa je širina polja za indeksiranje PMT prvog nivoa 10 bita, a za indeksiranje PMT drugog nivoa 20-10 = 10 bita.
 
    Prema tome, struktura virtuelne adrese je: Page_L1(10):Page_L2(10):Offset(12).
-2. Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s tim da vrednost 0 može da označava nekorišćeni opseg stranica (invalidan ulaz), pošto se ni PMT drugog nivoa ne može smestiti počev od adrese 0. Prema tome, širina ulaza u PMT prvog nivoa je najmanje jednaka širini fizičke adrese, što je 28 bita. Drugim rečima, jedan ulaz u PMT prvog nivoa zauzima 4 bajta.
+2. Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s tim da vrednost 0 može da označava nekorišćeni ospeg stranica (invalidan ulaz), pošto se ni PMT drugog nivoa ne može smestiti počev od adrese 0. Prema tome, širina ulaza u PMT prvog nivoa je najmanje jednaka širini fizičke adrese, što je 28 bita. Drugim rečima, jedan ulaz u PMT prvog nivoa zauzima 4 bajta.
 3. PMT prvog nivoa zauzima 1K ulaza po 4 bajta, dakle 4KB.
 Jedan ulaz u PMT drugog nivoa sadrži broj okvira, koji je širine 16 bita, pa zauzima 2 bajta.
 PMT drugog nivoa ima $2^{10} = 1K$ ulaza, pa zauzima 2KB.

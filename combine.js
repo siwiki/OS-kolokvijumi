@@ -29,6 +29,64 @@ const CATEGORIES = {
 const KEYWORDS = {
     pthreads : 'Sinhronizacija!POSIX niti',
     psemaphore : 'Sinhronizacija!POSIX semafori',
+    lnk_scndPass : 'Linker!Drugi prolaz',
+    lnk_firstPass : 'Linker!Prvi prolaz',
+    setjmp : 'setjmp',
+    longjmp : 'longjmp',
+    cont_shr_mem_rel : 'Kontinualna alokacija!shrink uz mem\\textbackslash free i relocate',
+    cont_re_bfree : 'Kontinualna alokacija!realocate iza je prazno',
+    cont_tabl : 'Kontinualna alokacija!tablica',
+    cont_extend : 'Kontinualna alokacija!extend uz mem allocate, free, copy',
+    cont_komp : 'Kontinualna alokacija!kompakcija',
+    cont_free_bf : 'Kontinualna alokacija!free uz spajanje iza i ispred',
+    cont_extend_aloc : 'Kontinualna alokacija!extend uz alloc',
+    cont_extend_free : 'Kontinualna alokacija!extend iz slobodnog',
+    cont_bestFit : 'Kontinualna alokacija!Best fit',
+    cont_firstFit : 'Kontinualna alokacija!First fit',
+    cont_worstFit : 'Kontinualna alokacija!Worst fit',
+    cont_rel : 'Kontinualna alokacija!relocate',
+    segpg_fsd : 'Segmentno-stranična!find seg desc',
+    segpg_hpf : 'Segmentno-stranična!handle page fault',
+    segpg_va : 'Segmentno-stranična!VA',
+    segpg_fa : 'Segmentno-stranična!FA',
+    segpg_teorija : 'Segmentno-stranična!Teorija', 
+    dynload_lm : 'Dinamičko učitavanje!load module',
+    dynload_dlarr_otBlck : 'Dinamičko učitavanje!DLArray 1 u 2 bloka',
+    dynload_georeg : 'Dinamičko učitavanje!GeoRegion',
+    overlay_cotf : 'Preklopi!Ciklicna obrada u 2 faze',
+    overlay_ensure : 'Preklopi!Ensure overlay',
+    overlay_axb : 'Preklopi!AxB=C',
+    overlay_dlarr_impl : 'Preklopi!Implementacija DLArray',
+    overlay_syscall_asm : 'Preklopi!SysCall Asembler',
+    syscall_crt_thr_run : 'Create thread rekurzivno i zameni run',
+    syscall_fork : 'fork',
+    syscall_tree : 'stablo',
+    syscall_spawn : 'spawn',
+    thread_join : 'thread join',
+    thread_arg : 'thread arg proširenje',
+    thread_arr : 'niz od N da se podeli u K niti',
+    thread_pipe : 'pipe',
+    thread_bin_search : 'binarni search niz u threads',
+    thread_asm : 'asembler',
+    thread_opt : 'optimistička kontrola konkurentnosti',
+    thread_lav : 'lavirint',
+    context_wc : 'čekanje dece',
+    context_hdlrs : 'handler',
+    context_sig : 'signal',
+    context_disp : 'dispatch',
+    context_cre_thr : 'create thread',
+    context_yield_disp : 'yield dispatch',
+    context_yield : 'yield',
+    context_append : 'append',
+    context_resume : 'resume',
+    context_ter: 'teorija tablica',
+    context_sus : 'suspend',
+    semimpl_spinlck : 'spin lock',
+    semimpl_busy_wait : 'busy wait',
+    semimpl_mutex : 'mutex',
+    semimpl_ext_event : 'external event',
+    buffer_int : 'naizmenično čekanje',
+    buffer_bounded : 'bounded buffer'
 };
 
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
@@ -62,6 +120,7 @@ async function processFile(year, month, type, categories) {
         const firstLine = sectionTrimmed.split('\n', 1)[0].trim().split(' ');
         const category = firstLine[0];
         const keywords = firstLine.slice(1);
+        if (addIndices(keywords).includes(undefined)) console.log(`Undefined index: ${year} ${month} ${task} ${type} ${keywords}`);
         const content = sectionTrimmed.replace(/.*[\r\n]*/, '');
         if (!categories[category]) {
             categories[category] = [];
