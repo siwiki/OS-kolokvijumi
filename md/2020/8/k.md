@@ -25,7 +25,7 @@ public:
 ```
 
 --------------------------------------------------------------------------------
-segpage segpg_fsd segpg_hpf
+segpage
 Neki sistem koristi segmentno-straničnu organizaciju memorije. Logičke segmente koje je
 proces alocirao sistem opisuje strukturama tipa `SegDesc` za svaki proces. Kako bi se pretraga
 za logičkim segmentom kom odgovara adresirana stranica koja je generisala straničnu grešku

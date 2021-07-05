@@ -92,6 +92,6 @@ void Search::find (int i, int j) {
   int k = (i+j)/2;
   Thread* t = new Search(array,k+1,j,x);
   t->start();
-  t->find(i,k);
+  find(i,k);
 }
 ```

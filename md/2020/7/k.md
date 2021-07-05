@@ -70,8 +70,8 @@ void* vmalloc (SegDesc* head, void* addr, size_t size);
 --------------------------------------------------------------------------------
 buffer
 Realizovati u potpunosti klasu `DoubleBuffer` čiji je interfejs dat. Ova klasa implementira
-dvostruki bafer. Proizvođaa stavlja u „izlazni“  bafer blokove veličine `chunkSizeProd`
-znakova pozivom operacije `put()`;  potrošaa uzima iz „ulaznog“  bafera blokove veličine
+dvostruki bafer. Proizvođač stavlja u „izlazni“  bafer blokove veličine `chunkSizeProd`
+znakova pozivom operacije `put()`; potrošač uzima iz „ulaznog“  bafera blokove veličine
 `chunkSizeCons` znakova pozivom operacije `get()`. Kada obojica završe sa svojim baferom,
 baferi zamenjuju uloge. Proizvođač i potrošač su uporedne niti (ne treba ih realizovati), dok je
 sva potrebna sinhronizacija unutar klase `DoubleBuffer`. Pretpostaviti da je zadata veličina

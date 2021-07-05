@@ -104,7 +104,7 @@ isto toliko – 16 bita, odnosno 2 bajta.
 bita, a za indeksiranje PMT drugog nivoa 40 - 20 = 20 bita.
 Prema tome, struktura virtuelne adrese je: Page_L1(20):Page_L2(20):Offset(24).
 2. Ulaz u PMT prvog nivoa sadrži adresu početka PMT drugog nivoa u fizičkoj memoriji, s
-tim da vrednost 0 može da označava nekorišćeni ospeg stranica (invalidan ulaz), pošto se ni PMT
+tim da vrednost 0 može da označava nekorišćeni opseg stranica (invalidan ulaz), pošto se ni PMT
 drugog nivoa ne može smestiti počev od adrese 0. Prema tome, širina ulaza u PMT prvog nivoa je
 jednaka širini fizičke adrese, što je 40 bita. Drugim rečima, jedan ulaz u PMT prvog nivoa zauzima
 5 bajtova.
