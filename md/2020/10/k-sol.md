@@ -25,7 +25,7 @@ segment
 ```cpp
 SegDesc* findSegDesc (SegDesc* root, size_t size) {
   SegDesc *sd = root, *bestFit = nullptr;
-  while (!sd) {
+  while (sd) {
     if (sd->sz==size) return sd;
     else
     if (sd->sz<size) sd = sd->right;
