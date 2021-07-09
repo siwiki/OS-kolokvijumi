@@ -1,6 +1,6 @@
 2020/oktobar/Kolokvijum - Oktobar 2020.pdf
 --------------------------------------------------------------------------------
-syscall
+syscall syscall_spawn 
 U sistemu Windows postoji sistemski poziv
 ```cpp
 int spawnvp (int mode, char *path, const char **argv);
