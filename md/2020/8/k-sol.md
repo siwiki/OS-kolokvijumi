@@ -60,7 +60,7 @@ segpage
 1. ```cpp
    SegDesc* findSegDesc (SegDesc* root, size_t page) {
      SegDesc* sd = root;
-     while (!sd) {
+     while (sd) {
        if (sd->pg<=page && page<sd->pg+sd->sz) return sd;
        if (page<sd->pg) sd = sd->left;
        else sd = sd->right;
