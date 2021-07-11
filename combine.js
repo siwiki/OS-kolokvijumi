@@ -209,7 +209,7 @@ async function main() {
         ).map(
             ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
                 ({url, content, year, month, type, task, solutionUrl, keywords}) =>
-                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n ${addIndices(keywords)} ${formatUrls(url, solutionUrl)}\n${content}`
+                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${addIndices(keywords)}\n\n${formatUrls(url, solutionUrl)}\n${content}`
             ).join('\n\n')}`
         ).join('\n\n\\pagebreak\n')}${footer}`,
         {
