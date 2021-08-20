@@ -60,7 +60,7 @@ Virtual address (hex) & Mapping result (hex) \\
 \hline
 12FA0 & X \\
 \hline
-C0FF0 & D670F0 \\
+C00F0 & D670F0 \\
 \hline
 70750 & X \\
 \hline
