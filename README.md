@@ -28,7 +28,8 @@ i dobijate PDF (`combined-print.pdf`) i Markdown (`combined-print.md`) dokumente
 Ukoliko planirate da doprinosite projektu, mogu vam biti korisne sledeće informacije:
 - `combine.sh` prima broj godine za kompilaciju kao prvi argument, kada hoćete da kompajlirate jednu godinu a ne ceo dokument
     - Na primer: `./combine.sh 2017`
-- U Markdown fajlove rešenja je takođe potrebno navoditi kategorija zbog toga što se kategorizacija dešava pre spajanja postavki i rešenja u `combine.js`
+- U Markdown fajlove rešenja je takođe potrebno navoditi kategorije zbog toga što se kategorizacija dešava pre spajanja postavki i rešenja u `combine.js`
+    - Ovo je bag koji možete da ispravite ukoliko želite
 - Ukoliko je neka sekcija u rešenju loše formatirana, `combine.js` će javiti kako za taj zadatak ne postoji rešenje
 - Pre Markdown uređenih i neuređenih lista je potrebno da stoji novi red, inače se neće dobro prepoznati kao liste
 - GitHub-flavored Markdown (GFM) nije podržan, pa je potrebno koristiti LaTeX tabele
