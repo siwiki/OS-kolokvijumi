@@ -154,7 +154,7 @@ simbola u različitim prostorima imena, prevodilac jednostavno kao simbol u `.ob
 potpuno kvalifikovano ime, a ne nekvalifikovano ime, tako da linker vidi to jednoznačno puno ime.
 Drugim rečima, linker ne poznaje pojam prostora imena niti kvalifikovanog imena, za njega su svi
 simboli jednostavni nizovi znakova koji moraju biti jednoznačno definisani. Prevodilac obezbeđuje
-ovu jednoznačnosti korišćenjem punih kvalifikovanih imena kao imena simbola koje ostavlja
+ovu jednoznačnost korišćenjem punih kvalifikovanih imena kao imena simbola koje ostavlja
 linkeru.
 
 --------------------------------------------------------------------------------
