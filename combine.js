@@ -120,7 +120,6 @@ async function processFile(year, month, type, categories) {
         const firstLine = sectionTrimmed.split('\n', 1)[0].trim().split(' ');
         const category = firstLine[0];
         const keywords = firstLine.slice(1);
-        if (addIndices(keywords).includes(undefined)) console.log(`Undefined index: ${year} ${month} ${task} ${type} ${keywords}`);
         const content = sectionTrimmed.replace(/.*[\r\n]*/, '');
         if (!categories[category]) {
             categories[category] = [];
