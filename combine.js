@@ -52,7 +52,7 @@ async function getYears() {
     if (arg) {
         return arg.substring(7).split(',').map(year => year.trim());
     } else {
-        return (await readdir(BASE_DIR)).reverse();
+        return (await readdir(BASE_DIR)).filter((x) => !(isNaN(x))).reverse();
     }
 }
 
@@ -120,10 +120,10 @@ async function main() {
             });
         }
     }
-    const header = await readFile('header.md', {
+    const header = await readFile(`${BASE_DIR}/header.md`, {
         encoding: 'utf-8'
     });
-    const footer = await readFile('footer.md', {
+    const footer = await readFile(`${BASE_DIR}/footer.md`, {
         encoding: 'utf-8'
     });
     const categoryKeys = Object.keys(CATEGORIES);
