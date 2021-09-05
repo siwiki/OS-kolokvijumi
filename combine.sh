@@ -3,13 +3,13 @@ set -e
 cd "${0%/*}"
 if [ -z "$1" ]
 then
-    node combine.js
+    node combine.js ./os1/meta.json
 else
     if [ "$1" == "print" ]
     then
-        node combine.js --print
+        node combine.js ./os1/meta.json --print
     else
-        node combine.js "--year=$1"
+        node combine.js ./os1/meta.json "--year=$1"
     fi
 fi
 if [ "$1" == "print" ]
