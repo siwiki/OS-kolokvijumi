@@ -5,3 +5,4 @@ combined*
 node_modules
 rsvg-*
 *_svg-tex.*
+.vscode/*
