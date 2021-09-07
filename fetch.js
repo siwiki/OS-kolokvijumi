@@ -11,7 +11,7 @@ const client = got.extend({
         'User-Agent': 'os1-pdf'
     },
     method: 'GET',
-    prefixUrl: 'http://os.etf.bg.ac.rs/OS1/kolokvijumi/',
+    prefixUrl: 'http://os.etf.bg.ac.rs/OS2/kolokvijumi/',
     resolveBodyOnly: true,
     retry: 0
 });

@@ -1,0 +1,236 @@
+--------------------------------------------------------------------------------
+
+
+1/  4 
+Rešenja prvog kolokvijuma iz Operativnih sistema 2 
+Novembar 2010. 
+1. (10 poena) 
+a)(5) 
+Proces Trenutak prvog izvršavanja Trenutak završetka Vreme odziva 
+A 2 4 2 
+B 4 6 3 
+C 0 8 8 
+D 8 9 8 
+Srednje vreme odziva: 5,25 
+b)(5) 
+Proces Trenutak prvog izvršavanja Trenutak završetka Vreme odziva 
+A 2 4 2 
+B 4 6 3 
+C 0 9 9 
+D 1 2 1 
+Srednje vreme odziva: 3,75 
+2. (10 poena) 
+monitor buffer; 
+  export append, take; 
+  var 
+    buf : array[0..size-1] of integer; 
+    top, base : 0..size-1;  
+    numberInBuffer : integer; 
+ 
+  procedure append (i : integer); 
+  begin 
+    while numberInBuffer = size do 
+      wait(); 
+    end while; 
+    buf[top] := i; 
+    numberInBuffer := numberInBuffer+1; 
+    top := (top+1) mod size; 
+    notifyAll(); 
+  end append; 
+ 
+  procedure take (var i : integer); 
+  begin 
+    while numberInBuffer = 0 do 
+      wait(); 
+    end while; 
+    i := buf[base]; 
+    base := (base+1) mod size; 
+    numberInBuffer := numberInBuffer-1; 
+    notifyAll(); 
+  end take; 
+ 
+begin (* Initialization *) 
+  numberInBuffer := 0; 
+  top := 0; base := 0 
+end;  
+
+2/  4 
+3. (10 poena) 
+public class Main { 
+    public Main() { 
+    } 
+     
+    public static void main(String[] args) { 
+        ServerSocket ss; 
+        try{ 
+            ss = new ServerSocket(5000); 
+            while(true){ 
+                Socket s = ss.accept(); 
+                (new RequestHandler(s)).start(); 
+            } 
+        }catch(Exception e){ 
+            //greska 
+        } 
+    } 
+} 
+ 
+public class RequestHandler extends Thread { 
+    private PrintWriter out; 
+    private BufferedReader in; 
+    private Socket s; 
+     
+    public RequestHandler(Socket s) { 
+        this.s = s; 
+        try{ 
+            out = new PrintWriter(s.getOutputStream(),true); 
+            in = new BufferedReader(new 
+InputStreamReader(s.getInputStream())); 
+        }catch(Exception e){ 
+            //greska 
+        } 
+    } 
+     
+    public void run(){ 
+        try{ 
+            while(!s.isInputShutdown()){ 
+                String s = in.readLine(); 
+                System.out.println(s); 
+                if (s.equals("#fetch_and_increment#")){ 
+                    int i = fetch_and_increment(); 
+                    out.println(i); 
+                } 
+            } 
+        }catch(Exception e){ 
+            //greska 
+        } 
+    } 
+     
+    private static int deljena_promenljiva = 0; 
+    private static Semaphore mutex = new Semaphore(1); 
+    private static int fetch_and_increment() { 
+        int i; 
+        try { 
+            mutex.acquire(); 
+        } catch (InterruptedException ex) { 
+            ex.printStackTrace(); 
+            return -1; 
+        } 
+        i = deljena_promenljiva++; 
+
+3/  4 
+        mutex.release(); 
+        return i; 
+    } 
+     
+} 
+Klijent: 
+public class fetch_and_increment { 
+    Socket s; 
+    PrintWriter out; 
+    BufferedReader in; 
+     
+    public fetch_and_increment(String host, int port) { 
+        try { 
+            s = new Socket(host,port); 
+            out = new PrintWriter(s.getOutputStream(),true); 
+            in = new BufferedReader(new 
+InputStreamReader(s.getInputStream())); 
+        } catch (Exception e) { 
+            //greska 
+        } 
+         
+    } 
+     
+    public int fetch_and_increment1(){ 
+        try{ 
+            out.println("#fetch_and_increment#"); 
+            return Integer.parseInt(in.readLine()); 
+        }catch (Exception e){ 
+            //greska 
+        } 
+        return -1; 
+    } 
+     
+} 
+4. (10 poena) 
+ 
+P0
+P
+1
+P2
+P
+3
+P4
+F0
+F1
+F2
+F3
+F4
+  
+P0
+P
+1
+P
+2
+P3
+P4
+F0
+F1
+F2
+F3
+F
+4
+  
+  a)     b) 
+P0
+P1
+P2P3
+P
+4
+F0
+F1
+F2
+F3
+F4
+ 
+P0
+P1
+P2P3
+P4
+F0
+F1
+F2
+F3
+F4
+ 
+ c)     d) 
+ 
+
+4/  4 
+5. (10 poena) 
+a)(5) Dokaz kontradikcijom. Pretpostavimo da može nastati mrtva blokada, što znači da 
+postoji  zatvoren  krug  procesa  P
+i1
+, P
+i2
+,  ...,  P
+in
+    (n>=1) koji su međusobno blokirani. Prema 
+uslovima algoritma, odatle bi sledilo da je: i
+1
+<i
+2
+< ... <i
+n
+<i
+1
+, što ne može biti, pa mrtva blokada 
+ne može nastati. 
+b)(5) Prema uslovima algoritma, ako mlađi   proces zatraži resurs koga drži neki stariji 
+proces, mlađi   proces se poništava i pokreće ponovo. Kada se  poništeni  proces  ponovo  
+pokrene,  ako  bi  mu  se  dodelio  novi  ID  koji  odgovara  vremenu  njegovom  ponovnog 
+pokretanja, on bi bio još mlađi u sistemu, pa bi trpeo još više poništavanja, što može dovesti 
+do njegovog izgladnjivanja. Zato mu treba dodeliti isti ID koji je imao pri prvom pokretanju. 
+Ako bi on bio dalje ponovo poništavan, vremenom bi taj proces postajao sve stariji i konačno 
+postao najstariji, kada više neće doživeti poništavanje, odnosno neće trpeti izgladnjivanje. 
+ 
