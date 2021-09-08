@@ -1,94 +1,104 @@
+2011/januar/SI, IR Kolokvijum 3 - Januar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
 1/2 
 Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, Januar 2013. 
-1. (10 poena)  
-class Mutex { 
-public: 
-  Mutex () 
-    { InitializeCriticalSectionAndSpinCount(&criticalSection,0x00000400); } 
- ~Mutex() 
-    { DeleteCriticalSection(&criticalSection); } 
-  void enter () 
-    { EnterCriticalSection(&criticalSection); } 
-  void exit () 
-    { LeaveCriticalSection(&criticalSection); } 
-private: 
-  CRITICAL_SECTION criticalSection; 
-}; 
-2. (10 poena) 
- 
-#!/bin/bash 
- 
-if [ $# -lt 2 ];then 
-    echo "Nedovoljan broj argumenata!" 
-    exit 1 
-fi 
- 
-tmp="tmp.html" 
-wget "$1" -O $tmp 
-if [ $? -ne 0 ];then 
-    echo "Nepostojeci URL" 
-    exit 2 
-fi 
- 
-IFS_old=$IFS 
-IFS=$'\n' 
-for i in $(cat $tmp | grep href=\".*\.$2\"\>| sed 
-'s/.*href="\(.*\)">.*/\1/');do 
-    echo "$i" 
-    wget "$i" 
-done 
-IFS=$IFS_old  
-rm $tmp 
-3. (10 poena) 
-class Agent { 
-public: 
- Agent(key_t key); 
- virtual ~Agent(); 
- void takeTobaccoAndPaper () {atomicOnTwoSems(Paper,Tobacco,-1);} 
- void takePaperAndMatch   () {atomicOnTwoSems(Paper,Match,-1);} 
- void takeTobaccoAndMatch () {atomicOnTwoSems(Match,Tobacco,-1);} 
- void finishedSmoking () {atomicOnTwoSems(randNum(),randNum(),1);} 
-private:  
- int id; 
- void atomicOnTwoSems(int first, int second, int op); 
- int randNum(); 
- static const int Paper=0, Match=1, Tobacco=2; 
-}; 
- 
- 
-
-2/2 
-void Agent::atomicOnTwoSems(int first, int second, int op){ 
-  struct sembuf sems[2]; 
-     sems[0].sem_num = first; 
-     sems[1].sem_num = second; 
-     sems[0].sem_op = sems[1].sem_op = op; 
-     sems[0].sem_flg =  sems[1].sem_flg = SEM_UNDO; 
-     semop(id, sems, 2); 
- } 
- 
-int Agent::randNum() { 
- static int prev; 
- int next = rand()%3; 
- prev =(next==prev)?++prev%3:next; 
- return  prev; 
-} 
- 
-Agent::Agent(key_t key) { 
-  id = semget(key, 3, 0666 | IPC_CREAT); 
-  for (int var = 0; var < 3; ++var) 
-     semctl(id, var, SETVAL, 0); 
-  finishedSmoking(); 
-} 
- 
-Agent::~Agent() { 
-  for (int var = 0; var < 3; ++var) { 
-   semctl(id, 0, IPC_RMID); 
+Operativnih sistema 2 
+Januar 2012. 
+1. (10 poena)   
+int vm_alloc (int pg, int sz) { 
+  static vm_area_desc vm; 
+  static vm_area_desc* ptr=&vm; 
+  vm.page=pg; 
+  vm.size=sz; 
+  asm { 
+    load r1,#0x21 
+    load r2,ptr 
+    int  0x31 
   } 
 } 
+2. (10 poena) 
+#!/bin/bash 
+if test ! $# -eq 2 
+then 
+  echo "Nije prosledjen odgovarajuci broj parametara" 
+  exit 1 
+fi 
+if test ! -f $2 -o ! -w $2 
+then 
+  echo "Fajl $2 ne postoji ili nemate dozvolu za upis" 
+  exit 2 
+fi 
+if test ! -d $1 
+then 
+  echo "Direktorijum $1 ne postoji" 
+  exit 3 
+fi 
+ls $1 | sed "s/\(.\).*_\(.\).*_\(.*\)\.zip/\2\1\3d@student.etf.bg.ac.rs/" 
+>$2 
  
+3. (10 poena) 
+void acquireForksForPhilosopher(int *forks[N], int id, int msgQueueId) { 
+ forks[id] = 0; 
+ forks[(id + 1) % N] = 0; 
+ struct requestMsg msg_buf; 
+ msg_buf.mtype = id + 1; 
+ msg_buf.msg[0] = 1; 
+ msgsnd(msgQueueId, &msg_buf, sizeof(char), 0); 
+} 
+ 
+int main() { 
+ int requestMsgQueueId = msgget(MESSAGE_Q_KEY, IPC_CREAT | 0666); 
+ int responseMsgQueueId = msgget(MESSAGE_Q_KEY + 1, IPC_CREAT | 0666); 
+ size_t len = sizeof(char); 
+ 
+ //philosophers 
+
+2/2 
+ int id; 
+ for (id = 1; id <= N; id++) { // rezervisana vrednost za mtype=0  
+  if (fork() == 0) { 
+   philosopher(id); 
+  } 
+ } 
+ 
+ //waiter 
+ int *forks[N], *requests[N]; 
+ for (id = 0; id < N; id++) { 
+  forks[id] = 1; 
+  requests[id] = 0; 
+ } 
+ 
+ struct requestMsg msg_buf; 
+ while (1) { 
+  int r = msgrcv(requestMsgQueueId, &msg_buf, len, 0, 0); 
+  id = (int) msg_buf.mtype - 1; 
+ 
+  if (msg_buf.msg[0] == 1) { //request forks 
+   if (forks[id] && forks[(id + 1) % N]) { 
+    acquireForksForPhilosopher(forks, id, responseMsgQueueId); 
+   } else { 
+    requests[id] = 1; 
+   } 
+  } else { //Release forks 
+   forks[id] = 1; 
+   forks[(id + 1) % N] = 1; 
+ 
+   // check neighbors 
+   int leftNeighbour = id ? id - 1 : N - 1; 
+   int rightNeighbour = (id + 1) % N; 
+   if (requests[rightNeighbour] && forks[(rightNeighbour + 1) % N]) { 
+    requests[rightNeighbour] = 0; 
+    acquireForksForPhilosopher(forks, rightNeighbour, 
+      responseMsgQueueId); 
+   } 
+   if (requests[leftNeighbour] && forks[leftNeighbour]) { 
+    requests[leftNeighbour] = 0; 
+    acquireForksForPhilosopher(forks, leftNeighbour, 
+      responseMsgQueueId); 
+   } 
+  } 
+ } 
+}
  

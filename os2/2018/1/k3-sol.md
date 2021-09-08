@@ -1,106 +1,100 @@
+2017/januar/SI, IR Kolokvijum 3 - Januar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
 1/  2 
 Rešenja zadataka sa trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2019. 
+Operativnih sistema 2, januar 2018. 
 1. (10 poena)   
-class CLook { 
-public: 
-  CLook () : pending(0) {} 
- 
-  Req* get () const { return pending; } 
-  void remove (); 
-  void put (Req*); 
- 
-private: 
-  Req *pending; 
-}; 
- 
-void CLook::remove () { 
-  if (pending==0) return; 
-  if (pending->next==pending) { 
-    pending->next = pending->prev = 0; 
-    pending = 0; 
-  } else { 
-    Rq* rq = pending; 
-    pending = pending->next; 
-    rq->prev->next = pending; 
-    rq->next->prev = rq->prev; 
-    rq->next = rq->prev = 0; 
+int recoverBlock (unsigned dsk, unsigned long blk, byte* buffer) { 
+  byte auxBuf[BlockSize]; // Auxiliary buffer 
+  for (int i=0; i<BlockSize; i++) 
+    buffer[i] = 0; 
+  for (unsigned d=0; d<=StripeSize; d++) { 
+    if (d==dsk) continue; // Disk dsk is out of order, skip it 
+    int status = readBlock(d,blk,auxBuf); 
+    if (status!=0) return status; 
+    for (int i=0; i<BlockSize; i++) 
+      buffer[i] ^= auxBuf[i];     
   }   
+  return 0; 
 } 
 2. (10 poena) 
-freqs=$(cat /proc/cpuinfo | grep MH | cut -d: -f2 | tr -d " " | \ 
-cut -d. -f1) 
-sum=0 
-for i in $freqs; do 
- let sum=sum+i 
-done 
-count=$(echo $freqs | wc -w) 
-if [ $count -gt 0 ]; then 
- let average=sum/count 
- echo "Average=$average" 
+#!/bin/bash 
+ 
+if [ $# -ne 2 ]; then 
+    echo "Wrong number of arguments" 
+    exit 1 
 fi 
-3. (10 poena) 
-class FileTree : public Tree{ 
-public: 
-    FileTree(void *startAddress, long size) : Tree(startAddress, size) {} 
  
-    void *getLogicalAddress(void *address) override { 
-        uint64_t start, curr, result; 
+command=$1 
+dir=$2 
  
-        start = (uint64_t) segmentStartAddress; 
-        curr = (uint64_t) address; 
+pid=$(ps a | grep $command | grep -v grep | tr -s " " | cut -d" " -f2) 
  
-        if (curr < start || curr > start + segmentSize) { 
-            return 0; 
-        } 
+if kill $pid; then 
+    pushd $dir 
+    if make; then 
+ popd 
+ $command 
+    else 
+ echo "Compilation fails" 
+ exit 1 
+    fi 
+else 
+    echo "Kill command failed" 
+fi 
  
-        result = curr - start; 
-        return (void *) result; 
-    } 
+ 
 
 2/  2 
+3. (10 poena)
  
-    void *getVirtualAddress(void *address) override { 
-        uint64_t start, curr, result; 
- 
-        start = (uint64_t) segmentStartAddress; 
-        curr = (uint64_t) address; 
- 
-        if (curr > start) { 
-            return 0; 
-        } 
- 
-        result = curr - start; 
-        return (void *) result; 
-    } 
-}; 
- 
-#define MEMORY_SIZE (10000) 
-#define N (100) 
- 
-int main(int argc, char* argv[]) { 
-    if (argc != 2) { 
-        fprintf(stderr, "Arguments error"); 
-        exit(1); 
-    } 
-    int file = open(argv[1], O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP 
-| S_IWGRP); 
-    void  *tree_space  =  mmap(0,  MEMORY_SIZE,  PROT_READ  |  PROT_WRITE,  
-MAP_SHARED, file, 0); 
- 
-    // If file content does not exists 
-    // ftruncate(file, MEMORY_SIZE); 
- 
-    FileTree tree(tree_space, MEMORY_SIZE); 
-    for (int i = 0; i < N; i++) { 
-        tree.addNumber(rand()); 
-    } 
- 
-    munmap(tree_space, MEMORY_SIZE); 
+const char DEVICE_NAME[] = "/dev/ud1"; 
+const size_t DEVICE_SIZE = 1 << 30; 
+const int MSG_KEY = 1; 
+void *open_device(int *file) { 
+    int fd = open(DEVICE_NAME, O_WRONLY); 
+    void *mem_pointer =  
+          mmap(0, DEVICE_SIZE, PROT_WRITE, MAP_SHARED, fd,0); 
+    *file = fd; 
+    return mem_pointer; 
+} 
+void close_device(int file, void *address) { 
+    munmap(address, DEVICE_SIZE); 
     close(file); 
- 
+} 
+void write_io(char *device_address, int address,  
+              char *data, int size) { 
+    for (int i = 0; i < size; i++) { 
+        device_address[address + i] = data[i]; 
+    } 
+} 
+struct msg_t { 
+    int size; 
+    int address; 
+    char data[128]; 
+}; 
+struct msg_buf { 
+    long mtype; 
+    struct msg_t data; 
+}; 
+int main() { 
+    int msg_box = msgget(MSG_KEY, IPC_CREAT | 0666); 
+    int fd; 
+    void *device_address; 
+    device_address = open_device(&fd); 
+    while (1) { 
+        struct msg_buf msg; 
+        msgrcv(msg_box, &msg, sizeof(struct msg_t), 1, 0); 
+        if (msg.data.size == 0) { 
+            break; 
+        } 
+        write_io(device_address, msg.data.address, 
+                 msg.data.data, msg.data.size); 
+    } 
+    close_device(fd, device_address); 
+    msgctl(msg_box, IPC_RMID, 0); 
     return 0; 
 } 
+ 

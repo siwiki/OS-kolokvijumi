@@ -1,121 +1,158 @@
+2017/januar/SI, IR Kolokvijum 1 - Januar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
-1/  2 
+1/  3 
 Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Januar 2019. 
+Januar 2018. 
 1. (10 poena) 
 class Scheduler { 
 public:  
-  Scheduler () {...} 
-  PCB* get (); 
- 
-  void remove (PCB*); 
-  void put (PCB*); 
- 
+  Scheduler (); 
+  PCB* get (int proc); 
+  void put (PCB*, unsigned long elapsed); 
 private: 
-  ProcGroup *head, *tail; 
-  ProcGroup *runningGroup; 
-  PCB *runningProc; 
+  static const int P; 
+  PCB* head[P];  // Heads of processors' ready lists 
+  unsigned long size[P]; // Number of processes in each ready list 
 }; 
  
-PCB* Scheduler::get () { 
-  if (runningProc==0 || runningGroup==0) return 0; // Exception! 
-  runningProc = runningProc->next; 
-  while (!runningProc) { 
-    runningGroup = runningGroup->next; 
-    if (!runningGroup) runningGroup = head; 
-    runningProc = runningGroup->head; 
-  }   
-  runningProc->slice = runningGroup->slice/runningGroup->size; 
-  return runningProc; 
+Scheduler::Scheduler () { 
+  for (int i=0; i<P; i++) head[i]=size[i]=0; 
 } 
+ 
+void Scheduler::put (PCB* pcb, unsigned long elapsed) { 
+  if (pcb==0) return; // Exception! 
+  int proc = pcb->affinity;  // Processor to schedule on 
+  if (elapsed==0) { 
+    pcb->execTime = 0; 
+    unsigned long minSize = size[0]; 
+    proc = 0; 
+    for (int p=1; p<P; p++) 
+      if (size[p]<minSize) { 
+        proc = p; 
+        minSize = size[p]; 
+    } 
+    pcb->affinity = proc; 
+  }   
+  // Put pcb in proc's queue: 
+  pcb->execTime += elapsed; 
+  PCB *prev=0, *cur=head[proc]; 
+  while (cur && cur->execTime<=pcb->execTime) { 
+    prev = cur; cur = cur->next;   
+  }   
+  if (prev==0) { 
+    pcb->next = head[proc]; 
+    head[proc] = pcb; 
+  } else { 
+    prev->next = pcb; 
+    pcb->next = cur; 
+  }   
+  size[proc]++; 
+} 
+ 
+PCB* Scheduler::get (int proc) { 
+  PCB* ret = head[proc]; 
+  if (ret) { 
+     head[proc] = ret->next; 
+     ret->next = 0; 
+     size[proc]--; 
+  }   
+  return ret; 
+} 
+
+2/  3 
 2. (10 poena) 
-class TickTuck { 
-  private boolean canTuck = false; 
+class Toggle { 
+  public Toggle () {} 
  
-  synchronized void tick () { 
-    // do tick 
-    canTuck = true; 
-    notify();   
+  public synchronized flip () { 
+    while (!toggle) wait(); 
+    // do flip 
+    toggle = false; 
+    notifyAll(); 
   }   
  
-  synchronized void tuck () { 
-    while (!canTuck) wait(); 
-    // do tuck 
-    canTuck = false; 
+  public synchronized flop () { 
+    while (toggle) wait(); 
+    // do flop 
+    toggle = true; 
+    notifyAll(); 
   }   
+ 
+  private bool toggle = true; 
 } 
 3. (10 poena) 
-public class Server extends Thread{ 
-    private final Service input; 
-    private  final  Map<String,  String>  m_messages  =  new  Has  hMap<String, 
-String>(); 
- 
-    public Server(Socket input) throws IOException { 
-        this.input = new Service(input); 
- 
-        start(); 
-        work(); 
+public class Server { 
+    private int port; 
+    private boolean reject = false; 
+    private int acceptedClients = 0; 
+    public Server(int port) { 
+        this.port = port; 
     } 
- 
-
-2/  2 
-    private void work() throws IOException { 
-        ServerSocket server = new ServerSocket(5555); 
-        while (true) { 
-            Socket client = server.accept(); 
-            Service service = new Service(client); 
-            Thread reqHandler = new RequestHandler(this, service); 
-            reqHandler.start(); 
-        } 
-    } 
- 
-    public void run() { 
-        while (true) { 
-            String key = input.readMessage(); 
-            String msg = input.readMessage(); 
- 
-            addMessage(key, msg); 
-        } 
-    } 
- 
-    public synchronized void addMessage(String key, String msg) { 
-        m_messages.put(key, msg); 
-        notifyAll(); 
-    } 
- 
-    public    synchronized    String    getMessage(String    key)    throws    
-InterruptedException { 
-        while (!m_messages.containsKey(key)) { 
-            wait(); 
-        } 
- 
-        return m_messages.remove(key); 
-    } 
-} 
- 
-public class RequestHandler extends Thread { 
-    private final Server server; 
-    private final Service service; 
- 
-    public RequestHandler(Server server, Service service) { 
-        this.server = server; 
-        this.service = service; 
-    } 
- 
-    public voi  d run() { 
-        String key = service.readMessage(); 
- 
-        String msg = null; 
+    public void work() { 
+        ServerSocket serverSocket = null; 
         try { 
-            msg = server.getMessage(key); 
-            service.sendMessage(msg); 
-        } catch (InterruptedException e) { 
+            serverSocket = new ServerSocket(port); 
+        } catch (IOException e) { 
             e.printStackTrace(); 
-          } 
+            return; 
+        } 
+        while (true) { 
+            try { 
+                Socket client = serverSocket.accept(); 
+                Service service = new Service(client); 
+                if (!clientAdmission(service)) continue; 
+                Thread worker = new RequestHandler(this, service); 
+                worker.start(); 
+            } catch (IOException e) { 
+                e.printStackTrace(); 
+            } 
+        } 
+    } 
+    public synchronized boolean clientAdmission(Service service) { 
+        if (reject) { 
+            service.sendMessage("rejected"); 
+            return false; 
+        } 
+        acceptedClients++; 
+        service.sendMessage("accepted"); 
+        return true; 
+    } 
+    public synchronized void clientFinished() { 
+        acceptedClients--; 
+        if (acceptedClients > 0) { 
+            reject = true; 
+        } else { 
+            reject = false; 
+
+3/  3 
+        } 
+    } 
+    public   static   void   main(String[]   args)   throws   IOException,   
+InterruptedException { 
+        Server server = new Server(5555); 
+        server.work(); 
     } 
 } 
- 
-Klasa Service je data na vezbama. 
+public class RequestHandler extends Thread { 
+    private Server server; 
+    private Service service; 
+    public RequestHandler(Server server, Service service) throws IOException 
+{ 
+        this.service = service; 
+        this.server = server; 
+    } 
+    public void run() { 
+        try { 
+            String line = service.receiveMessage(); 
+            while (!line.equals("end")) { 
+                line = service.receiveMessage(); 
+            } 
+            server.clientFinished(); 
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+        } 
+    } 
+} 
  

@@ -1,98 +1,97 @@
+2018/januar/SI, IR Kolokvijum 2 - Januar 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
 1/  2 
 Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, januar 2020. 
-1. (10 poena) a)(7) Ideja algoritma jeste u tome da se ispita da li postoji ciklična kombinacija 
-držanja i čekanja ugnežđenih kritičnih sekcija različitih procesa koja je u skladu sa strukturom 
-njihovog korišćenja. Drugim rečima, konstruiše se graf alokacije resursa (resursi su ovde 
-kritične sekcije) za sve situacije u kojima procesi mogu da drže neke resurse i čekaju na neke 
-resurse, u skladu sa strukturom programa, i proverava se da li u takvim grafovima postoje 
-petlje. Mrtva blokada je moguća ako i samo ako se otkrije takva petlja. 
-Preciznije, algoritam izgleda ovako. Posmatraju se sve staze od korena svakog stabla 
-ugnežđivanja kritičnih sekcija do svakog od listova tog stabla. Za svaku takvu stazu 
-posmatraju se podstaze od korena, a koje sadrže najmanje dva čvora sa resursima. Za svaku 
-od odabranih podstaza pretpostavlja se da je odgovarajući proces zauzeo sve resurse osim 
-poslednjeg u stazi, a čeka na taj poslednji (najdalji od korena). Posmatraju se sve kombinacije 
-takvih podstaza, po jedna iz svakog stabla (tj. po jedna za svaki proces). Za svaku takvu 
-kombinaciju konsturiše se graf zauzeća resursa od strane procesa: čvorovi su procesi i resursi 
-(ovde kritične sekcije), grana zauzeća polazi od resursa i ide do procesa koji je taj resurs 
-zauzeo (za sve čvorove u podstazi osim poslednjeg), a grana potražnje ide od procesa do 
-resursa na koji on čeka (za poslednji resurs u podstazi). Pritom se isključuju (ne uzimaju u 
-obzir) oni grafovi zauzeća koji ne zadovoljavaju oba sledeća dva uslova: 
-1) Iz svakog čvora može polaziti najviše jedna izlazna grana (svaki resurs može držati najviše 
-jedan proces; svaki proces može čekati najviše na jedan resurs, što je zadovoljeno samom 
-kontrukcijom grafa). 
-2) Ako u čvor za resurs ulazi grana, onda iz nje mora izlaziti grana (ako neki proces čeka na 
-neki resurs, onda je taj resurs zauzet). 
-Za svaki tako konstruisan graf zauzeća proverava se postojanje petlje. 
-Ovaj algoritam se može optimizovati smanjivanjem prostora pretrage, recimo ovako: ako u 
-datom grafu zauzeća nije zadovoljen uslov 1), onda taj uslov neće biti zadovoljen ni za 
-grafove za sve druge kombinacije podstaza u kom su te podstaze nadskupovi podstaza prvog 
-grafa, tj. pretraga ne treba dalje da analizira kombinacije dužih nadstaza. 
-b)(3) Za datu šumu stabala, podstaze koje se uzimaju u obzir su sledeće: 
-P1: {A-B, A-B-C}; P2: {C-D, C-E}; P3: {D-A, D-A-E} 
-Za kombinaciju staza: P1: A-B-C, P2: C-D, P3: D-A graf zauzeća izgleda ovako i poseduje 
-petlju A-P1-C-P2-D-P3-A, pa je mrtva blokada moguća: 
+Operativnih sistema 2, januar 2019. 
+1. (10 poena) a)(7) Da bi se proverilo da li mrtva blokada sigurno postoji, treba eliminisati 
+sve procese koji mogu dobiti tražene resurse i potom možda osloboditi one koje već drže: 
+ 
+Allocation 
+  
+Request 
+ Available 
+ A B C   A B C  A B C 
+P1 1 0 1  P1 0 1 3  0 0 0 
+P2 2 1 1  P2 0 0 0     
+P3 0 1 1  P3 2 0 1     
+P4 0 1 1  P4 3 1 0     
+Proces P2 ne traži resurse, pa se može dogoditi da on oslobodi svoje zauzete resurse: 
+ 
+Allocation 
+  
+Request 
+ Available 
+ A B C   A B C  A B C 
+P1 1 0 1  P1 0 1 3  2 1 1 
+P2 2 1 1  P2 0 0 0     
+P3 0 1 1  P3 2 0 1     
+P4 0 1 1  P4 3 1 0     
+Sada proces P3 može da dobije tražene resurse, jer je za njega Request
+3
+ ≤ Available, pa se 
+može dogoditi da on oslobodi svoje resurse:
  
  
-P1
-ABCD
-P2P3
+Allocation 
+  
+Request 
+ Available 
+ A B C   A B C  A B C 
+P1 1 0 1  P1 0 1 3  2 2 2 
+P2 2 1 1  P2 0 0 0     
+P3 0 1 1  P3 2 0 1     
+P4 0 1 1  P4 3 1 0     
+Međutim, sada ni proces P1 ni proces P4 ne može da dobije tražene resurse jer ni za jedan od 
+njih ne važi Request
+i
+ ≤ Available, pa su ova dva procesa sigurno u mrtvoj blokadi. 
+b)(3) Može se ugasiti bilo koji od ova dva procesa i mrtva blokada će biti rešena (lako se 
+proverava na opisani način). Da to nije tako, tj. ako bi ostao jedan proces koji ne može 
+zadovoljiti svoje zahteve, to bi značilo da su njegovi zahtevi za resursima veći od ukupno 
+raspoložive količine resursa u sistemu, pa on svakako ne može da se izvršava čak ni sam. 
 
 2/  2 
 2. (10 poena) 
-#include <fcntl.h> 
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <sys/mman.h> 
-inline void handle_err (const char* msg) { 
-  fprintf(stderr, "Error: %s", msg); exit(-1); 
+const uint16 PMTSize = ((uint16)1)<<10; 
+typedef uint32 PgDesc[2]; 
+ 
+PgDesc* _getVictimPageDesc (uint32* pmt, uint8 flags) { 
+  for (uint16 i=0; i<PMTSize; i++) { 
+    PgDesc* pmt1 = (PgDesc*)(pmt[i]); 
+    if (pmt1==0) continue; 
+    for (uint16 j=0; j<PMTSize; j++) { 
+      uint32 pgDesc = pmt1[j][0]; 
+      if ((pgDesc>>30)==flags) return &pmt1[j]; 
+    } 
+  }   
+  return 0; 
 } 
  
-const size_t MAX_ARRAY_SIZE = ...; 
-const size_t MEM_SIZE = (MAX_ARRAY_SIZE+2)*sizeof(unsigned); 
+PgDesc* getVictimPageDesc (uint32* pmt) { 
+  if (pmt==0) return 0; // Exception 
+  PgDesc* victim = 0; 
  
-int main (int argc, char* argv[]) { 
-  if (argc != 2) handle_err("Expecting one argument for the file."); 
+  victim = _getVictimPageDesc(pmt,0); 
+  if (victim) return victim; 
  
-  fd = open(argv[1], O_RDWR); 
-  if (fd == -1) handle_err("Cannot open file."); 
+  victim = _getVictimPageDesc(pmt,2); 
+  if (victim) return victim; 
  
-  void* addr = mmap(NULL, MEM_SIZE, PROT_WRITE, MAP_SHARED, fd, 0); 
-  if (addr == MAP_FAILED) handle_err("Cannot map file."); 
+  victim = _getVictimPageDesc(pmt,1); 
+  if (victim) return victim; 
  
-  unsigned size = *((unsigned*)addr+1); 
-  unsigned *array = (unsigned*)addr+2; 
-  unsigned max = 0; 
-  for (unsigned i=0; i<size; i++) 
-    if (array[i] > max) max = i; 
-  *(unsigned*)addr = max; 
+  victim = _getVictimPageDesc(pmt,3); 
+  if (victim) return victim; 
  
-  munmap(addr, MEM_SIZE); 
-  close(fd); 
-  exit(0); 
+  return 0; // Exception: there are no pages of this process 
 } 
+ 
 3. (10 poena) 
-a)(5) 
-n 
-Početne adrese (hex) slobodnih blokova veličine 2
-n
- 
-4 - 
-3 - 
-2 AC 000 
-1 AA 000 
-0 A3 000 
-b)(5) 
-n 
-Početne adrese (hex) slobodnih blokova veličine 2
-n
- 
-4 - 
-3 A8 000 
-2 - 
-1 A2 000 
-0 - 
- 
+Dati  program  ispisuje  deo  sadržaja  fajla  zadatog  svojim  prvim  argumentom  iz  komandne 
+linije  na  standardni  izlaz. Opseg bajtova sadržaja fajla koji se ispisuju zadaje se pomerajem 
+(offset) i dužinom (length) u drugom i trećem argumentu komandne linije (ako treći argument 
+nije  zadat  ili  prebacuje  veličinu  fajla,  ispisuje  se  sadržaj  do  kraja  fajla).  Program  pravi 
+memorijsko  preslikavanje  sadržaja  fajla  potrebne  veličine  u  stranicama  (i  poravnat  na 
+stranicu) i potom ispisuje tražene bajtove na standardni izlaz sistemskim pozivom write. 

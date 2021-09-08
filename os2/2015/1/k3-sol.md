@@ -1,101 +1,71 @@
+2014/januar/SI, IR Kolokvijum 3 - Januar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
 1/2 
 Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2016. 
-1. (10 poena)   
-class DiskScheduler { 
-public:  
-  DiskScheduler (); 
-  DiskRequest* get (); 
-  void put (DiskRequest*); 
-private: 
-  DiskRequest *head, *cursor; 
-}; 
- 
-DiskScheduler::DiskScheduler () : head(0), cursor(0) {} 
- 
-void DiskScheduler::put (DiskRequest* req) { 
-  if (req==0) return; // Exception! 
-  for (DiskRequest *prv=0, *nxt=head; nxt && nxt->cyl<=req->cyl; 
-       prv=nxt, nxt=nxt->next); 
-  req->prev = prv; 
-  req->next = nxt; 
-  if (prv) prv->next = req; 
-  else head = req; 
-  if (nxt) nxt->prev = req; 
-  if (!cursor) cursor = req; 
-} 
- 
-DiskRequest* DiskScheduler::get () { 
-  if (!cursor) return 0; 
-  DiskRequest* req = cursor; 
-  if (req->prev) req->prev->next = req->next; 
-  else head = req->next; 
-  if (req->next) req->next->prev = req->prev; 
-  cursor = cursor->next; 
-  if (!cursor) cursor = head; 
-  req->prev = req->next = 0; 
-  return req; 
+Operativnih sistema 2, januar 2015. 
+1. (10 poena)  
+int fopen(const char* fname, int mode) { 
+  if(fname==0) return -1; 
+  int ret = 0; 
+  int pid = getPID(); 
+  if (pid<0) return -1;  // Exception 
+  // Prepare the ”command line”: 
+  const int buffersz = 1024; 
+  char buffer[buffersz]; 
+  ret = snprintf(buffer,buffersz,”open %d,%s,%d”,pid,fname,mode); 
+  if (ret<0 || ret>=buffersz) return -1; // Exception 
+  // Send the request and get the reply: 
+  ret = send(FILE_LISTENER,buffer,strlen(buffer)+1); 
+  if (ret<0) return -1; // Exception 
+  ret = receive(FILE_LISTENER,buffer,buffersz); 
+  if (ret<0) return -1; // Exception 
+  if (sscanf(buffer,”%d”,&ret)<=0) return -1; 
+  return ret; 
 } 
 2. (10 poena) 
-#!/bin/bash 
+!/bin/bash 
  
-if [ $# -ne 4 ]; then 
-    echo "Nedovoljan broj parametara" 
+if [ $# -ne 1 ];then 
+    echo "Nedovoljan broj argumenata." 
     exit 1 
 fi 
  
 file=$1 
+cat $file | sed 's/^.\{5\}\([0-9]\).*$/\1 &/' | sort |  
+sed 's/^[^\ ]*\ \(.*\)$/\1/' 
+3. (10 poena) 
+int main(int argc, const char **argv) { 
+ if (argc > 2) { 
+  M = atoi(argv[1]); 
+  N = atoi(argv[2]); 
+ } else 
+  return -1; 
  
-if [ ! -r $file ]; then 
-    echo "Ulazni fajl ne moze da se cita" 
-    exit 1 
-fi 
+ int requestMsgQueueId = msgget(MESSAGE_Q_KEY, IPC_CREAT | 0666); 
+ int responseMsgQueueId = msgget(MESSAGE_Q_KEY + 1, IPC_CREAT | 0666); 
+ size_t len = sizeof(char); 
  
-voz=$2 
-hh=$3 
-mm=$4 
+ int cars = 0; 
+ struct requestMsg msg_buf; 
+ while (1) { 
  
+  if (cars < N) { // let one vehicle enter 
+ 
+   // msgtyp<0 – primiti prvu poruku sa najnižom vrednošću tipa koja je  
+   // manja ili jednaka apsolutnoj vrednosti msgtyp; 
+   msgrcv(requestMsgQueueId, &msg_buf, len, -M, 0); 
+ 
+   cars++; 
+   // msg_buf.mtype je isti 
 
 2/2 
-for i in $(cat $file | grep "^$voz\ " | sed "s/^$voz\ \(.*\)/\1/"); do 
-    voz_hh=$(echo $i | sed "s/\([0-9][0-9]\).*/\1/") 
-    voz_mm=$(echo $i | sed "s/.*\:\([0-9][0-9]\)/\1/") 
-    if [ "$voz_hh" -gt "$hh" ]; then 
-        echo $i 
-        exit 0 
-    fi 
-    if [ "$voz_hh" -eq "$hh" -a "$voz_mm" -gt "$mm" ]; then 
-       echo $i 
-       exit 0 
-    fi 
-done 
- 
-3. (10 poena) 
- 
-struct msgbuf 
-{ 
-  long mtype; 
-  int sender; 
-}; 
- 
-void barrier(int id, int msg_box) 
-{ 
-  struct msgbuf msg; 
- 
-  for (int i = 0; i < NUM_PROCESS; i++) { 
-    if (i == id) 
-      continue; 
-    msg.mtype = i + 1; 
-    msg.sender = id; 
-    msgsnd(msg_box, &msg, sizeof(int), 0); 
+   msgsnd(responseMsgQueueId, &msg_buf, sizeof(char), 0);  
+  } else { //wait for a car to leave 
+   msgrcv(requestMsgQueueId, &msg_buf, len, M + 1, 0); 
+   cars--; 
   } 
- 
-  for (int i = 0; i < NUM_PROCESS; i++) { 
-    if (i == id) 
-      continue; 
-    msgrcv(msg_box, &msg, sizeof(int), id + 1, 0); 
-  } 
+ } 
 } 
+ 

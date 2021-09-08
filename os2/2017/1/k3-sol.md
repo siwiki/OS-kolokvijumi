@@ -1,99 +1,116 @@
+2016/januar/SI, IR Kolokvijum 3 - Januar 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
-1/  2 
-Rešenja zadataka sa trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2018. 
-1. (10 poena)   
-int recoverBlock (unsigned dsk, unsigned long blk, byte* buffer) { 
-  byte auxBuf[BlockSize]; // Auxiliary buffer 
-  for (int i=0; i<BlockSize; i++) 
-    buffer[i] = 0; 
-  for (unsigned d=0; d<=StripeSize; d++) { 
-    if (d==dsk) continue; // Disk dsk is out of order, skip it 
-    int status = readBlock(d,blk,auxBuf); 
-    if (status!=0) return status; 
-    for (int i=0; i<BlockSize; i++) 
-      buffer[i] ^= auxBuf[i];     
-  }   
-  return 0; 
+1/2 
+Rešenja trećeg kolokvijuma iz  
+Operativnih sistema 2, januar 2017. 
+1. (10 poena)  
+DiskRequest* DiskScheduler::get () { 
+  if (!edfHead || !scanHead) return 0; 
+  DiskRequest* req = 0; 
+  // Select the request: 
+  if (edfHead->deadline<=0) 
+    req = edfHead; 
+  else 
+    req = scanHead; 
+  // Remove it from the EDF queue: 
+  if (req->edfPrev) req->edfPrev->edfNext = req->edfNext; 
+  else edfHead = req->edfNext; 
+  if (req->edfNext) req->edfNext->edfPrev = req->edfPrev; 
+  req->edfPrev = req->edfNext = 0; 
+  // Remove it from the SCAN queue: 
+  if (req->scanNext!=req) 
+    scanHead = req->scanNext; 
+  else 
+    scanHead = 0; 
+  req->scanPrev->scanNext = req->scanNext; 
+  req->scanNext->scanPrev = req->scanPrev; 
+  req->scanNext = req->scanPrev = 0; 
+  return req; 
 } 
 2. (10 poena) 
 #!/bin/bash 
  
-if [ $# -ne 2 ]; then 
-    echo "Wrong number of arguments" 
+if [ $# -ne 3 ]; then
+ 
+    echo "Nedovoljan broj argumenata" 
     exit 1 
 fi 
  
-command=$1 
+sablon=$1
+ 
 dir=$2 
+pravo=$3 
  
-pid=$(ps a | grep $command | grep -v grep | tr -s " " | cut -d" " -f2) 
+old_IFS=$IFS
  
-if kill $pid; then 
-    pushd $dir 
-    if make; then 
- popd 
- $command 
-    else 
- echo "Compilation fails" 
- exit 1 
+IFS=$'\n' 
+for i in $(find "$dir" -name '*'); do 
+    ime=$(echo $i | sed 's:.*/\([^/]*\)$:\1:') 
+    if echo $ime | grep $sablon; then 
+      if [ -f $i ]; then 
+          chmod a+$pravo $i 
+      fi 
     fi 
-else 
-    echo "Kill command failed" 
-fi 
- 
+done 
+IFS=$old_IFS 
  
 
-2/  2 
-3. (10 poena)
+2/2 
  
-const char DEVICE_NAME[] = "/dev/ud1"; 
-const size_t DEVICE_SIZE = 1 << 30; 
-const int MSG_KEY = 1; 
-void *open_device(int *file) { 
-    int fd = open(DEVICE_NAME, O_WRONLY); 
-    void *mem_pointer =  
-          mmap(0, DEVICE_SIZE, PROT_WRITE, MAP_SHARED, fd,0); 
-    *file = fd; 
-    return mem_pointer; 
-} 
-void close_device(int file, void *address) { 
-    munmap(address, DEVICE_SIZE); 
-    close(file); 
-} 
-void write_io(char *device_address, int address,  
-              char *data, int size) { 
-    for (int i = 0; i < size; i++) { 
-        device_address[address + i] = data[i]; 
-    } 
-} 
-struct msg_t { 
-    int size; 
-    int address; 
-    char data[128]; 
-}; 
-struct msg_buf { 
-    long mtype; 
-    struct msg_t data; 
-}; 
+3. (10 poena) 
+                                #include                <stdio.h> 
+#include <unistd.h> 
+ 
+#define INPUT 0 
+#define OUTPUT 1 
+#define LEFT 0 
+#define RIGHT 1 
+#define NUM 6 
+#define ITERATIONS (1000) 
+ 
 int main() { 
-    int msg_box = msgget(MSG_KEY, IPC_CREAT | 0666); 
-    int fd; 
-    void *device_address; 
-    device_address = open_device(&fd); 
-    while (1) { 
-        struct msg_buf msg; 
-        msgrcv(msg_box, &msg, sizeof(struct msg_t), 1, 0); 
-        if (msg.data.size == 0) { 
-            break; 
+    int file_descriptors[2][NUM][2]; 
+    for (int j = 0; j < 2; j++) { 
+        for (int i = 0; i < NUM; i++) { 
+            pipe(file_descriptors[j][i]); 
         } 
-        write_io(device_address, msg.data.address, 
-                 msg.data.data, msg.data.size); 
     } 
-    close_device(fd, device_address); 
-    msgctl(msg_box, IPC_RMID, 0); 
-    return 0; 
-} 
  
+    int id = 0; 
+    for (int i = 1; i < NUM;i++) { 
+        id = i; 
+        if (fork() > 0) { 
+            break; 
+        } else { 
+            id = 0; 
+        } 
+    } 
+ 
+    double value = id + 1; 
+    double ratio = 0.5; 
+    int left = (NUM + id - 1) % NUM; 
+    int right = (id + 1) % NUM; 
+    for (int i = 0; i < ITERATIONS; i++) { 
+        double share = value * ratio; 
+        write(file_descriptors[LEFT][id][OUTPUT] , &share, sizeof(double)); 
+        share = value * (1 - ratio); 
+        write(file_descriptors[RIGHT][id][OUTPUT], &share, sizeof(double)); 
+        double left_share, right_share; 
+        read(file_descriptors[LEFT][left][INPUT],  
+                             &left_share,             sizeof(double)); 
+        read(file_descriptors[RIGHT][right][INPUT],  
+                             &right_share,             sizeof(double)); 
+        value = left_share + right_share; 
+        ratio = left_share / value; 
+    } 
+    printf("id=%d share=%.2f\n", id, value); 
+ 
+    for (int j = 0; j < 2; j++) { 
+        for (int i = 0; i < NUM; i++) { 
+            close(file_descriptors[j][i][INPUT]); 
+            close(file_descriptors[j][i][OUTPUT]); 
+        } 
+    } 
+    return 0; 

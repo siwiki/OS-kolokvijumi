@@ -1,176 +1,122 @@
+2018/januar/SI, IR Kolokvijum 1 - Januar 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
-1/  3 
+1/  2 
 Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Januar 2020. 
+Januar 2019. 
 1. (10 poena) 
 class Scheduler { 
 public:  
-  Scheduler (): active(0) {} 
+  Scheduler () {...} 
   PCB* get (); 
-  void put (PCB*, bool timeExpired=false); 
+ 
+  void remove (PCB*); 
+  void put (PCB*); 
  
 private: 
-  class ProcList { 
-  public: 
-    ProcList () : head(0), tail(0) {} 
-    void put (PCB* p); 
-    PCB* get (); 
-  private: 
-    PCB *head, *tail; 
-  }; 
- 
-  ProcList ready[2][MaxPri+1]; 
-  int active; 
+  ProcGroup *head, *tail; 
+  ProcGroup *runningGroup; 
+  PCB *runningProc; 
 }; 
  
-inline void Scheduler::ProcList::put (PCB* p) { 
-  if (tail) tail->next = p; 
-  else head = tail = p; 
-  p  ->next = 0; 
-} 
- 
-inline PCB* Scheduler::ProcList::get () { 
-  PCB* ret = head; 
-  if (head) head = head->next; 
-  if (!head) tail = 0; 
-  return ret; 
-} 
- 
-PCB* Scheduler:: put (PCB* p, bool timeExpired=false) { 
-  int set = (timeExpired?(1-active):active); 
-  ready[set][p->pri].put(p); 
-} 
- 
 PCB* Scheduler::get () { 
-  int oldActive = active; 
-  do { 
-    for (int i=0; i<=MaxPri; i++) { 
-      PCB* p = ready[active][i].get(); 
-      if (p) return p; 
-    } 
-    active = 1-active; 
-  } while (active!=oldActive); 
-  return 0; 
+  if (runningProc==0 || runningGroup==0) return 0; // Exception! 
+  runningProc = runningProc->next; 
+  while (!runningProc) { 
+    runningGroup = runningGroup->next; 
+    if (!runningGroup) runningGroup = head; 
+    runningProc = runningGroup->head; 
+  }   
+  runningProc->slice = runningGroup->slice/runningGroup->size; 
+  return runningProc; 
 } 
- 
-
-2/  3 
 2. (10 poena) 
-monitor Agent; 
-  export takeRedAndGreen, 
-         takeGreenAndBlue, 
-         takeRedAndBlue, 
-  var 
-    redAvailable, greenAvailable, blueAvailable : boolean; 
-    waitRG, waitGB, waitRB : condition; 
+class TickTuck { 
+  private boolean canTuck = false; 
  
-  procedure takeRedAndGreen (); 
-  begin 
-    if not (redAvailable and greenAvailable) then 
-      waitRG.wait(); 
-    redAvailable := false; 
-    greenAvailable := false; 
-    putTokens(); 
-  end; 
+  synchronized void tick () { 
+    // do tick 
+    canTuck = true; 
+    notify();   
+  }   
  
-  procedure takeGreenAndBlue (); 
-  begin 
-    if not (greenAvailable and blueAvailable) then 
-      waitGB.wait(); 
-    greenAvailable := false; 
-    blueAvailable := false; 
-    putTokens(); 
-  end; 
+  synchronized void tuck () { 
+    while (!canTuck) wait(); 
+    // do tuck 
+    canTuck = false; 
+  }   
+} 
+3. (10 poena) 
+public class Server extends Thread{ 
+    private final Service input; 
+    private  final  Map<String,  String>  m_messages  =  new  Has  hMap<String, 
+String>(); 
  
-  procedure takeRedAndBlue (); 
-  begin 
-    if not (redAvailable and blueAvailable) then 
-      waitRB.wait(); 
-    redAvailable := false; 
-    blueAvailable := false; 
-    putTokens(); 
-  end; 
+    public Server(Socket input) throws IOException { 
+        this.input = new Service(input); 
  
-  procedure procedure putTokens (); 
-  begin 
-    ...  (* Randomly select two colors and put tokens on the table 
-            by setting two Boolean variables to True *) (); 
-    if redAvailable and greenAvailable then 
-      waitRG.signal(); 
-    if greenAvailable and blueAvailable then 
-      waitGB.signal(); 
-    if redAvailable and blueAvailable then 
-      waitRB.signal(); 
-  end; 
-begin 
-  putTokens(); 
-end; 
- 
- 
- 
- 
+        start(); 
+        work(); 
+    } 
  
 
-3/  3 
-3. (10 poena) 
-public class Server { 
-    private final static int N = 10; 
-    private final ServerSocket socket; 
-    private int numOfClients = 0; 
- 
-    public Server() throws IOException { 
-        socket = new ServerSocket(5555); 
-    } 
- 
-    public void work() throws IOException { 
-        while(true) { 
-            Socket client = socket.accept(); 
- 
-            new RequestHandler(client, this).start(); 
+2/  2 
+    private void work() throws IOException { 
+        ServerSocket server = new ServerSocket(5555); 
+        while (true) { 
+            Socket client = server.accept(); 
+            Service service = new Service(client); 
+            Thread reqHandler = new RequestHandler(this, service); 
+            reqHandler.start(); 
         } 
     } 
  
-    public synchronized int addClient() { 
-        numOfClients++; 
+    public void run() { 
+        while (true) { 
+            String key = input.readMessage(); 
+            String msg = input.readMessage(); 
+ 
+            addMessage(key, msg); 
+        } 
+    } 
+ 
+    public synchronized void addMessage(String key, String msg) { 
+        m_messages.put(key, msg); 
         notifyAll(); 
-        return numOfClients + N; 
     } 
  
-    public synchronized void waitNewUsers(int count) { 
-        while(count > numOfClients) { 
-            try { 
-                wait(); 
-            } catch (InterruptedException e) { 
-                e.printStackTrace(); 
-            } 
+    public    synchronized    String    getMessage(String    key)    throws    
+InterruptedException { 
+        while (!m_messages.containsKey(key)) { 
+            wait(); 
         } 
+ 
+        return m_messages.remove(key); 
     } 
 } 
  
 public class RequestHandler extends Thread { 
-    private final Socket client; 
     private final Server server; 
+    private final Service service; 
  
-    public RequestHandler(Socket client, Server server) { 
-        this.client = client; 
+    public RequestHandler(Server server, Service service) { 
         this.server = server; 
+        this.service = service; 
     } 
  
-    public void run() { 
-        Service service = new Service(client); 
-        String msg = service.receiveMessage(); 
+    public voi  d run() { 
+        String key = service.readMessage(); 
  
-            if (msg.equals("Login")) { 
-                int count = server.addClient(); 
-                server.waitNewUsers(count); 
-                service.sendMessage("Continue"); 
- 
-            } 
+        String msg = null; 
+        try { 
+            msg = server.getMessage(key); 
+            service.sendMessage(msg); 
+        } catch (InterruptedException e) { 
+            e.printStackTrace(); 
+          } 
     } 
 } 
  
-Klasa Service (Usluga) je data na vežbama. 
- 
+Klasa Service je data na vezbama. 
  

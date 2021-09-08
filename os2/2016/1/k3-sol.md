@@ -1,115 +1,102 @@
+2015/januar/SI, IR Kolokvijum 3 - Januar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
 
 
 1/2 
 Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2017. 
-1. (10 poena)  
+Operativnih sistema 2, januar 2016. 
+1. (10 poena)   
+class DiskScheduler { 
+public:  
+  DiskScheduler (); 
+  DiskRequest* get (); 
+  void put (DiskRequest*); 
+private: 
+  DiskRequest *head, *cursor; 
+}; 
+ 
+DiskScheduler::DiskScheduler () : head(0), cursor(0) {} 
+ 
+void DiskScheduler::put (DiskRequest* req) { 
+  if (req==0) return; // Exception! 
+  for (DiskRequest *prv=0, *nxt=head; nxt && nxt->cyl<=req->cyl; 
+       prv=nxt, nxt=nxt->next); 
+  req->prev = prv; 
+  req->next = nxt; 
+  if (prv) prv->next = req; 
+  else head = req; 
+  if (nxt) nxt->prev = req; 
+  if (!cursor) cursor = req; 
+} 
+ 
 DiskRequest* DiskScheduler::get () { 
-  if (!edfHead || !scanHead) return 0; 
-  DiskRequest* req = 0; 
-  // Select the request: 
-  if (edfHead->deadline<=0) 
-    req = edfHead; 
-  else 
-    req = scanHead; 
-  // Remove it from the EDF queue: 
-  if (req->edfPrev) req->edfPrev->edfNext = req->edfNext; 
-  else edfHead = req->edfNext; 
-  if (req->edfNext) req->edfNext->edfPrev = req->edfPrev; 
-  req->edfPrev = req->edfNext = 0; 
-  // Remove it from the SCAN queue: 
-  if (req->scanNext!=req) 
-    scanHead = req->scanNext; 
-  else 
-    scanHead = 0; 
-  req->scanPrev->scanNext = req->scanNext; 
-  req->scanNext->scanPrev = req->scanPrev; 
-  req->scanNext = req->scanPrev = 0; 
+  if (!cursor) return 0; 
+  DiskRequest* req = cursor; 
+  if (req->prev) req->prev->next = req->next; 
+  else head = req->next; 
+  if (req->next) req->next->prev = req->prev; 
+  cursor = cursor->next; 
+  if (!cursor) cursor = head; 
+  req->prev = req->next = 0; 
   return req; 
 } 
 2. (10 poena) 
 #!/bin/bash 
  
-if [ $# -ne 3 ]; then
- 
-    echo "Nedovoljan broj argumenata" 
+if [ $# -ne 4 ]; then 
+    echo "Nedovoljan broj parametara" 
     exit 1 
 fi 
  
-sablon=$1
+file=$1 
  
-dir=$2 
-pravo=$3 
+if [ ! -r $file ]; then 
+    echo "Ulazni fajl ne moze da se cita" 
+    exit 1 
+fi 
  
-old_IFS=$IFS
- 
-IFS=$'\n' 
-for i in $(find "$dir" -name '*'); do 
-    ime=$(echo $i | sed 's:.*/\([^/]*\)$:\1:') 
-    if echo $ime | grep $sablon; then 
-      if [ -f $i ]; then 
-          chmod a+$pravo $i 
-      fi 
-    fi 
-done 
-IFS=$old_IFS 
+voz=$2 
+hh=$3 
+mm=$4 
  
 
 2/2 
+for i in $(cat $file | grep "^$voz\ " | sed "s/^$voz\ \(.*\)/\1/"); do 
+    voz_hh=$(echo $i | sed "s/\([0-9][0-9]\).*/\1/") 
+    voz_mm=$(echo $i | sed "s/.*\:\([0-9][0-9]\)/\1/") 
+    if [ "$voz_hh" -gt "$hh" ]; then 
+        echo $i 
+        exit 0 
+    fi 
+    if [ "$voz_hh" -eq "$hh" -a "$voz_mm" -gt "$mm" ]; then 
+       echo $i 
+       exit 0 
+    fi 
+done 
  
 3. (10 poena) 
-                                #include                <stdio.h> 
-#include <unistd.h> 
  
-#define INPUT 0 
-#define OUTPUT 1 
-#define LEFT 0 
-#define RIGHT 1 
-#define NUM 6 
-#define ITERATIONS (1000) 
+struct msgbuf 
+{ 
+  long mtype; 
+  int sender; 
+}; 
  
-int main() { 
-    int file_descriptors[2][NUM][2]; 
-    for (int j = 0; j < 2; j++) { 
-        for (int i = 0; i < NUM; i++) { 
-            pipe(file_descriptors[j][i]); 
-        } 
-    } 
+void barrier(int id, int msg_box) 
+{ 
+  struct msgbuf msg; 
  
-    int id = 0; 
-    for (int i = 1; i < NUM;i++) { 
-        id = i; 
-        if (fork() > 0) { 
-            break; 
-        } else { 
-            id = 0; 
-        } 
-    } 
+  for (int i = 0; i < NUM_PROCESS; i++) { 
+    if (i == id) 
+      continue; 
+    msg.mtype = i + 1; 
+    msg.sender = id; 
+    msgsnd(msg_box, &msg, sizeof(int), 0); 
+  } 
  
-    double value = id + 1; 
-    double ratio = 0.5; 
-    int left = (NUM + id - 1) % NUM; 
-    int right = (id + 1) % NUM; 
-    for (int i = 0; i < ITERATIONS; i++) { 
-        double share = value * ratio; 
-        write(file_descriptors[LEFT][id][OUTPUT] , &share, sizeof(double)); 
-        share = value * (1 - ratio); 
-        write(file_descriptors[RIGHT][id][OUTPUT], &share, sizeof(double)); 
-        double left_share, right_share; 
-        read(file_descriptors[LEFT][left][INPUT],  
-                             &left_share,             sizeof(double)); 
-        read(file_descriptors[RIGHT][right][INPUT],  
-                             &right_share,             sizeof(double)); 
-        value = left_share + right_share; 
-        ratio = left_share / value; 
-    } 
-    printf("id=%d share=%.2f\n", id, value); 
- 
-    for (int j = 0; j < 2; j++) { 
-        for (int i = 0; i < NUM; i++) { 
-            close(file_descriptors[j][i][INPUT]); 
-            close(file_descriptors[j][i][OUTPUT]); 
-        } 
-    } 
-    return 0; 
+  for (int i = 0; i < NUM_PROCESS; i++) { 
+    if (i == id) 
+      continue; 
+    msgrcv(msg_box, &msg, sizeof(int), id + 1, 0); 
+  } 
+} 
