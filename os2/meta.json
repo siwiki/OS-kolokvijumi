@@ -1,7 +1,5 @@
 {
-    "BASE_URL": "http://os.etf.bg.ac.rs/OS2/kolokvijumi/",
-    "CATEGORIES": {
-     
-    },
-    "KEYWORDS": {}
+    "baseUrl": "http://os.etf.bg.ac.rs/OS2/kolokvijumi/",
+    "categories": {},
+    "keywords": {}
 }

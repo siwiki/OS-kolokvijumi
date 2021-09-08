@@ -2,19 +2,10 @@
 'use strict';
 import got from 'got';
 import {createWriteStream} from 'fs';
-import {mkdir, writeFile} from 'fs/promises';
+import {readFile, mkdir, writeFile} from 'fs/promises';
 import stream from 'stream';
 import {promisify} from 'util';
 
-const client = got.extend({
-    headers: {
-        'User-Agent': 'os1-pdf'
-    },
-    method: 'GET',
-    prefixUrl: 'http://os.etf.bg.ac.rs/OS2/kolokvijumi/',
-    resolveBodyOnly: true,
-    retry: 0
-});
 const DIRECTORY_REGEX = /<img src="\/icons\/[^"]+" alt="\[([^\]]+)\]">(?:<\/td><td>)?\s*<a href="([^"]+)">[^<]+<\/a>(?:<\/td><td align="right">)?\s*(\d+-(?:\w{3}|\d+)-\d+ \d+:\d+)/g;
 const MONTHS = {
     'januar': 1,
@@ -35,6 +26,7 @@ const MONTHS = {
 };
 const COLLOQUIA_REGEX = /Kolokvijum(?: (1|2|3))?/;
 const COLLOQUIA_2017_REGEX = /k(\d)(?:_resenja)?_2017/;
+const ALL_DIRECTORIES = ['os1', 'os2'];
 const pipeline = promisify(stream.pipeline);
 
 function parseDirectoryListing(content) {
@@ -61,7 +53,8 @@ function classify(filename) {
         filename.includes('rez') ||
         filename.includes('Rez') ||
         filename.endsWith('.xls') ||
-        filename.endsWith('.xlsx')
+        filename.endsWith('.xlsx') ||
+        filename.includes('spisak')
     ) {
         return 'res';
     }
@@ -94,26 +87,33 @@ function classify(filename) {
     return baseType;
 }
 
-function getLocalFilename(year, month, file, type) {
+function getLocalFilename(baseDir, year, month, file, type) {
     if (file.endsWith('.doc')) {
-        return `doc/${year}-${month}-${type}.doc`;
+        return `doc/${baseDir}/${year}-${month}-${type}.doc`;
     }
-    return `pdf/${year}/${month}/${type}.pdf`;
+    return `pdf/${baseDir}/${year}/${month}/${type}.pdf`;
 }
 
-async function processMonth(year, month) {
+async function processMonth(baseDir, client, year, month) {
     console.info('Processing month', month, year);
     const {files} = parseDirectoryListing(await client(`${year}/${month}`));
     if (files.length === 0) {
         console.info('Skipping month', month, year, 'as there are no files');
         return;
     }
-    const monthNormalized = month.trim().replace(/\s*-\s*nadoknad.*/, '');
+    const monthNormalized = decodeURIComponent(month)
+        .trim()
+        .replace(/\s*-\s*nadoknad.*|\s*nadoknada\s*-\s*/, '')
+        .toLowerCase();
     const monthNum = MONTHS[monthNormalized];
-    await mkdir(`pdf/${year}/${monthNum}`, {
+    if (!monthNum) {
+        console.error('Failed to obtain month number!');
+        return;
+    }
+    await mkdir(`pdf/${baseDir}/${year}/${monthNum}`, {
         recursive: true
     });
-    await mkdir(`md/${year}/${monthNum}`, {
+    await mkdir(`${baseDir}/${year}/${monthNum}`, {
         recursive: true
     });
     for (const file in files) {
@@ -126,15 +126,15 @@ async function processMonth(year, month) {
         console.info('Downloading', url);
         await pipeline(
             client.stream(url),
-            createWriteStream(getLocalFilename(year, monthNum, file, type))
+            createWriteStream(getLocalFilename(baseDir, year, monthNum, file, type))
         );
-        await writeFile(`md/${year}/${monthNum}/${type}.md`, `${url}\n`, {
+        await writeFile(`${baseDir}/${year}/${monthNum}/${type}.md`, `${url}\n`, {
             encoding: 'utf-8'
         });
     }
 }
 
-async function processYear(year) {
+async function processYear(baseDir, client, year) {
     if (isNaN(year)) {
         console.error('Year cannot be parsed!');
         return;
@@ -142,15 +142,41 @@ async function processYear(year) {
     console.info('Processing year', year);
     const {directories} = parseDirectoryListing(await client(`${year}`));
     for (const month in directories) {
-        await processMonth(year, month);
+        await processMonth(baseDir, client, year, month);
+    }
+}
+
+async function processSubject(baseDir) {
+    console.info('Processing subject', baseDir);
+    const {baseUrl} = JSON.parse(await readFile(`${baseDir}/meta.json`, {
+        encoding : 'utf-8'
+    }));
+    await mkdir(`doc/${baseDir}`, {
+        recursive: true
+    });
+    const client = got.extend({
+        headers: {
+            'User-Agent': 'OS-kolokvijumi-spider'
+        },
+        method: 'GET',
+        prefixUrl: baseUrl,
+        resolveBodyOnly: true,
+        retry: 0
+    });
+    const {directories} = parseDirectoryListing(await client(''));
+    for (const year in directories) {
+        await processYear(baseDir, client, Number(year));
     }
 }
 
 async function main() {
-    await mkdir('doc');
-    const {directories} = parseDirectoryListing(await client(''));
-    for (const year in directories) {
-        await processYear(Number(year));
+    const dirArg = process.argv[2];
+    if (dirArg && !dirArg.startsWith('--')) {
+        await processSubject(dirArg);
+    } else {
+        for (const dir of ALL_DIRECTORIES) {
+            await processSubject(dir);
+        }
     }
 }
 

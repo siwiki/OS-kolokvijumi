@@ -3,11 +3,6 @@
 import {readFile, readdir, writeFile} from 'fs/promises';
 import {argv} from 'process';
 
-var BASE_DIR = './os1';
-var BASE_URL = '';
-var CATEGORIES = {};
-var KEYWORDS = {};
-
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
 const TYPES = {
     k: 'kolokvijum',
@@ -16,9 +11,10 @@ const TYPES = {
     k3: 'treći kolokvijum'
 };
 const isWeb = !process.argv.includes('--print');
+const ALL_DIRECTORIES = ['os1', 'os2'];
 
-async function processFile(year, month, type, categories) {
-    const text = await readFile(`${BASE_DIR}/${year}/${month}/${type}.md`, {
+async function processFile(year, month, type, categories, baseDir) {
+    const text = await readFile(`${baseDir}/${year}/${month}/${type}.md`, {
         encoding: 'utf-8'
     });
     const sections = text.split(/-{60,100}/);
@@ -47,42 +43,36 @@ async function processFile(year, month, type, categories) {
     }
 }
 
-async function getYears() {
+async function getYears(baseDir) {
     const arg = argv.find(arg => arg.startsWith('--year='));
     if (arg) {
         return arg.substring(7).split(',').map(year => year.trim());
     } else {
-        return (await readdir(BASE_DIR)).filter((x) => !(isNaN(x))).reverse();
+        return (await readdir(baseDir)).filter((x) => !(isNaN(x))).reverse();
     }
 }
 
-function formatUrls(url, solutionUrl) {
+function formatUrls(url, solutionUrl, baseUrl) {
     const urlRow = (url && isWeb) ?
-        `- [Postavka](${BASE_URL}${url})\n` :
+        `- [Postavka](${baseUrl}${url})\n` :
         '';
     const solutionUrlRow = (solutionUrl && isWeb) ?
-        `- [Rešenje](${BASE_URL}${solutionUrl})\n` :
+        `- [Rešenje](${baseUrl}${solutionUrl})\n` :
         '';
     return `${urlRow}${solutionUrlRow}`;
 }
 
-function addIndices(keywords){
-    return keywords.map(keyword => `\\index{${KEYWORDS[keyword]}}`).join(' ');
-}
-
-async function main() {
-    let meta = await readFile(`${process.argv[2]}/meta.json`, { encoding : 'utf-8'});
-    meta = JSON.parse(meta);
-    BASE_DIR = process.argv[2];
-    BASE_URL = meta.BASE_URL;
-    CATEGORIES = meta.CATEGORIES;
-    KEYWORDS = meta.KEYWORDS;
+async function processDirectory(baseDir) {
+    const meta = JSON.parse(await readFile(`${baseDir}/meta.json`, {
+        encoding : 'utf-8'
+    }));
+    const {baseUrl, categories} = meta;
 
     const categories = {};
-    for (const year of await getYears()) {
-        for (const month of await readdir(`${BASE_DIR}/${year}`)) {
-            for (const typeExt of await readdir(`${BASE_DIR}/${year}/${month}`)) {
-                await processFile(year, month, typeExt.split('.')[0], categories);
+    for (const year of await getYears(baseDir)) {
+        for (const month of await readdir(`${baseDir}/${year}`)) {
+            for (const typeExt of await readdir(`${baseDir}/${year}/${month}`)) {
+                await processFile(year, month, typeExt.split('.')[0], categories, baseDir);
             }
         }
     }
@@ -120,27 +110,42 @@ async function main() {
             });
         }
     }
-    const header = await readFile(`${BASE_DIR}/header.md`, {
+    const header = await readFile(`${baseDir}/header.md`, {
         encoding: 'utf-8'
     });
-    const footer = await readFile(`${BASE_DIR}/footer.md`, {
+    const footer = await readFile(`${baseDir}/footer.md`, {
         encoding: 'utf-8'
     });
-    const categoryKeys = Object.keys(CATEGORIES);
+    const categoryKeys = Object.keys(categories);
     await writeFile(
         isWeb ? 'combined-web.md' : 'combined-print.md',
         `${header}${Object.entries(categoriesConnected).sort(
             ([category1], [category2]) => categoryKeys.indexOf(category1) - categoryKeys.indexOf(category2)
         ).map(
-            ([category, entries]) => `# ${CATEGORIES[category]}\n${entries.map(
+            ([category, entries]) => `# ${categories[category]}\n${entries.map(
                 ({url, content, year, month, type, task, solutionUrl, keywords}) =>
-                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${addIndices(keywords)}\n\n${formatUrls(url, solutionUrl)}\n${content}`
+                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${
+                        keywords
+                            .map(kw => `\\index{${meta.keywords[kw]}}`)
+                            .join(' ')
+                    }\n\n${formatUrls(url, solutionUrl, baseUrl)}\n${content}`
             ).join('\n\n')}`
         ).join('\n\n\\pagebreak\n')}${footer}`,
         {
             encoding: 'utf-8'
         }
     );
+}
+
+async function main() {
+    const dirArg = process.argv[2];
+    if (dirArg && !dirArg.startsWith('--')) {
+        await processDirectory(dirArg);
+    } else {
+        for (const dir of ALL_DIRECTORIES) {
+            await processDirectory(dir);
+        }
+    }
 }
 
 main();
