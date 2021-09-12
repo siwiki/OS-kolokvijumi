@@ -4,7 +4,7 @@ cd "${0%/*}"
 
 prnt=
 year=
-subject="./os1/"
+subject="os1"
 while getopts ":y:p" opt 
 do
     case $opt in
@@ -38,11 +38,11 @@ fi
 
 latex_args="--enable-installer --shell-escape"
 if [ $prnt ]; then
-    pandoc print.md -s -t latex -o print.tex
-    pdflatex $latex_args print.tex
-    pdflatex $latex_args print.tex
+    pandoc "$subject-print.md" -s -t latex -o "$subject-print.tex"
+    pdflatex $latex_args "$subject-print.tex"
+    pdflatex $latex_args "$subject-print.tex"
 else
-    pandoc web.md -s -t latex -o web.tex
-    pdflatex $latex_args web.tex 
-    pdflatex $latex_args web.tex 
+    pandoc "$subject-web.md" -s -t latex -o "$subject-web.tex"
+    pdflatex $latex_args "$subject-web.tex"
+    pdflatex $latex_args "$subject-web.tex"
 fi
