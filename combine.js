@@ -118,7 +118,7 @@ async function processDirectory(baseDir) {
     });
     const categoryKeys = Object.keys(meta.categories);
     await writeFile(
-        isWeb ? `${baseDir}-web.md` : `${baseDir}-print.md`,
+        isWeb ? `web.md` : `print.md`,
         `${header}${Object.entries(categoriesConnected).sort(
             ([category1], [category2]) => categoryKeys.indexOf(category1) - categoryKeys.indexOf(category2)
         ).map(
