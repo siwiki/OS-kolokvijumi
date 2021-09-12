@@ -66,7 +66,7 @@ async function processDirectory(baseDir) {
     const meta = JSON.parse(await readFile(`${baseDir}/meta.json`, {
         encoding : 'utf-8'
     }));
-    const {baseUrl, categories} = meta;
+    const {baseUrl} = meta;
 
     const categories = {};
     for (const year of await getYears(baseDir)) {
@@ -116,13 +116,13 @@ async function processDirectory(baseDir) {
     const footer = await readFile(`${baseDir}/footer.md`, {
         encoding: 'utf-8'
     });
-    const categoryKeys = Object.keys(categories);
+    const categoryKeys = Object.keys(meta.categories);
     await writeFile(
-        isWeb ? 'combined-web.md' : 'combined-print.md',
+        isWeb ? `${baseDir}-web.md` : `${baseDir}-print.md`,
         `${header}${Object.entries(categoriesConnected).sort(
             ([category1], [category2]) => categoryKeys.indexOf(category1) - categoryKeys.indexOf(category2)
         ).map(
-            ([category, entries]) => `# ${categories[category]}\n${entries.map(
+            ([category, entries]) => `# ${meta.categories[category]}\n${entries.map(
                 ({url, content, year, month, type, task, solutionUrl, keywords}) =>
                     `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${
                         keywords
