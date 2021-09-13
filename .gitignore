@@ -1,7 +1,8 @@
 doc
 pdf
 doc2pdf
-combined*
+os1-*
+os2-*
 node_modules
 rsvg-*
 *_svg-tex.*
