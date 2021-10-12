@@ -1,11 +1,7 @@
 2019/januar/SI, IR Kolokvijum 3 - Januar 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2 
-Rešenja zadataka sa trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2020. 
-1. (10 poena)   
+disk
+```cpp
 class DiskScheduler { 
 public: 
   DiskScheduler () : in(0), out(0) {} 
@@ -32,8 +28,12 @@ Req* DiskScheduler::get () {
     out = (out+1)%NumReqQueues; 
   } while (out!=oldOut); 
   return 0; // No requests, the entire queue is empty 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 1 ]; then 
@@ -56,11 +56,12 @@ done
  
 #IFS=$old_IFS 
  
-echo "Broj pronadjenih fajlova je $count" 
+echo "Broj pronadjenih fajlova je $count"
+```
  
-
-2/  2 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+linux
+```cpp
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <unistd.h> 
@@ -80,5 +81,4 @@ int main(void) {
  } 
  return 0; 
 } 
- 
- 
+```

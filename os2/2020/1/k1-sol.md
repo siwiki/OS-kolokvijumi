@@ -1,11 +1,7 @@
 2019/januar/SI, IR Kolokvijum 1 - Januar 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Januar 2020. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (): active(0) {} 
@@ -54,11 +50,13 @@ PCB* Scheduler::get () {
     active = 1-active; 
   } while (active!=oldActive); 
   return 0; 
-} 
+}
+```
  
 
-2/  3 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Agent; 
   export takeRedAndGreen, 
          takeGreenAndBlue, 
@@ -108,14 +106,11 @@ monitor Agent;
 begin 
   putTokens(); 
 end; 
- 
- 
- 
- 
- 
+```
 
-3/  3 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
     private final static int N = 10; 
     private final ServerSocket socket; 
@@ -170,8 +165,6 @@ public class RequestHandler extends Thread {
  
             } 
     } 
-} 
- 
-Klasa Service (Usluga) je data na vežbama. 
- 
- 
+}
+```
+Klasa `Service` (Usluga) je data na vežbama. 

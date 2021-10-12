@@ -13,11 +13,9 @@ public class Server {
         } 
     } 
  
-    public synchronized int[] getCards(RequestHandler user, int num) throws 
-InterruptedException { 
+    public synchronized int[] getCards(RequestHandler user, int num) throws InterruptedException { 
         int[] ret; 
-        while (user != users.peekFirst() || (ret = tryGetCards(num)) == 
-null) { 
+        while (user != users.peekFirst() || (ret = tryGetCards(num)) == null) { 
             wait(); 
         } 
  
@@ -32,8 +30,7 @@ null) {
         return ret; 
     } 
  
-    public synchronized void returnCards(int[] ret) throws 
-InterruptedException { 
+    public synchronized void returnCards(int[] ret) throws InterruptedException { 
         for (int i = 0; i < ret.length; i++) { 
             cards[ret[i]] = true; 
         } 
@@ -74,11 +71,9 @@ InterruptedException {
             while (true) { 
                 Socket clientSocket = clientSocket = serverSocket.accept(); 
  
-                ServerService clientService = new 
-ServerService(clientSocket); 
+                ServerService clientService = new ServerService(clientSocket); 
  
-                RequestHandler user = new RequestHandler(clientService, 
-this); 
+                RequestHandler user = new RequestHandler(clientService, this); 
                 users.addLast(user); 
                 user.start(); 
             } 

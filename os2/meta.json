@@ -5,11 +5,14 @@
         "deadlock": "Detekcija mrtve blokade",
         "thrashing": "Batrganje",
         "pipe": "Međuprocesna komunikacija (cevi)",
+        "sharedobj": "Međuprocesna komunikacija (deljeni objekat)",
+        "network": "Međuprocesna komunikacija (poruke)",
         "buddy": "Alokator parnjaka",
         "allocator": "Alokacija resursa",
         "memory": "Alokator memorije",
-        "network": "Klijent-server komunikacija",
-        "bash": "Bash"
+        "disk": "Upravljanje diskovima",
+        "bash": "Linux (Bash)",
+        "linux": "Linux (C)"
     },
     "keywords": {}
 }

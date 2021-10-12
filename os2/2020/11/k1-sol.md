@@ -1,11 +1,7 @@
 2020/novembar/SI Kolokvijum 1 - Novembar 2020 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-novembar 2020. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler () {} 
@@ -56,9 +52,10 @@ PCB* Scheduler::get () {
   } 
   return 0; 
 } 
-
-2/4 
-2. (10 poena) 
+```
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor ResourcePool; 
 export request, release; 
  
@@ -94,10 +91,12 @@ begin
   var i : integer; 
   for i:=0 to PoolSize-1 do free[i] := true; 
   numOfFree := PoolSize; 
-end; 
+end;
+```
 
-3/4 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
     public static class User { 
         private String userIp; 
@@ -158,9 +157,6 @@ public class Server {
  
     public static void main(String args[]) { 
         Server server = new Server(); 
-
-4/4 
- 
         server.run(); 
     } 
 } 
@@ -176,13 +172,11 @@ public class RequestHandler extends Thread {
  
     private String parseAndRespond(String msg) { 
         String[] data = msg.split("#"); 
-        Server.User user = server.addAndMatchUser(data[1], 
-Integer.parseInt(data[2])); 
+        Server.User user = server.addAndMatchUser(data[1], Integer.parseInt(data[2])); 
         if (user == null) { 
             return "#WaitForMatch#"; 
         } else { 
-            return String.format("#Matched#%s#%d#", user.getUserIp(), 
-user.getUserPort()); 
+            return String.format("#Matched#%s#%d#", user.getUserIp(), user.getUserPort()); 
         } 
     } 
  
@@ -204,5 +198,4 @@ user.getUserPort());
         } 
     } 
 } 
- 
- 
+```
