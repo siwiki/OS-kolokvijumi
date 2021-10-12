@@ -1,7 +1,7 @@
-# OS1-kolokvijumi
+# OS-kolokvijumi
 Cilj projekta je izvoženje teksta sa [OS1](http://os.etf.bg.ac.rs/OS1/) i [OS2](http://os.etf.bg.ac.rs/OS2/) kolokvijuma kako bi se formatirali u Markdown a zatim kategorisali po oblasti i spojili u jedan PDF spreman za štampu.
 
-Poslednju PDF i Markdown verziju dokumenta možete preuzeti iz [Releases](https://github.com/KockaAdmiralac/OS1-kolokvijumi/releases/latest).
+Poslednju PDF i Markdown verziju dokumenta možete preuzeti iz [Releases](https://github.com/KockaAdmiralac/OS-kolokvijumi/releases/latest).
 
 ## Kompajliranje
 Prvo je potrebno da imate:
@@ -13,8 +13,8 @@ Prvo je potrebno da imate:
 
 Zatim pokrenite sledeće komande:
 ```console
-$ git clone https://github.com/KockaAdmiralac/OS1-kolokvijumi.git
-$ cd OS1-kolokvijumi
+$ git clone https://github.com/KockaAdmiralac/OS-kolokvijumi.git
+$ cd OS-kolokvijumi
 $ npm install
 $ ./combine.sh os1 
 ```
