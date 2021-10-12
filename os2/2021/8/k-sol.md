@@ -1,55 +1,54 @@
 2020/avgust/SI, IR Kolokvijum integralni - Avgust 2021 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+1. ```cpp
+   class Scheduler { 
+   public: 
+     Scheduler () : cursor(0) {} 
+     PCB* get (); 
+   private: 
+     int cursor; 
+   }; 
 
+   PCB* Scheduler::get () { 
+     int oldC = cursor; 
+     do { 
+       if (procs[cursor].isUsed && procs[cursor].isRunnable) { 
+         int c = cursor; 
+         if (++cursor == MAX_PROCESSES) cursor = 0; 
+         return &procs[c]; 
+       } 
+       if (++cursor == MAX_PROCESSES) cursor = 0; 
+     } while (cursor != oldC); 
+     return 0;   
+   }
+   ```
+2. ```cpp
+   class Scheduler { 
+   public: 
+     Scheduler () {} 
+     PCB* get (); 
+   }; 
 
-1/  4 
-Rešenja kolokvijuma iz  
-Operativnih sistema 2, avgust 2021. 
-1. (10 poena) 
-a)(5) 
-class Scheduler { 
-public: 
-  Scheduler () : cursor(0) {} 
-  PCB* get (); 
-private: 
-  int cursor; 
-}; 
- 
-PCB* Scheduler::get () { 
-  int oldC = cursor; 
-  do { 
-    if (procs[cursor].isUsed && procs[cursor].isRunnable) { 
-      int c = cursor; 
-      if (++cursor == MAX_PROCESSES) cursor = 0; 
-      return &procs[c]; 
-    } 
-    if (++cursor == MAX_PROCESSES) cursor = 0; 
-  } while (cursor != oldC); 
-  return 0;   
-} 
-a)(5) 
-class Scheduler { 
-public: 
-  Scheduler () {} 
-  PCB* get (); 
-}; 
- 
-PCB* Scheduler::get () { 
-  int maxPri = -1, maxProc = -1; 
-  for (int i=0; i<MAX_PROCESSES; i++) { 
-    if (!procs[i].isUsed || !procs[i].isRunnable) continue; 
-    if (procs[i].pri<maxPri) maxPri = procs[i].pri, maxProc = i; 
-  }; 
-  if (maxProc>=0) return &procs[maxProc]; 
-  else return 0;   
-} 
-2. (10 poena) Invarijanta protokola koja sprečava mrtvu blokadu jeste ta da u svakom 
+   PCB* Scheduler::get () { 
+     int maxPri = -1, maxProc = -1; 
+     for (int i=0; i<MAX_PROCESSES; i++) { 
+       if (!procs[i].isUsed || !procs[i].isRunnable) continue; 
+       if (procs[i].pri<maxPri) maxPri = procs[i].pri, maxProc = i; 
+     }; 
+     if (maxProc>=0) return &procs[maxProc]; 
+     else return 0;   
+   }
+   ```
+
+--------------------------------------------------------------------------------
+deadlock
+Invarijanta protokola koja sprečava mrtvu blokadu jeste ta da u svakom 
 trenutku svi procesi koji čekaju na resurs jesu stariji (imaju manju vremensku marku) od 
 procesa koji taj resurs drži. To se može postići uređenjem reda čekanja u opadajući redosled 
 po vremenskoj marki, s tim da je ova implementacija takva da je prvi u redu onaj proces koji 
 trenutno drži resurs, a iza njega su svi procesi stariji i poređani monotono. 
-
-2/  4 
+```cpp
 int Resource::allocate () { 
   if (this->queue.isEmpty()) { 
     this->queue.insert(running,running->timestamp); 
@@ -60,14 +59,18 @@ int Resource::allocate () {
     return 0; 
   } else 
     return -1; 
-} 
+}
  
 PCB* Resource::release () { 
   if (this->queue.first()!=running) return 0; // Error 
   this->queue.removeFirst(); 
   return this->queue.first(); 
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+thrashing
+```cpp
 void pageFault (PCB* pcb, size_t page) { 
   size_t frame; 
   if (pcb->usedFrames < pcb->allowedFrames) { 
@@ -81,8 +84,12 @@ void pageFault (PCB* pcb, size_t page) {
   }   
   loadPage(pcb,page,frame); 
   setPageAvailable(pcb,page,frame); 
-} 
-4. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
     private double balance; 
     private int nextId = 0; 
@@ -113,7 +120,6 @@ public class Server {
         double reserved = reservations.remove(id); 
         balance += reserved - value; 
 
-3/  4 
         return "OK"; 
     } 
  
@@ -170,8 +176,7 @@ public class RequestHandler extends Thread {
           if (data.length == 1) { 
               response = server.reserveAmount(Double.parseDouble(data[0])); 
           } else { 
-              response = server.finalAmount(Integer.parseInt(data[0]), 
-Double.parseDouble(data[1])); 
+              response = server.finalAmount(Integer.parseInt(data[0]), Double.parseDouble(data[1]));
           } 
  
           service.sendMessage(response); 
@@ -183,12 +188,10 @@ Double.parseDouble(data[1]));
                 service.close(); 
             } catch (IOException e) { 
 
-4/  4 
                 e.printStackTrace(); 
             } 
         } 
     } 
 } 
- 
-Klasa Service je data na vežbama. 
- 
+```
+Klasa `Service` je data na vežbama.

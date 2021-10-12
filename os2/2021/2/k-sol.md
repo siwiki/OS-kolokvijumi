@@ -1,11 +1,7 @@
 2020/februar/SI, IR Kolokvijum integralni - Februar 2021 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  4 
-Rešenja kolokvijuma iz  
-Operativnih sistema 2, februar 2021. 
-1. (10 poena) 
+network
+```java
 public class Server { 
     private static final int N = 50;   
     private boolean[] cards = new boolean[N]; 
@@ -61,7 +57,6 @@ InterruptedException {
             } 
             x = (x + 1) % N; 
 
-2/  4 
             if (n == num) { 
                 return ret; 
             } 
@@ -124,7 +119,6 @@ public class RequestHandler extends Thread {
     public void run() { 
         try { 
 
-3/  4 
            int numOfCards = service.getNumOfCards(); 
            String commands = service.getCommands(); 
  
@@ -164,46 +158,52 @@ public class ServerService extends Service {
     public int getNumOfCards() throws IOException { 
         return Integer.parseInt(receiveMessage()); 
     } 
-} 
+}
+```
+Klasa `Service` je data na vežbama.
  
-Klasa Service je data na vežbama. 
- 
-2. (10 poena) a)(5) Problem je potencijalno izgladnjivanje. 
-int allocate (unsigned res) { 
-  static const unsigned long sleep_time = ...; 
-  int stat = alloc(res); 
-  while (stat==0) { 
-    sleep(rnd(sleep_time)+1); 
-    stat = alloc(res); 
-  }   
-  return stat; 
-} 
-b)(5) 
+--------------------------------------------------------------------------------
+allocator
+1. Problem je potencijalno izgladnjivanje.
+   ```cpp
+   int allocate (unsigned res) { 
+     static const unsigned long sleep_time = ...; 
+     int stat = alloc(res); 
+     while (stat==0) { 
+       sleep(rnd(sleep_time)+1); 
+       stat = alloc(res); 
+     }
+     return stat; 
+   }
+   ```
+2. ```cpp
+   #include <stdlib.h> 
 
-4/  4 
-#include <stdlib.h> 
- 
-int compare_ints (const void* p, const void* q) { 
-  int x = *(const int*)p; 
-  int y = *(const int*)q; 
-  return (x > y) - (x < y); 
-} 
- 
-void sort_ints (unsigned* a, size_t n) { 
-  qsort(a,n,sizeof(*a),compare_ints); 
-} 
- 
-int allocate (unsigned res[], size_t n) { 
-  sort_ints(res,n); 
-  for (int i=0; i<n; i++) { 
-    if (allocate(i)<0) { 
-      for (int j=0; j<i; j++) release(j); 
-      return -1; 
-    } 
-  }   
-  return 0; 
-} 
-3. (10 poena) 
+   int compare_ints (const void* p, const void* q) { 
+     int x = *(const int*)p; 
+     int y = *(const int*)q; 
+     return (x > y) - (x < y); 
+   }
+
+   void sort_ints (unsigned* a, size_t n) { 
+     qsort(a,n,sizeof(*a),compare_ints); 
+   }
+
+   int allocate (unsigned res[], size_t n) { 
+     sort_ints(res,n); 
+     for (int i=0; i<n; i++) { 
+       if (allocate(i)<0) { 
+         for (int j=0; j<i; j++) release(j); 
+         return -1; 
+       }
+     }
+     return 0; 
+   }
+   ```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 void clock () { 
   while (true) { 
     unsigned long pgDesc = *frames[clockHand].pgDesc; 
@@ -211,8 +211,12 @@ void clock () {
     *frames[clockHand].pgDesc = pgDesc & ~1UL; 
     clockHand = frames[clockHand].next; 
   }   
-} 
-4. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 1 -o ! -r $1 ]; then 
@@ -237,4 +241,4 @@ for i in $(cat $1); do
 done 
  
 IFS=$OLD_IFS 
- 
+```

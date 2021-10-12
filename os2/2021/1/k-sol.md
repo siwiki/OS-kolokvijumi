@@ -1,11 +1,7 @@
 2020/januar/SI, IR Kolokvijum integralni - Januar 2021 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  4 
-Rešenja kolokvijuma iz  
-Operativnih sistema 2, januar 2021. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler () {} 
@@ -56,92 +52,207 @@ PCB* Scheduler::get () {
     if (p) return p; 
   }   
   return 0; 
-} 
+}
+```
 
-2/  4 
- 
-2. (10 poena) Postoji sledeća (sigurna) sekvenca kojim procesi mogu da dobiju zahtevane 
-resurse i izvrše se do kraja, pa sistem nije u mrtvoj blokadi: P3, P4, P2, P1. 
- 
-Allocation 
-  
-Request 
- Available 
- 
- A B C   A B C  A B C 
-P1 1 0 1  P1 0 1 3  0 1 1 
-P2 0 1 1  P2 3 0 1      
-P3 2 1 1  P3 0 0 0      
-P4 1 0 0  P4 2 1 0      
- 
- 
-Allocation 
-  
-Request 
- Available 
- 
- A B C   A B C  A B C 
-P1 1 0 1  P1 0 1 3  2 2 2 
-P2 0 1 1  P2 3 0 1      
-P3 2 1 1  P3 0 0 0      
-P4 1 0 0  P4 2 1 0      
- 
- 
-Allocation 
-  
-Request 
- Available 
- 
- A B C   A B C  A B C 
-P1 1 0 1  P1 0 1 3  3 2 2 
-P2 0 1 1  P2 3 0 1      
-P3 2 1 1  P3 0 0 0      
-P4 1 0 0  P4 2 1 0      
- 
- 
-Allocation 
-  
-Request 
- Available 
- 
- A B C   A B C  A B C 
-P1 1 0 1  P1 0 1 3  3 3 3 
-P2 0 1 1  P2 3 0 1      
-P3 2 1 1  P3 0 0 0      
-P4 1 0 0  P4 2 1 0      
- 
- 
-Allocation 
-  
-Request 
- Available 
- 
- A B C   A B C  A B C 
-P1 1 0 1  P1 0 1 3  4 3 4 
-P2 0 1 1  P2 3 0 1      
-P3 2 1 1  P3 0 0 0      
-P4 1 0 0  P4 2 1 0      
-3. (10 poena) 
-a)(5) 
+--------------------------------------------------------------------------------
+deadlock
+Postoji sledeća (sigurna) sekvenca kojim procesi mogu da dobiju zahtevane 
+resurse i izvrše se do kraja, pa sistem nije u mrtvoj blokadi: *P3*, *P4*, *P2*, *P1*. 
 
-3/  4 
-inline void Buddy::split (char* seg, int upper, int lower) { 
-  while (--upper>=lower) 
-    bucket[upper].put(seg + (1<<upper)*BLOCK_SIZE); 
-} 
-b)(5) 
-void* Buddy::alloc (int size) { 
-  if (size<0 || size>=BUCKET_SIZE) return 0; // Exception 
- 
-  for (int current=size; current<BUCKET_SIZE; current++) { 
-    char* p = bucket[current].get(); 
-    if (!p) continue;  
-    split(p,current,size); 
-    return p; 
-  }   
-  return 0; 
-} 
-4. (10 poena) 
+\begin{figure}[H]
+\subfloat[Allocation]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+P1 & 1 & 0 & 1 \\
+\hline
+P2 & 0 & 1 & 1 \\
+\hline
+\sout{P3} & \sout{2} & \sout{1} & \sout{1} \\
+\hline
+P4 & 1 & 0 & 0 \\
+\hline
+\end{tabular}
+}
+\subfloat[Request]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+P1 & 0 & 1 & 3 \\
+\hline
+P2 & 3 & 0 & 1 \\
+\hline
+\sout{P3} & \sout{0} & \sout{0} & \sout{0} \\
+\hline
+P4 & 2 & 1 & 0 \\
+\hline
+\end{tabular}
+}
+\subfloat[Available]{
+\begin{tabular}{ |c|c|c| }
+\hline
+A & B & C \\
+\hline
+2 & 2 & 2 \\
+\hline
+\end{tabular}
+}
+\end{figure}
+
+\begin{figure}[H]
+\subfloat[Allocation]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+P1 & 1 & 0 & 1 \\
+\hline
+P2 & 0 & 1 & 1 \\
+\hline
+\sout{P3} & \sout{2} & \sout{1} & \sout{1} \\
+\hline
+\sout{P4} & \sout{1} & \sout{0} & \sout{0} \\
+\hline
+\end{tabular}
+}
+\subfloat[Request]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+P1 & 0 & 1 & 3 \\
+\hline
+P2 & 3 & 0 & 1 \\
+\hline
+\sout{P3} & \sout{0} & \sout{0} & \sout{0} \\
+\hline
+\sout{P4} & \sout{2} & \sout{1} & \sout{0} \\
+\hline
+\end{tabular}
+}
+\subfloat[Available]{
+\begin{tabular}{ |c|c|c| }
+\hline
+A & B & C \\
+\hline
+3 & 2 & 2 \\
+\hline
+\end{tabular}
+}
+\end{figure}
+
+\begin{figure}[H]
+\subfloat[Allocation]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+P1 & 1 & 0 & 1 \\
+\hline
+\sout{P2} & \sout{0} & \sout{1} & \sout{1} \\
+\hline
+\sout{P3} & \sout{2} & \sout{1} & \sout{1} \\
+\hline
+\sout{P4} & \sout{1} & \sout{0} & \sout{0} \\
+\hline
+\end{tabular}
+}
+\subfloat[Request]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+P1 & 0 & 1 & 3 \\
+\hline
+\sout{P2} & \sout{3} & \sout{0} & \sout{1} \\
+\hline
+\sout{P3} & \sout{0} & \sout{0} & \sout{0} \\
+\hline
+\sout{P4} & \sout{2} & \sout{1} & \sout{0} \\
+\hline
+\end{tabular}
+}
+\subfloat[Available]{
+\begin{tabular}{ |c|c|c| }
+\hline
+A & B & C \\
+\hline
+3 & 3 & 3 \\
+\hline
+\end{tabular}
+}
+\end{figure}
+
+\begin{figure}[H]
+\subfloat[Allocation]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+\sout{P1} & \sout{1} & \sout{0} & \sout{1} \\
+\hline
+\sout{P2} & \sout{0} & \sout{1} & \sout{1} \\
+\hline
+\sout{P3} & \sout{2} & \sout{1} & \sout{1} \\
+\hline
+\sout{P4} & \sout{1} & \sout{0} & \sout{0} \\
+\hline
+\end{tabular}
+}
+\subfloat[Request]{
+\begin{tabular}{ |c|c|c|c| }
+\hline
+   & A & B & C \\
+\hline
+\sout{P1} & \sout{0} & \sout{1} & \sout{3} \\
+\hline
+\sout{P2} & \sout{3} & \sout{0} & \sout{1} \\
+\hline
+\sout{P3} & \sout{0} & \sout{0} & \sout{0} \\
+\hline
+\sout{P4} & \sout{2} & \sout{1} & \sout{0} \\
+\hline
+\end{tabular}
+}
+\subfloat[Available]{
+\begin{tabular}{ |c|c|c| }
+\hline
+A & B & C \\
+\hline
+4 & 3 & 4 \\
+\hline
+\end{tabular}
+}
+\end{figure}
+
+--------------------------------------------------------------------------------
+buddy
+1. ```cpp
+   inline void Buddy::split (char* seg, int upper, int lower) { 
+     while (--upper>=lower) 
+       bucket[upper].put(seg + (1<<upper)*BLOCK_SIZE); 
+   }
+   ```
+2. ```cpp
+   void* Buddy::alloc (int size) { 
+     if (size<0 || size>=BUCKET_SIZE) return 0; // Exception
+
+     for (int current=size; current<BUCKET_SIZE; current++) { 
+       char* p = bucket[current].get(); 
+       if (!p) continue;  
+       split(p,current,size); 
+       return p; 
+     }
+     return 0;
+   }
+   ```
+
+--------------------------------------------------------------------------------
+pipe
+```cpp
 #include <stdio.h> 
 #include <sys/stat.h> 
 #include <fcntl.h> 
@@ -184,7 +295,6 @@ int main()
         result = msg.pid; 
         write(outFd, &result, sizeof(result)); 
 
-4/  4 
         close(outFd); 
     } 
  
@@ -228,4 +338,4 @@ int main(int argnum, char **args) {
  
     return 0; 
 } 
- 
+```

@@ -1,5 +1,15 @@
 {
     "baseUrl": "http://os.etf.bg.ac.rs/OS2/kolokvijumi/",
-    "categories": {},
+    "categories": {
+        "schedule": "Raspoređivanje procesa",
+        "deadlock": "Detekcija mrtve blokade",
+        "thrashing": "Batrganje",
+        "pipe": "Međuprocesna komunikacija (cevi)",
+        "buddy": "Alokator parnjaka",
+        "allocator": "Alokacija resursa",
+        "memory": "Alokator memorije",
+        "network": "Klijent-server komunikacija",
+        "bash": "Bash"
+    },
     "keywords": {}
 }
