@@ -1,11 +1,7 @@
 2017/decembar/SI, IR Kolokvijum 2 - Decembar 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, decembar 2017. 
-1. (10 poena)  
+deadlock
+```ada
 var forks : array 0..4 of semaphore = 1; 
  
 task type Philosopher(i:int) 
@@ -24,8 +20,12 @@ begin
     forks[first].signal; 
     forks[second].signal; 
   end; 
-end; 
-2. (10 poena)  
+end;
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 uint64* getVictim () { 
   while (clockHand) { 
     uint16* pCnt = ((uint16*)clockHand) + 3; 
@@ -38,25 +38,62 @@ uint64* getVictim () {
     clockHand = (uint64*)next; 
   }   
   return 0; // No pages or another exception 
-} 
-3. (10 poena) 
-a)(2) 
-0  
-1 A06000, A08000 
-2 A0C000 
-3  
-4  
-b)(4) 
-0 A07000 
-1 A08000 
-2 A0C000 
-3  
-4  
-c)(4) 
+}
+```
 
-2/  2 
-0 A07000 
-1  
-2  
-3 A08000 
-4  
+--------------------------------------------------------------------------------
+buddy
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+0 & \\
+\hline
+1 & A06000, A08000 \\
+\hline
+2 & A0C000 \\
+\hline
+3 & \\
+\hline
+4 & \\
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod a}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+0 & A07000 \\
+\hline
+1 & A08000 \\
+\hline
+2 & A0C000 \\
+\hline
+3 & \\
+\hline
+4 & \\
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod b}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+0 & A07000 \\
+\hline
+1 & \\
+\hline
+2 & \\
+\hline
+3 & A08000 \\
+\hline
+4 & \\
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod c}
+\end{figure}

@@ -1,11 +1,7 @@
 2016/januar/SI, IR Kolokvijum 3 - Januar 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2017. 
-1. (10 poena)  
+disk
+```cpp
 DiskRequest* DiskScheduler::get () { 
   if (!edfHead || !scanHead) return 0; 
   DiskRequest* req = 0; 
@@ -28,8 +24,12 @@ DiskRequest* DiskScheduler::get () {
   req->scanNext->scanPrev = req->scanPrev; 
   req->scanNext = req->scanPrev = 0; 
   return req; 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 3 ]; then
@@ -55,12 +55,12 @@ for i in $(find "$dir" -name '*'); do
     fi 
 done 
 IFS=$old_IFS 
- 
+```
 
-2/2 
- 
-3. (10 poena) 
-                                #include                <stdio.h> 
+--------------------------------------------------------------------------------
+linux
+```cpp
+#include <stdio.h> 
 #include <unistd.h> 
  
 #define INPUT 0 
@@ -98,10 +98,8 @@ int main() {
         share = value * (1 - ratio); 
         write(file_descriptors[RIGHT][id][OUTPUT], &share, sizeof(double)); 
         double left_share, right_share; 
-        read(file_descriptors[LEFT][left][INPUT],  
-                             &left_share,             sizeof(double)); 
-        read(file_descriptors[RIGHT][right][INPUT],  
-                             &right_share,             sizeof(double)); 
+        read(file_descriptors[LEFT][left][INPUT], &left_share, sizeof(double)); 
+        read(file_descriptors[RIGHT][right][INPUT], &right_share, sizeof(double)); 
         value = left_share + right_share; 
         ratio = left_share / value; 
     } 
@@ -114,3 +112,5 @@ int main() {
         } 
     } 
     return 0; 
+}
+```

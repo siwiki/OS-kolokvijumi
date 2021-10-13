@@ -1,11 +1,7 @@
 2017/Oktobar/SI Kolokvijum 1 - Oktobar 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2017. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (); 
@@ -53,10 +49,12 @@ PCB* Scheduler::get () {
     if (head[i]) 
        return remove(i); 
   return 0; 
-} 
+}
+```
 
-2/4 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor ResourceAllocator; 
 export alloc, free; 
  
@@ -78,8 +76,12 @@ end;
  
 begin 
   count := 0; 
-end; 
-3. (10 poena) 
+end;
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class ClientRequest { 
     private final String ip; 
     private final int port; 
@@ -128,8 +130,6 @@ public class RequestHandler extends Thread {
             if ("reserve".equals(operation)) { 
                 int tickets = Integer.parseInt(service.receiveMessage()); 
  
-
-3/4 
                 int ticketsAvailable = counter.reserveTickets( 
                         new ClientRequest(new ClientRequest(ip, port, tickets)); 
  
@@ -213,7 +213,6 @@ public class Server extends Thread {
     private boolean work; 
     private int port; 
 
-4/4 
     private TicketCounter counter; 
  
     public Server(int port) { 
@@ -280,6 +279,6 @@ public class Server extends Thread {
             } 
         } 
     } 
-} 
- 
-Klasa Service je klasa data na vežbama. 
+}
+``` 
+Klasa `Service` je klasa data na vežbama.

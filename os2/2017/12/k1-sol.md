@@ -1,11 +1,7 @@
 2017/decembar/IR Kolokvijum 1 - Decembar 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Novembar 2017. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (); 
@@ -56,9 +52,11 @@ void Scheduler::age () {
       head[i] = tail[i] = 0; 
     } 
 } 
+```
 
-2/4 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Toggle; 
 export flip, flop; 
  
@@ -84,8 +82,12 @@ end;
  
 begin 
   toggle := false; 
-end; 
-3. (10 poena) 
+end;
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Server extends Thread { 
     private Set<String> filesInUse = new HashSet<String>(); 
     private int port; 
@@ -121,8 +123,6 @@ public class Server extends Thread {
         Server server = new Server(5555); 
  
         server.work(); 
-
-3/4 
     } 
 } 
 public class RequestHandler extends Thread { 
@@ -189,8 +189,6 @@ public class RequestHandler extends Thread {
  
     private void startUsingFile(String fileName)  
                                           throws InterruptedException { 
-
-4/4 
         synchronized (filesInUse) { 
             while (filesInUse.contains(fileName)) { 
                 wait(); 
@@ -205,4 +203,4 @@ public class RequestHandler extends Thread {
         } 
     } 
 } 
- 
+```
