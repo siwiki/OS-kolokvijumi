@@ -1,11 +1,7 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 1 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Septembar 2014. 
-1. (10 poena) 
+schedule
+```cpp
 const int MAXPRI = ..., PRIRANGE = ..., PRISTEP = 1; 
 extern PCB* idle; 
  
@@ -59,10 +55,12 @@ PCB* Scheduler::get () {
   } 
   ret->next = 0; 
   return ret; 
-} 
-2. (10 poena) 
+}
+```
 
-2/3 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Event; 
   export wait, signal; 
  
@@ -83,13 +81,16 @@ monitor Event;
  
 begin 
   flag:=false; 
-end; (* Event *) 
-3. (10 poena) 
+end; (* Event *)
+```
+
+--------------------------------------------------------------------------------
+network
+```java
  static final int N = ...; 
  static final int M =...; 
  static int count = N; 
- static ArrayList<LinkedList<Socket>> blockedList = new 
-ArrayList<LinkedList<Socket>>(M); 
+ static ArrayList<LinkedList<Socket>> blockedList = new ArrayList<LinkedList<Socket>>(M); 
  
  public static void main(String[] args) { 
   for (int i = 0; i < M; i++) { 
@@ -99,8 +100,7 @@ ArrayList<LinkedList<Socket>>(M);
    ServerSocket sock = new ServerSocket(1033); 
    while (true) { 
     Socket clientSocket = sock.accept(); 
-    BufferedReader in = new BufferedReader(new 
-InputStreamReader(clientSocket.getInputStream())); 
+    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
     String msg = in.readLine(); 
  
     StringTokenizer st = new StringTokenizer(msg, "#"); 
@@ -122,8 +122,6 @@ InputStreamReader(clientSocket.getInputStream()));
         found = true; 
         break; 
        }        
-
-3/3 
      } 
      if (!found) count++; 
     }      
@@ -131,10 +129,8 @@ InputStreamReader(clientSocket.getInputStream()));
   } catch (Exception e) { System.err.println(e);} 
  } 
  
- static void sendMsgToClient(Socket clientSocket,String msg) throws 
-UnknownHostException, IOException { 
-  PrintWriter newOut = new 
-PrintWriter(clientSocket.getOutputStream(),true); 
+ static void sendMsgToClient(Socket clientSocket,String msg) throws UnknownHostException, IOException { 
+  PrintWriter newOut = new PrintWriter(clientSocket.getOutputStream(),true); 
   newOut.println(msg); 
   clientSocket.close(); 
  } 
@@ -147,8 +143,7 @@ public class Client {
    while (true) { 
     Socket srvSocket = new Socket("localhost", 1033); 
     sendMsq(srvSocket, "#Enter#"+args[0]+"#"); // args[0] is street no.  
-    BufferedReader in = new BufferedReader(new 
-InputStreamReader(srvSocket.getInputStream())); 
+    BufferedReader in = new BufferedReader(new InputStreamReader(srvSocket.getInputStream())); 
     System.out.println(in.readLine()); 
     srvSocket.close(); 
  
@@ -163,10 +158,9 @@ InputStreamReader(srvSocket.getInputStream()));
    System.err.println(e); 
   } 
  } 
- private static void sendMsq(Socket srvSocket, String msg) throws 
-UnknownHostException, IOException { 
+ private static void sendMsq(Socket srvSocket, String msg) throws UnknownHostException, IOException { 
   PrintWriter out = new PrintWriter(srvSocket.getOutputStream(), true); 
   out.println(msg); 
   } 
 } 
- 
+```

@@ -1,11 +1,7 @@
 2012/januar/SI, IR Kolokvijum 3 - Januar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, Januar 2013. 
-1. (10 poena)  
+windows
+```cpp
 class Mutex { 
 public: 
   Mutex () 
@@ -18,9 +14,12 @@ public:
     { LeaveCriticalSection(&criticalSection); } 
 private: 
   CRITICAL_SECTION criticalSection; 
-}; 
-2. (10 poena) 
- 
+};
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -lt 2 ];then 
@@ -43,8 +42,12 @@ for i in $(cat $tmp | grep href=\".*\.$2\"\>| sed
     wget "$i" 
 done 
 IFS=$IFS_old  
-rm $tmp 
-3. (10 poena) 
+rm $tmp
+```
+
+--------------------------------------------------------------------------------
+linux
+```cpp
 class Agent { 
 public: 
  Agent(key_t key); 
@@ -60,9 +63,6 @@ private:
  static const int Paper=0, Match=1, Tobacco=2; 
 }; 
  
- 
-
-2/2 
 void Agent::atomicOnTwoSems(int first, int second, int op){ 
   struct sembuf sems[2]; 
      sems[0].sem_num = first; 
@@ -91,5 +91,4 @@ Agent::~Agent() {
    semctl(id, 0, IPC_RMID); 
   } 
 } 
- 
- 
+```

@@ -14,7 +14,8 @@
         "disk": "Upravljanje diskovima",
         "syscall": "Sistemski pozivi",
         "bash": "Linux (Bash)",
-        "linux": "Linux (C)"
+        "linux": "Linux (C)",
+        "windows": "Windows"
     },
     "keywords": {}
 }

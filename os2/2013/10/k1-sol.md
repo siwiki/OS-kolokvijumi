@@ -1,11 +1,7 @@
 2013/oktobar/SI Kolokvijum 1 - Oktobar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2013. 
-1. (10 poena) 
+schedule
+```cpp
 const int timesliceHP = ..., timesliceMP = ..., timesliceLP = ...; 
 enum Queue {HP,MP,LP}; 
 extern PCB* const idle; 
@@ -55,9 +51,11 @@ void Scheduler::put (PCB* pcb, int wasBlocked) {
   else 
     tail[i] = tail[i]->next = pcb; 
 } 
+```
 
-2/3 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Mutex; 
   export lock, unlock; 
  
@@ -78,8 +76,12 @@ monitor Mutex;
 begin 
   isLocked:=false; 
 end; 
-3. (10 poena) 
-Na serverskoj strani u klasi Server treba dodati sledeće atribute: 
+```
+
+--------------------------------------------------------------------------------
+network
+Na serverskoj strani u klasi `Server` treba dodati sledeće atribute: 
+```java
  public static boolean kraj = false;  
  protected TaskExecutor executor; 
  
@@ -95,8 +97,9 @@ public static void main(String args[]) {
  s.start(); 
  executor.start(); 
  ... 
- 
-RequestHandler treba izmeniti na sledeći način: 
+```
+`RequestHandler` treba izmeniti na sledeći način: 
+```java
 public class RequestHandler extends Thread { 
  ... 
  protected TaskExecutor executor; 
@@ -117,8 +120,6 @@ protected void processRequest(String request) {
 public class TaskExecutor extends Thread { 
  protected ArrayList<WorkerThread> list = new ArrayList<WorkerThread>(); 
  
-
-3/3 
  private synchronized WorkerThread removeMaxPriAndDoAging() { 
   WorkerThread maxPriWT = null; 
   while (list.isEmpty()) try { wait(); } catch (InterruptedException e) {} 
@@ -152,3 +153,4 @@ public class TaskExecutor extends Thread {
   } 
  } 
 } 
+```

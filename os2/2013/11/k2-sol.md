@@ -1,11 +1,7 @@
 2013/novembar/SI, IR Kolokvijum 2 - Novembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, novembar 2013. 
-1. (10 poena) 
+deadlock
+```cpp
 int getHolder (unsigned int rid) { 
   for (unsigned int i=0; i<numOfProc; i++) 
     if (resourceAlloc[i][rid]==-1) return i; 
@@ -29,7 +25,11 @@ int wouldMakeDeadlock (unsigned int pid, unsigned int rid) {
     if (r==-1) return 0; // No deadlock 
   } 
 } 
-2. (10 poena)  
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 #define next(x) pcb->pagefifo[x] 
  
 unsigned int getVictimPage(PCB* pcb) { 
@@ -58,12 +58,15 @@ unsigned int getVictimPage(PCB* pcb) {
   // Should never fall through here: 
   return -1; 
 } 
-3. (10 poena) Inicijalno: F256 
-Nakon A1: A1, F1, F2, F4, F8, F16, F32, F64, F128 
+```
 
-2/2 
-Nakon A16: A1, F1, F2, F4, F8, A16, F32, F64, F128 
-Nakon A64: A1, F1, F2, F4, F8, A16, F32, A64, F128 
-Nakon A16: A1, F1, F2, F4, F8, A16, A16, F16, A64, F128 
-Nakon A64: A1, F1, F2, F4, F8, A16, A16, F16, A64, A64, F64 
-Nakon F1: F16, A16, A16, F16, A64, A64, F64 
+--------------------------------------------------------------------------------
+buddy
+
+- Inicijalno: F256 
+- Nakon A1: A1, F1, F2, F4, F8, F16, F32, F64, F128 
+- Nakon A16: A1, F1, F2, F4, F8, A16, F32, F64, F128 
+- Nakon A64: A1, F1, F2, F4, F8, A16, F32, A64, F128 
+- Nakon A16: A1, F1, F2, F4, F8, A16, A16, F16, A64, F128 
+- Nakon A64: A1, F1, F2, F4, F8, A16, A16, F16, A64, A64, F64 
+- Nakon F1: F16, A16, A16, F16, A64, A64, F64 

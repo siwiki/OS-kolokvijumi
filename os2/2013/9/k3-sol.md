@@ -1,18 +1,18 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 3 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, septembar 2014. 
-1. (10 poena)   
+disk
+```cpp
 int mapRAIDBlock(unsigned long blk, unsigned long& d, unsigned long& b) { 
   static const int dsks = getNumOfDisks(), blks = getNumOfBlocks(); 
   d = blk%dsks; 
   b = blk/dsks; 
   if (b>=blks) return -1; else return 0; 
 } 
-2. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 2 ];then 
@@ -34,11 +34,11 @@ else
     echo "Greska: Fajlu ne moze da se pristupi" 
     exit 2 
 fi 
- 
+```
 
-2/2 
-3. (10 poena)
- 
+--------------------------------------------------------------------------------
+linux
+```cpp 
 #define N 3 
 #define key 123 
  
@@ -86,4 +86,4 @@ int main() {
  wait(0); 
  return 0; 
 }
- 
+```

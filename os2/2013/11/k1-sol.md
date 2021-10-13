@@ -1,11 +1,7 @@
 2013/novembar/IR Kolokvijum 1 - Novembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Novembar 2013. 
-1. (10 poena) 
+schedule
+```cpp
 void Scheduler::put (PCB* pcb, int wasBlocked) { 
   if (pcb==0) return; // Exception! 
   if (pcb==idle) return; // Idle process is not put in the queue 
@@ -28,7 +24,11 @@ void Scheduler::put (PCB* pcb, int wasBlocked) {
   else 
     tail[i] = tail[i]->next = pcb; 
 } 
-2. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+sharedobj
+```java
 public class Buffer { 
  protected List l = new LinkedList(); 
  
@@ -41,9 +41,12 @@ public class Buffer {
   while (l.isEmpty())try {wait();} catch (InterruptedException e) {} 
   return l.remove();  
  } 
- 
-3. (10 poena) 
-Na serverskoj strani u klasi Server treba dodati sledeće atribute: 
+```
+
+--------------------------------------------------------------------------------
+network
+Na serverskoj strani u klasi `Server` treba dodati sledeće atribute: 
+```java
  protected File rootDir; 
  
 public Server(int port, String rootDir) { 
@@ -56,13 +59,12 @@ public static void main(String args[]) {
  Server s = new Server(6001, "/home/..."); 
  s.start(); 
  ... 
- 
-Klasu RequestHandler treba izmeniti na sledeći način: 
+``` 
+Klasu `RequestHandler` treba izmeniti na sledeći način: 
+```java
 public class RequestHandler extends Thread { 
  ... 
  protected File rootDir; 
-
-2/3 
  ...  
 public RequestHandler(Socket clientSocket, File rootDir) { 
   this.sock = clientSocket; 
@@ -102,8 +104,9 @@ protected void sendFile(String filePath) throws Exception {
   } 
  } 
 } 
+```
 Na klijentskoj strani: 
- 
+```java 
 public class FileClient extends Usluga { 
  public FileClient(String host, int port) { 
   super(host, port); 
@@ -128,11 +131,9 @@ public class FileClient extends Usluga {
   while (true) { 
    message = receiveMessage(); 
    if(message.equals("#done#") || message.equals("#error#")) break; 
-
-3/3 
    l.add(message); 
   } 
   return l; 
  } 
 } 
- 
+```

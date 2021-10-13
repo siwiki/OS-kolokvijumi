@@ -1,11 +1,7 @@
 2013/septembar-nadoknade/SI, IR Kolokvijum 2 - Septembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, septembar 2014. 
-1. (10 poena) 
+deadlock
+```cpp
 int ResourceAllocator::announce (int p, int r) { 
   if (p<0 || p>=np || r<0 || r>=nr) return -1; // Exception 
   if (alloc[p][r]!=0) return 0; // No effect if already used 
@@ -34,7 +30,11 @@ inline int ResourceAllocator::release (int p, int r) {
   alloc[p][r] = 1;  // Announcement edge 
   return 1; 
 } 
-2. (10 poena)  
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 void updateReferenceRegs (PCB* pcb) { 
   if (pcb==0) return; // Exception! 
   for (unsigned page=0; page<PMTSIZE; page++) { 
@@ -46,9 +46,11 @@ void updateReferenceRegs (PCB* pcb) {
     (pcb->pmt[page]) &= ~1U;  // Reset the reference bit 
   } 
 } 
+```
 
-2/2 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+slab
+```cpp
 template<class T, int slabSize> 
 void* SlabAllocator<T,slabSize>::alloc () { 
   for (Slab* s = cacheHead; s!=0; s=s->next) 
@@ -72,4 +74,4 @@ void* SlabAllocator<T,slabSize>::alloc () {
   s->slots[0].isFree = 0; 
   return &(s->slots[0].slot); 
 } 
- 
+```
