@@ -1,11 +1,7 @@
 2014/septembar/SI, IR Kolokvijum 2 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, septembar 2015. 
-1. (10 poena) 
+deadlock
+```cpp
 int ResourceAllocator::request (int p, ResourceVector req) { 
   if (p<0 || p>=np) return -1; // Exception 
   if (alloc[p]+req>max[p]) return -2; // Request beyond announcement 
@@ -19,8 +15,12 @@ int ResourceAllocator::request (int p, ResourceVector req) {
     return -4;  // Cannot be acquired because it leads to an unsafe state 
   } else  
     return 0;  // Resources acquired 
-} 
-2. (10 poena)  
+}
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 unsigned getLRUPage (PCB* pcb) { 
   if (pcb==0) return; // Exception! 
   unsigned minPage = 0, minRef = 0, first = 1; 
@@ -35,8 +35,12 @@ unsigned getLRUPage (PCB* pcb) {
     } 
   } 
   return minPage; 
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+thrashing
+```cpp
 void incPageFaultCounter (PCB* pcb) { 
   if (pcb==0) return; // Exception! 
   pcb->pageFaultCounters[pcb->pageFaultCursor]++; 
@@ -56,4 +60,5 @@ unsigned getNumberOfPageFaults (PCB* pcb) {
   for (int i=0; i<PFLTCOUNTERS; i++) 
     sum += pcb->pageFaultCounters[i]; 
   return sum; 
-} 
+}
+```

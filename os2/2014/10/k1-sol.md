@@ -1,12 +1,11 @@
 2014/oktobar/SI Kolokvijum 1 - Oktobar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+HP, MP, HP, HP, MP, HP, MP, LP, MP, LP  
 
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2014. 
-1. (10 poena) HP, MP, HP, HP, MP, HP, MP, LP, MP, LP  
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor TaxiDispatcher; 
   export userRequest, taxiAvailable; 
  
@@ -43,9 +42,13 @@ monitor TaxiDispatcher;
  
 begin 
   waitingUsers:=0; availableTaxis:=0; 
-end; 
-3. (10 poena) 
-Na serverskoj strani u klasi Server treba dodati sledeće atribute: 
+end;
+```
+
+--------------------------------------------------------------------------------
+network
+Na serverskoj strani u klasi `Server` treba dodati sledeće atribute:
+```java
  public static boolean kraj = false;  
  protected QueryExecutor executor; 
  
@@ -60,11 +63,10 @@ public static void main(String args[]) {
  Server s = new Server(6001,executor); 
  s.start(); 
  executor.start(); 
-
-2/2 
  ... 
- 
-klasu RequestHandler treba izmeniti na sledeći način: 
+```
+klasu `RequestHandler` treba izmeniti na sledeći način:
+```java
 public class RequestHandler extends Thread { 
  ... 
  protected QueryExecutor executor; 
@@ -84,14 +86,12 @@ protected void processRequest(String request) {
  
 public class QueryExecutor extends Thread { 
  protected Queue<SQLWorkerThread> fifoQueue = new Queue<SQLWorkerThread>(); 
- protected DelayQueue<SQLWorkerThread>  delayQueue = new 
-DelayQueue<SQLWorkerThread>(); 
+ protected DelayQueue<SQLWorkerThread>  delayQueue = new DelayQueue<SQLWorkerThread>(); 
  
  private synchronized SQLWorkerThread get() { 
    while (delayQueue.isEmpty() && fifoQueue.isEmpty()) wait(); 
    SQLWorkerThread nextWT = delayQueue.peek(); 
-   if (nextWT.getDelay()> 0) 
- nextWT = fifoQueue.peek(); 
+   if (nextWT.getDelay()> 0) nextWT = fifoQueue.peek(); 
    delayQueue.remove(nextWT); 
    fifoQueue.remove(nextWT); 
    return nextWT;  
@@ -110,4 +110,4 @@ DelayQueue<SQLWorkerThread>();
   } 
  } 
 } 
- 
+```

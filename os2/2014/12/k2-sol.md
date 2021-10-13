@@ -1,16 +1,16 @@
 2014/decembar/SI, IR Kolokvijum 2 - Decembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
+deadlock
 
+\begin{figure}[H]
+\centering
+\subfloat[Rešenje prve stavke]{\includesvg[width=0.45\textwidth]{images/os2/2014/k2-graf-a}}
+\subfloat[Rešenje druge stavke]{\includesvg[width=0.45\textwidth]{images/os2/2014/k2-graf-b}}
+\end{figure}
 
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, decembar 2014. 
-1. (10 poena) 
-a)(5) 
- 
-b)(5) 
- 
-2. (10 poena)  
+--------------------------------------------------------------------------------
+memory
+```cpp
 int findBestCandidate (PCB* pcb, unsigned int modifyBit) { 
   unsigned int initClockHand = pcb->clockHand; 
   do { 
@@ -24,7 +24,11 @@ int findBestCandidate (PCB* pcb, unsigned int modifyBit) {
   } while (pcb->clockHand!=initClockHand); 
   return 0; // Not found 
 } 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+slab
+```cpp
 int slab_free_slot (Cache* cache, void* slot_) { 
   if (slot_==0 || cache==0) return -1; // Exception 
   Slot* slot = (Slot*)slot_; 
@@ -45,4 +49,4 @@ int slab_free_slot (Cache* cache, void* slot_) {
   } 
   return 1; 
 } 
- 
+```

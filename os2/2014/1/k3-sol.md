@@ -1,11 +1,7 @@
 2013/januar/SI, IR Kolokvijum 3 - Januar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, Januar 2014. 
-1. (10 poena)  
+syscall
+```cpp
 extern char* CLI_path; 
 int execute_command(char* command_name, char** args){ 
   static create_process_struct ps; 
@@ -17,8 +13,12 @@ int execute_command(char* command_name, char** args){
     load r2,ptr 
     int  0x11 
   } 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -lt 3 ];then 
@@ -44,8 +44,12 @@ if [ $? -eq 0 ];then
  done 
 else 
  echo "$USER $@" >> $FILE 
-fi 
-3. (10 poena) 
+fi
+```
+
+--------------------------------------------------------------------------------
+linux
+```cpp
 void giveTokenToClient(int id, int responseMsgQueueId) { 
  struct requestMsg msg_buf; 
  msg_buf.mtype = id + 1; 
@@ -61,8 +65,6 @@ int main(int argc, const char **argv) {
     } 
  else return -1; 
 
-2/2 
- 
  int requestMsgQueueId = msgget(MESSAGE_Q_KEY, IPC_CREAT | 0666); 
  int responseMsgQueueId = msgget(MESSAGE_Q_KEY + 1, IPC_CREAT | 0666); 
  size_t len = sizeof(char); 
@@ -114,3 +116,4 @@ int main(int argc, const char **argv) {
   } 
  } 
 } 
+```

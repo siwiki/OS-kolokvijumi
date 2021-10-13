@@ -1,11 +1,7 @@
 2014/septembar/SI, IR Kolokvijum 3 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, septembar 2015. 
-1. (10 poena)   
+disk
+```cpp
 int readBlock (unsigned blk, void* buffer) { 
   static const int dsks = getNumOfDisks(), blks = getNumOfBlocks(); 
   d = blk%dsks; 
@@ -20,8 +16,12 @@ int readBlock (unsigned blk, void* buffer) {
     return -2;  // Complete disk[d] pair failure 
  
   return 0; 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 dir=$1 
@@ -41,10 +41,11 @@ for i in $(find $dir -name "*.cpp"); do
     cat $i | sed 's://.*$::' > $tmp 
     cp $tmp $i 
 done; 
+```
 
-2/3 
-3. (10 poena)
- 
+--------------------------------------------------------------------------------
+linux
+```cpp
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <sys/shm.h> 
@@ -108,8 +109,6 @@ static void sem_signal(int sem_id)
 static void inc(int *pvalue) 
 { 
   *pvalue = (*pvalue + 1) % SIZE; 
-
-3/3 
 } 
  
 static void read_msg(struct Buffer *buffer, Id process_id, int sem_id) 
@@ -135,8 +134,7 @@ int main()
   int shm_buffer_size; 
   Id process_id = 0; 
   shm_buffer_size = sizeof(struct Buffer); 
-  int  shmid  =  shmget(keyMem,  shm_buffer_size,  IPC_CREAT  |    S_IRUSR  | 
-S_IWUSR); 
+  int  shmid  =  shmget(keyMem,  shm_buffer_size,  IPC_CREAT  |    S_IRUSR  | S_IWUSR); 
   struct Buffer *buffer = (struct Buffer*)shmat(shmid, 0, 0); 
   int sem_id = semget(keySem, 0, 066 | IPC_CREAT); 
   buffer->head = 0; 
@@ -172,3 +170,4 @@ S_IWUSR);
   shmctl(shmid, IPC_RMID, NULL); 
   return 0; 
 } 
+```

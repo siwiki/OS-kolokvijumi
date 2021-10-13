@@ -1,12 +1,11 @@
 2014/decembar/IR Kolokvijum 1 - Decembar 2014 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+HP, MP, LP, MP, HP, HP, MP, LP, MP, LP  
 
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Decembar 2014. 
-1. (10 poena) HP, MP, LP, MP, HP, HP, MP, LP, MP, LP  
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor TaxiDispatcher; 
   export userRequest, taxiAvailable; 
  
@@ -48,8 +47,12 @@ monitor TaxiDispatcher;
  
 begin 
   waitingUsers:=0; availableTaxis:=0; 
-end; 
-3. (10 poena) 
+end;
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class TaxiDispatcher { 
  static LinkedList<Socket> blockedTaxi = new LinkedList<Socket>(); 
  static LinkedList<Socket> blockedUsers = new LinkedList<Socket>(); 
@@ -59,10 +62,7 @@ public class TaxiDispatcher {
    ServerSocket sock = new ServerSocket(1033);  
    while (true) { 
     Socket clientSocket = sock.accept(); 
-    BufferedReader in = new BufferedReader(new 
-InputStreamReader(clientSocket.getInputStream())); 
-
-2/2 
+    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
     String request = in.readLine(); 
  
     if (request.equals("userRequest")) { 
@@ -71,7 +71,7 @@ InputStreamReader(clientSocket.getInputStream()));
       sendMsgToClient(clientSocket, "Continue"); 
      } 
      else blockedUsers.add(clientSocket); 
-    }else if (request.equals("taxiAvailable")) { 
+    } else if (request.equals("taxiAvailable")) { 
      if(!blockedUsers.isEmpty()){    
       sendMsgToClient(blockedUsers.remove(), "Continue"); 
       sendMsgToClient(clientSocket, "Continue"); 
@@ -85,9 +85,9 @@ InputStreamReader(clientSocket.getInputStream()));
  } 
  static void sendMsgToClient(Socket clientSocket,String msg) throws 
 UnknownHostException, IOException { 
-  PrintWriter newOut = new 
-PrintWriter(clientSocket.getOutputStream(),true); 
+  PrintWriter newOut = new PrintWriter(clientSocket.getOutputStream(),true); 
   newOut.println(msg); 
   clientSocket.close(); 
  } 
 } 
+```

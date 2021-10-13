@@ -1,11 +1,7 @@
 2014/septembar/SI, IR Kolokvijum 1 - Septembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Septembar 2015. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (); 
@@ -44,10 +40,12 @@ PCB* Scheduler::get () {
     tail[active]=0; 
   ret->next = 0; 
   return ret; 
-} 
+}
+```
 
-2/3 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor FlipFlop; 
   export flip, flop; 
  
@@ -71,8 +69,12 @@ monitor FlipFlop;
  
 begin 
   i:=N; 
-end; (* monitor *) 
-3. (10 poena) 
+end; (* monitor *)
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class President { 
     private static int nextId = 0; 
     int price = 0, newPrice = 0; 
@@ -106,8 +108,6 @@ public class President {
         while (nextRound != round && !end) wait(); 
         return end; 
     } 
-
-3/3 
     public static void main(String[] args) { 
         President auction = new President(); 
         try { 
@@ -164,4 +164,4 @@ public class ServerThread extends Thread {
         } finally { president.removeUser(); } 
     } 
 } 
- 
+```
