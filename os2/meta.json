@@ -7,10 +7,10 @@
         "pipe": "Međuprocesna komunikacija (cevi)",
         "sharedobj": "Međuprocesna komunikacija (deljeni objekat)",
         "network": "Međuprocesna komunikacija (poruke)",
-        "buddy": "Alokator parnjaka",
-        "slab": "Alokator ploča",
+        "memory": "Upravljanje memorijom",
+        "buddy": "Upravljanje memorijom (parnjaci)",
+        "slab": "Upravljanje memorijom (ploče)",
         "allocator": "Alokacija resursa",
-        "memory": "Alokator memorije",
         "disk": "Upravljanje diskovima",
         "bash": "Linux (Bash)",
         "linux": "Linux (C)"
