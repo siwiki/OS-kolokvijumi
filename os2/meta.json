@@ -8,6 +8,7 @@
         "sharedobj": "Međuprocesna komunikacija (deljeni objekat)",
         "network": "Međuprocesna komunikacija (poruke)",
         "buddy": "Alokator parnjaka",
+        "slab": "Alokator ploča",
         "allocator": "Alokacija resursa",
         "memory": "Alokator memorije",
         "disk": "Upravljanje diskovima",

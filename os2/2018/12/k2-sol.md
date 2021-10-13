@@ -1,11 +1,7 @@
 2018/decembar/SI, IR Kolokvijum 2 - Decembar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, decembar 2018. 
-1. (10 poena)  
+deadlock
+```cpp
 struct RCB { 
   unsigned id; 
   int free; // Is this resource free (available for allocation)? 
@@ -52,9 +48,11 @@ void resource_free (PCB* p, RCB* r) {
   if (r->next) r->next->prev = r->prev; 
   r  ->next = r->prev = 0; 
 } 
+```
 
-2/  2 
-2. (10 poena)  
+--------------------------------------------------------------------------------
+memory
+```cpp
 PageDesc* getFromGroup(int group, unsigned long start) { 
   for (i = 0; i<NumOfPages; i++) { 
       PageDesc* pd = &pages[(start+i)%NumOfPages]; 
@@ -72,9 +70,12 @@ PageDesc* getVictim () {
       return pd;     
   }   
   return 0; // Exception 
-} 
+}
+```
  
-3. (10 poena) 
+--------------------------------------------------------------------------------
+slab
+```cpp
 Slot* Cache::alloc () { 
   Slab* cur = 0; 
   for (cur = this->head; cur; cur = cur->next) 
@@ -89,4 +90,4 @@ Slot* Cache::alloc () {
   cur->head = *(long*)slot; 
   return slot; 
 } 
-}; 
+```

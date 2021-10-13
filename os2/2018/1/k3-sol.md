@@ -1,11 +1,7 @@
 2017/januar/SI, IR Kolokvijum 3 - Januar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2 
-Rešenja zadataka sa trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2018. 
-1. (10 poena)   
+disk
+```cpp
 int recoverBlock (unsigned dsk, unsigned long blk, byte* buffer) { 
   byte auxBuf[BlockSize]; // Auxiliary buffer 
   for (int i=0; i<BlockSize; i++) 
@@ -18,8 +14,12 @@ int recoverBlock (unsigned dsk, unsigned long blk, byte* buffer) {
       buffer[i] ^= auxBuf[i];     
   }   
   return 0; 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 2 ]; then 
@@ -44,12 +44,11 @@ if kill $pid; then
 else 
     echo "Kill command failed" 
 fi 
- 
- 
+```
 
-2/  2 
-3. (10 poena)
- 
+--------------------------------------------------------------------------------
+linux
+```cpp
 const char DEVICE_NAME[] = "/dev/ud1"; 
 const size_t DEVICE_SIZE = 1 << 30; 
 const int MSG_KEY = 1; 
@@ -97,4 +96,4 @@ int main() {
     msgctl(msg_box, IPC_RMID, 0); 
     return 0; 
 } 
- 
+```

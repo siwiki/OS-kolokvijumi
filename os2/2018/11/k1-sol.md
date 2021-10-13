@@ -1,12 +1,11 @@
 2018/novembar/SI Kolokvijum 1 - Novembar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+HP5, MP3, HP3, MP1, HP1, HP7, MP5, LP1, MP3 
 
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Novembar 2018. 
-1. (10 poena) HP5, MP3, HP3, MP1, HP1, HP7, MP5, LP1, MP3 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor TickTuck; 
 export tick, tuck; 
  
@@ -40,8 +39,12 @@ end;
 begin 
   bTick := true; 
   iTucks := 0; 
-end; 
-3. (10 poena) 
+end;
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
  private static final int N = 10; 
  private static final int PORT = 5555; 
@@ -59,7 +62,6 @@ public class Server {
   } 
  } 
 
-2/2 
 public synchronized void addClient(Service client) throws IOException { 
   if (activeClients < N) { 
    activeClients++; 
@@ -97,6 +99,5 @@ public class RequestHandler extends Thread {
   server.finishClient(); 
  } 
 } 
- 
-Klasa Service (Usluga) data je na vežbama. 
- 
+```
+Klasa `Service` (Usluga) data je na vežbama. 

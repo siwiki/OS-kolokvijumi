@@ -1,12 +1,11 @@
 2018/decembar/IR Kolokvijum 1 - Decembar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+HP5, MP4, LP2, MP3, LP1, MP1, HP6, MP5, LP3, MP3, LP1 
 
-
-1/  2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Decembar 2018. 
-1. (10 poena) HP5, MP4, LP2, MP3, LP1, MP1, HP6, MP5, LP3, MP3, LP1 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor TickTuck; 
 export tick, tuck; 
  
@@ -30,8 +29,12 @@ end;
  
 begin 
   b  Tuck := false; 
-end; 
-3. (10 poena) 
+end;
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Client { 
     public int[][] doCalculation(int[][] matrix) throws IOException { 
         if (matrix.length == 0 || matrix[0].length == 0) { 
@@ -63,8 +66,6 @@ public class Client {
     } 
  
     private void sendMatrix(int[][] matrix, Service service) { 
-
-2/  2 
         service.sendMessage(matrix.length + ""); 
         for (int[] row : matrix) { 
             StringBuilder sb = new StringBuilder(); 
@@ -96,6 +97,6 @@ public class Client {
         } 
         return ret; 
     } 
-} 
-Klasa Service je data na vežbama. 
- 
+}
+```
+Klasa `Service` je data na vežbama. 

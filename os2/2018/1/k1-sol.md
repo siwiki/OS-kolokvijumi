@@ -1,11 +1,7 @@
 2017/januar/SI, IR Kolokvijum 1 - Januar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Januar 2018. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (); 
@@ -59,10 +55,12 @@ PCB* Scheduler::get (int proc) {
      size[proc]--; 
   }   
   return ret; 
-} 
+}
+```
 
-2/  3 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```java
 class Toggle { 
   public Toggle () {} 
  
@@ -81,8 +79,12 @@ class Toggle {
   }   
  
   private bool toggle = true; 
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
     private int port; 
     private boolean reject = false; 
@@ -124,13 +126,10 @@ public class Server {
         if (acceptedClients > 0) { 
             reject = true; 
         } else { 
-            reject = false; 
-
-3/  3 
+            reject = false;
         } 
     } 
-    public   static   void   main(String[]   args)   throws   IOException,   
-InterruptedException { 
+    public   static   void   main(String[]   args)   throws   IOException,   InterruptedException { 
         Server server = new Server(5555); 
         server.work(); 
     } 
@@ -138,8 +137,7 @@ InterruptedException {
 public class RequestHandler extends Thread { 
     private Server server; 
     private Service service; 
-    public RequestHandler(Server server, Service service) throws IOException 
-{ 
+    public RequestHandler(Server server, Service service) throws IOException { 
         this.service = service; 
         this.server = server; 
     } 
@@ -155,4 +153,4 @@ public class RequestHandler extends Thread {
         } 
     } 
 } 
- 
+```
