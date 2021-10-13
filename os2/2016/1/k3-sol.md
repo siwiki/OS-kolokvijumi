@@ -1,11 +1,7 @@
 2015/januar/SI, IR Kolokvijum 3 - Januar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2016. 
-1. (10 poena)   
+disk
+```cpp
 class DiskScheduler { 
 public:  
   DiskScheduler (); 
@@ -39,8 +35,12 @@ DiskRequest* DiskScheduler::get () {
   if (!cursor) cursor = head; 
   req->prev = req->next = 0; 
   return req; 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 4 ]; then 
@@ -58,9 +58,7 @@ fi
 voz=$2 
 hh=$3 
 mm=$4 
- 
 
-2/2 
 for i in $(cat $file | grep "^$voz\ " | sed "s/^$voz\ \(.*\)/\1/"); do 
     voz_hh=$(echo $i | sed "s/\([0-9][0-9]\).*/\1/") 
     voz_mm=$(echo $i | sed "s/.*\:\([0-9][0-9]\)/\1/") 
@@ -72,10 +70,12 @@ for i in $(cat $file | grep "^$voz\ " | sed "s/^$voz\ \(.*\)/\1/"); do
        echo $i 
        exit 0 
     fi 
-done 
+done
+```
  
-3. (10 poena) 
- 
+--------------------------------------------------------------------------------
+linux
+```cpp
 struct msgbuf 
 { 
   long mtype; 
@@ -99,4 +99,5 @@ void barrier(int id, int msg_box)
       continue; 
     msgrcv(msg_box, &msg, sizeof(int), id + 1, 0); 
   } 
-} 
+}
+```

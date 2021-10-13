@@ -1,14 +1,12 @@
 2016/decembar/IR Kolokvijum 1 - Decembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+1. HP, MP, LP, MP, MP, LP, MP, LP, LP 
+2. $\tau = 6$ 
 
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Decembar 2016. 
-1. (10 poena) 
-a)(7)    HP, MP, LP, MP, MP, LP, MP, LP, LP 
-b)(3) τ = 6 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```java
 public class Computer { 
  
   public synchronized void writeX (double v) { 
@@ -37,8 +35,12 @@ public class Computer {
   private static final int readyForX=0, readyForY=1, readyToRead=2; 
   private int state = readyForX; 
  
-}; 
-3. (10 poena) 
+};
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Posrednik { 
     private static final int port = 6000; 
     private class Nit extends Thread { 
@@ -61,8 +63,6 @@ public class Posrednik {
                     } 
                     server.posalji(poruka); 
                     poruka = server.primi(); 
-
-2/2 
                     if (poruka == null) { 
                         break; 
                     } 
@@ -95,8 +95,7 @@ public class Komunikacija {
     public Komunikacija(Socket socket) throws IOException { 
         this.socket = socket; 
         izlaz = new PrintWriter(socket.getOutputStream(), true); 
-        ulaz = new BufferedReader(new 
-InputStreamReader(socket.getInputStream())); 
+        ulaz = new BufferedReader(new InputStreamReader(socket.getInputStream())); 
     } 
     public void posalji(String poruka) { 
         izlaz.println(poruka); 
@@ -114,4 +113,4 @@ InputStreamReader(socket.getInputStream()));
         socket.close(); 
     } 
 } 
- 
+```

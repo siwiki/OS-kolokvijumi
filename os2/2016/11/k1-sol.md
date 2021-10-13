@@ -1,14 +1,12 @@
 2016/novembar/SI Kolokvijum 1 - Novembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+1. MP, LP, LP, MP, HP, MP, LP, MP, LP 
+2. $\tau = 4$
 
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Novembar 2016. 
-1. (10 poena) 
-a)(7)    MP, LP, LP, MP, HP, MP, LP, MP, LP 
-b)(3) τ = 4 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Computer; 
 export writeX, writeY, read; 
  
@@ -57,10 +55,12 @@ end;
  
 begin 
   readyForX:=true; readyForY:=true; readyToRead:=false; 
-end; 
+end;
+```
 
-2/4 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+network
+```java
 public class Nalog { 
     private String tekuciRacun; 
     private String opis; 
@@ -74,16 +74,14 @@ public class Nalog {
         vrsta = Vrsta.valueOf(delovi[3]); 
         suma = Double.parseDouble(delovi[4]); 
     } 
-    public Nalog(String tekuciRacun, String opis, Vrsta vrsta, double suma) 
-{ 
+    public Nalog(String tekuciRacun, String opis, Vrsta vrsta, double suma) { 
         this.tekuciRacun = tekuciRacun; 
         this.opis = opis; 
         this.vrsta = vrsta; 
         this.suma = suma; 
     } 
     public String uPoruku() { 
-        return "#" + tekuciRacun + "#" + opis + "#" + vrsta.toString() + 
-"#" + suma + "#"; 
+        return "#" + tekuciRacun + "#" + opis + "#" + vrsta.toString() + "#" + suma + "#"; 
     } 
     public String getTekuciRacun() { 
         return tekuciRacun; 
@@ -105,8 +103,7 @@ public class Komunikacija {
     public Komunikacija(Socket socket) throws IOException { 
         this.socket = socket; 
         izlaz = new PrintWriter(socket.getOutputStream(), true); 
-        ulaz = new BufferedReader(new 
-InputStreamReader(socket.getInputStream())); 
+        ulaz = new BufferedReader(new InputStreamReader(socket.getInputStream())); 
     } 
     public void posalji(String poruka) { 
         izlaz.println(poruka); 
@@ -125,8 +122,6 @@ InputStreamReader(socket.getInputStream()));
     } 
 } 
 public class Server { 
-
-3/4 
     private static final int port = 6000; 
     private static final int granica = 6; 
     private String registarIp; 
@@ -152,8 +147,7 @@ public class Server {
                         klijent.posalji("ok"); 
                     } else { 
                         Deque<Nalog> lista = dohvatiIsplate(nalog); 
-                        Komunikacija  registar  = new Komunikacija(new 
-Socket(registarIp, registarPort)); 
+                        Komunikacija  registar  = new Komunikacija(new Socket(registarIp, registarPort)); 
                         registar.posalji(Integer.toString(lista.size())); 
                         for (Nalog n : lista) { 
                             registar.posalji(nalog.uPoruku()); 
@@ -196,8 +190,6 @@ Socket(registarIp, registarPort));
             stanje = racuni.get(nalog.getTekuciRacun()); 
         } 
         if (stanje < nalog.getSuma()) { 
-
-4/4 
             return false; 
         } 
         racuni.put(nalog.getTekuciRacun(), stanje - nalog.getSuma()); 
@@ -228,5 +220,4 @@ Socket(registarIp, registarPort));
         Server server = new Server("nbs.co.rs", 11111); 
     } 
 } 
- 
- 
+```

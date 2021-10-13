@@ -1,20 +1,18 @@
 2016/decembar/SI, IR Kolokvijum 2 - Decembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, decembar 2016. 
-1. (10 poena) Sprečavanje mrtve blokade uvođenjem relacije totalnog uređenja resursa i 
-alokacije resursa po monotono rastućem redosledu. Iz datog koda se može zaključiti sledeće: 
-da bi mrtva blokada bila sprečena, mora biti: C>B, D; A>C, D; B, C>D. Odatle sledi: 
-A>C>B>D. Tako: 
+deadlock
+Sprečavanje mrtve blokade uvođenjem relacije totalnog uređenja resursa i alokacije resursa po monotono rastućem redosledu. Iz datog koda se može zaključiti sledeće: da bi mrtva blokada bila sprečena, mora biti: $C > B, D$; $A > C, D$; $B, C > D$. Odatle sledi: $A > C > B > D$. Tako:
+```
 Process X:              Process Y:              Process Z: 
       req(D); req(B);         req(D); req(C);         req(D); 
       req(C);                 req(A);                 req(B); req(C); 
       rel(C);                 rel(A);                 rel(C); rel(B); 
       rel(B); rel(D);         rel(C); rel(D);         rel(D); 
-2. (10 poena)  
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 int getFreeFrame (uint pid, uint page, uint* frame) { 
   int cur = 0; 
   for (cur=0; cur<FreeFramePoolSize; cur++) { 
@@ -36,8 +34,12 @@ int getFreeFrame (uint pid, uint page, uint* frame) {
   } 
   // No free frame in the pool! 
   return -1; 
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 ulong getWorkingSetSize (PCB* pcb) { 
   if (pcb==0) return 0; // Exception 
   ulong size = 0; 
@@ -52,3 +54,4 @@ ulong getWorkingSetSize (PCB* pcb) {
   } 
   return size; 
 } 
+```
