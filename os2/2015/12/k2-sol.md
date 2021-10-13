@@ -1,11 +1,7 @@
 2015/decembar/SI, IR Kolokvijum 2 - Decembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, decembar 2015. 
-1. (10 poena) 
+deadlock
+```cpp
 int ResourceAllocator::release (int p, int r) { 
   if (p<0 || p>=np || r<0 || r>=nr) return -1; // Exception 
   if (alloc[p][r]!=acquired) return -2;// Resource not used by this process 
@@ -17,8 +13,12 @@ int ResourceAllocator::release (int p, int r) {
         deblock[i]=1; 
   } 
   return 1; 
-} 
-2. (10 poena)  
+}
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 unsigned int getVictimPage (PCB* pcb) { 
   if (pcb==0) return; // Exception! 
   while (1) { 
@@ -26,28 +26,48 @@ unsigned int getVictimPage (PCB* pcb) {
     pcb->pageCounters[pcb->clockHand]--; 
     pcb->clockHand = pcb->pageFifo[pcb->clockHand]; 
   } 
-} 
-3. (10 poena) 
-a)(5) 
-n    Po
-četne adrese (hex) slobodnih blokova veličine 2
-n
-n
- 
-4    - 
-3    - 
-2    A C0 00 
-1    A A0 00 
-0    - 
-b)(5) 
-n    Po
-četne adrese (hex) slobodnih blokova veličine 2
-n
-n
- 
-4    - 
-3    A 00 00 
-2    A C0 00 
-1    A A0 00 
-0    - 
- 
+}
+```
+
+--------------------------------------------------------------------------------
+buddy
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+n & \textit{Početne adrese (hex) slobodnih blokova veličine $2^n$} \\
+\hline
+4 & - \\
+\hline
+3 & - \\
+\hline
+2 & A C0 00 \\
+\hline
+1 & A A0 00 \\
+\hline
+0 & - \\
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod a}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+n & \textit{Početne adrese (hex) slobodnih blokova veličine $2^n$} \\
+\hline
+4 & - \\
+\hline
+3 & A 00 00 \\
+\hline
+2 & A C0 00 \\
+\hline
+1 & A A0 00 \\
+\hline
+0 & - \\
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod b}
+\end{figure}

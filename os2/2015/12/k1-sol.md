@@ -1,11 +1,7 @@
 2015/decembar/IR Kolokvijum 1 - Decembar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Decembar 2015. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (); 
@@ -54,10 +50,12 @@ PCB* Scheduler::get (int proc) {
        return ret; 
     } 
   return 0; 
-} 
+}
+```
 
-2/4 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```java
 class Gate { 
   private bool isOpen = true; 
  
@@ -73,8 +71,12 @@ class Gate {
   public synhronized pass () { 
     while (!this.isOpen) this.wait(); 
   } 
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 package rs.etf; 
  
 import java.io.BufferedReader; 
@@ -120,8 +122,6 @@ public class Server extends Thread {
         } 
  
     } 
-
-3/4 
      
     protected class RequestListener extends Thread { 
  
@@ -188,8 +188,6 @@ public class Server extends Thread {
                 try { 
                     s = ss.accept(); 
                     in = new BufferedReader(new InputStreamReader( 
-
-4/4 
                             s.getInputStream())); 
                     out = new PrintWriter(new OutputStreamWriter( 
                             s.getOutputStream()), true); 
@@ -224,4 +222,4 @@ public class Server extends Thread {
     } 
  
 }
- 
+```

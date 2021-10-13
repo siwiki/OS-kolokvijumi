@@ -1,11 +1,7 @@
 2015/oktobar/SI Kolokvijum 1 - Oktobar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2015. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler (); 
@@ -46,10 +42,12 @@ PCB* Scheduler::get () {
        return ret; 
     } 
   return 0; 
-} 
+}
+```
 
-2/4 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```java
 class Server { 
   private Data d; 
   private bool readyToRead = false, readyToWrite = true; 
@@ -70,8 +68,12 @@ class Server {
     this.notifyAll(); 
     return data; 
   } 
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 import java.io.BufferedReader; 
 import java.io.IOException; 
 import java.io.InputStreamReader; 
@@ -112,8 +114,6 @@ public class Server extends Thread {
           } finally { 
             if (in != null) 
               in.close(); 
-
-3/4 
           } 
         } 
       } catch (Exception e) { 
@@ -180,8 +180,6 @@ public class Server extends Thread {
     } finally { 
       try { 
         ss.close(); 
-
-4/4 
       } catch (IOException e) { 
         // 
       } 
@@ -200,8 +198,7 @@ public class Server extends Thread {
     return workstations[minInd]; 
   } 
  
-  protected synchronized void setNumOfRequests(String workstation, int 
-nReq) { 
+  protected synchronized void setNumOfRequests(String workstation, int nReq) { 
     for (int i = 0; i < workstations.length; i++) { 
       if (workstations[i].equals(workstation)) { 
         numOfRequests[i] = nReq; 
@@ -211,4 +208,4 @@ nReq) {
   } 
  
 } 
- 
+```

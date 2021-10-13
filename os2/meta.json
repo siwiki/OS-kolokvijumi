@@ -12,6 +12,7 @@
         "slab": "Upravljanje memorijom (ploče)",
         "allocator": "Alokacija resursa",
         "disk": "Upravljanje diskovima",
+        "syscall": "Sistemski pozivi",
         "bash": "Linux (Bash)",
         "linux": "Linux (C)"
     },

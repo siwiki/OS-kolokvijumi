@@ -1,11 +1,7 @@
 2014/januar/SI, IR Kolokvijum 3 - Januar 2015 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2015. 
-1. (10 poena)  
+syscall
+```cpp
 int fopen(const char* fname, int mode) { 
   if(fname==0) return -1; 
   int ret = 0; 
@@ -23,8 +19,12 @@ int fopen(const char* fname, int mode) {
   if (ret<0) return -1; // Exception 
   if (sscanf(buffer,”%d”,&ret)<=0) return -1; 
   return ret; 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 !/bin/bash 
  
 if [ $# -ne 1 ];then 
@@ -34,8 +34,12 @@ fi
  
 file=$1 
 cat $file | sed 's/^.\{5\}\([0-9]\).*$/\1 &/' | sort |  
-sed 's/^[^\ ]*\ \(.*\)$/\1/' 
-3. (10 poena) 
+sed 's/^[^\ ]*\ \(.*\)$/\1/'
+```
+
+--------------------------------------------------------------------------------
+linux
+```cpp
 int main(int argc, const char **argv) { 
  if (argc > 2) { 
   M = atoi(argv[1]); 
@@ -59,8 +63,6 @@ int main(int argc, const char **argv) {
  
    cars++; 
    // msg_buf.mtype je isti 
-
-2/2 
    msgsnd(responseMsgQueueId, &msg_buf, sizeof(char), 0);  
   } else { //wait for a car to leave 
    msgrcv(requestMsgQueueId, &msg_buf, len, M + 1, 0); 
@@ -68,4 +70,4 @@ int main(int argc, const char **argv) {
   } 
  } 
 } 
- 
+```
