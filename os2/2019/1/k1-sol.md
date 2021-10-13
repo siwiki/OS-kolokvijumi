@@ -1,11 +1,7 @@
 2018/januar/SI, IR Kolokvijum 1 - Januar 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Januar 2019. 
-1. (10 poena) 
+schedule
+```cpp
 class Scheduler { 
 public:  
   Scheduler () {...} 
@@ -30,8 +26,12 @@ PCB* Scheduler::get () {
   }   
   runningProc->slice = runningGroup->slice/runningGroup->size; 
   return runningProc; 
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+sharedobj
+```java
 class TickTuck { 
   private boolean canTuck = false; 
  
@@ -46,12 +46,15 @@ class TickTuck {
     // do tuck 
     canTuck = false; 
   }   
-} 
-3. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class Server extends Thread{ 
     private final Service input; 
-    private  final  Map<String,  String>  m_messages  =  new  Has  hMap<String, 
-String>(); 
+    private  final  Map<String,  String>  m_messages  =  new  HashMap<String, String>(); 
  
     public Server(Socket input) throws IOException { 
         this.input = new Service(input); 
@@ -60,8 +63,6 @@ String>();
         work(); 
     } 
  
-
-2/  2 
     private void work() throws IOException { 
         ServerSocket server = new ServerSocket(5555); 
         while (true) { 
@@ -86,8 +87,7 @@ String>();
         notifyAll(); 
     } 
  
-    public    synchronized    String    getMessage(String    key)    throws    
-InterruptedException { 
+    public synchronized String getMessage(String key) throws InterruptedException { 
         while (!m_messages.containsKey(key)) { 
             wait(); 
         } 
@@ -95,7 +95,7 @@ InterruptedException {
         return m_messages.remove(key); 
     } 
 } 
- 
+
 public class RequestHandler extends Thread { 
     private final Server server; 
     private final Service service; 
@@ -105,7 +105,7 @@ public class RequestHandler extends Thread {
         this.service = service; 
     } 
  
-    public voi  d run() { 
+    public void run() { 
         String key = service.readMessage(); 
  
         String msg = null; 
@@ -114,9 +114,8 @@ public class RequestHandler extends Thread {
             service.sendMessage(msg); 
         } catch (InterruptedException e) { 
             e.printStackTrace(); 
-          } 
+        } 
     } 
 } 
- 
-Klasa Service je data na vezbama. 
- 
+```
+Klasa `Service` je data na vežbama. 

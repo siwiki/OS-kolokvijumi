@@ -1,23 +1,34 @@
 2019/Decembar/IR Kolokvijum 1 - Decembar 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
 
+\begin{tabular}{ |c|c| }
+\hline
+Trenutak & Izvršava se proces \\
+\hline
+15 & C \\
+\hline
+25 & B \\
+\hline
+35 & D \\
+\hline
+55 & D \\
+\hline
+65 & C \\
+\hline
+75 & D \\
+\hline
+95 & B \\
+\hline
+110 & D \\
+\hline
+125 & A \\
+\hline
+\end{tabular}
 
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Decembar 2019. 
-1. (10 poena) 
-Trenutak [ms] Izvršava se 
-proces 
-15                            C                            
-25                            B                            
-35                            D                            
-55                            D                            
-65                            C                            
-75                            D                            
-95                            B                            
-110                           D                           
-125                           A                           
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor DiningPhilosophers; 
 export startEating, stopEating; 
  
@@ -48,16 +59,16 @@ begin
   var i: integer; 
   for i:=0 to 4 do forks[i] := false; 
 end; 
+```
 
-2/3 
-3. (10 poena)  
- 
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
     private final static int N = 100; 
     private final ServerSocket socket; 
     private final ContentPrice contentPrice; 
-    private final Map<String, Integer> accounts = new HashMap<String, 
-Integer>(); 
+    private final Map<String, Integer> accounts = new HashMap<String, Integer>(); 
  
     public Server() throws IOException { 
         socket = new ServerSocket(5555); 
@@ -92,8 +103,7 @@ public class RequestHandler extends Thread {
     private final Server server; 
     private final ContentPrice contentPrice; 
  
-    public RequestHandler(Socket client, Server server, ContentPrice 
-contentPrice) { 
+    public RequestHandler(Socket client, Server server, ContentPrice contentPrice) { 
         this.client = client; 
         this.server = server; 
         this.contentPrice = contentPrice; 
@@ -111,8 +121,6 @@ contentPrice) {
  
             if (server.withdraw(user, contentPrice.getPrice(content))) { 
                 // Deliver content to user 
-
-3/3 
             } else { 
                 service.sendMessage("Insufficient funds"); 
                 break; 
@@ -120,6 +128,7 @@ contentPrice) {
  
         } 
     } 
-} 
-Klasa Service (Usluga) je data na vežbama. 
+}
+```
+Klasa `Service` (Usluga) je data na vežbama. 
  

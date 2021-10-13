@@ -1,23 +1,31 @@
 2019/Novembar/SI Kolokvijum 1 - Oktobar 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+\begin{tabular}{ |c|c| }
+\hline
+Trenutak & Izvršava se proces \\
+\hline
+15 & B \\
+\hline
+25 & C \\
+\hline
+35 & D \\
+\hline
+55 & D \\
+\hline
+65 & C \\
+\hline
+75 & D \\
+\hline
+95 & B \\
+\hline
+110 & D \\
+\hline
+\end{tabular}
 
-
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2019. 
-1. (10 poena) 
- 
-Trenutak       Izvršava       se       
-proces 
-15                         B                         
-25                         C                         
-35                         D                         
-55                         D                         
-65                         C                         
-75                         D                         
-95                         B                         
-110                        D                        
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor DiningPhilosophers; 
 export startEating, stopEating; 
  
@@ -49,9 +57,11 @@ begin
   var i: integer; 
   for i:=0 to 4 do forks[i] := false; 
 end; 
+```
 
-2/3 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+network
+```java
 public class Server { 
     private final ServerSocket socket; 
     private final DataAccess dataAccess; 
@@ -99,8 +109,7 @@ public class Server {
         return dataAccess.read(address, size); 
     } 
  
-    public synchronized void write(Socket client, int address, int size, int[] 
-values) { 
+    public synchronized void write(Socket client, int address, int size, int[] values) { 
         while (client != clientOwner && clientOwner != null) { 
             try { 
                 wait(); 
@@ -118,8 +127,6 @@ public class RequestHandler extends Thread {
  
     public RequestHandler(Socket client, Server server) { 
         this.client = client; 
-
-3/3 
         this.server = server; 
     } 
  
@@ -177,6 +184,6 @@ public class RequestHandler extends Thread {
         } 
         server.write(client,address, size, values); 
     } 
-} 
-Klasa Service (Usluga) je data na vežbama. 
- 
+}
+```
+Klasa `Service` (Usluga) je data na vežbama. 

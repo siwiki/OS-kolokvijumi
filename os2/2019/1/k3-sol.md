@@ -1,11 +1,7 @@
 2018/januar/SI, IR Kolokvijum 3 - Januar 2019 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/  2 
-Rešenja zadataka sa trećeg kolokvijuma iz  
-Operativnih sistema 2, januar 2019. 
-1. (10 poena)   
+disk
+```cpp
 class CLook { 
 public: 
   CLook () : pending(0) {} 
@@ -30,8 +26,12 @@ void CLook::remove () {
     rq->next->prev = rq->prev; 
     rq->next = rq->prev = 0; 
   }   
-} 
-2. (10 poena) 
+}
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 freqs=$(cat /proc/cpuinfo | grep MH | cut -d: -f2 | tr -d " " | \ 
 cut -d. -f1) 
 sum=0 
@@ -42,8 +42,12 @@ count=$(echo $freqs | wc -w)
 if [ $count -gt 0 ]; then 
  let average=sum/count 
  echo "Average=$average" 
-fi 
-3. (10 poena) 
+fi
+```
+
+--------------------------------------------------------------------------------
+linux
+```cpp
 class FileTree : public Tree{ 
 public: 
     FileTree(void *startAddress, long size) : Tree(startAddress, size) {} 
@@ -62,8 +66,6 @@ public:
         return (void *) result; 
     } 
 
-2/  2 
- 
     void *getVirtualAddress(void *address) override { 
         uint64_t start, curr, result; 
  
@@ -87,10 +89,8 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "Arguments error"); 
         exit(1); 
     } 
-    int file = open(argv[1], O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP 
-| S_IWGRP); 
-    void  *tree_space  =  mmap(0,  MEMORY_SIZE,  PROT_READ  |  PROT_WRITE,  
-MAP_SHARED, file, 0); 
+    int file = open(argv[1], O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP); 
+    void  *tree_space  =  mmap(0,  MEMORY_SIZE,  PROT_READ  |  PROT_WRITE,  MAP_SHARED, file, 0); 
  
     // If file content does not exists 
     // ftruncate(file, MEMORY_SIZE); 
@@ -105,3 +105,4 @@ MAP_SHARED, file, 0);
  
     return 0; 
 } 
+```
