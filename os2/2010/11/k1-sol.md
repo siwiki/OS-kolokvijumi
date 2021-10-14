@@ -16,7 +16,7 @@ C & 0 & 8 & 8 \\
 \hline
 D & 8 & 9 & 8 \\
 \hline
-\multicolumn{2}{|c|}{Srednje vreme odziva: 5.25}
+\multicolumn{4}{|c|}{Srednje vreme odziva: 5.25} \\
 \hline
 \end{tabular}
 \caption{Rešenje stavke pod a.}
@@ -36,7 +36,7 @@ C & 0 & 9 & 9 \\
 \hline
 D & 1 & 2 & 1 \\
 \hline
-\multicolumn{2}{|c|}{Srednje vreme odziva: 3.75}
+\multicolumn{4}{|c|}{Srednje vreme odziva: 3.75} \\
 \hline
 \end{tabular}
 \caption{Rešenje stavke pod b.}
@@ -183,27 +183,10 @@ public class fetch_and_increment {
 deadlock
 
 \begin{figure}
-
-\begin{minipage}{.5\linewidth}
-\centering
-\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-a}}
-\end{minipage}
-
-\begin{minipage}{.5\linewidth}
-\centering
-\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-b}}
-\end{minipage}\par\medskip
-
-\begin{minipage}{.5\linewidth}
-\centering
-\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-c}}
-\end{minipage}
-
-\begin{minipage}{.5\linewidth}
-\centering
-\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-d}}
-\end{minipage}
-
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-a}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-b}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-c}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-d}}
 \end{figure}
 
 --------------------------------------------------------------------------------
