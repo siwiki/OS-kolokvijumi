@@ -1,11 +1,7 @@
 2011/nadoknada%20-%20septembar/SI, IR Kolokvijum 2 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, Septembar 2012. 
-1. (10 poena)  
+deadlock
+```cpp
 int  allocate (int pid, int rid) { 
   if (pid>=numOfProcesses || rid>=numOfResources) return 0; // Exception! 
   if (resourceAlloc[pid][rid]) return 1; // Already allocated to this proc. 
@@ -19,8 +15,15 @@ int  allocate (int pid, int rid) {
   resourceAlloc[pid][rid] = 1; 
   return 1; 
 } 
-2. (10 poena) 1: BCh, 2: ECh, 3: BCh, 4: 54h. Biće izbačena stranica 4. 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+memory
+1: BCh, 2: ECh, 3: BCh, 4: 54h. Biće izbačena stranica 4. 
+
+--------------------------------------------------------------------------------
+thrashing
+```cpp
 unsigned long workingSetSize (PCB* pcb) { 
   static const unsigned int mask = ~(~0U>>1); // 100...0b 
   if (pcb==0) return -1; // Exception! 
@@ -29,3 +32,4 @@ unsigned long workingSetSize (PCB* pcb) {
     size += ((pcb->pmt[i] & mask)!=0); 
   return size; 
 } 
+```

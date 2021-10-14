@@ -1,35 +1,17 @@
 2011/decembar/SI, IR Kolokvijum 2 - Novembar 2011 - Resenja.pdf
 --------------------------------------------------------------------------------
+deadlock
 
+\begin{figure}[H]
+\centering
+\subfloat[Rešenje prve stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011/k2-graf-a}}
+\subfloat[Rešenje druge stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011/k2-graf-b}}
+\subfloat[Rešenje treće stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011/k2-graf-c}}
+\end{figure}
 
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2 
-Novembar 2011. 
-1. (10 poena)  
-a) b) c) 
-P1
-P2
-P3
-R1
-R2
-R3
- 
-P1
-P2
-P3
-R1
-R2
-R3
- 
-P1
-P2
-P3
-R1
-R2
-R3
- 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+memory
+```cpp
 unsigned int getVictimPage (PCB* pcb) { 
   static const unsigned long mask = ~(~0UL>>1); // 100...0b 
   if (pcb==0) return -1; // Exception! 
@@ -41,7 +23,11 @@ unsigned int getVictimPage (PCB* pcb) {
   pcb->clockHand = pcb->pagefifo[pcb->clockHand]; 
   return victim; 
 } 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+slab
+```cpp
 X* Cache::alloc() { 
   Slab* s=this->headSlab; 
   for (; s!=0; s=s->nextSlab)  // Find a slab with a free slot 
@@ -53,3 +39,4 @@ X* Cache::alloc() {
   s->freeSlot=*(X**)s->freeSlot; 
   return ret; 
 } 
+```

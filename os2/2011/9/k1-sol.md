@@ -1,11 +1,7 @@
 2011/nadoknada%20-%20septembar/SI, IR Kolokvijum 1 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Septembar 2012. 
-1. (10 poena) 
+schedule
+```cpp
 const int MAXPRI = ...; 
 extern PCB* idle; 
  
@@ -46,9 +42,11 @@ void Scheduler::put (PCB* pcb) {
   else 
     tail[p] = tail[p]->next = pcb; 
 } 
+```
 
-2/4 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 type Data = ...; 
  
 monitor server; 
@@ -80,7 +78,11 @@ begin
   readyToRead:=false; 
   readyToWrite:=true; 
 end; (* server *) 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 import java.io.*; 
 import java.net.*; 
 import java.util.*; 
@@ -96,8 +98,7 @@ public class Server {
     
    while (true) { 
     Socket clientSocket = sock.accept(); 
-    BufferedReader in = new BufferedReader(new 
-InputStreamReader(clientSocket.getInputStream())); 
+    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
     String request = in.readLine(); 
  
     if (request.equals("GetToken")) { 
@@ -108,8 +109,6 @@ InputStreamReader(clientSocket.getInputStream()));
      else blockedList.addLast(clientSocket); 
     }else if (request.equals("ReturnToken")) { 
      if(blockedList.isEmpty()) count++;      
-
-3/4 
      else  sendMsgToClient(blockedList.poll(), "Continue");    
     }      
    } 
@@ -117,10 +116,8 @@ InputStreamReader(clientSocket.getInputStream()));
    System.err.println(e); 
   } 
  } 
- static void sendMsgToClient(Socket clientSocket,String msg) throws 
-UnknownHostException, IOException { 
-  PrintWriter newOut = new 
-PrintWriter(clientSocket.getOutputStream(),true); 
+ static void sendMsgToClient(Socket clientSocket,String msg) throws UnknownHostException, IOException { 
+  PrintWriter newOut = new PrintWriter(clientSocket.getOutputStream(),true); 
   newOut.println(msg); 
   clientSocket.close(); 
  } 
@@ -132,8 +129,7 @@ public class Client {
    while (true) { 
     Socket srvSocket = new Socket("localhost", 1033); 
     sendMsq(srvSocket,"GetToken"); 
-    BufferedReader in = new BufferedReader(new 
-InputStreamReader(srvSocket.getInputStream())); 
+    BufferedReader in = new BufferedReader(new InputStreamReader(srvSocket.getInputStream())); 
     System.out.println(in.readLine()); 
     srvSocket.close(); 
     //do Something... 
@@ -147,20 +143,20 @@ InputStreamReader(srvSocket.getInputStream()));
    System.err.println(e); 
   } 
  } 
- private static void sendMsq(Socket srvSocket, String msg) throws 
-UnknownHostException, IOException { 
+ private static void sendMsq(Socket srvSocket, String msg) throws UnknownHostException, IOException { 
   PrintWriter out = new PrintWriter(srvSocket.getOutputStream(), true); 
   out.println(msg); 
   } 
 } 
+```
 
-4/4 
-4. (10 poena) 
-a)(5)   b)(5) Na primer: P1.request(R2), P2.request(R3), P3.request(R1) 
-P1
-P2
-P3
-R1
-R2
-R3
- 
+--------------------------------------------------------------------------------
+allocator
+1. (Graf dat ispod.)
+2. Na primer: P1.request(R2), P2.request(R3), P3.request(R1)
+
+\begin{figure}[H]
+  \centering
+  \includesvg{images/os2/2011/k1-graf}
+  \caption{Graf iz dela zadatka pod a.}
+\end{figure}

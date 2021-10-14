@@ -1,12 +1,11 @@
 2011/novembar/SI, IR Kolokvijum 1 - Oktobar 2011 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+MP, HP, MP, MP, LP, MP, HP 
 
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2011. 
-1. (10 poena) MP, HP, MP, MP, LP, MP, HP 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor server; 
 export acquireToken, returnToken; 
  
@@ -37,7 +36,11 @@ begin
     server.returnToken; 
   end; 
 end; (* client *)  
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 import java.io.*; 
 import java.net.*; 
 import java.util.StringTokenizer; 
@@ -60,8 +63,6 @@ public static void main(String[] args) {
     clientSocket.getInputStream())); 
   StringTokenizer st = new StringTokenizer(in.readLine(), "#"); 
   if (!st.nextToken().equals("StartAuction")) {  
-
-2/2 
     auctionOver = true;  
   }else {  
     bestOffer = Integer.parseInt(st.nextToken());} 
@@ -71,8 +72,7 @@ public static void main(String[] args) {
   while (!auctionOver) { 
    clientSocket = sock.accept(); 
  
-   in = new BufferedReader(new 
-InputStreamReader(clientSocket.getInputStream())); 
+   in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
    out = new PrintWriter(clientSocket.getOutputStream(), true); 
    st = new StringTokenizer(in.readLine(), "#"); 
    String clientHost = st.nextToken(); 
@@ -101,38 +101,17 @@ InputStreamReader(clientSocket.getInputStream()));
  } catch (Exception e) { System.err.println(e);} 
 } 
  
-static void sendMsgToBestClient(String msg) throws UnknownHostException, 
-IOException { 
+static void sendMsgToBestClient(String msg) throws UnknownHostException, IOException { 
  Socket clientSocket = new Socket(bestClientHost,bestClientPort); 
  PrintWriter oldOut = new PrintWriter(clientSocket.getOutputStream(),true); 
  oldOut.println(msg); 
  clientSocket.close(); 
  } 
 } 
- 
-4. (10 poena) 
-a)(5) Dokaz kontradikcijom. Pretpostavimo da može nastati mrtva blokada, što znači da 
-postoji  zatvoren  krug  procesa P
-i1
-, P
-i2
-,  ..., P
-in
-  (n>=1) koji su međusobno blokirani. Prema 
-uslovima algoritma, odatle bi sledilo da je: i
-1
->i
-2
-> ... >i
-n
->i
-1
-, što ne može biti, pa mrtva blokada 
-ne može nastati. 
-b)(5) Prema  uslovima algoritma,  ako stariji proces zatraži resurs koga drži neki mlađi 
-proces, mlađi proces  se poništava i  pokreće ponovo. Kada se poništeni proces  ponovo 
-pokrene,   ako   bi   mu   se   dodelio   novi   ID   koji   odgovara  vremenu  njegovom  ponovnog 
-pokretanja, on bi bio još mlađi u sistemu, pa bi trpeo još više poništavanja, što može dovesti 
-do njegovog izgladnjivanja. Zato mu treba dodeliti isti ID koji je imao pri prvom pokretanju. 
-Ako bi on bio dalje ponovo poništavan, vremenom bi taj proces postajao sve stariji i konačno 
-postao najstariji, kada više neće doživeti poništavanje, odnosno neće trpeti izgladnjivanje. 
+```
+
+--------------------------------------------------------------------------------
+deadlock
+
+1. Dokaz kontradikcijom. Pretpostavimo da može nastati mrtva blokada, što znači da postoji  zatvoren  krug  procesa $P_{i1}$, $P_{i2}$,  ..., $P_{in}$  ($n \geq 1$) koji su međusobno blokirani. Prema uslovima algoritma, odatle bi sledilo da je: $i_1 > i_2 > ... > i_n > i_1$, što ne može biti, pa mrtva blokada ne može nastati. 
+2. Prema  uslovima algoritma,  ako stariji proces zatraži resurs koga drži neki mlađi proces, mlađi proces  se poništava i  pokreće ponovo. Kada se poništeni proces  ponovo pokrene,   ako   bi   mu   se   dodelio   novi   ID   koji   odgovara  vremenu  njegovom  ponovnog pokretanja, on bi bio još mlađi u sistemu, pa bi trpeo još više poništavanja, što može dovesti do njegovog izgladnjivanja. Zato mu treba dodeliti isti ID koji je imao pri prvom pokretanju. Ako bi on bio dalje ponovo poništavan, vremenom bi taj proces postajao sve stariji i konačno postao najstariji, kada više neće doživeti poništavanje, odnosno neće trpeti izgladnjivanje. 
