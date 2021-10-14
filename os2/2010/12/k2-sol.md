@@ -1,25 +1,30 @@
 2010/decembar/SI Kolokvijum 2 - Decembar 2010 - Resenja.doc
 --------------------------------------------------------------------------------
+memory
 
+\begin{tabular}{c|c|c|c|}
+\hline
+0 & 0 & 1 & 1 & 1 \\
+\hline
+1 & 0 & 1 & 1 & 0 \\
+\hline
+2 & 1 & 0 & 1 & 1 \\
+\hline
+3 & 1 & 0 & 0 & 1 \\
+\hline
+\end{tabular}
 
-1/  2 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2 
-Decembar 2010. 
-1. (10 poena) 
-0 0 1 1 1 
-1 0 1 1 0 
-2 1 0 1 1 
-3 1 0 0 1 
 Bila bi izbačena stranica 1. 
-2. (10 poena) 
-a)(5) 130, 157, 189, 200, 17, 23, 25, 64, 68, 76  
-b)(5)    RAID   2 je otporan na otkaz   više   od jednog diska, jer dodatni   ECC biti  na 
-redundantnim diskovima mogu da restauriraju otkaz  više  od  jednog  bita u  pruzi.  RAID  3  je 
-otporan samo na otkaz jednog diska, jer je samo bit parnosti redundantan. RAID 3 ima veći 
-efektivan kapacitet za isti broj fizičkih diskova N (kapacitet je (N-1)/N) nego RAID 2 (N-k/N, 
-k je broj ECC diskova i veći je od 1). 
-3. (10 poena) 
+
+--------------------------------------------------------------------------------
+disk
+
+1. 130, 157, 189, 200, 17, 23, 25, 64, 68, 76  
+2. RAID 2 je otporan na otkaz   više   od jednog diska, jer dodatni   ECC biti  na redundantnim diskovima mogu da restauriraju otkaz  više  od  jednog  bita u  pruzi.  RAID  3  je otporan samo na otkaz jednog diska, jer je samo bit parnosti redundantan. RAID 3 ima veći efektivan kapacitet za isti broj fizičkih diskova $N$ (kapacitet je $(N-1)/N$) nego RAID 2 ($N-k/N$, $k$ je broj ECC diskova i veći je od 1). 
+
+--------------------------------------------------------------------------------
+buddy
+```cpp
 void* buddy_alloc (int i) { 
   if (i<0 || i>=N) return 0; // Error 
   // First, try to find the segment of exact size of 2^i blocks: 
@@ -51,9 +56,11 @@ void* buddy_alloc (int i) {
   // Not found, no memory: 
   return 0;  
 } 
+```
 
-2/  2 
-4. (10 poena) 
+--------------------------------------------------------------------------------
+syscall
+```cpp
 int dir_chdir (char* dirname) { 
   if (dirname==0) return -1; // Error in argument 
   FHANDLE fhandle = dir_curdir(); 
@@ -71,3 +78,4 @@ int dir_chdir (char* dirname) {
   dir_chdir(fhandle); 
   return 0; 
 } 
+```

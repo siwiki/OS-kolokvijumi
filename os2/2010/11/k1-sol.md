@@ -1,26 +1,50 @@
 2010/novembar/SI Kolokvijum 1 - Oktobar 2010 - Resenja.doc
 --------------------------------------------------------------------------------
+schedule
 
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Proces & Trenutak prvog izvršavanja & Trenutak završetka & Vreme odziva \\
+\hline
+A & 2 & 4 & 2 \\
+\hline
+B & 4 & 6 & 3 \\
+\hline
+C & 0 & 8 & 8 \\
+\hline
+D & 8 & 9 & 8 \\
+\hline
+\multicolumn{2}{|c|}{Srednje vreme odziva: 5.25}
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod a.}
+\end{figure}
 
-1/  4 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Novembar 2010. 
-1. (10 poena) 
-a)(5) 
-Proces Trenutak prvog izvršavanja Trenutak završetka Vreme odziva 
-A 2 4 2 
-B 4 6 3 
-C 0 8 8 
-D 8 9 8 
-Srednje vreme odziva: 5,25 
-b)(5) 
-Proces Trenutak prvog izvršavanja Trenutak završetka Vreme odziva 
-A 2 4 2 
-B 4 6 3 
-C 0 9 9 
-D 1 2 1 
-Srednje vreme odziva: 3,75 
-2. (10 poena) 
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Proces & Trenutak prvog izvršavanja & Trenutak završetka & Vreme odziva \\
+\hline
+A & 2 & 4 & 2 \\
+\hline
+B & 4 & 6 & 3 \\
+\hline
+C & 0 & 9 & 9 \\
+\hline
+D & 1 & 2 & 1 \\
+\hline
+\multicolumn{2}{|c|}{Srednje vreme odziva: 3.75}
+\hline
+\end{tabular}
+\caption{Rešenje stavke pod b.}
+\end{figure}
+
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor buffer; 
   export append, take; 
   var 
@@ -54,9 +78,11 @@ begin (* Initialization *)
   numberInBuffer := 0; 
   top := 0; base := 0 
 end;  
+```
 
-2/  4 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+network
+```java
 public class Main { 
     public Main() { 
     } 
@@ -82,17 +108,16 @@ public class RequestHandler extends Thread {
      
     public RequestHandler(Socket s) { 
         this.s = s; 
-        try{ 
+        try { 
             out = new PrintWriter(s.getOutputStream(),true); 
-            in = new BufferedReader(new 
-InputStreamReader(s.getInputStream())); 
-        }catch(Exception e){ 
+            in = new BufferedReader(new InputStreamReader(s.getInputStream())); 
+        } catch (Exception e) { 
             //greska 
         } 
     } 
      
     public void run(){ 
-        try{ 
+        try { 
             while(!s.isInputShutdown()){ 
                 String s = in.readLine(); 
                 System.out.println(s); 
@@ -117,14 +142,14 @@ InputStreamReader(s.getInputStream()));
             return -1; 
         } 
         i = deljena_promenljiva++; 
-
-3/  4 
         mutex.release(); 
         return i; 
     } 
      
-} 
+}
+```
 Klijent: 
+```java
 public class fetch_and_increment { 
     Socket s; 
     PrintWriter out; 
@@ -134,8 +159,7 @@ public class fetch_and_increment {
         try { 
             s = new Socket(host,port); 
             out = new PrintWriter(s.getOutputStream(),true); 
-            in = new BufferedReader(new 
-InputStreamReader(s.getInputStream())); 
+            in = new BufferedReader(new InputStreamReader(s.getInputStream())); 
         } catch (Exception e) { 
             //greska 
         } 
@@ -153,85 +177,38 @@ InputStreamReader(s.getInputStream()));
     } 
      
 } 
-4. (10 poena) 
- 
-P0
-P
-1
-P2
-P
-3
-P4
-F0
-F1
-F2
-F3
-F4
-  
-P0
-P
-1
-P
-2
-P3
-P4
-F0
-F1
-F2
-F3
-F
-4
-  
-  a)     b) 
-P0
-P1
-P2P3
-P
-4
-F0
-F1
-F2
-F3
-F4
- 
-P0
-P1
-P2P3
-P4
-F0
-F1
-F2
-F3
-F4
- 
- c)     d) 
- 
+```
 
-4/  4 
-5. (10 poena) 
-a)(5) Dokaz kontradikcijom. Pretpostavimo da može nastati mrtva blokada, što znači da 
-postoji  zatvoren  krug  procesa  P
-i1
-, P
-i2
-,  ...,  P
-in
-    (n>=1) koji su međusobno blokirani. Prema 
-uslovima algoritma, odatle bi sledilo da je: i
-1
-<i
-2
-< ... <i
-n
-<i
-1
-, što ne može biti, pa mrtva blokada 
-ne može nastati. 
-b)(5) Prema uslovima algoritma, ako mlađi   proces zatraži resurs koga drži neki stariji 
-proces, mlađi   proces se poništava i pokreće ponovo. Kada se  poništeni  proces  ponovo  
-pokrene,  ako  bi  mu  se  dodelio  novi  ID  koji  odgovara  vremenu  njegovom  ponovnog 
-pokretanja, on bi bio još mlađi u sistemu, pa bi trpeo još više poništavanja, što može dovesti 
-do njegovog izgladnjivanja. Zato mu treba dodeliti isti ID koji je imao pri prvom pokretanju. 
-Ako bi on bio dalje ponovo poništavan, vremenom bi taj proces postajao sve stariji i konačno 
-postao najstariji, kada više neće doživeti poništavanje, odnosno neće trpeti izgladnjivanje. 
+--------------------------------------------------------------------------------
+deadlock
+
+\begin{figure}
+
+\begin{minipage}{.5\linewidth}
+\centering
+\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-a}}
+\end{minipage}
+
+\begin{minipage}{.5\linewidth}
+\centering
+\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-b}}
+\end{minipage}\par\medskip
+
+\begin{minipage}{.5\linewidth}
+\centering
+\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-c}}
+\end{minipage}
+
+\begin{minipage}{.5\linewidth}
+\centering
+\subfloat[]{\includegraphics[scale=0.45]{images/os2/2010/k1-graf-d}}
+\end{minipage}
+
+\end{figure}
+
+--------------------------------------------------------------------------------
+deadlock
+
+1. Dokaz kontradikcijom. Pretpostavimo da može nastati mrtva blokada, što znači da postoji  zatvoren  krug  procesa  $P_{i1}$, $P_{i2}$,  ...,  $P_{in}$ ($n \geq 1$) koji su međusobno blokirani. Prema uslovima algoritma, odatle bi sledilo da je: $i_1 < i_2 < ... < i_n < i_1$, što ne može biti, pa mrtva blokada ne može nastati.
+2. Prema uslovima algoritma, ako mlađi proces zatraži resurs koga drži neki stariji proces, mlađi   proces se poništava i pokreće ponovo. Kada se  poništeni  proces  ponovo  pokrene,  ako  bi  mu  se  dodelio  novi  ID  koji  odgovara  vremenu  njegovom  ponovnog pokretanja, on bi bio još mlađi u sistemu, pa bi trpeo još više poništavanja, što može dovesti do njegovog izgladnjivanja. Zato mu treba dodeliti isti ID koji je imao pri prvom pokretanju. Ako bi on bio dalje ponovo poništavan, vremenom bi taj proces postajao sve stariji i konačno postao najstariji, kada više neće doživeti poništavanje, odnosno neće trpeti izgladnjivanje. 
  

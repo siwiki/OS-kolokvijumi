@@ -6,7 +6,7 @@ date: Oktobar 2021
 geometry: margin=2cm
 output: pdf_document
 classoption: twoside
-header-includes: \usepackage[croatian]{babel}\usepackage{subfig}\usepackage{float}\usepackage{fancyhdr}\usepackage{imakeidx}\usepackage{listings}\usepackage{svg}\makeindex[intoc]\graphicspath{{./}}\usepackage[normalem]{ulem}
+header-includes: \usepackage[croatian]{babel}\usepackage{subfig}\usepackage{float}\usepackage{fancyhdr}\usepackage{imakeidx}\usepackage{listings}\usepackage{svg}\makeindex[intoc]\graphicspath{{./}}\usepackage[normalem]{ulem}\usepackage{multirow}
 urlcolor: blue
 toc: true
 toc-depth: 2
