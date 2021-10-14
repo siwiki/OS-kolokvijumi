@@ -1,12 +1,11 @@
 2012/oktobar/SI Kolokvijum 1 - Oktobar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
+schedule
+LP, MP, MP, HP, MP, HP, MP 
 
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2012. 
-1. (10 poena) LP, MP, MP, HP, MP, HP, MP 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor server; 
 export acquireToken, returnToken; 
  
@@ -37,7 +36,11 @@ begin
     server.returnToken; 
   end; 
 end; (* client *)  
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class NetBuffer extends Usluga { 
  public NetBuffer(String host, int port) { 
   super(host, port); 
@@ -61,14 +64,12 @@ public class NetBuffer extends Usluga {
 public int getK() { 
   String message = "#getK#"; 
   sendMessage(message); 
-
-2/2 
   return K = receiveIntMessage(); 
  } 
 } 
- 
-Na serverskoj strani u klasi Server treba da se dodaju sledeći atributi: 
- 
+```
+Na serverskoj strani u klasi `Server` treba da se dodaju sledeći atributi: 
+```java
 public BoundedBuffer buff;  
 public final int K; 
   
@@ -78,8 +79,9 @@ public Server(int port, int N, int K) {
   ... 
  
 //poziv konstruktora new RequestHandler(clientSocket,buff,K); 
- 
-RequestHandler treba izmeniti na sledeći način: 
+```
+`RequestHandler` treba izmeniti na sledeći način: 
+```
 public class RequestHandler extends Thread { 
 ... 
  buffer buff; 
@@ -106,3 +108,4 @@ protected void processRequest(String request) {
    else if (functionName.equals("getK"))  
     sendMessage("" + K); 
  } 
+```

@@ -1,11 +1,7 @@
 2012/decembar/SI, IR Kolokvijum 2 - Novembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/1 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2, Novembar 2012. 
-1. (10 poena)  
+allocator
+```cpp
 int allocate (unsigned int pid, unsigned int rid) { 
   if (pid>=numOfProc || rid>=numOfRes) return -1; // Exception! 
   // Is this resource free? 
@@ -30,7 +26,11 @@ int release (unsigned int pid, unsigned int rid) {
     }  
   return -1; 
 } 
-2. (10 poena)  
+```
+
+--------------------------------------------------------------------------------
+memory
+```cpp
 double soldQuantity () { 
   void* storage = mmapfile(“log.bin”); 
   if (storage==0) return -1; // Exception! 
@@ -41,6 +41,10 @@ double soldQuantity () {
     sum+=log[i].quantity; 
   return sum; 
 } 
-3. (10 poena) 
-a)(5) 43, 41, 51, 62, 70, 95, 130 
-b)(5) 51, 62, 70, 95, 130, 41, 43 
+```
+
+--------------------------------------------------------------------------------
+disk
+
+1. 43, 41, 51, 62, 70, 95, 130 
+2. 51, 62, 70, 95, 130, 41, 43 

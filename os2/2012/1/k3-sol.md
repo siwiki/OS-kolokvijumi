@@ -1,12 +1,7 @@
 2011/januar/SI, IR Kolokvijum 3 - Januar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2 
-Januar 2012. 
-1. (10 poena)   
+syscall
+```cpp
 int vm_alloc (int pg, int sz) { 
   static vm_area_desc vm; 
   static vm_area_desc* ptr=&vm; 
@@ -18,7 +13,11 @@ int vm_alloc (int pg, int sz) {
     int  0x31 
   } 
 } 
-2. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
 if test ! $# -eq 2 
 then 
@@ -37,8 +36,11 @@ then
 fi 
 ls $1 | sed "s/\(.\).*_\(.\).*_\(.*\)\.zip/\2\1\3d@student.etf.bg.ac.rs/" 
 >$2 
- 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+linux
+```cpp
 void acquireForksForPhilosopher(int *forks[N], int id, int msgQueueId) { 
  forks[id] = 0; 
  forks[(id + 1) % N] = 0; 
@@ -54,8 +56,6 @@ int main() {
  size_t len = sizeof(char); 
  
  //philosophers 
-
-2/2 
  int id; 
  for (id = 1; id <= N; id++) { // rezervisana vrednost za mtype=0  
   if (fork() == 0) { 
@@ -101,4 +101,4 @@ int main() {
   } 
  } 
 }
- 
+```

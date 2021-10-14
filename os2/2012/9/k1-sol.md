@@ -1,11 +1,7 @@
 2012/nadoknada%20-%20septembar/SI, IR Kolokvijum 1 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Septembar 2013. 
-1. (10 poena) 
+schedule
+```cpp
 PCB* Scheduler::get () { 
   if (maxPri==-1) return idle; 
   PCB* ret = head[maxPri]; 
@@ -17,7 +13,11 @@ PCB* Scheduler::get () {
   ret->next = 0; 
   return ret; 
 } 
-2. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor account; 
   export credit, debit; 
  
@@ -39,7 +39,11 @@ monitor account;
 begin 
   balance := 0; 
 end; (* account *) 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 import java.io.*; 
 import java.net.*; 
 import java.util.*; 
@@ -47,8 +51,7 @@ import java.util.*;
 public class Server { 
  public static final int N = ...; 
  public static final int [][] a ={...}; 
- public static List<Integer> bagOfTasks = Collections.synchronizedList(new 
-LinkedList<Integer>()); 
+ public static List<Integer> bagOfTasks = Collections.synchronizedList(new LinkedList<Integer>()); 
  public static int result; 
  public static Worker[] workers; 
  public static int workerNum; 
@@ -56,12 +59,9 @@ LinkedList<Integer>());
    ServerSocket sock = new ServerSocket(1033); 
    while (true) { 
     Socket clientSocket = sock.accept(); 
-    BufferedReader in = new BufferedReader(new  
-InputStreamReader(clientSocket.getInputStream())); 
+    BufferedReader in = new BufferedReader(new  InputStreamReader(clientSocket.getInputStream())); 
     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true); 
  
-
-2/2 
     while (true) { 
      String request = in.readLine(); 
      StringTokenizer st = new StringTokenizer(request, "#"); 
@@ -110,3 +110,4 @@ class Worker extends Thread{
   } 
  } 
 } 
+```

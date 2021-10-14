@@ -1,11 +1,7 @@
 2012/decembar/IR Kolokvijum 1 - Novembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/3 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Novembar 2012. 
-1. (10 poena)  
+schedule
+```cpp
 const int timesliceHP = ..., timesliceMP = ..., timesliceLP = ...; 
 extern PCB * const idle; 
  
@@ -53,9 +49,11 @@ void Scheduler::put (PCB* pcb) {
   else 
     tail[i] = tail[i]->next = pcb; 
 } 
+```
 
-2/3 
-2. (10 poena) 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Semaphore; 
 export wait, signal; 
  
@@ -76,7 +74,11 @@ end;
 begin 
   val := 1; 
 end; (* Semaphore *) 
-3. (10 poena) 
+```
+
+--------------------------------------------------------------------------------
+network
+```java
 public class NetResource extends Usluga { 
  public NetResource(String host, int port, int resId) { 
   super(host, port); 
@@ -104,8 +106,9 @@ public class NetResource extends Usluga {
   allocatedResources[id]=false; 
  } 
 } 
- 
-Na serverskoj strani u klasi Server treba dodati sledeće atribute: 
+```
+Na serverskoj strani u klasi `Server` treba dodati sledeće atribute: 
+```java
 public final int RN; 
 public Resource[] resources; 
  
@@ -118,10 +121,9 @@ public Server(int port, int RN){
  ... 
  
 //poziv konstruktora new RequestHandler(clientSocket, resources); 
-
-3/3 
- 
-RequestHandler treba izmeniti na sledeći način: 
+```
+`RequestHandler` treba izmeniti na sledeći način: 
+```java
 public class RequestHandler extends Thread { 
  ... 
  Resource[] resources; 
@@ -146,4 +148,4 @@ protected void processRequest(String request) {
   sendMessage("deallocated"); 
  }  
 } 
- 
+```

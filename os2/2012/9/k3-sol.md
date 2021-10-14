@@ -1,22 +1,18 @@
 2012/nadoknada%20-%20septembar/SI, IR Kolokvijum 3 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-
-
-1/2 
-Rešenja trećeg kolokvijuma iz  
-Operativnih sistema 2, Septembar 2013. 
-1. (10 poena)  
-a)(5) Stavljanje  novog  zahteva: O(1),  jer  se  zahtev  stavlja  na  početak  liste  (promena 
-nekoliko pokazivača, nezavisno od veličine liste). Izbor zahteva: O(n), linearna pretraga cele 
-liste da se pronađe zahtev na minimalnom rastojanju od upravo opsluženog. 
-b)(5) Na primer, kreirati niz (statički alociran, veličine jednake broju cilindara na disku C) u 
-kome je svaki element k glava liste zahteva koji se odnose na cilindar k. Novi zahtev koji se 
-odnosi na cilindar k se stavlja na početak liste u ulazu k. Pretraga za najbližim zahtevom ide 
+disk
+1. Stavljanje  novog  zahteva: $\mathcal{O}(1)$,  jer  se  zahtev  stavlja  na  početak  liste  (promena nekoliko pokazivača, nezavisno od veličine liste). Izbor zahteva: $\mathcal{O}(n)$, linearna pretraga cele liste da se pronađe zahtev na minimalnom rastojanju od upravo opsluženog. 
+2. Na primer, kreirati niz (statički alociran, veličine jednake broju cilindara na disku $C$) u 
+kome je svaki element $k$ glava liste zahteva koji se odnose na cilindar $k$. Novi zahtev koji se 
+odnosi na cilindar $k$ se stavlja na početak liste u ulazu $k$. Pretraga za najbližim zahtevom ide 
 iterativno kroz niz, počev od ulaza koji odgovara cilindru upravo opsluženog zahteva k i 
-proverava najpre susedne ulaze (k-1 i k+1), pa onda sledeće (k-2 i k+2), itd. sve dok ne naiđe 
-na neprazan ulaz. Ovaj postupak ima složenost O(C), ali je složenosti O(1) u odnosu na broj 
-zahteva n. 
-2. (10 poena) 
+proverava najpre susedne ulaze ($k-1$ i $k+1$), pa onda sledeće ($k-2$ i $k+2$), itd. sve dok ne naiđe 
+na neprazan ulaz. Ovaj postupak ima složenost $\mathcal{O}(C)$, ali je složenosti $\mathcal{O}(1)$ u odnosu na broj 
+zahteva $n$. 
+
+--------------------------------------------------------------------------------
+bash
+```bash
 #!/bin/bash 
  
 if [ $# -ne 2 ]; then 
@@ -38,9 +34,11 @@ else
     echo "Prvi parametar nije direktorijum" 
     exit 2 
 fi 
+```
 
-2/2 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+linux
+```cpp
 #include <stdio.h> 
 #include <sys/shm.h> 
 #include <sys/stat.h> 
@@ -81,3 +79,4 @@ int main (int argc, const char* argv[])
  wait(0); 
  return 0; 
 } 
+```
