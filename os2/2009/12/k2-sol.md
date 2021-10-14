@@ -1,12 +1,7 @@
 2009/decembar/SI Kolokvijum 2 - Decembar 2009 - Resenja.doc
 --------------------------------------------------------------------------------
-
-
-1/  3 
-Rešenja drugog kolokvijuma iz  
-Operativnih sistema 2 
-Decembar 2009. 
-1. (10 poena) 
+memory
+```cpp
 int FramePool::getFrame (PID proc, PgID page, FID& frame) { 
   if (head==0) return -1; // No free frames 
   // Try to find the same one to reuse: 
@@ -25,10 +20,15 @@ int FramePool::getFrame (PID proc, PgID page, FID& frame) {
   delete cur; 
   return ret; 
 } 
-2. (10 poena) 64, 512, 8, 16, 128, 64, 256 
+```
 
-2/  3 
-3. (10 poena) 
+--------------------------------------------------------------------------------
+buddy
+64, 512, 8, 16, 128, 64, 256 
+
+--------------------------------------------------------------------------------
+disk
+```cpp
 DiskOpReq* DiskQueue::getReq () { 
   if (nextToServe==0) return 0; // Queue empty 
   DiskOpReq* cur = nextToServe; 
@@ -71,19 +71,18 @@ void DiskQueue::addReq (DiskOpReq* req) {
   req->prev->next=req; 
   tail = req; 
 } 
- 
-4. (10 poena) 
-a)(5) Deljenjem stranica. Stranice sa kodom i podacima kernela preslikavaju se u fiksni deo 
-virtuelnog  adresnog  prostora  svakog  procesa  (npr.  najniži deo)   , a okviri sa tim sadržajem se 
-dele između procesa. Ovo obezbeđuje sam kernel prilikom kreiranja procesa. 
-b)(5) 
+```
 
-3/  3 
-typedef int (*SYS_CALL)(void*); 
-SYS_CALL sys_call_table[...]; // Table of pointers to sys call functions 
-const unsigned int SYS_CALL_TABLE_SIZE = ...; 
- 
-int sys_call (unsigned int id, void* params) { 
-  if (id>=SYS_CALL_TABLE_SIZE) return -1; // Error 
-  return sys_call_table[id](params); 
-} 
+--------------------------------------------------------------------------------
+syscall
+1. Deljenjem stranica. Stranice sa kodom i podacima kernela preslikavaju se u fiksni deo virtuelnog  adresnog  prostora  svakog  procesa  (npr.  najniži deo)   , a okviri sa tim sadržajem se dele između procesa. Ovo obezbeđuje sam kernel prilikom kreiranja procesa. 
+2. ```cpp
+   typedef int (*SYS_CALL)(void*); 
+   SYS_CALL sys_call_table[...]; // Table of pointers to sys call functions 
+   const unsigned int SYS_CALL_TABLE_SIZE = ...; 
+   
+   int sys_call (unsigned int id, void* params) { 
+     if (id>=SYS_CALL_TABLE_SIZE) return -1; // Error 
+     return sys_call_table[id](params); 
+   } 
+```

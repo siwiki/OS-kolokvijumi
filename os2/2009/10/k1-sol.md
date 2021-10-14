@@ -1,16 +1,20 @@
 2009/novembar/SI Kolokvijum 1 - Oktobar 2009 - Resenja.doc
 --------------------------------------------------------------------------------
+schedule
 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+6 & 8 & 10 & 2 & 10 & 2 & 10 & 8 & 8 & 8 \\
+\hline
+4 & 5 & 6 & 8 & 5 & 7 & 4 & 7 & 7 & 7 \\
+\hline
+\end{tabular}
+\end{center}
 
-1/  5 
-Rešenja prvog kolokvijuma iz Operativnih sistema 2 
-Oktobar 2009. 
-1. (10 poena) 
-6 8 10 2 10 2 10 8 8 8 
-4 5 6 8 5 7 4 7 7 7 
-2. (10 poena) 
-
-2/  5 
+--------------------------------------------------------------------------------
+sharedobj
+```ada
 monitor Agent; 
   export takeSaltAndPepper, 
          putSaltAndPepper, 
@@ -61,10 +65,12 @@ begin
     eat; 
   end 
 end; 
-3. (10 poena) 
+```
 
-3/  5 
-//Beleznica 
+--------------------------------------------------------------------------------
+network
+```java
+//Beleznica
 public class Beleznica { 
     private int redni_broj; 
     private int opsluzuje_se; 
@@ -124,18 +130,13 @@ public class Server_voz extends Thread {
     BufferedReader r = null; 
     BufferedWriter w = null; 
         try { 
-            r = new BufferedReader(new 
-
-4/  5 
-InputStreamReader(s.getInputStream())); 
-            w = new BufferedWriter(new 
-OutputStreamWriter(s.getOutputStream())); 
+            r = new BufferedReader(new InputStreamReader(s.getInputStream())); 
+            w = new BufferedWriter(new OutputStreamWriter(s.getOutputStream())); 
             String poruka = r.readLine(); 
             if (r.equals("startA")){ 
                 synchronized(Dispecer.beleznica){ 
                     int redni_broj = Dispecer.beleznica.uzmi_redni_broj(); 
-                    while(!Dispecer.beleznica.dosao_na_red(redni_broj) && 
-Dispecer.beleznica.zauzetaBA()){ 
+                    while(!Dispecer.beleznica.dosao_na_red(redni_broj) && Dispecer.beleznica.zauzetaBA()){ 
                         o.wait(); 
                     } 
                     Dispecer.beleznica.kreniAB(); 
@@ -169,8 +170,6 @@ Dispecer.beleznica.zauzetaBA()){
         } 
     } 
 } 
-
-5/  5 
 //Dispecer 
 public class Dispecer { 
     public Dispecer() { 
@@ -202,10 +201,12 @@ salje poruku "startA"
 ceka da primi poruku "kreni" 
 //putuje 
 salje poruku "stigao" 
-4. (10 poena) 
-P2 - R3 - Da, P3-R1-Da (prelaz u bezbedno stanje), P3-R2-Ne (već zauzet), P3-R3-Ne (prelaz 
-u nebezbedno stanje), P4-R3-Da (prelaz u bezbedno stanje). 
-5. (10 poena) 
-Na primer, puštati naizmenično jednog pisca pa jednog ili nekoliko čitalaca u slučaju da 
-postoje i jedni i drugi koji čekaju, ali ne insistirati na naizmeničnosti ukoliko ne postoje oni 
-koji čekaju. 
+```
+
+--------------------------------------------------------------------------------
+deadlock
+P2 - R3 - Da, P3-R1-Da (prelaz u bezbedno stanje), P3-R2-Ne (već zauzet), P3-R3-Ne (prelaz u nebezbedno stanje), P4-R3-Da (prelaz u bezbedno stanje). 
+
+--------------------------------------------------------------------------------
+allocator
+Na primer, puštati naizmenično jednog pisca pa jednog ili nekoliko čitalaca u slučaju da postoje i jedni i drugi koji čekaju, ali ne insistirati na naizmeničnosti ukoliko ne postoje oni koji čekaju. 
