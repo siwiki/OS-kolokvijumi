@@ -2,11 +2,10 @@
     "baseUrl": "http://os.etf.bg.ac.rs/OS2/kolokvijumi/",
     "categories": {
         "schedule": "Raspoređivanje procesa",
-        "deadlock": "Detekcija mrtve blokade",
-        "thrashing": "Batrganje",
-        "pipe": "Međuprocesna komunikacija (cevi)",
         "sharedobj": "Međuprocesna komunikacija (deljeni objekat)",
         "network": "Međuprocesna komunikacija (poruke)",
+        "deadlock": "Detekcija mrtve blokade",
+        "thrashing": "Batrganje",
         "memory": "Upravljanje memorijom",
         "buddy": "Upravljanje memorijom (parnjaci)",
         "slab": "Upravljanje memorijom (ploče)",

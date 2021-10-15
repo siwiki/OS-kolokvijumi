@@ -122,7 +122,7 @@ private:
 ```
 
 --------------------------------------------------------------------------------
-pipe
+linux
 Napisati dva programa na programskom jeziku C koji međusobno komuniciraju koristeći isključivo 
 imenovane cevi operativnog sistema Linux. Greške koje vraćaju funkcije za rad sa  imenovanim 
 cevima nije potrebno obrađivati.
