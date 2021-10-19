@@ -6,38 +6,29 @@ public class Server {
     private static final int N = 50;   
     private boolean[] cards = new boolean[N]; 
     private Deque<RequestHandler> users = new ArrayDeque<RequestHandler>(); 
- 
     public Server () { 
         for (int i = 0; i < N; i++) { 
             cards[i] = true; 
         } 
     } 
- 
     public synchronized int[] getCards(RequestHandler user, int num) throws InterruptedException { 
         int[] ret; 
         while (user != users.peekFirst() || (ret = tryGetCards(num)) == null) { 
             wait(); 
         } 
- 
         users.getFirst(); 
- 
         for (int i = 0; i < num; i++) { 
             cards[ret[i]] = false; 
         } 
- 
         notifyAll(); 
- 
         return ret; 
     } 
- 
     public synchronized void returnCards(int[] ret) throws InterruptedException { 
         for (int i = 0; i < ret.length; i++) { 
             cards[ret[i]] = true; 
         } 
- 
         notifyAll(); 
     } 
- 
     private int[] tryGetCards(int num) { 
         int[] ret = new int[num]; 
         int n = 0; 
@@ -53,7 +44,6 @@ public class Server {
                 n++; 
             } 
             x = (x + 1) % N; 
-
             if (n == num) { 
                 return ret; 
             } 
@@ -61,23 +51,17 @@ public class Server {
  
         return null; 
     } 
- 
     public void run() { 
         ServerSocket serverSocket = null; 
- 
         try { 
             serverSocket = new ServerSocket(5555); 
- 
             while (true) { 
-                Socket clientSocket = clientSocket = serverSocket.accept(); 
- 
+                Socket clientSocket = serverSocket.accept(); 
                 ServerService clientService = new ServerService(clientSocket); 
- 
                 RequestHandler user = new RequestHandler(clientService, this); 
                 users.addLast(user); 
                 user.start(); 
             } 
- 
         } catch (IOException e) { 
             e.printStackTrace(); 
         } finally { 
@@ -90,39 +74,28 @@ public class Server {
             } 
         } 
     } 
- 
     public static void main(String args[]) { 
         Server server = new Server(); 
- 
         server.run(); 
     } 
- 
     public String runExecutionOnCards(String commands, int[] cards) { 
         ... 
     } 
 } 
- 
 public class RequestHandler extends Thread { 
     private final ServerService service; 
- 
     private final Server server; 
     public RequestHandler(ServerService service, Server server) { 
         this.server = server; 
         this.service = service; 
     } 
- 
     public void run() { 
         try { 
-
            int numOfCards = service.getNumOfCards(); 
            String commands = service.getCommands(); 
- 
            int cards[] = server.getCards(this, numOfCards); 
- 
            String result = server.runExecutionOnCards(commands, cards); 
- 
            service.sendResult(result); 
- 
         } catch (IOException e) { 
             e.printStackTrace(); 
         } catch (InterruptedException e) { 
@@ -136,20 +109,16 @@ public class RequestHandler extends Thread {
         } 
     } 
 } 
- 
 public class ServerService extends Service { 
     public ServerService(Socket socket) throws IOException { 
         super(socket); 
     } 
- 
     public void sendResult(String msg) { 
         sendMessage(msg.replaceAll("\n", "@")); 
     } 
- 
     public String getCommands() throws IOException { 
         return receiveMessage().replaceAll("@", "\n"); 
     } 
- 
     public int getNumOfCards() throws IOException { 
         return Integer.parseInt(receiveMessage()); 
     } 

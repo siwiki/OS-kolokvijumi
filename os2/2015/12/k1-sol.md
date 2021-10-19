@@ -68,7 +68,7 @@ class Gate {
     this.notifyAll(); 
   } 
  
-  public synhronized pass () { 
+  public synchronized pass () { 
     while (!this.isOpen) this.wait(); 
   } 
 }

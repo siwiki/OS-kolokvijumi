@@ -130,7 +130,7 @@ public class Server {
             serverSocket = new ServerSocket(5555); 
  
             while (balance > 0) { 
-                Socket clientSocket = clientSocket = serverSocket.accept(); 
+                Socket clientSocket = serverSocket.accept(); 
  
                 Service clientService = new Service(clientSocket); 
  

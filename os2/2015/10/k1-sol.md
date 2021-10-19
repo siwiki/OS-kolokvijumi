@@ -60,7 +60,7 @@ class Server {
     this.notifyAll(); 
   } 
  
-  public synhronized Data get () { 
+  public synchronized Data get () { 
     while (!this.readyToRead) this.wait(); 
     this.readyToRead=false; 
     Data data=d;   

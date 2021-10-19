@@ -34,7 +34,7 @@ inline PCB* Scheduler::ProcList::get () {
   return ret; 
 } 
  
-PCB* Scheduler:: put (PCB* p, bool wasBlocked) { 
+PCB* Scheduler::put (PCB* p, bool wasBlocked) { 
   if (pcb==0) return; // Exception! 
   if (wasBlocked) { 
     pcb->tau=(pcb->tau+pcb->time)>>1; 
@@ -101,23 +101,18 @@ public class Server {
     public static class User { 
         private String userIp; 
         private int userPort; 
- 
         public User(String userIp, int userPort) { 
             this.userIp = userIp; 
             this.userPort = userPort; 
         } 
- 
         public String getUserIp() { 
             return userIp; 
         } 
- 
         public int getUserPort() { 
             return userPort; 
         } 
     } 
- 
     private User user = null; 
- 
     public synchronized User addAndMatchUser(String ip, int port) { 
         User ret = user; 
         if (user != null) { 
@@ -127,21 +122,15 @@ public class Server {
         } 
         return ret; 
     } 
- 
     public void run() { 
         ServerSocket serverSocket = null; 
- 
         try { 
             serverSocket = new ServerSocket(5555); 
- 
             while (true) { 
-                Socket clientSocket = clientSocket = serverSocket.accept(); 
- 
+                Socket clientSocket = serverSocket.accept(); 
                 Service clientService = new Service(clientSocket); 
- 
                 new RequestHandler(clientService, this).start(); 
             } 
- 
         } catch (IOException e) { 
             e.printStackTrace(); 
         } finally { 
@@ -154,22 +143,18 @@ public class Server {
             } 
         } 
     } 
- 
     public static void main(String args[]) { 
         Server server = new Server(); 
         server.run(); 
     } 
 } 
- 
 public class RequestHandler extends Thread { 
     private final Service service; 
- 
     private final Server server; 
     public RequestHandler(Service service, Server server) { 
         this.server = server; 
         this.service = service; 
     } 
- 
     private String parseAndRespond(String msg) { 
         String[] data = msg.split("#"); 
         Server.User user = server.addAndMatchUser(data[1], Integer.parseInt(data[2])); 
@@ -179,14 +164,12 @@ public class RequestHandler extends Thread {
             return String.format("#Matched#%s#%d#", user.getUserIp(), user.getUserPort()); 
         } 
     } 
- 
     public void run() { 
         try { 
             // Login 
             // ... 
             String msg = service.receiveMessage(); 
             service.sendMessage(parseAndRespond(msg)); 
- 
         } catch (IOException e) { 
             e.printStackTrace(); 
         } finally { 

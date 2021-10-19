@@ -24,7 +24,7 @@ private:
 inline void Scheduler::ProcList::put (PCB* p) { 
   if (tail) tail->next = p; 
   else head = tail = p; 
-  p  ->next = 0; 
+  p->next = 0; 
 } 
  
 inline PCB* Scheduler::ProcList::get () { 
@@ -34,7 +34,7 @@ inline PCB* Scheduler::ProcList::get () {
   return ret; 
 } 
  
-PCB* Scheduler:: put (PCB* p, bool wasBlocked) { 
+PCB* Scheduler::put (PCB* p, bool wasBlocked) { 
   if (pcb==0) return; // Exception! 
   if (wasBlocked) { 
     if ((pcb->curPri > 0) &&  
