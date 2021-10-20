@@ -15,8 +15,8 @@ pdf-engine: pdflatex
 \raggedbottom
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\rightmark}
-\fancyhead[LO,RE]{\leftmark}
+\fancyhead[LE,RO]{\leftmark}
+\fancyhead[LO,RE]{\rightmark}
 \fancyfoot[C]{\thepage}
 \renewcommand\indexname{Indeks}
 \lstset{basicstyle=\ttfamily}
