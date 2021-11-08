@@ -115,27 +115,22 @@ public class Server {
     private final static int N = 10; 
     private final ServerSocket socket; 
     private int numOfClients = 0; 
- 
     public Server() throws IOException { 
         socket = new ServerSocket(5555); 
     } 
- 
     public void work() throws IOException { 
-        while(true) { 
+        while (true) { 
             Socket client = socket.accept(); 
- 
             new RequestHandler(client, this).start(); 
         } 
     } 
- 
     public synchronized int addClient() { 
         numOfClients++; 
         notifyAll(); 
         return numOfClients + N; 
     } 
- 
     public synchronized void waitNewUsers(int count) { 
-        while(count > numOfClients) { 
+        while (count > numOfClients) { 
             try { 
                 wait(); 
             } catch (InterruptedException e) { 
@@ -144,26 +139,21 @@ public class Server {
         } 
     } 
 } 
- 
 public class RequestHandler extends Thread { 
     private final Socket client; 
     private final Server server; 
- 
     public RequestHandler(Socket client, Server server) { 
         this.client = client; 
         this.server = server; 
     } 
- 
     public void run() { 
         Service service = new Service(client); 
         String msg = service.receiveMessage(); 
- 
-            if (msg.equals("Login")) { 
-                int count = server.addClient(); 
-                server.waitNewUsers(count); 
-                service.sendMessage("Continue"); 
- 
-            } 
+        if (msg.equals("Login")) { 
+            int count = server.addClient(); 
+            server.waitNewUsers(count); 
+            service.sendMessage("Continue"); 
+        } 
     } 
 }
 ```
