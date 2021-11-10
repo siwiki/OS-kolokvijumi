@@ -8,7 +8,6 @@ schedule
 sharedobj
 ```java
 public class Computer { 
- 
   public synchronized void writeX (double v) { 
     while (this.state!=readyForX) wait(); 
     this.x = v; 
@@ -30,11 +29,9 @@ public class Computer {
     notifyAll(); 
     return temp; 
   } 
- 
   private double x, y; 
   private static final int readyForX=0, readyForY=1, readyToRead=2; 
   private int state = readyForX; 
- 
 };
 ```
 

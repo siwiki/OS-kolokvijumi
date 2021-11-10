@@ -66,20 +66,17 @@ public class Server {
     private final ServerSocket socket; 
     private final DataAccess dataAccess; 
     private Socket clientOwner = null; 
- 
     public Server() throws IOException { 
         socket = new ServerSocket(5555); 
         dataAccess = new DataAccess(); 
     } 
- 
     public void work() throws IOException { 
         while(true) { 
             Socket client = socket.accept(); 
  
             new RequestHandler(client, this).start(); 
         } 
-    } 
- 
+    }
     public synchronized void lock(Socket client) { 
         while (clientOwner != null) { 
             try { 
@@ -90,14 +87,12 @@ public class Server {
         } 
         clientOwner = client; 
     } 
- 
     public synchronized void unlock(Socket client) { 
         if (client == clientOwner) { 
             clientOwner = null; 
             notifyAll(); 
         } 
     } 
- 
     public synchronized int[] read(Socket client, int address, int size) { 
         while (client != clientOwner && clientOwner != null) { 
             try { 
@@ -108,7 +103,6 @@ public class Server {
         } 
         return dataAccess.read(address, size); 
     } 
- 
     public synchronized void write(Socket client, int address, int size, int[] values) { 
         while (client != clientOwner && clientOwner != null) { 
             try { 
@@ -120,16 +114,13 @@ public class Server {
         dataAccess.write(address, size, values); 
     } 
 } 
- 
 public class RequestHandler extends Thread { 
     private final Socket client; 
     private final Server server; 
- 
     public RequestHandler(Socket client, Server server) { 
         this.client = client; 
         this.server = server; 
     } 
- 
     public void run() { 
         Service service = new Service(client); 
         while(true) { 
@@ -149,21 +140,17 @@ public class RequestHandler extends Thread {
             } 
         } 
     } 
- 
     public void lock(String[] args) { 
         server.lock(client); 
     } 
- 
     public synchronized void unlock(String[] args) { 
         server.unlock(client); 
     } 
- 
     public String read(String[] args) { 
         int address = Integer.parseInt(args[1]); 
         int size = Integer.parseInt(args[2]); 
         return arrayToString(server.read(client, address, size)); 
     } 
- 
     private String arrayToString(int[] array) { 
         StringBuilder sb = new StringBuilder(); 
         for (int x : array) { 
@@ -172,9 +159,7 @@ public class RequestHandler extends Thread {
         } 
         sb.append('#'); 
         return sb.toString(); 
- 
     } 
- 
     public void write(String[] args) { 
         int address = Integer.parseInt(args[1]); 
         int size = Integer.parseInt(args[2]); 

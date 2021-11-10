@@ -47,7 +47,6 @@ public class NetBuffer extends Usluga {
   getK(); 
  } 
  private int K; 
- 
  public void put(int d[]) { 
   String message = "#put#"; 
   for (int i = 0; i < K; i++) { 
@@ -72,16 +71,14 @@ Na serverskoj strani u klasi `Server` treba da se dodaju sledeći atributi:
 ```java
 public BoundedBuffer buff;  
 public final int K; 
-  
 public Server(int port, int N, int K) { 
   buff = new buffer(N, K); 
   this.K=K; 
   ... 
- 
 //poziv konstruktora new RequestHandler(clientSocket,buff,K); 
 ```
 `RequestHandler` treba izmeniti na sledeći način: 
-```
+```java
 public class RequestHandler extends Thread { 
 ... 
  buffer buff; 
@@ -92,8 +89,7 @@ public RequestHandler(Socket clientSocket, buffer buff, int K) {
   this.buff = buff; 
   this.K = K; 
   ... 
-} 
- 
+}
 protected void processRequest(String request) { 
   StringTokenizer st = new StringTokenizer(request, "#"); 
   String functionName = st.nextToken(); 

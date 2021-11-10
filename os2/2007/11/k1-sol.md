@@ -36,16 +36,13 @@ network
 ```java
 import java.net.*; 
 import java.io.*; 
- 
 private class ChannelServer extends Thread { 
   private ServerSocket mySocket; 
   private int myPort; 
- 
   public ChannelServer (int port) { 
     myPort = port; 
     mySocket = new ServerSocket(port); 
   }   
- 
   public void run () { 
     try { 
       Socket client = mySocket.accept(); 
@@ -60,13 +57,10 @@ private class ChannelServer extends Thread {
     } 
   }   
 } 
- 
- 
 public class MainServer { 
   private final static int N = 10; 
   private final static int port0 = 1050; 
   private static bool[] allocatedPorts = new bool[N]; 
- 
   private static int getFreePort () { 
     for (int i=0; i<N; i++) { 
       if (allocatedPorts[i]) continue; 
@@ -75,13 +69,11 @@ public class MainServer {
     } 
     return 0; 
   }   
- 
   public static void freePort (int i) { 
     i = i – port0 - 1; 
     if (i>=0 && i < N) 
       allocatedPorts[i]=false; 
   }   
- 
   public static void main (String[] args) { 
     try { 
       ServerSocket sock = new ServerSocket(port0); 

@@ -50,18 +50,15 @@ public class Server {
  private static final int PORT = 5555; 
  private List<Service> clients = new ArrayList<Service>(); 
  private int activeClients = 0; 
-  
+
  public void work() throws IOException { 
   ServerSocket server = new ServerSocket(PORT); 
-   
   while (true) { 
    Socket socket = server.accept(); 
    Service client = new Service(socket); 
-    
    addClient(client); 
   } 
- } 
-
+ }
 public synchronized void addClient(Service client) throws IOException { 
   if (activeClients < N) { 
    activeClients++; 
@@ -72,7 +69,6 @@ public synchronized void addClient(Service client) throws IOException {
    clients.add(client); 
   } 
  } 
-  
  public synchronized void finishClient() { 
   if (clients.size() > 0) { 
    Service client = clients.remove(0); 
@@ -83,19 +79,15 @@ public synchronized void addClient(Service client) throws IOException {
   } 
  } 
 } 
- 
 public class RequestHandler extends Thread { 
  private Service client; 
  private Server server; 
- 
  public RequestHandler(Server server, Service client) { 
   this.server = server; 
   this.client = client; 
  } 
-  
  public void run() { 
   // The work goes here 
-   
   server.finishClient(); 
  } 
 } 

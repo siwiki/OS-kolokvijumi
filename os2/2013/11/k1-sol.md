@@ -31,12 +31,10 @@ sharedobj
 ```java
 public class Buffer { 
  protected List l = new LinkedList(); 
- 
  public synchronized void put(Object o){ 
   l.add(o); 
   notify(); 
  } 
- 
  public synchronized Object get(){ 
   while (l.isEmpty())try {wait();} catch (InterruptedException e) {} 
   return l.remove();  
@@ -47,10 +45,9 @@ public class Buffer {
 network
 Na serverskoj strani u klasi `Server` treba dodati sledeće atribute: 
 ```java
- protected File rootDir; 
- 
-public Server(int port, String rootDir) { 
- this.rootDir = new File(rootDir);  
+  protected File rootDir; 
+  public Server(int port, String rootDir) { 
+  this.rootDir = new File(rootDir);  
  ... 
  
 //poziv konstruktora new RequestHandler(clientSocket, rootDir); 
@@ -71,7 +68,6 @@ public RequestHandler(Socket clientSocket, File rootDir) {
   this.rootDir = rootDir; 
   ... 
 } 
- 
 protected void processRequest(String request) { 
   StringTokenizer st = new StringTokenizer(request, "#"); 
   String functionName = st.nextToken(); 
@@ -81,7 +77,6 @@ protected void processRequest(String request) {
    else if (functionName.equals("get")) sendFile(filePath); 
   } catch (Exception e) {//...} 
 } 
- 
 protected void sendIndex(String filePath) throws Exception { 
  File file = new File(rootDir+"/"+filePath); 
  if ((!file.exists()) || !file.isDirectory()) sendMessage("#error#"); 
@@ -91,7 +86,6 @@ protected void sendIndex(String filePath) throws Exception {
  } 
  sendMessage("#done#"); 
 } 
- 
 protected void sendFile(String filePath) throws Exception { 
  File file = new File(rootDir+"/"+filePath); 
  if ((!file.exists()) || file.isDirectory()) sendMessage("#error#"); 

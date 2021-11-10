@@ -55,7 +55,6 @@ Na serverskoj strani u klasi `Server` treba dodati sledeće atribute:
 public Server(int port, QueryExecutor executor) { 
  this.executor = executor;   
  ... 
- 
 //poziv konstruktora new RequestHandler(clientSocket, executor); 
  
 public static void main(String args[]) {   
@@ -76,18 +75,15 @@ public RequestHandler(Socket clientSocket, QueryExecutor executor) {
   this.executor = executor; 
   ... 
 } 
- 
 protected void processRequest(String request) { 
   StringTokenizer st = new StringTokenizer(request, "#"); 
   string sqlQuery = st.nextToken(); 
   int waitTime = Integer.parseInt(st.nextToken()); 
   executor.put(new SQLWorkerThread(sqlQuery,waitTime,out)); 
 } 
- 
 public class QueryExecutor extends Thread { 
  protected Queue<SQLWorkerThread> fifoQueue = new Queue<SQLWorkerThread>(); 
  protected DelayQueue<SQLWorkerThread>  delayQueue = new DelayQueue<SQLWorkerThread>(); 
- 
  private synchronized SQLWorkerThread get() { 
    while (delayQueue.isEmpty() && fifoQueue.isEmpty()) wait(); 
    SQLWorkerThread nextWT = delayQueue.peek(); 
@@ -96,13 +92,11 @@ public class QueryExecutor extends Thread {
    fifoQueue.remove(nextWT); 
    return nextWT;  
  } 
- 
  public synchronized void put(SQLWorkerThread wt) { 
   fifoQueue.add(wt); 
   delayQueue.add(wt); 
   notifyAll(); 
  } 
- 
  public void run() { 
   while (!Server.kraj) { 
    SQLWorkerThread nextWT = get(); 

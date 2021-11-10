@@ -84,7 +84,6 @@ public class NetResource extends Usluga {
   super(host, port); 
   id = resId; 
  } 
- 
  private int id; 
  public static final int RN = ...; 
  private static boolean[] allocatedResources = new boolean[RN];  
@@ -98,7 +97,6 @@ public class NetResource extends Usluga {
   receiveMessage(); 
   allocatedResources[id]=true; 
  } 
- 
  public void dealloc() { 
   String message = "#dealloc#" + id + "#"; 
   sendMessage(message); 
@@ -111,7 +109,6 @@ Na serverskoj strani u klasi `Server` treba dodati sledeće atribute:
 ```java
 public final int RN; 
 public Resource[] resources; 
- 
 public Server(int port, int RN){ 
  this.RN=RN; 
  resources = new Resource[RN]; 
@@ -119,7 +116,6 @@ public Server(int port, int RN){
   resources[i]=new Resource(); 
  }   
  ... 
- 
 //poziv konstruktora new RequestHandler(clientSocket, resources); 
 ```
 `RequestHandler` treba izmeniti na sledeći način: 
@@ -128,13 +124,11 @@ public class RequestHandler extends Thread {
  ... 
  Resource[] resources; 
  ...  
- 
 public RequestHandler(Socket clientSocket, Resource[] resources) { 
   this.sock = clientSocket; 
   this.resources = resources; 
   ... 
 } 
- 
 protected void processRequest(String request) { 
  StringTokenizer st = new StringTokenizer(request, "#"); 
  String functionName = st.nextToken(); 

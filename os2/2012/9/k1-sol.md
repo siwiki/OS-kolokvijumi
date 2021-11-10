@@ -47,7 +47,6 @@ network
 import java.io.*; 
 import java.net.*; 
 import java.util.*; 
- 
 public class Server { 
  public static final int N = ...; 
  public static final int [][] a ={...}; 
@@ -91,7 +90,6 @@ public class Server {
    } 
  } 
 } 
- 
 class Worker extends Thread{ 
  @Override 
  public void run() { 

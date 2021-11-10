@@ -86,7 +86,6 @@ network
 public class Main { 
     public Main() { 
     } 
-     
     public static void main(String[] args) { 
         ServerSocket ss; 
         try{ 
@@ -154,7 +153,6 @@ public class fetch_and_increment {
     Socket s; 
     PrintWriter out; 
     BufferedReader in; 
-     
     public fetch_and_increment(String host, int port) { 
         try { 
             s = new Socket(host,port); 
@@ -163,9 +161,7 @@ public class fetch_and_increment {
         } catch (Exception e) { 
             //greska 
         } 
-         
     } 
-     
     public int fetch_and_increment1(){ 
         try{ 
             out.println("#fetch_and_increment#"); 
@@ -175,7 +171,6 @@ public class fetch_and_increment {
         } 
         return -1; 
     } 
-     
 } 
 ```
 

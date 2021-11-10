@@ -34,7 +34,6 @@ sharedobj
 ```java
 class TickTuck { 
   private boolean canTuck = false; 
- 
   synchronized void tick () { 
     // do tick 
     canTuck = true; 
@@ -55,14 +54,12 @@ network
 public class Server extends Thread{ 
     private final Service input; 
     private  final  Map<String,  String>  m_messages  =  new  HashMap<String, String>(); 
- 
     public Server(Socket input) throws IOException { 
         this.input = new Service(input); 
  
         start(); 
         work(); 
     } 
- 
     private void work() throws IOException { 
         ServerSocket server = new ServerSocket(5555); 
         while (true) { 
@@ -72,7 +69,6 @@ public class Server extends Thread{
             reqHandler.start(); 
         } 
     } 
- 
     public void run() { 
         while (true) { 
             String key = input.readMessage(); 
@@ -81,12 +77,10 @@ public class Server extends Thread{
             addMessage(key, msg); 
         } 
     } 
- 
     public synchronized void addMessage(String key, String msg) { 
         m_messages.put(key, msg); 
         notifyAll(); 
     } 
- 
     public synchronized String getMessage(String key) throws InterruptedException { 
         while (!m_messages.containsKey(key)) { 
             wait(); 
@@ -94,17 +88,14 @@ public class Server extends Thread{
  
         return m_messages.remove(key); 
     } 
-} 
-
+}
 public class RequestHandler extends Thread { 
     private final Server server; 
     private final Service service; 
- 
     public RequestHandler(Server server, Service service) { 
         this.server = server; 
         this.service = service; 
     } 
- 
     public void run() { 
         String key = service.readMessage(); 
  

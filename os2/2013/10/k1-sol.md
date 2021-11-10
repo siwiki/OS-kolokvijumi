@@ -88,7 +88,6 @@ Na serverskoj strani u klasi `Server` treba dodati sledeće atribute:
 public Server(int port, TaskExecutor executor) { 
  this.executor = executor;   
  ... 
- 
 //poziv konstruktora new RequestHandler(clientSocket, executor); 
  
 public static void main(String args[]) {   
@@ -108,22 +107,18 @@ public RequestHandler(Socket clientSocket, TaskExecutor executor) {
   this.sock = clientSocket; 
   this.executor = executor; 
   ... 
-} 
- 
+}
 protected void processRequest(String request) { 
   StringTokenizer st = new StringTokenizer(request, "#"); 
   int taskId = Integer.parseInt(st.nextToken()); 
   int priority = Integer.parseInt(st.nextToken()); 
   executor.add(new WorkerThread(taskId,priority,out)); 
 } 
- 
 public class TaskExecutor extends Thread { 
  protected ArrayList<WorkerThread> list = new ArrayList<WorkerThread>(); 
- 
  private synchronized WorkerThread removeMaxPriAndDoAging() { 
   WorkerThread maxPriWT = null; 
   while (list.isEmpty()) try { wait(); } catch (InterruptedException e) {} 
- 
   for (WorkerThread wt : list) { 
    if(maxPriWT == null) 
     maxPriWT = wt; 
@@ -138,12 +133,10 @@ public class TaskExecutor extends Thread {
   list.remove(maxPriWT); 
   return maxPriWT; 
  } 
- 
  public synchronized void add(WorkerThread wt) { 
   list.add(wt); 
   notifyAll(); 
  } 
- 
  public void run() { 
   while (!Server.kraj) { 
    WorkerThread maxPriWT = removeMaxPriAndDoAging(); 

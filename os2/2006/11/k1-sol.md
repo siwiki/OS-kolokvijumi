@@ -45,18 +45,15 @@ end; (* client *)
 network
 ```java
 public class CoderProxy extends Usluga { 
- 
  public CoderProxy (String host, int port){ 
   super(host, port); 
  } 
-  
  public String code(String op1, String op2){ 
   String message = "#code1#" + op1 +  "#" + op2 + "#"; 
   sendMessage(message); 
    
   return receiveMessage();   
  } 
- 
  public String code(String op){ 
   String message = "#code2#" + op + "#"; 
   sendMessage(message); 
@@ -64,12 +61,11 @@ public class CoderProxy extends Usluga {
   return receiveMessage();   
  } 
 } 
- 
 public class RequestHandler extends Thread{ 
 protected Coder coder; 
 ... 
 public RequestHandler(...,Coder k){ 
- ... 
+... 
 coder = k; 
 } 
 protected void processRequest(String request){ 
@@ -86,7 +82,6 @@ protected void processRequest(String request){
    String rezultat = coder.code(op); 
    sendMessage(result); 
   } 
- 
  } 
  ... 
 }

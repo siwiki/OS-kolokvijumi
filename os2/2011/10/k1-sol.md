@@ -44,70 +44,65 @@ network
 import java.io.*; 
 import java.net.*; 
 import java.util.StringTokenizer; 
- 
 public class Agent { 
- 
-static int bestOffer; 
-static String bestClientHost = null; 
-static int bestClientPort; 
-static boolean auctionOver = false; 
-static int badOfferCounter = 0; 
-static BufferedReader in; 
-static PrintWriter out; 
- 
-public static void main(String[] args) { 
- try { 
-  ServerSocket sock = new ServerSocket(1025); 
-  Socket clientSocket = sock.accept(); 
-  in = new BufferedReader(new InputStreamReader( 
-    clientSocket.getInputStream())); 
-  StringTokenizer st = new StringTokenizer(in.readLine(), "#"); 
-  if (!st.nextToken().equals("StartAuction")) {  
-    auctionOver = true;  
-  }else {  
-    bestOffer = Integer.parseInt(st.nextToken());} 
-   
-  clientSocket.close(); 
-   
-  while (!auctionOver) { 
-   clientSocket = sock.accept(); 
- 
-   in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
-   out = new PrintWriter(clientSocket.getOutputStream(), true); 
-   st = new StringTokenizer(in.readLine(), "#"); 
-   String clientHost = st.nextToken(); 
-   String clientPort = st.nextToken(); 
-   int newOffer = Integer.parseInt(st.nextToken()); 
- 
-   if (newOffer > bestOffer) { 
-    if (bestClientHost != null) sendMsgToBestClient("BetterOfferReceived"); 
-    bestOffer = newOffer; 
-    bestClientHost = clientHost; 
-    bestClientPort = Integer.parseInt(clientPort);     
-    out.println("OfferAccepted"); 
-    badOfferCounter = 0; 
-   } else { 
-    out.println("OfferRejected"); 
-    badOfferCounter++; 
-   } 
- 
-   clientSocket.close(); 
- 
-   if (badOfferCounter == 5) { 
-    if (bestClientHost != null) sendMsgToBestClient("YouWon!");  
-    auctionOver = true; 
-   } 
+  static int bestOffer; 
+  static String bestClientHost = null; 
+  static int bestClientPort; 
+  static boolean auctionOver = false; 
+  static int badOfferCounter = 0; 
+  static BufferedReader in; 
+  static PrintWriter out; 
+  public static void main(String[] args) { 
+  try { 
+    ServerSocket sock = new ServerSocket(1025); 
+    Socket clientSocket = sock.accept(); 
+    in = new BufferedReader(new InputStreamReader( 
+      clientSocket.getInputStream())); 
+    StringTokenizer st = new StringTokenizer(in.readLine(), "#"); 
+    if (!st.nextToken().equals("StartAuction")) {  
+      auctionOver = true;  
+    } else {  
+      bestOffer = Integer.parseInt(st.nextToken());} 
+    
+    clientSocket.close(); 
+    
+    while (!auctionOver) { 
+    clientSocket = sock.accept(); 
+  
+    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
+    out = new PrintWriter(clientSocket.getOutputStream(), true); 
+    st = new StringTokenizer(in.readLine(), "#"); 
+    String clientHost = st.nextToken(); 
+    String clientPort = st.nextToken(); 
+    int newOffer = Integer.parseInt(st.nextToken()); 
+  
+    if (newOffer > bestOffer) { 
+      if (bestClientHost != null) sendMsgToBestClient("BetterOfferReceived"); 
+      bestOffer = newOffer; 
+      bestClientHost = clientHost; 
+      bestClientPort = Integer.parseInt(clientPort);     
+      out.println("OfferAccepted"); 
+      badOfferCounter = 0; 
+    } else { 
+      out.println("OfferRejected"); 
+      badOfferCounter++; 
+    } 
+    clientSocket.close(); 
+  
+    if (badOfferCounter == 5) { 
+      if (bestClientHost != null) sendMsgToBestClient("YouWon!");  
+      auctionOver = true; 
+    } 
+    } 
+  } catch (Exception e) { System.err.println(e);} 
   } 
- } catch (Exception e) { System.err.println(e);} 
-} 
- 
-static void sendMsgToBestClient(String msg) throws UnknownHostException, IOException { 
- Socket clientSocket = new Socket(bestClientHost,bestClientPort); 
- PrintWriter oldOut = new PrintWriter(clientSocket.getOutputStream(),true); 
- oldOut.println(msg); 
- clientSocket.close(); 
- } 
-} 
+  static void sendMsgToBestClient(String msg) throws UnknownHostException, IOException { 
+  Socket clientSocket = new Socket(bestClientHost,bestClientPort); 
+  PrintWriter oldOut = new PrintWriter(clientSocket.getOutputStream(),true); 
+  oldOut.println(msg); 
+  clientSocket.close(); 
+  } 
+  } 
 ```
 
 --------------------------------------------------------------------------------

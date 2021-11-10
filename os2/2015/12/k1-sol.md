@@ -58,16 +58,13 @@ sharedobj
 ```java
 class Gate { 
   private bool isOpen = true; 
- 
   public synchronized void close () { 
     this.isOpen=false; 
   } 
- 
   public synchronized void open () { 
     this.isOpen=true; 
     this.notifyAll(); 
   } 
- 
   public synchronized pass () { 
     while (!this.isOpen) this.wait(); 
   } 
@@ -78,7 +75,6 @@ class Gate {
 network
 ```java
 package rs.etf; 
- 
 import java.io.BufferedReader; 
 import java.io.IOException; 
 import java.io.InputStreamReader; 
@@ -88,17 +84,13 @@ import java.net.ServerSocket;
 import java.net.Socket; 
  
 public class Server extends Thread { 
- 
     protected class RequestHandler extends Thread { 
- 
         private Socket mySocket; 
         private BufferedReader in = null; 
         private PrintWriter out = null; 
- 
         public RequestHandler (Socket socket) { 
             this.mySocket = socket; 
         } 
- 
         public void run() { 
             try { 
                 this.in = new BufferedReader(new InputStreamReader( 
@@ -120,9 +112,7 @@ public class Server extends Thread {
                 } 
             } 
         } 
- 
-    } 
-     
+    }
     protected class RequestListener extends Thread { 
  
         private ServerSocket mySocket = null; 
@@ -134,7 +124,6 @@ public class Server extends Thread {
                 // ... 
             } 
         } 
- 
         public void run() { 
             try { 
                 while (true) { 
@@ -156,18 +145,13 @@ public class Server extends Thread {
                 } 
             } 
         } 
- 
-    } 
- 
- 
+    }
     protected static final int REQUEST_PORT = 6000; 
     protected int[] ports; 
     protected RequestListener[] reqListeners; 
- 
     public Server (int[] ports) { 
         this.ports = ports; 
     } 
- 
     public void start() { 
         this.reqListeners = new RequestListener[ports.length]; 
         for (int i=0; i<this.reqListeners.length; i++) { 
@@ -176,7 +160,6 @@ public class Server extends Thread {
         } 
         super.start(); 
     } 
- 
     public void run () { 
         ServerSocket ss = null; 
         try { 
@@ -213,13 +196,11 @@ public class Server extends Thread {
             } 
         } 
     } 
- 
     protected String getChannel (int req) { 
         if (req>=0 && req<this.ports.length) 
             return Integer.toString(this.ports[req]); 
         else 
             return Integer.toString(this.ports[0]);  // Default listener 
     } 
- 
 }
 ```

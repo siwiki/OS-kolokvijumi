@@ -86,21 +86,17 @@ network
 import java.io.*; 
 import java.net.*; 
 import java.util.*; 
- 
 public class Server { 
  static final int N = ...; 
  static int count = N; 
  static LinkedList<Socket> blockedList = new LinkedList<Socket>(); 
- 
  public static void main(String[] args) { 
   try { 
    ServerSocket sock = new ServerSocket(1033); 
-    
    while (true) { 
     Socket clientSocket = sock.accept(); 
     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); 
     String request = in.readLine(); 
- 
     if (request.equals("GetToken")) { 
      if(count>0){    
       sendMsgToClient(clientSocket, "Continue"); 
@@ -122,7 +118,6 @@ public class Server {
   clientSocket.close(); 
  } 
 } 
- 
 public class Client { 
  public static void main(String[] args) { 
   try { 

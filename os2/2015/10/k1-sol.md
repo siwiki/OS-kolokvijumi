@@ -51,7 +51,6 @@ sharedobj
 class Server { 
   private Data d; 
   private bool readyToRead = false, readyToWrite = true; 
- 
   public synchronized void put (Data data) { 
     while (!this.readyToWrite) this.wait(); 
     this.readyToWrite=false; 
@@ -59,7 +58,6 @@ class Server {
     this.readyToRead=true; 
     this.notifyAll(); 
   } 
- 
   public synchronized Data get () { 
     while (!this.readyToRead) this.wait(); 
     this.readyToRead=false; 
@@ -81,18 +79,14 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter; 
 import java.net.ServerSocket; 
 import java.net.Socket; 
- 
 public class Server extends Thread { 
   protected static final int REQUEST_PORT = 6000; 
   protected static final int WS_RESPONSE_PORT = 6001; 
- 
   protected class ResponseCollector extends Thread { 
     protected Server myServer; 
- 
     public ResponseCollector(Server s) { 
       myServer = s; 
     } 
- 
     public void run() { 
       ServerSocket ss = null; 
       try { 
@@ -126,25 +120,20 @@ public class Server extends Thread {
         } 
       } 
     } 
- 
   } 
- 
   protected String[] workstations; 
   protected int[] numOfRequests; 
- 
   public Server(String[] workstations) { 
     this.workstations = workstations; 
     numOfRequests = new int[workstations.length]; 
     for (int i = 0; i < numOfRequests.length; i++) 
       numOfRequests[i] = 0; 
   } 
- 
   public void start() { 
     ResponseCollector rc = new ResponseCollector(this); 
     rc.start(); 
     super.start(); 
   } 
- 
   public void run() { 
     ServerSocket ss = null; 
     try { 
@@ -185,7 +174,6 @@ public class Server extends Thread {
       } 
     } 
   } 
- 
   protected synchronized String getWorkstation() { 
     int minReq = numOfRequests[0], minInd = 0; 
     for (int i = 1; i < numOfRequests.length; i++) { 
@@ -197,7 +185,6 @@ public class Server extends Thread {
     numOfRequests[minInd]++; 
     return workstations[minInd]; 
   } 
- 
   protected synchronized void setNumOfRequests(String workstation, int nReq) { 
     for (int i = 0; i < workstations.length; i++) { 
       if (workstations[i].equals(workstation)) { 
@@ -205,7 +192,6 @@ public class Server extends Thread {
         break; 
       } 
     } 
-  } 
- 
+  }
 } 
 ```

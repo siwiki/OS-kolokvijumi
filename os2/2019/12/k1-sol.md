@@ -69,12 +69,10 @@ public class Server {
     private final ServerSocket socket; 
     private final ContentPrice contentPrice; 
     private final Map<String, Integer> accounts = new HashMap<String, Integer>(); 
- 
     public Server() throws IOException { 
         socket = new ServerSocket(5555); 
         contentPrice = new ContentPrice(); 
     } 
- 
     public void work() throws IOException { 
         while(true) { 
             Socket client = socket.accept(); 
@@ -82,7 +80,6 @@ public class Server {
             new RequestHandler(client, this, contentPrice).start(); 
         } 
     } 
- 
     public synchronized boolean withdraw(String user, int price) { 
         if (!accounts.containsKey(user)) { 
             accounts.put(user, N); 
@@ -97,18 +94,15 @@ public class Server {
         return true; 
     } 
 } 
- 
 public class RequestHandler extends Thread { 
     private final Socket client; 
     private final Server server; 
     private final ContentPrice contentPrice; 
- 
     public RequestHandler(Socket client, Server server, ContentPrice contentPrice) { 
         this.client = client; 
         this.server = server; 
         this.contentPrice = contentPrice; 
     } 
- 
     public void run() { 
         Service service = new Service(client); 
         String user = service.receiveMessage(); 

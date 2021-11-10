@@ -48,10 +48,8 @@ network
 ```java
 import java.net.*; 
 import java.io.*; 
- 
 public class MainServer { 
   private final static int port0 = 1050; 
-   
   public static void main (String[] args) { 
     try { 
       ServerSocket sock = new ServerSocket(port0); 

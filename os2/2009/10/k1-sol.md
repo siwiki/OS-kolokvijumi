@@ -76,7 +76,6 @@ public class Beleznica {
     private int opsluzuje_se; 
     private int vozAB; 
     private int vozBA; 
- 
     public Beleznica(){ 
         redni_broj = 0; 
         opsluzuje_se = 0; 
@@ -86,46 +85,36 @@ public class Beleznica {
     public void kreniAB(){ 
         vozAB++; 
         opsluzuje_se++; 
-    } 
-     
+    }
     public boolean stigaoAB(){ 
         return --vozAB == 0; 
-    } 
-     
+    }
     public boolean zauzetaAB(){ 
         return vozAB>0; 
     } 
-     
     public void kreniBA(){ 
         vozBA++; 
         opsluzuje_se++; 
     } 
-     
     public boolean stigaoBA(){ 
         return --vozBA == 0; 
     } 
-     
     public boolean zauzetaBA(){ 
         return vozBA>0; 
     } 
-     
     public int uzmi_redni_broj(){ 
         return redni_broj++; 
     } 
-     
     public boolean dosao_na_red(int i){ 
         return i == opsluzuje_se; 
     } 
 } 
- 
 //Server_voz 
 public class Server_voz extends Thread { 
     private Socket s; 
- 
     public Server_voz(Socket soc) { 
         s = soc; 
     }     
- 
     public void run(){ 
     BufferedReader r = null; 
     BufferedWriter w = null; 
@@ -174,9 +163,7 @@ public class Server_voz extends Thread {
 public class Dispecer { 
     public Dispecer() { 
     } 
- 
     public static Beleznica beleznica = new Beleznica(); 
-     
     private static ServerSocket s; 
     public static void main(String[] args) { 
         try { 
@@ -196,11 +183,11 @@ public class Dispecer {
         } 
     } 
 } 
-//masinovodja koji krece iz mesta A 
-salje poruku "startA" 
-ceka da primi poruku "kreni" 
-//putuje 
-salje poruku "stigao" 
+// masinovodja koji krece iz mesta A 
+// salje poruku "startA" 
+// ceka da primi poruku "kreni" 
+// putuje 
+// salje poruku "stigao" 
 ```
 
 --------------------------------------------------------------------------------

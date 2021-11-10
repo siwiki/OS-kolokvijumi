@@ -94,53 +94,38 @@ public class Server {
     private double balance; 
     private int nextId = 0; 
     private Map<Integer,Double> reservations = new HashMap<Integer, Double>(); 
- 
     public Server(double balance) { 
         this.balance = balance; 
     } 
- 
     public synchronized String reserveAmount(double value) { 
         int id = ++nextId; 
- 
         if (balance < value) { 
             return "FAIL"; 
         } 
- 
         reservations.put(id, value); 
         balance -= value; 
- 
         return String.format("OK#%d", id); 
     } 
- 
     public synchronized String finalAmount(int id, double value) { 
         if (!reservations.containsKey(id) || reservations.get(id) < value) { 
             return "FAIL"; 
-        } 
- 
+        }
         double reserved = reservations.remove(id); 
-        balance += reserved - value; 
-
+        balance += reserved - value;
         return "OK"; 
     } 
- 
     public void run() { 
         ServerSocket serverSocket = null; 
- 
         try { 
             serverSocket = new ServerSocket(5555); 
- 
             while (balance > 0) { 
                 Socket clientSocket = serverSocket.accept(); 
- 
                 Service clientService = new Service(clientSocket); 
- 
                 RequestHandler user = new RequestHandler(clientService, this); 
                 user.start(); 
             } 
- 
-        } catch (IOException e) { 
-            e.printStackTrace(); 
-        } finally { 
+        } catch (IOException e) { e.printStackTrace(); } 
+        finally { 
             if (serverSocket != null) { 
                 try { 
                     serverSocket.close(); 
@@ -150,46 +135,36 @@ public class Server {
             } 
         } 
     } 
- 
     public static void main(String args[]) { 
         Server server = new Server(1000.0); 
  
         server.run(); 
     } 
-} 
- 
+}
 public class RequestHandler extends Thread { 
     private final Service service; 
- 
     private final Server server; 
     public RequestHandler(Service service, Server server) { 
         this.server = server; 
         this.service = service; 
     } 
- 
     public void run() { 
         try { 
           String msg = service.receiveMessage(); 
           String[] data = msg.split("#"); 
- 
           String response; 
           if (data.length == 1) { 
               response = server.reserveAmount(Double.parseDouble(data[0])); 
           } else { 
               response = server.finalAmount(Integer.parseInt(data[0]), Double.parseDouble(data[1]));
           } 
- 
           service.sendMessage(response); 
- 
         } catch (IOException e) { 
             e.printStackTrace(); 
         } finally { 
             try { 
                 service.close(); 
-            } catch (IOException e) { 
-
-                e.printStackTrace(); 
-            } 
+            } catch (IOException e) { e.printStackTrace(); }
         } 
     } 
 } 

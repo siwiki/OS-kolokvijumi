@@ -91,21 +91,17 @@ network
 public class Server extends Thread { 
     private Set<String> filesInUse = new HashSet<String>(); 
     private int port; 
- 
     public Server(int port) { 
         this.port = port; 
     } 
- 
     public void work() { 
         ServerSocket serverSocket = null; 
- 
         try { 
             serverSocket = new ServerSocket(port); 
         } catch (IOException e) { 
             e.printStackTrace(); 
             return; 
         } 
- 
         while (true) { 
             try { 
                 Socket client = serverSocket.accept(); 
@@ -114,10 +110,8 @@ public class Server extends Thread {
             } catch (IOException e) { 
                 e.printStackTrace(); 
             } 
- 
         } 
     } 
- 
     public static void main(String [] args)  
                            throws IOException, InterruptedException { 
         Server server = new Server(5555); 
@@ -129,13 +123,11 @@ public class RequestHandler extends Thread {
     private static final Pattern PATTERN = Pattern.compile("line#(.*)#"); 
     private Set<String> filesInUse; 
     private Service service; 
- 
     public RequestHandler(Set<String> filesInUse, Socket socket)  
                                                  throws IOException { 
         this.filesInUse = filesInUse; 
         this.service = new Service(socket); 
-    } 
- 
+    }
     public void run() { 
         String line; 
         try { 
@@ -158,9 +150,7 @@ public class RequestHandler extends Thread {
         } catch (Exception e) { 
             e.printStackTrace(); 
         } 
- 
     } 
- 
     private void receiveFile(File file) throws IOException { 
         String line;PrintWriter fileOut = new PrintWriter(file); 
  
@@ -175,7 +165,6 @@ public class RequestHandler extends Thread {
         } 
         fileOut.close(); 
     } 
- 
     private void sendFile(String fileName) throws IOException { 
         String line; 
         BufferedReader reader =  
@@ -186,7 +175,6 @@ public class RequestHandler extends Thread {
         service.sendMessage("eof##"); 
         reader.close(); 
     } 
- 
     private void startUsingFile(String fileName)  
                                           throws InterruptedException { 
         synchronized (filesInUse) { 
@@ -196,7 +184,6 @@ public class RequestHandler extends Thread {
             filesInUse.add(fileName); 
         } 
     } 
- 
     private void finishWithFile(String fileName) { 
         synchronized (filesInUse) { 
             filesInUse.remove(fileName); 

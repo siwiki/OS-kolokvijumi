@@ -91,7 +91,6 @@ network
  static final int M =...; 
  static int count = N; 
  static ArrayList<LinkedList<Socket>> blockedList = new ArrayList<LinkedList<Socket>>(M); 
- 
  public static void main(String[] args) { 
   for (int i = 0; i < M; i++) { 
    blockedList.add(i, new LinkedList<Socket>()); 
@@ -128,14 +127,12 @@ network
    } 
   } catch (Exception e) { System.err.println(e);} 
  } 
- 
  static void sendMsgToClient(Socket clientSocket,String msg) throws UnknownHostException, IOException { 
   PrintWriter newOut = new PrintWriter(clientSocket.getOutputStream(),true); 
   newOut.println(msg); 
   clientSocket.close(); 
  } 
 } 
- 
 // Client 
 public class Client { 
  public static void main(String[] args) { 

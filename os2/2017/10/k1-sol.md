@@ -86,40 +86,32 @@ public class ClientRequest {
     private final String ip; 
     private final int port; 
     private int requestedTickets; 
- 
     public ClientRequest(String ip, int port, int requestedTickets) { 
         this.ip = ip; 
         this.port = port; 
         this.requestedTickets = requestedTickets; 
     } 
- 
     public String getIp() { 
         return ip; 
     } 
- 
     public int getPort() { 
         return port; 
     } 
- 
     public int getRequestedTickets() { 
         return requestedTickets; 
     } 
- 
     public void removeRequestedTickets(int requestedTickets) { 
         this.requestedTickets -= requestedTickets; 
     } 
 } 
- 
 public class RequestHandler extends Thread { 
     private TicketCounter counter; 
     private Service service; 
- 
     public RequestHandler(TicketCounter counter, Socket socket)  
                              throws IOException { 
         this.counter = counter; 
         service = new Service(socket); 
     } 
- 
     public void run() { 
         String ip = null; 
         try { 
@@ -143,9 +135,7 @@ public class RequestHandler extends Thread {
         } catch (IOException e) { 
             e.printStackTrace(); 
         } 
- 
     } 
- 
     private void giveTickets(List<ClientRequest> ret) throws IOException { 
         for (ClientRequest client : ret) { 
             Service clientConn = new Service( 
@@ -156,33 +146,26 @@ public class RequestHandler extends Thread {
         } 
     } 
 } 
- 
 public class TicketCounter { 
     private int availableTickets; 
- 
     private List<ClientRequest> waitingList =  
-                         new ArrayList<ClientRequest>(); 
- 
+                      new ArrayList<ClientRequest>(); 
     public TicketCounter(int availableTickets) { 
         this.availableTickets = availableTickets; 
     } 
- 
     public synchronized int reserveTickets(ClientRequest client) { 
         if (client.getRequestedTickets() <= availableTickets) { 
             availableTickets -= client.getRequestedTickets(); 
             return client.getRequestedTickets(); 
         } 
- 
         client.removeRequestedTickets(availableTickets); 
         waitingList.add(client); 
         int ret = availableTickets; 
         availableTickets = 0; 
         return ret; 
     } 
- 
     public synchronized List<ClientRequest> returnTickets(int tickets) { 
-        availableTickets +=tickets; 
- 
+        availableTickets += tickets; 
         List<ClientRequest> ret = new ArrayList<ClientRequest>(); 
         while (availableTickets > 0 && waitingList.size() > 0) { 
             ClientRequest first = waitingList.get(0); 
@@ -200,31 +183,24 @@ public class TicketCounter {
             } 
             ret.add(send); 
         } 
- 
         return ret; 
     } 
- 
     public synchronized List<ClientRequest> getAllWaitingClients() { 
         return Collections.unmodifiableList(waitingList); 
     } 
 } 
- 
 public class Server extends Thread { 
     private boolean work; 
-    private int port; 
-
+    private int port;
     private TicketCounter counter; 
- 
     public Server(int port) { 
         this.port = port; 
     } 
- 
     public void run() { 
         ServerSocket serverSocket = null; 
         List<Thread> threads = new ArrayList<Thread>(); 
         try { 
             serverSocket = new ServerSocket(port); 
- 
             while(work) { 
                 Socket clientSocket = null; 
                 try { 
@@ -233,36 +209,29 @@ public class Server extends Thread {
                         new RequestHandler(counter, clientSocket); 
                     threads.add(handler); 
                     handler.start(); 
- 
                 } 
                 catch (IOException e) { 
                     e.printStackTrace(); 
                 } 
             } 
- 
             waitThreads(threads); 
- 
             cleanUp(); 
         } catch (IOException e) { 
             e.printStackTrace(); 
         } 
     } 
- 
     public void startServer(int n) { 
         work = true; 
         init(n); 
         start(); 
     } 
- 
     private void init(int n) { 
         counter = new TicketCounter(n); 
     } 
- 
     public synchronized void stopServer() { 
         work = false; 
         interrupt(); 
     } 
- 
     private void cleanUp() throws IOException { 
         for (ClientRequest client : counter.getAllWaitingClients()) { 
             Service clientConn = new Service( 
@@ -270,7 +239,6 @@ public class Server extends Thread {
             clientConn.sendMessage("end"); 
         } 
     } 
- 
     private void waitThreads(List<Thread> threads) { 
         for (Thread thread : threads) { 
             try { 

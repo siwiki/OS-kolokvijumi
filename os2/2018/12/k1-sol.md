@@ -40,22 +40,14 @@ public class Client {
         if (matrix.length == 0 || matrix[0].length == 0) { 
             return null; 
         } 
- 
         Socket socket = new Socket("server.etf.rs", 5555); 
- 
         Service service = new Service(socket); 
- 
         waitInLine(service); 
- 
         sendMatrix(matrix, service); 
- 
         int[][] result = receiveMatrix(service); 
- 
         service.close(); 
- 
         return result; 
     } 
- 
     private void waitInLine(Service service) { 
         String msg; 
         int users; 
@@ -64,7 +56,6 @@ public class Client {
             users = Integer.parseInt(msg); 
         } while (users > 0); 
     } 
- 
     private void sendMatrix(int[][] matrix, Service service) { 
         service.sendMessage(matrix.length + ""); 
         for (int[] row : matrix) { 
@@ -76,7 +67,6 @@ public class Client {
             service.sendMessage(sb.toString().trim()); 
         } 
     } 
- 
     private int[][] receiveMatrix(Service service) { 
         String msg; 
         msg = service.receiveMessage(); 
@@ -88,7 +78,6 @@ public class Client {
         } 
         return result; 
     } 
- 
     private int[] parseArrayInt(String array) { 
         String[] values = array.split(" "); 
         int[] ret = new int[values.length]; 

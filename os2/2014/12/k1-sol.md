@@ -56,7 +56,6 @@ network
 public class TaxiDispatcher { 
  static LinkedList<Socket> blockedTaxi = new LinkedList<Socket>(); 
  static LinkedList<Socket> blockedUsers = new LinkedList<Socket>(); 
- 
  public static void main(String[] args) { 
   try { 
    ServerSocket sock = new ServerSocket(1033);  
