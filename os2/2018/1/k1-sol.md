@@ -78,7 +78,7 @@ class Toggle {
     notifyAll(); 
   }   
  
-  private bool toggle = true; 
+  private boolean toggle = true; 
 }
 ```
 
