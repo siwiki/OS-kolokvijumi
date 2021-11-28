@@ -3,22 +3,22 @@
 deadlock
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2019/k2-graf-a}
+  \includesvg{images/os2/2019-k2-graf-a}
   \caption{Graf za rešenje zadatka pod a}
 \end{figure}
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2019/k2-graf-b}
+  \includesvg{images/os2/2019-k2-graf-b}
   \caption{Graf za rešenje zadatka pod b}
 \end{figure}
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2019/k2-graf-c}
+  \includesvg{images/os2/2019-k2-graf-c}
   \caption{Graf za rešenje zadatka pod c}
 \end{figure}
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2019/k2-graf-d}
+  \includesvg{images/os2/2019-k2-graf-d}
   \caption{Graf za rešenje zadatka pod d}
 \end{figure}
 

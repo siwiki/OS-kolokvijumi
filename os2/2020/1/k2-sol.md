@@ -12,7 +12,7 @@ deadlock
  
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2020/k2-graf-resenje}
+  \includesvg{images/os2/2020-k2-graf-resenje}
   \caption{Graf}
 \end{figure}
 

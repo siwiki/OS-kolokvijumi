@@ -152,6 +152,6 @@ allocator
 
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2011/k1-graf}
+  \includesvg{images/os2/2011-k1-graf}
   \caption{Graf iz dela zadatka pod a.}
 \end{figure}

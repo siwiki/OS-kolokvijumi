@@ -4,9 +4,9 @@ deadlock
 
 \begin{figure}[H]
 \centering
-\subfloat[Rešenje prve stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011/k2-graf-a}}
-\subfloat[Rešenje druge stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011/k2-graf-b}}
-\subfloat[Rešenje treće stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011/k2-graf-c}}
+\subfloat[Rešenje prve stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011-k2-graf-a}}
+\subfloat[Rešenje druge stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011-k2-graf-b}}
+\subfloat[Rešenje treće stavke]{\includesvg[width=0.30\textwidth]{images/os2/2011-k2-graf-c}}
 \end{figure}
 
 --------------------------------------------------------------------------------

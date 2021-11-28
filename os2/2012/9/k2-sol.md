@@ -7,7 +7,7 @@ deadlock
 
 \begin{figure}[H]
   \centering
-  \includesvg{images/os2/2012/k2-graf}
+  \includesvg{images/os2/2012-k2-graf}
   \caption{Graf iz stavke pod a}
 \end{figure}
 

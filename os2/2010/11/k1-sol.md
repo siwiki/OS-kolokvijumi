@@ -178,10 +178,10 @@ public class fetch_and_increment {
 deadlock
 
 \begin{figure}
-\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-a}}
-\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-b}}
-\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-c}}
-\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010/k1-graf-d}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010-k1-graf-a}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010-k1-graf-b}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010-k1-graf-c}}
+\subfloat[]{\includesvg[width=0.25\textwidth]{images/os2/2010-k1-graf-d}}
 \end{figure}
 
 --------------------------------------------------------------------------------

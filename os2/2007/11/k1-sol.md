@@ -108,6 +108,6 @@ deadlock
 
 \begin{figure}[H]
     \centering
-    \includesvg{images/os2/2007/k1-graf-resenje}
+    \includesvg{images/os2/2007-k1-graf-resenje}
     \caption{Graf iz rešenja stavke pod a.}
 \end{figure}

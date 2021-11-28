@@ -4,8 +4,8 @@ deadlock
 
 \begin{figure}[H]
 \centering
-\subfloat[Rešenje prve stavke]{\includesvg[width=0.45\textwidth]{images/os2/2014/k2-graf-a}}
-\subfloat[Rešenje druge stavke]{\includesvg[width=0.45\textwidth]{images/os2/2014/k2-graf-b}}
+\subfloat[Rešenje prve stavke]{\includesvg[width=0.45\textwidth]{images/os2/2014-k2-graf-a}}
+\subfloat[Rešenje druge stavke]{\includesvg[width=0.45\textwidth]{images/os2/2014-k2-graf-b}}
 \end{figure}
 
 --------------------------------------------------------------------------------
