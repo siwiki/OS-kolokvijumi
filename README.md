@@ -35,3 +35,5 @@ Ukoliko planirate da doprinosite projektu, mogu vam biti korisne sledeće inform
 - Pre Markdown uređenih i neuređenih lista je potrebno da stoji novi red, inače se neće dobro prepoznati kao liste
 - GitHub-flavored Markdown (GFM) nije podržan, pa je potrebno koristiti LaTeX tabele
 - Bilo kakav LaTeX je dozvoljen, ali ako je nešto lakše izraziti u Markdown tako i treba da stoji
+- Ponekad kada izmenite sliku i regenerišete dokument, ta slika neće biti ispravna. U ovom slučaju pogledajte da li je slučajno keširana verzija slike u direktorijumu `svg-inkscape`, i obrišite je.
+    - Iz ovog istog razloga, nemojte slike nazivati sa istim imenom samo u različitim direktorijumima, jer će da se preklope njihova imena.
