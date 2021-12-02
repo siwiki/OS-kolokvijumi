@@ -38,7 +38,7 @@ int getFreeFrame (uint pid, uint page, uint* frame) {
 ```
 
 --------------------------------------------------------------------------------
-memory
+thrashing
 ```cpp
 ulong getWorkingSetSize (PCB* pcb) { 
   if (pcb==0) return 0; // Exception 

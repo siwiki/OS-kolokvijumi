@@ -50,7 +50,7 @@ deadlock
 2. Dokaz kontradikcijom: pretpostavimo da je nastala mrtva blokada. Tada važi neophodan uslov „kružno čekanje“ (*circular wait*), tj. postoje procesi $p_1$, $p_2$, ..., $p_n$, takvi da $p_1$ čeka na resurs koga je zauzeo $p_2$, itd, $p_n$ čeka na resurs koga je zauzeo $p_1$. Prema ovom protokolu, $p_i$ može da čeka na resurs koga je zauzeo $p_j$ samo ako je $TS(p_i) < TS(p_j)$). Odatle sledi: $TS(p_1) < TS(p_2) < ... < TS(p_n) < TS(p_1)$, tj. $TS(p_1) < TS(p_1)$ – kontradikcija.
 
 --------------------------------------------------------------------------------
-memory
+thrashing
 ```cpp
 const uint16 PMTSize = ((uint16)1)<<10; 
 typedef uint32 PgDesc[2]; 
