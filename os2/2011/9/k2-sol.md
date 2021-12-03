@@ -1,6 +1,6 @@
 2011/nadoknada%20-%20septembar/SI, IR Kolokvijum 2 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
-deadlock
+allocator
 ```cpp
 int  allocate (int pid, int rid) { 
   if (pid>=numOfProcesses || rid>=numOfResources) return 0; // Exception! 

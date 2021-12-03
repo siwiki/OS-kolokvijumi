@@ -106,7 +106,7 @@ public class Agent {
 ```
 
 --------------------------------------------------------------------------------
-deadlock
+allocator
 
 1. Dokaz kontradikcijom. Pretpostavimo da može nastati mrtva blokada, što znači da postoji  zatvoren  krug  procesa $P_{i1}$, $P_{i2}$,  ..., $P_{in}$  ($n \geq 1$) koji su međusobno blokirani. Prema uslovima algoritma, odatle bi sledilo da je: $i_1 > i_2 > ... > i_n > i_1$, što ne može biti, pa mrtva blokada ne može nastati. 
 2. Prema  uslovima algoritma,  ako stariji proces zatraži resurs koga drži neki mlađi proces, mlađi proces  se poništava i  pokreće ponovo. Kada se poništeni proces  ponovo pokrene,   ako   bi   mu   se   dodelio   novi   ID   koji   odgovara  vremenu  njegovom  ponovnog pokretanja, on bi bio još mlađi u sistemu, pa bi trpeo još više poništavanja, što može dovesti do njegovog izgladnjivanja. Zato mu treba dodeliti isti ID koji je imao pri prvom pokretanju. Ako bi on bio dalje ponovo poništavan, vremenom bi taj proces postajao sve stariji i konačno postao najstariji, kada više neće doživeti poništavanje, odnosno neće trpeti izgladnjivanje. 

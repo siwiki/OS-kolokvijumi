@@ -1,6 +1,6 @@
 2017/decembar/SI, IR Kolokvijum 2 - Decembar 2017 - Resenja.pdf
 --------------------------------------------------------------------------------
-deadlock
+sharedobj
 ```ada
 var forks : array 0..4 of semaphore = 1; 
  

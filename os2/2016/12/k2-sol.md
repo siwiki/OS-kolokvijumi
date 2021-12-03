@@ -1,6 +1,6 @@
 2016/decembar/SI, IR Kolokvijum 2 - Decembar 2016 - Resenja.pdf
 --------------------------------------------------------------------------------
-deadlock
+allocator
 Sprečavanje mrtve blokade uvođenjem relacije totalnog uređenja resursa i alokacije resursa po monotono rastućem redosledu. Iz datog koda se može zaključiti sledeće: da bi mrtva blokada bila sprečena, mora biti: $C > B, D$; $A > C, D$; $B, C > D$. Odatle sledi: $A > C > B > D$. Tako:
 ```
 Process X:              Process Y:              Process Z: 

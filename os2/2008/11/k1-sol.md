@@ -75,7 +75,7 @@ public class MainServer {
 Napomena:  Dato  rešenje  nije  najefikasnije  i  ima  mana,  ali  odgovara  postavci  zadatka. 
 
 --------------------------------------------------------------------------------
-allocator
+sharedobj
 Postoji  problem potencijalnog izgladnjivanja  (*starvation*)  koji  nastaje  kada  neki  proces  mora  neograničeno da ponavlja navedeni postupak, pošto se uvek dešava da neki drugi proces učita istu  vrednost,  ali  neposredno  pre  posmatranog  procesa  izmeni  deljeni  podatak,  posmatrani proces se povuče i prilikom ponovnog pokušaja dogodi se isto. 
 
 Treba primetiti da problem žive blokade (*livelock*)  ne  postoji,  pošto  od  više  procesa  koji  pročitaju istu početnu vrednost, uvek će jedan, zbog sekvencijalnosti (odnosno atomičnosti) operacije  provere  i  upisa  nove  vrednosti,   uspešno  završiti  postupak (prvi koji  je  ušao  u  tu  operaciju, pošto zatiče pročitanu vrednost), dok će ga ostali ponoviti. 
@@ -90,9 +90,9 @@ Ako bi sistem dozvolio zauzeće traženih resursa, prešao bi u stanje:
 \hline
    & A & B & C \\
 \hline
-\sout{$P_1$} & \sout{1} & \sout{1} & \sout{12} \\
+\sout{$P_1$} & \sout{1} & \sout{1} & \sout{2} \\
 \hline
-$P_2$ & 1 & 3 & 0 \\
+$P_2$ & 1 & 3 & 2 \\
 \hline
 $P_3$ & 0 & 2 & 1 \\
 \hline
@@ -134,9 +134,9 @@ Treba ispitati da li je ovo stanje sigurno pronalaženjem sigurne sekvence:
 \hline
    & A & B & C \\
 \hline
-\sout{$P_1$} & \sout{1} & \sout{1} & \sout{12} \\
+\sout{$P_1$} & \sout{1} & \sout{1} & \sout{1} \\
 \hline
-$P_2$ & 1 & 3 & 0 \\
+$P_2$ & 1 & 3 & 2 \\
 \hline
 $P_3$ & 0 & 2 & 1 \\
 \hline
@@ -176,9 +176,9 @@ A & B & C \\
 \hline
    & A & B & C \\
 \hline
-\sout{$P_1$} & \sout{1} & \sout{1} & \sout{12} \\
+\sout{$P_1$} & \sout{1} & \sout{1} & \sout{2} \\
 \hline
-$P_2$ & 1 & 3 & 0 \\
+$P_2$ & 1 & 3 & 2 \\
 \hline
 \sout{$P_3$} & \sout{0} & \sout{2} & \sout{1} \\
 \hline
@@ -218,9 +218,9 @@ A & B & C \\
 \hline
    & A & B & C \\
 \hline
-\sout{$P_1$} & \sout{1} & \sout{1} & \sout{12} \\
+\sout{$P_1$} & \sout{1} & \sout{1} & \sout{1} \\
 \hline
-\sout{$P_2$} & \sout{1} & \sout{3} & \sout{0} \\
+\sout{$P_2$} & \sout{1} & \sout{3} & \sout{2} \\
 \hline
 \sout{$P_3$} & \sout{0} & \sout{2} & \sout{1} \\
 \hline

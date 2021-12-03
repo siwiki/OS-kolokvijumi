@@ -195,5 +195,5 @@ deadlock
 P2 - R3 - Da, P3-R1-Da (prelaz u bezbedno stanje), P3-R2-Ne (već zauzet), P3-R3-Ne (prelaz u nebezbedno stanje), P4-R3-Da (prelaz u bezbedno stanje). 
 
 --------------------------------------------------------------------------------
-allocator
+sharedobj
 Na primer, puštati naizmenično jednog pisca pa jednog ili nekoliko čitalaca u slučaju da postoje i jedni i drugi koji čekaju, ali ne insistirati na naizmeničnosti ukoliko ne postoje oni koji čekaju. 

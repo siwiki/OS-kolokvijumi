@@ -9,7 +9,7 @@ Implementirati ovu klasu ako je algoritam raspoređivanja:
 2. po prioritetu; polje `pri` tipa `int` u PCB-u sadrži prioritet (niža vrednost - viši prioritet).
 
 --------------------------------------------------------------------------------
-deadlock
+allocator
 U nekom operativnom sistemu primenjuje se sledeći protokol sprečavanja mrtve blokade. Svaki proces  dobija  jedinstvenu  vremensku  marku  (polje `timestamp` tipa `long` u  strukturi  PCB)  u trenutku svog nastanka. Proces koji zahteva zauzeće nekog zauzetog resursa može da čeka na taj resurs  samo  ako  je  stariji  (ima  manju  vremensku  marku)  od  procesa  koji  taj  resurs  drži;  u suprotnom, proces će dobiti grešku kao rezultat zahteva za zauzeće resursa. 
 
 Resurs je u kernelu implementiran klasom `Resource`. Implementirati njene operacije `allocate`  i `release`.  Operaciju `allocate` poziva  kernel  kada  opslužuje  zahtev  procesa  za  alokaciju  datog resursa. Ona treba da vrati: 1 ako je resurs bio slobodan, proces koji ga je tražio ga dobija i treba da nastavi izvršavanje; 0 ako je resurs zauzet, a proces treba da ga čeka i kernel treba da ga blokira (operacija `allocate` ne  treba  da  radi  blokiranje  i  promenu  konteksta  procesa,  to  radi  ostatak kernela); -1 ako je resurs zauzet, a proces ne sme da ga čeka, već mu treba vratiti grešku. Operacija `release` treba da vrati  pokazivač na PCB onog procesa koji eventualno treba deblokirati jer je čekao pa dobio resurs. Pokazivač `running` ukazuje na PCB tekućeg procesa čiji se sistemski poziv opslužuje. Na raspolaganju je klasa `Queue` koja implementira red pokazivača na PCB sa svojim operacijama:

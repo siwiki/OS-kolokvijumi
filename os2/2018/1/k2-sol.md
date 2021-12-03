@@ -26,7 +26,7 @@ allocator
 2. Problem ovog rešenja je moguće izgladnjivanje: resurs dobija onaj od procesa koji čekaju na dati resurs koji ima najnižu vrednost svog `pid`. Zbog toga neki proces sa visokom vrednošću `pid` može neograničeno da čeka na resurs ako se stalno pojavljuju procesi sa nižim vrednostima `pid` koji traže isti resurs. Rešenje je uvesti neki pravedni (engl. fair) protokol dodeljivanja resursa procesima koji čekaju na isti resurs i koji sprečava izgladnjivanje, recimo prost FIFO protokol, uvezivanjem procesa koji čekaju na isti resurs u FIFO listu.
 
 --------------------------------------------------------------------------------
-deadlock
+allocator
 1. ```cpp
    int Resource::allocate (Process* p) { 
      int ret = 0; 

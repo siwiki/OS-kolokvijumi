@@ -88,9 +88,9 @@ protected void processRequest(String request){
 ```
 
 --------------------------------------------------------------------------------
-deadlock
+sharedobj
 ```ada
-var forks : array [0..4  ] of semaphore = 1; 
+var forks : array [0..4] of semaphore = 1; 
  
 task type Philosopher(i:int) 
 var left, right : 0..4  ; 

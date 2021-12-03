@@ -1,6 +1,6 @@
 2013/novembar/SI, IR Kolokvijum 2 - Novembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
-deadlock
+allocator
 ```cpp
 int getHolder (unsigned int rid) { 
   for (unsigned int i=0; i<numOfProc; i++) 

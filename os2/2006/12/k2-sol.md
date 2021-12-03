@@ -1,6 +1,6 @@
 2006/decembar/SI Kolokvijum 2 - Decembar 2006 - Resenja.doc
 --------------------------------------------------------------------------------
-allocator
+sharedobj
 Problem  datog  rešenja  je  što  postoji  utrkivanje  (race  condition)  jer  operacije  oslobađanja ulaza  u  monitor  (`mutex.signal()`)  i  blokiranja  na  semaforu  za  uslovnu  sinhronizaciju  (`spaceAvailable.wait()`  i `itemAvailable.wait()`) nisu nedeljive. Zbog toga moće doći do sledećeg neregularnog scenarija i gubitka sinhronizacije: 
 
 - proizvođač pokušava da smesti element u pun bafer, izvršava prve tri linije koda operacije `put()`, zaključno sa `mutex.signal()` 

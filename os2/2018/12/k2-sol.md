@@ -1,6 +1,6 @@
 2018/decembar/SI, IR Kolokvijum 2 - Decembar 2018 - Resenja.pdf
 --------------------------------------------------------------------------------
-deadlock
+allocator
 ```cpp
 struct RCB { 
   unsigned id; 
@@ -9,7 +9,7 @@ struct RCB {
   RCB* prev; 
   ... 
 }; 
- 
+
 struct PCB { 
   RCB* allocr; // List of allocated resources, sorted by id 
   ... 
@@ -42,11 +42,11 @@ int resource_allocate (PCB* p, RCB* r) {
  
 void resource_free (PCB* p, RCB* r) { 
   if (!p || !r) return -2; // Exception; 
-  r  ->free = 1; 
+  r->free = 1; 
   if (r->prev) r->prev->next = r->next; 
   else p->allocr = r->next; 
   if (r->next) r->next->prev = r->prev; 
-  r  ->next = r->prev = 0; 
+  r->next = r->prev = 0; 
 } 
 ```
 

@@ -42,7 +42,7 @@ schedule
    ```
 
 --------------------------------------------------------------------------------
-deadlock
+allocator
 Invarijanta protokola koja sprečava mrtvu blokadu jeste ta da u svakom 
 trenutku svi procesi koji čekaju na resurs jesu stariji (imaju manju vremensku marku) od 
 procesa koji taj resurs drži. To se može postići uređenjem reda čekanja u opadajući redosled 

@@ -146,7 +146,7 @@ public class Client {
 ```
 
 --------------------------------------------------------------------------------
-allocator
+deadlock
 1. (Graf dat ispod.)
 2. Na primer: P1.request(R2), P2.request(R3), P3.request(R1)
 

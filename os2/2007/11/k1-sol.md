@@ -96,7 +96,7 @@ public class MainServer {
 ```
 
 --------------------------------------------------------------------------------
-deadlock
+sharedobj
 Ne obezbeđuje živost, jer je moguće izgladnjivanje (*starvation*) procesa koji čeka na semaforu (odnosno na pristup deljenom resursu). Proces nižeg prioriteta koji čeka na pristup resursu može da bude pretican od strane procesa višeg prioriteta koji zahtevaju isti resurs i zato pre do resursa dolaze, pošto se u red čekanja na semaforu smeštaju ispred pa se i deblokiraju ranije. Na taj način proces nižeg prioriteta može neograničeno da čeka na pristup resursu. Drugim rečima, ovakav semafor ne obezbeđuje „poštenost“ (*fairness*). 
 
 --------------------------------------------------------------------------------
