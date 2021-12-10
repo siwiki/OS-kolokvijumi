@@ -2,6 +2,9 @@
 set -e
 cd "${0%/*}"
 
+# Clear converted SVGs
+rm -rf svg-inkscape
+
 prnt=
 year=
 subject="os1"
