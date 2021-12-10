@@ -20,14 +20,15 @@ int alloc (unsigned resource);
 atomično zauzima resurs sa datim identifikatorom. Njen poziv je sinhroni, neblokirajući: ukoliko je resurs uspešno zauzet, ona odmah vraća 1, a ako nije, odmah vraća 0, bez suspenzije pozivaoca; u slučaju bilo kakve greške, vraća negativnu vrednost. Funkcija `release(unsigned)` oslobađa resurs sa zadatim identifikatorom.
 
 1. Realizovati funkciju `allocate` koja ima isti potpis kao i `alloc`, ali koja kontrolu pozivaocu vraća tek kada je resurs uspešno zauzet ili ako se prilikom zauzimanja dogodila greška. Ako resurs ne može da bude zauzet odmah, pozivajući tok kontrole se uspavljuje neko slučajno vreme, a onda se ponovo pokušava zauzimanje resursa. Na raspolaganju su sledeće funkcije:
-    - `void sleep (unsigned long sleep_time)`: uspavljuje pozivaoca na zadato vreme u $\mu s$;
-    - `unsigned long rnd (unsigned long n)`: vraća slučajan ceo broj u ospegu $0..n-1$. 
-Koji problem ima ovakav pristup alokaciji resursa? 
+   - `void sleep (unsigned long sleep_time)`: uspavljuje pozivaoca na zadato vreme u $\mu s$;
+   - `unsigned long rnd (unsigned long n)`: vraća slučajan ceo broj u opsegu $0..n-1$. 
+   
+   Koji problem ima ovakav pristup alokaciji resursa? 
 2. Korišćenjem funkcije realizovane pod a), realizovati funkciju:
    ```cpp
    int allocate (unsigned res[], size_t n);
    ```
-   koja u jednom pozivu zauzima čitav niz resursa dimenzije n (sve ili ništa), ali tako da se spreči mrtva/živa blokada.
+   koja u jednom pozivu zauzima čitav niz resursa dimenzije $n$ (sve ili ništa), ali tako da se spreči mrtva/živa blokada.
 
 --------------------------------------------------------------------------------
 memory
