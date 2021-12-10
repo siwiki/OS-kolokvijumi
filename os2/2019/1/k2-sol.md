@@ -127,7 +127,7 @@ PgDesc* getVictimPageDesc (uint32* pmt) {
 ```
 
 --------------------------------------------------------------------------------
-memory
+linux
 Dati  program  ispisuje  deo  sadržaja  fajla  zadatog  svojim  prvim  argumentom  iz  komandne 
 linije  na  standardni  izlaz. Opseg bajtova sadržaja fajla koji se ispisuju zadaje se pomerajem 
 (*offset*) i dužinom (*length*) u drugom i trećem argumentu komandne linije (ako treći argument 

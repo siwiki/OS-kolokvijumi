@@ -17,7 +17,7 @@ deadlock
 \end{figure}
 
 --------------------------------------------------------------------------------
-memory
+linux
 ```cpp
 #include <fcntl.h> 
 #include <stdio.h> 
