@@ -32,16 +32,15 @@ void CLook::remove () {
 --------------------------------------------------------------------------------
 bash
 ```bash
-freqs=$(cat /proc/cpuinfo | grep MH | cut -d: -f2 | tr -d " " | \ 
-cut -d. -f1) 
+freqs=$(cat /proc/cpuinfo | grep MH | cut -d: -f2 | tr -d " " | cut -d. -f1) 
 sum=0 
 for i in $freqs; do 
- let sum=sum+i 
+  let sum=sum+i 
 done 
 count=$(echo $freqs | wc -w) 
 if [ $count -gt 0 ]; then 
- let average=sum/count 
- echo "Average=$average" 
+  let average=sum/count 
+  echo "Average=$average" 
 fi
 ```
 

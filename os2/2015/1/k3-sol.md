@@ -26,15 +26,11 @@ int fopen(const char* fname, int mode) {
 bash
 ```bash
 !/bin/bash 
- 
 if [ $# -ne 1 ];then 
     echo "Nedovoljan broj argumenata." 
     exit 1 
 fi 
- 
-file=$1 
-cat $file | sed 's/^.\{5\}\([0-9]\).*$/\1 &/' | sort |  
-sed 's/^[^\ ]*\ \(.*\)$/\1/'
+cat $1 | sed 's/^.\{5\}\([0-9]\).*$/\1 &/' | sort | sed 's/^[^\ ]*\ \(.*\)$/\1/'
 ```
 
 --------------------------------------------------------------------------------

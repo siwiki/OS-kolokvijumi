@@ -42,23 +42,18 @@ DiskRequest* DiskScheduler::get () {
 bash
 ```bash
 #!/bin/bash 
- 
 if [ $# -ne 4 ]; then 
     echo "Nedovoljan broj parametara" 
     exit 1 
 fi 
- 
 file=$1 
- 
 if [ ! -r $file ]; then 
     echo "Ulazni fajl ne moze da se cita" 
     exit 1 
 fi 
- 
 voz=$2 
 hh=$3 
 mm=$4 
-
 for i in $(cat $file | grep "^$voz\ " | sed "s/^$voz\ \(.*\)/\1/"); do 
     voz_hh=$(echo $i | sed "s/\([0-9][0-9]\).*/\1/") 
     voz_mm=$(echo $i | sed "s/.*\:\([0-9][0-9]\)/\1/") 

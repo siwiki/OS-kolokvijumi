@@ -31,20 +31,14 @@ DiskRequest* DiskScheduler::get () {
 bash
 ```bash
 #!/bin/bash 
- 
 if [ $# -ne 3 ]; then
- 
     echo "Nedovoljan broj argumenata" 
     exit 1 
 fi 
- 
 sablon=$1
- 
 dir=$2 
 pravo=$3 
- 
 old_IFS=$IFS
- 
 IFS=$'\n' 
 for i in $(find "$dir" -name '*'); do 
     ime=$(echo $i | sed 's:.*/\([^/]*\)$:\1:') 

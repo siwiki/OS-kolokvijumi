@@ -20,30 +20,28 @@ int execute_command(char* command_name, char** args){
 bash
 ```bash
 #!/bin/bash 
- 
 if [ $# -lt 3 ];then 
     echo 'Error: Insufficient arguments.' 
     exit 1 
 fi 
- 
 TMP='tmp123' 
 FILE=$1 
 shift 
 USER=$1 
 shift 
 grep "^$USER" $FILE > /dev/null 
-if [ $? -eq 0 ];then 
- while [ $# -gt 0 ];do 
-  grep "^$USER.*$1" $FILE > /dev/null 
-  if [ $? -ne 0 ];then 
-   cat $FILE | sed "s:\(^$USER.*\):\1 $1:" > $TMP 
-   cat $TMP > $FILE 
-   rm $TMP 
-  fi 
-  shift 
- done 
+if [ $? -eq 0 ]; then 
+  while [ $# -gt 0 ]; do 
+    grep "^$USER.*$1" $FILE > /dev/null 
+    if [ $? -ne 0 ]; then 
+      cat $FILE | sed "s:\(^$USER.*\):\1 $1:" > $TMP 
+      cat $TMP > $FILE 
+      rm $TMP 
+    fi 
+    shift 
+  done 
 else 
- echo "$USER $@" >> $FILE 
+  echo "$USER $@" >> $FILE 
 fi
 ```
 

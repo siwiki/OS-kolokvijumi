@@ -35,11 +35,11 @@ pid=$(ps a | grep $command | grep -v grep | tr -s " " | cut -d" " -f2)
 if kill $pid; then 
     pushd $dir 
     if make; then 
- popd 
- $command 
+        popd
+        $command 
     else 
- echo "Compilation fails" 
- exit 1 
+        echo "Compilation failed" 
+        exit 1 
     fi 
 else 
     echo "Kill command failed" 

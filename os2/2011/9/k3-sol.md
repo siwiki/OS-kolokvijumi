@@ -14,7 +14,7 @@ then
   echo "Direktorijum $1 ne postoji" 
   exit 1 
 fi 
-ls –l -a $1 / | grep ^- | wc -l 
+ls -l -a $1 / | grep ^- | wc -l 
 ```
 
 --------------------------------------------------------------------------------

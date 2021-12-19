@@ -258,84 +258,62 @@ linux
 #include <fcntl.h> 
 #include <unistd.h> 
 #include <string.h> 
- 
+#define N 100 
+#define STOP "STOP" 
 struct input_msg { 
     int pid; 
     char msg[50]; 
 }; 
- 
-#define N 100 
-#define STOP "STOP" 
- 
- 
 int makeHash(char *msg); 
 void getMsg(char *msg); 
- 
 // First program 
-int main() 
-{ 
+int main(void) { 
     mkfifo("input", 0666); 
     int fd = open("input", O_RDONLY); 
- 
     while (1) { 
         struct input_msg msg; 
- 
         if (read(fd, &msg, sizeof(msg)) <= 0) { 
             continue; 
         } 
- 
         if (!strcmp(msg.msg, STOP)) { 
             break; 
         } 
- 
         char outName[20]; 
         sprintf(outName, "pipe%d", msg.pid); 
         int outFd = open(outName, O_WRONLY); 
         int result = makeHash(msg.msg); 
         result = msg.pid; 
         write(outFd, &result, sizeof(result)); 
-
         close(outFd); 
     } 
- 
     close(fd); 
- 
     return 0; 
 } 
- 
 // Second program 
 int main(int argnum, char **args) { 
     int pid; 
     sscanf(args[1], "%d", &pid); 
- 
     char outName[20]; 
     sprintf(outName, "pipe%d", pid); 
     mkfifo(outName, 0666); 
- 
     int fd = open("input", O_WRONLY); 
     struct input_msg msg; 
- 
     msg.pid = pid; 
- 
     if (pid == N) { 
         strcpy(msg.msg, STOP); 
     } else { 
         getMsg(msg.msg); 
     } 
- 
     write(fd, &msg, sizeof(msg)); 
     close(fd); 
     if (pid == N) { 
-      return 0; 
+        return 0; 
     } 
- 
     int outFd = open(outName, O_RDONLY); 
     int result; 
     read(outFd, &result, sizeof(result)); 
     printf("Result=%d\n", pid, result); 
     close(outFd); 
- 
- 
     return 0; 
 } 
 ```

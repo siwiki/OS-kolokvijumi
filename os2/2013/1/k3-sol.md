@@ -21,19 +21,16 @@ private:
 bash
 ```bash
 #!/bin/bash 
- 
 if [ $# -lt 2 ];then 
     echo "Nedovoljan broj argumenata!" 
     exit 1 
 fi 
- 
 tmp="tmp.html" 
 wget "$1" -O $tmp 
 if [ $? -ne 0 ];then 
     echo "Nepostojeci URL" 
     exit 2 
 fi 
- 
 IFS_old=$IFS 
 IFS=$'\n' 
 for i in $(cat $tmp | grep href=\".*\.$2\"\>| sed 

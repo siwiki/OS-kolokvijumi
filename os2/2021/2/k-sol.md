@@ -182,27 +182,19 @@ void clock () {
 bash
 ```bash
 #!/bin/bash 
- 
 if [ $# -ne 1 -o ! -r $1 ]; then 
  echo "Error: First parameter must be a readable file" 
  exit 1 
 fi 
- 
 OLD_IFS=$IFS 
- 
 IFS=$'\n' 
- 
-REGEX='.*(\([^\.]*\)\.\([^\,]*\)\,\(.*\)\,\(0x[0-9a-  f]*\))$' 
+REGEX='.*(\([^\.]*\)\.\([^\,]*\)\,\(.*\)\,\(0x[0-9a-f]*\))$' 
 for i in $(cat $1); do 
- 
- name=$(echo $i | sed "s:$REGEX:\1.\  2:") 
+ name=$(echo $i | sed "s:$REGEX:\1.\2:") 
  size=$(echo $i | sed "s:$REGEX:\3:") 
-  
  echo "{uint${size}_t __reg;" 
  echo $i | sed "s:$REGEX"':read_reg("\1", "\2"'", \4, \&__reg);:" 
  echo "printf(\"$name=0x\"PRIx$size\"\\n\", __reg);}" 
- 
 done 
- 
 IFS=$OLD_IFS 
 ```

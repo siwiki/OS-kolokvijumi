@@ -35,17 +35,11 @@ Req* DiskScheduler::get () {
 bash
 ```bash
 #!/bin/bash 
- 
 if [ $# -ne 1 ]; then 
     echo "Nedovoljan broj parametara" 
     exit 1 
 fi 
- 
-#old_IFS=$IFS 
-#IFS=$'\n' 
- 
 count=0 
- 
 for i in $(find / -iname '*.txt'); do 
   if [ -r $i ]; then 
     if grep "$1" $i; then 
@@ -53,9 +47,6 @@ for i in $(find / -iname '*.txt'); do
     fi 
   fi  
 done 
- 
-#IFS=$old_IFS 
- 
 echo "Broj pronadjenih fajlova je $count"
 ```
  

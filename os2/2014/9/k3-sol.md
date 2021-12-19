@@ -23,19 +23,15 @@ int readBlock (unsigned blk, void* buffer) {
 bash
 ```bash
 #!/bin/bash 
- 
 dir=$1 
- 
 if [ $# -ne 1 ]; then 
     echo "Greska: Neispravan broj argumenata." 
     exit 1 
 fi 
- 
 if ! [ -d $dir ]; then 
     echo "Greska: Argument nije direktorijum." 
     exit 1 
 fi 
- 
 tmp='/tmp/os2_sep_2015.cpp' 
 for i in $(find $dir -name "*.cpp"); do 
     cat $i | sed 's://.*$::' > $tmp 
