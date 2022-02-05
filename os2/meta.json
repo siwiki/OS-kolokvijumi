@@ -16,5 +16,10 @@
         "linux": "Linux (C)",
         "windows": "Windows"
     },
+    "colloquia": {
+        "k1": ["schedule", "sharedobj", "network"],
+        "k2": ["deadlock", "allocator", "memory", "thrashing", "buddy", "slab"],
+        "k3": ["disk", "syscall", "bash", "linux", "windows"]
+    },
     "keywords": {}
 }

@@ -22,5 +22,10 @@
         "fsimpl": "Fajl sistem (implementacija)",
         "os": "Uvod u operativne sisteme"
     },
+    "colloquia": {
+        "k1": ["linker", "page", "cont", "segment", "segpage", "dynload", "overlay"],
+        "k2": ["interrupt", "syscall", "thread", "context", "semimpl", "semintr", "buffer"],
+        "k3": ["io", "ioblock", "cmd", "fsintr", "fsimpl", "os"]
+    },
     "keywords": {}
 }

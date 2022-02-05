@@ -10,8 +10,14 @@ const TYPES = {
     k2: 'drugi kolokvijum',
     k3: 'treći kolokvijum'
 };
-const isWeb = !process.argv.includes('--print');
+const isWeb = !argv.includes('--print');
 const ALL_DIRECTORIES = ['os1', 'os2'];
+const GENERATE_OPTIONS = {
+    1: 'k1',
+    2: 'k2',
+    3: 'k3',
+    c: 'combined'
+};
 
 async function processFile(year, month, type, categories, baseDir) {
     const text = await readFile(`${baseDir}/${year}/${month}/${type}.md`, {
@@ -62,11 +68,31 @@ function formatUrls(url, solutionUrl, baseUrl) {
     return `${urlRow}${solutionUrlRow}`;
 }
 
+function getGenerateOptions() {
+    const arg = argv.find(arg => arg.startsWith('--generate')) || 'c123';
+    return arg
+        // Read character by character.
+        .split('')
+        // Map characters to their respective generation options.
+        .map(c => GENERATE_OPTIONS[c])
+        // Remove extraneous characters.
+        .filter(Boolean);
+}
+
+function getCategories(option, colloquia) {
+    return option === 'combined' ?
+        // Combine all categories.
+        ['k1', 'k2', 'k3']
+            .map(k => colloquia[k])
+            .flat() :
+        colloquia[option];
+}
+
 async function processDirectory(baseDir) {
     const meta = JSON.parse(await readFile(`${baseDir}/meta.json`, {
         encoding : 'utf-8'
     }));
-    const {baseUrl} = meta;
+    const {baseUrl, colloquia} = meta;
 
     const categories = {};
     for (const year of await getYears(baseDir)) {
@@ -116,30 +142,35 @@ async function processDirectory(baseDir) {
     const footer = await readFile(`${baseDir}/footer.md`, {
         encoding: 'utf-8'
     });
-    const categoryKeys = Object.keys(meta.categories);
-    await writeFile(
-        isWeb ? `${baseDir}-web.md` : `${baseDir}-print.md`,
-        `${header}${Object.entries(categoriesConnected).filter(
-            ([category, entries]) => category in meta.categories).sort(
-            ([category1], [category2]) => categoryKeys.indexOf(category1) - categoryKeys.indexOf(category2)
-        ).map(
-            ([category, entries]) => `# ${meta.categories[category]}\n${entries.map(
-                ({url, content, year, month, type, task, solutionUrl, keywords}) =>
-                    `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${
-                        keywords
-                            .map(kw => `\\index{${meta.keywords[kw]}}`)
-                            .join(' ')
-                    }\n\n${formatUrls(url, solutionUrl, baseUrl)}\n${content}`
+    for (const option of getGenerateOptions()) {
+        const categoryKeys = getCategories(option, colloquia);
+        const filenameCategory = option === 'combined' ? '' : `-${option}`;
+        const filenameVersion = isWeb ? '-web' : '-print';
+        const filename = `${baseDir}${filenameCategory}${filenameVersion}.md`;
+        const body = Object.entries(categoriesConnected)
+            // Filter out categories which are not in the current set for generation.
+            .filter(([category]) => categoryKeys.includes(category))
+            // Sort by position in the generation set.
+            .sort(([c1], [c2]) => categoryKeys.indexOf(c1) - categoryKeys.indexOf(c2))
+            // Map contents of each category.
+            .map(
+                ([category, entries]) => `# ${meta.categories[category]}\n${entries.map(
+                    ({url, content, year, month, type, task, solutionUrl, keywords}) =>
+                        `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${
+                            keywords
+                                .map(kw => `\\index{${meta.keywords[kw]}}`)
+                                .join(' ')
+                        }\n\n${formatUrls(url, solutionUrl, baseUrl)}\n${content}`
             ).join('\n\n')}`
-        ).join('\n\n\\pagebreak\n')}${footer}`,
-        {
+        ).join('\n\n\\pagebreak\n');
+        await writeFile(filename, `${header}${body}${footer}`, {
             encoding: 'utf-8'
-        }
-    );
+        });
+    }
 }
 
 async function main() {
-    const dirArg = process.argv[2];
+    const dirArg = argv[2];
     if (dirArg && !dirArg.startsWith('--')) {
         await processDirectory(dirArg);
     } else {
