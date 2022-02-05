@@ -48,7 +48,7 @@ interrupt void device2 () {
 ```
 
 --------------------------------------------------------------------------------
-interrupt 
+interrupt
 
 ```asm
 sys_call: ; Save r0 and r1 on the (kernel) stack

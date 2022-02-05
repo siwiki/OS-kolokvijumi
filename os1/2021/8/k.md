@@ -33,7 +33,7 @@ const int PROT_RD = ..., PROT_WR = ..., PROT_RW = PROT_RD | PROT_WR;
 ```
 
 --------------------------------------------------------------------------------
-thread 
+thread
 Školsko jezgro proširuje se nestatičkom funkcijom `Thread::join()` koju  sme  da  pozove 
 samo roditeljska nit date niti da bi sačekala da se data nit-dete završi; ukoliko ovu operaciju 
 pozove neka druga nit koja nije roditelj date niti, ova funkcija vraća grešku (`-1`). Kada jezgro 

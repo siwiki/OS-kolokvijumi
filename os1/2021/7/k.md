@@ -1,6 +1,6 @@
 2021/jun/Kolokvijum - Jul 2021.pdf
 --------------------------------------------------------------------------------
-overlay overlay_axb
+overlay
 U nekom velikom binarnom fajlu zapisane su dve velike kvadratne matrice $a$ i $b$ elemenata tipa `int`, dimenzije $N \times N$ i obezbeđen prostor za smeštanje još jedne takve matrice $c$ u koju treba upisati rezultat množenja $c = a \times b$. Korišćenjem principa preklopa (*overlay*), implementirati funkciju `mat_mul()` koja realizuje ovo množenje. $N$ je velik broj tipa `size_t`, pa u memoriju ne mogu da stanu cele navedene matrice, već samo po jedna vrsta ili kolona svake od njih. Na raspolaganju su sledeće implementirane funkcije:
 
 - `void load_arow (int (*)[], size_t i)`: u niz na koji ukazuje prvi parametar iz fajla učitava vrstu matrice $a$ datu drugim parametrom;
@@ -10,7 +10,7 @@ U nekom velikom binarnom fajlu zapisane su dve velike kvadratne matrice $a$ i $b
 Ne treba otvarati dati fajl (on je već otvoren) niti ga zatvarati (zatvoriće ga pozivalac). Sve eventualne greške obrađuju date implementirane funkcije.
 
 --------------------------------------------------------------------------------
-semintr psemaphore
+semintr
 Korišćenjem sistemskog poziva *fork* i POSIX semafora za sinhronizaciju napisati program koji, kad se nad njim pokrene proces, pokrene jedno svoje dete, a potom ta dva procesa strogo naizmenično na svoj standardni izlaz ispisuju po jedno „A“ (proces-roditelj), odnosno „B“ (proces-dete) tačno po 10 puta, nakon čega se završavaju. Za sistemski poziv *fork* pretpostavlja se sledeće:
 
 - proces-dete nasleđuje standardni izlaz od roditelja, a operativni sistem obezbeđuje međusobno isključenje ispisa na isti standardni izlaz;
