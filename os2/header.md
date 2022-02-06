@@ -2,7 +2,7 @@
 title: OS2 kolokvijumi
 author: pripremili Luka Simić i Aleksa Marković
 subtitle: kategorisani zadaci sa kolokvijuma 2006-2021 sa stranice predmeta
-date: Decembar 2021
+date: Februar 2022
 geometry: margin=2cm
 output: pdf_document
 classoption: twoside
