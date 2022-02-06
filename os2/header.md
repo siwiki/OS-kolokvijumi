@@ -6,7 +6,7 @@ date: Decembar 2021
 geometry: margin=2cm
 output: pdf_document
 classoption: twoside
-header-includes: \usepackage[croatian]{babel}\usepackage{subfig}\usepackage{float}\usepackage{fancyhdr}\usepackage{imakeidx}\usepackage{listings}\usepackage{svg}\makeindex[intoc]\graphicspath{{./}}\usepackage[normalem]{ulem}\usepackage{multirow}
+header-includes: \usepackage[croatian]{babel}\usepackage{subfig}\usepackage{float}\usepackage{fancyhdr}\usepackage{imakeidx}\usepackage{listings}\usepackage{svg}\makeindex[intoc]\graphicspath{{./}}\usepackage[normalem]{ulem}\usepackage{multirow}\usepackage{alphalph}
 urlcolor: blue
 toc: true
 toc-depth: 2
@@ -19,6 +19,9 @@ pdf-engine: pdflatex
 \fancyhead[LO,RE]{\rightmark}
 \fancyfoot[C]{\thepage}
 \renewcommand\indexname{Indeks}
+\renewcommand*{\thesubfigure}{%
+\alphalph{\value{subfigure}}%
+}%
 \lstset{basicstyle=\ttfamily}
 
 \newcommand{\specialcell}[2][c]{%
