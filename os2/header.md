@@ -21,7 +21,7 @@ pdf-engine: pdflatex
 \renewcommand\indexname{Indeks}
 \renewcommand*{\thesubfigure}{%
 \alphalph{\value{subfigure}}%
-}%
+}
 \lstset{basicstyle=\ttfamily}
 
 \newcommand{\specialcell}[2][c]{%
