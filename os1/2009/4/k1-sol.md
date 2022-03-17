@@ -28,7 +28,7 @@ segment
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
-Virtuelna adresa & 80013A & EB28C32 & 3F80028D & 303001E2 & F0A001E4 \\
+Virtuelna adresa & 80013A & EB28C32 & 3F80028D & 403001E2 & F0A001E4 \\
 \hline
 Rezultat adresiranja & PF & MAV & DC4 (28D+B37) & T & MAV  \\
 \hline
