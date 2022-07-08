@@ -17,13 +17,21 @@ Thread* t_fork () {
     Thread* newThr = new Thread();
     if (!newThr) { free(stck);  throw ThreadCreationException(); }
     newThr->stack = stck;
-    // and set its stack pointer to the top of the stack space:
-    newThr->context->sp = (int*)((char*)stck + STACK_SIZE) – 1;
 
-    // Put the new thread to the ready list and return:
-    Scheduler::put(newThr);
-    unlock();
-    return newThr;
+    if (setjmp(newThr->context)==0) {
+      // Parent thread:
+      // and set its stack pointer:
+      newThr->context->sp = newThr->context->sp -
+                            Thread::running->stack + stck;
+      // Put the new thread to the ready list and return:
+      Scheduler::put(newThr);
+      unlock();
+      return newThr;
+    } else {
+      // Child thread:
+      unlock();
+      return 0;
+    }
 
   } else {
     // Child thread:
