@@ -1,4 +1,4 @@
-2012/nadoknada%20-%20septembar/SI, IR Kolokvijum 3 - Septembar 2013 - Resenja.pdf
+2012/nadoknada - septembar/SI, IR Kolokvijum 3 - Septembar 2013 - Resenja.pdf
 --------------------------------------------------------------------------------
 disk
 1. Stavljanje  novog  zahteva: $\mathcal{O}(1)$,  jer  se  zahtev  stavlja  na  početak  liste  (promena nekoliko pokazivača, nezavisno od veličine liste). Izbor zahteva: $\mathcal{O}(n)$, linearna pretraga cele liste da se pronađe zahtev na minimalnom rastojanju od upravo opsluženog. 

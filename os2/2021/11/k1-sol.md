@@ -1,4 +1,4 @@
-2021/novembar/SI%20Kolokvijum%201%20-%20Novembar%202021%20-%20Resenja.pdf
+2021/novembar/SI Kolokvijum 1 - Novembar 2021 - Resenja.pdf
 --------------------------------------------------------------------------------
 schedule
 ```cpp

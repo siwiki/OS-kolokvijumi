@@ -1,4 +1,4 @@
-2011/nadoknada%20-%20septembar/SI, IR Kolokvijum 2 - Septembar 2012 - Resenja.pdf
+2011/nadoknada - septembar/SI, IR Kolokvijum 2 - Septembar 2012 - Resenja.pdf
 --------------------------------------------------------------------------------
 allocator
 ```cpp
