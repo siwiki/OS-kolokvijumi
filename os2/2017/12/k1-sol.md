@@ -179,7 +179,7 @@ public class RequestHandler extends Thread {
                                           throws InterruptedException { 
         synchronized (filesInUse) { 
             while (filesInUse.contains(fileName)) { 
-                wait(); 
+                filesInUse.wait(); 
             } 
             filesInUse.add(fileName); 
         } 
@@ -187,6 +187,7 @@ public class RequestHandler extends Thread {
     private void finishWithFile(String fileName) { 
         synchronized (filesInUse) { 
             filesInUse.remove(fileName); 
+            filesInUse.notifyAll();
         } 
     } 
 } 
