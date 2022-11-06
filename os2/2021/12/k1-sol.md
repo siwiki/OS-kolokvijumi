@@ -69,7 +69,7 @@ private:
 void MessageQueue::put(const char* m) {
     mutex.wait();
     Message* msg = 0; char* str = 0;
-    size_t sz = sizeof(m) + 1;
+    size_t sz = strlen(m) + 1;
     for (bool done = false; !done; ) {
         msg = (Message*) malloc(sizeof(Message));
         str = malloc(sz);
