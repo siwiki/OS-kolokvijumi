@@ -62,7 +62,7 @@ monitor Mutex;
   var isLocked : boolean, 
       isFree : condition; 
  
-  procedure wait () 
+  procedure lock () 
   begin 
     if isLocked then isFree.wait(); 
     isLocked:=true; 
