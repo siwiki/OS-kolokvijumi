@@ -124,18 +124,18 @@ public class RequestHandler extends Thread {
     public void run() { 
         Service service = new Service(client); 
         while(true) { 
-            // #<method>#arg0#...#[0]#[1]#...#[n - 1]# 
+            // <method>#arg0#...#[0]#[1]#...#[n - 1]
             String[] args = service.receiveMessage().split("#"); 
             if (args[0].equals("lock")) { 
                 lock(args); 
                 service.sendMessage("OK"); 
-            } else if (args[0].equals("lock")) { 
+            } else if (args[0].equals("unlock")) { 
                 unlock(args); 
                 service.sendMessage("OK"); 
-            } else if (args[0].equals("lock")) { 
+            } else if (args[0].equals("write")) { 
                 write(args); 
                 service.sendMessage("OK"); 
-            } else if (args[0].equals("lock")) { 
+            } else if (args[0].equals("read")) { 
                 service.sendMessage(read(args)); 
             } 
         } 
