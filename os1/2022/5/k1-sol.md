@@ -27,7 +27,7 @@ void* createRegion(RegionDesc* phead, size_t sz) {
 ```
 
 --------------------------------------------------------------------------------
-page
+segpage
 ```cpp
 const uint32 offsetw = 10;
 const uint32 pagew = 12;
@@ -59,7 +59,7 @@ void* v2pAddr(SMT smt, void* vaddr) {
 ```
 
 --------------------------------------------------------------------------------
-segment
+page
 
 1. VA: Page(16):Offset(16); PA: Frame(14):Offset(16)
 2. ```cpp
