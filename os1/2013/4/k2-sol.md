@@ -42,9 +42,9 @@ izvrše `swap` i izađu iz operacije `lock`, odnosno uđu u operaciju semafora. 
 je sledeća (ima i nešto malo efikasnijih, kako je prikazano na predavanjima):
 ```cpp
 void Semaphore::lock() {
-  int zero = 0;
-  mask_interrupts();
-  while (!zero) swap(&zero,&(this->lck));
+    int zero = 0;
+    mask_interrupts();
+    while (!zero) swap(&zero, &(this->lck));
 }
 ```
 
@@ -52,12 +52,15 @@ void Semaphore::lock() {
 cont
 ```cpp
 int mem_extend (PCB* p, size_t by) {
-  if (p==0 || by<0) return -1; // Error: invalid argument
-  if (by==0) return 0;
-  Word* tail = p->mem_base + p->mem_size;
-  if (mem_alloc(tail,by)<0) return -2; // Error: allocation failed
-  p->mem_size+=by; // Extend
-  return 1;
+    // Error: invalid argument
+    if (p == 0 || by < 0) return -1;
+    if (by == 0) return 0;
+    Word* tail = p->mem_base + p->mem_size;
+    // Error: allocation failed
+    if (mem_alloc(tail, by) < 0) return -2;
+    // Extend
+    p->mem_size += by;
+    return 0;
 }
 ```
 
