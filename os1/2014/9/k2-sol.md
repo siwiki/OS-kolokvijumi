@@ -68,7 +68,7 @@ void setPMTEntry (unsigned* pmt1, unsigned long vaddr, unsigned fr,
   unsigned pmt1entry = vaddr>>(pg2w+offsw);
   if (pmt1[pmt1entry]==0)
     pmt1[pmt1entry] = alloc_pmt();
-  unsigned* pmt2 = (unsigned*)(pmt1[pmt1entry] << offsw);
+  unsigned* pmt2 = (unsigned*)((unsigned long)pmt1[pmt1entry] << offsw);
   unsigned pmt2entry = (vaddr>>offsw) & ~(-1L<<pg2w);
   pmt2[pmt2entry] = (fr<<2) | ((r||w)<<1) | (x||w);
 }
