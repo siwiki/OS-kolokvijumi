@@ -8,7 +8,7 @@ linker
 4. Greška u povezivanju jer je simbol `x` višestruko definisan (u fajlu `a.o` i `b.o`).
 
 --------------------------------------------------------------------------------
-cont
+page
 ```cpp
 class FreeFrames {
 public:
