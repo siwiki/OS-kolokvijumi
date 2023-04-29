@@ -43,7 +43,7 @@ int main() {
     pid_t pid = fork();
     if (pid < 0) return -1;
     for (int i = 0; i < 10; i++) {
-        if (pid == 0) {
+        if (pid > 0) {
             if (sem_wait(sem1) < 0) break;
             printf("A");
             fflush(stdout);
@@ -66,13 +66,13 @@ int main() {
 --------------------------------------------------------------------------------
 io
 ```cpp
-interrupt void packetArrived () {
+interrupt void packetArrived() {
     if (pbTail == pbHead) { // Buffer full, reject packet
         *ioCtrl = IO_REJECT;
     } else {
-        for (int i=0; i < PACKET_SIZE; i++) pbTail[i] = ioData[i];
+        for (int i = 0; i < PACKET_SIZE; i++) pbTail[i] = ioData[i];
         *ioControl = IO_COMPLETE;
-        if ((pbTail-packetBuffer)/PACKET_SIZE == BUFFER_SIZE - 1) {
+        if ((pbTail - packetBuffer)/PACKET_SIZE == BUFFER_SIZE - 1) {
             pbTail = packetBuffer;
         } else {
             pbTail = pbTail + PACKET_SIZE;
@@ -84,7 +84,7 @@ interrupt void packetArrived () {
 --------------------------------------------------------------------------------
 fsimpl
 ```cpp
-int extendFile (FCB* fcb) {
+int extendFile(FCB* fcb) {
     size_t entry = (fcb->size + BLOCK_SIZE - 1)/BLOCK_SIZE;
     if (entry < SingleIndexSize) {
         PBlock newBlock = allocateBlock();
