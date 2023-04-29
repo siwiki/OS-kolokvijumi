@@ -84,7 +84,7 @@ begin
   if free[i] return; 
   free[i]:=true; 
   numOfFree:= numOfFree+1; 
-  resourceAvailable.signal; 
+  if (numOfFree=1) resourceAvailable.signal; 
 end; 
  
 begin 
