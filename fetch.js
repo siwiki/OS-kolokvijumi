@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-'use strict';
 import got from 'got';
 import {createWriteStream} from 'fs';
-import {readFile, mkdir, writeFile} from 'fs/promises';
+import {mkdir, writeFile} from 'fs/promises';
 import stream from 'stream';
 import {promisify} from 'util';
+import {ALL_DIRECTORIES, parseDirectoryListing, readJSON} from './util.js';
 
-const DIRECTORY_REGEX = /<img src="\/icons\/[^"]+" alt="\[([^\]]+)\]">(?:<\/td><td>)?\s*<a href="([^"]+)">[^<]+<\/a>(?:<\/td><td align="right">)?\s*(\d+-(?:\w{3}|\d+)-\d+ \d+:\d+)/g;
 const MONTHS = {
     'januar': 1,
     'februar': 2,
@@ -26,27 +25,7 @@ const MONTHS = {
 };
 const COLLOQUIA_REGEX = /Kolokvijum(?: (1|2|3))?/;
 const COLLOQUIA_2017_REGEX = /k(\d)(?:_resenja)?_2017/;
-const ALL_DIRECTORIES = ['os1', 'os2'];
 const pipeline = promisify(stream.pipeline);
-
-function parseDirectoryListing(content) {
-    const listing = {
-        directories: {},
-        files: {}
-    };
-    let match;
-    do {
-        match = DIRECTORY_REGEX.exec(content);
-        if (match) {
-            if (match[1] === 'DIR') {
-                listing.directories[match[2].slice(0, -1)] = new Date(match[3]);
-            } else {
-                listing.files[decodeURIComponent(match[2])] = new Date(match[3]);
-            }
-        }
-    } while (match);
-    return listing;
-}
 
 function classify(filename) {
     if (
@@ -148,9 +127,7 @@ async function processYear(baseDir, client, year) {
 
 async function processSubject(baseDir) {
     console.info('Processing subject', baseDir);
-    const {baseUrl} = JSON.parse(await readFile(`${baseDir}/meta.json`, {
-        encoding : 'utf-8'
-    }));
+    const {baseUrl} = await readJSON(`${baseDir}/meta.json`);
     await mkdir(`doc/${baseDir}`, {
         recursive: true
     });
