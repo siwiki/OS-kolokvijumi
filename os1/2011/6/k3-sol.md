@@ -56,7 +56,7 @@ Data* DoubleBuffer::get () {
 fsintr
 ```cpp
 int check_access (PCB* p, FHANDLE f, int write) {
-  return p->open_files[FHANDLE].access || !write;
+  return p->open_files[f].access || !write;
 }
 ```
 
