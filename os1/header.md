@@ -39,7 +39,7 @@ Poglavlja zbirke idu istim redom kao kolokvijumsko gradivo na predmetu, konkretn
 
 Raspored ovih oblasti po kolokvijumima se retko menja, ali se takva situacija može desiti (usled predviđenih ili nepredviđenih okolnosti). U tom slučaju, proverite koje oblasti dolaze na kolokvijumu sa predmetnim asistentima. Bitno je napomenuti da se ovaj redosled u prošlosti menjao, pa ako se neki zadatak ranije pojavljivao na prvom kolokvijumu to ne mora da znači da je ta oblast i tekuće godine na prvom kolokvijumu. U suštini, **da li neki zadatak može doći na kolokvijumu određujte prvenstveno na osnovu toga iz koje je oblasti, a ne na osnovu toga na kom se kolokvijumu pojavio u prošlosti**.
 
-Greške u formatiranju i kategorizaciji su sigurno prisutne. Ukoliko ih uočite, možete se javiti jednom od autora ili poslati *pull request* na repozitorijum projekta: \url{https://github.com/KockaAdmiralac/OS-kolokvijumi}. Ispravljeni dokumenti će biti dostupni u [Releases](https://github.com/KockaAdmiralac/OS-kolokvijumi/releases/latest). Svaka pomoć je dobrodošla.
+Greške u formatiranju i kategorizaciji su sigurno prisutne. Ukoliko ih uočite, možete se javiti jednom od autora ili poslati *pull request* na repozitorijum projekta: \url{https://github.com/siwiki/OS-kolokvijumi}. Ispravljeni dokumenti će biti dostupni u [Releases](https://github.com/siwiki/OS-kolokvijumi/releases/latest). Svaka pomoć je dobrodošla.
 
 Srećno na kolokvijumu.
 

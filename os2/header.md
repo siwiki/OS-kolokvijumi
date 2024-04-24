@@ -34,7 +34,7 @@ Svrha ovog dokumenta jeste da objedini sve do sada dostupne kolokvijume iz Opera
 - Na kolokvijumima iz OS2 je dozvoljena literatura, i studenti često pristupaju tome tako što odštampaju kolokvijume i njihova rešenja pa se na kolokvijumu snalaze kroz taj odštampani materijal ako vide neki sličan zadatak. Ovim objedinjenim dokumentom postiže se organizacija takvih materijala radi lakšeg snalaženja na kolokvijumu i ušteda u papirima potrebnim za štampanje svih tih rokova.
 - Zadaci su kategorisani po oblastima i sličnosti kako bi se lakše vežbali određeni tipovi zadataka na kolokvijumu.
 
-Greške u formatiranju i kategorizaciji su sigurno prisutne. Ukoliko ih uočite, možete se javiti jednom od autora ili poslati *pull request* na repozitorijum projekta: \url{https://github.com/KockaAdmiralac/OS-kolokvijumi}. Ispravljeni dokumenti će biti dostupni u [Releases](https://github.com/KockaAdmiralac/OS-kolokvijumi/releases/latest). Svaka pomoć je dobrodošla.
+Greške u formatiranju i kategorizaciji su sigurno prisutne. Ukoliko ih uočite, možete se javiti jednom od autora ili poslati *pull request* na repozitorijum projekta: \url{https://github.com/siwiki/OS-kolokvijumi}. Ispravljeni dokumenti će biti dostupni u [Releases](https://github.com/siwiki/OS-kolokvijumi/releases/latest). Svaka pomoć je dobrodošla.
 
 Srećno na kolokvijumu.
 

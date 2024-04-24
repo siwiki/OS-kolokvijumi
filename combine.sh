@@ -98,4 +98,4 @@ done
 echo -e "-> ${cyan}Cleaning up...${color_reset}"
 rm *.aux *.idx *.ilg *.ind *.log *.tex *.toc os*.md
 
-echo -e "\n${green}Complete! ${white}Please report any issues to ${bold}https://github.com/KockaAdmiralac/OS-kolokvijumi/issues${color_reset}"
+echo -e "\n${green}Complete! ${white}Please report any issues to ${bold}https://github.com/siwiki/OS-kolokvijumi/issues${color_reset}"
