@@ -1,10 +1,16 @@
 #!/usr/bin/env node
+import {getText} from 'any-text';
 import got from 'got';
 import {createWriteStream} from 'fs';
 import {mkdir, writeFile} from 'fs/promises';
 import stream from 'stream';
 import {promisify} from 'util';
-import {ALL_DIRECTORIES, parseDirectoryListing, readJSON} from './util.js';
+import {
+    ALL_DIRECTORIES,
+    parseDirectoryListing,
+    readJSON,
+    fileExists
+} from './util.js';
 
 const MONTHS = {
     'januar': 1,
@@ -23,6 +29,7 @@ const MONTHS = {
     'prvi': 4,
     'drugi': 5
 };
+const SEPARATOR = Array(81).join('-');
 const COLLOQUIA_REGEX = /Kolokvijum(?: (1|2|3))?/;
 const COLLOQUIA_2017_REGEX = /k(\d)(?:_resenja)?_2017/;
 const pipeline = promisify(stream.pipeline);
@@ -73,7 +80,7 @@ function getLocalFilename(baseDir, year, month, file, type) {
     return `pdf/${baseDir}/${year}/${month}/${type}.pdf`;
 }
 
-async function processMonth(baseDir, client, year, month) {
+async function processMonth(baseDir, dates, client, year, month) {
     console.info('Processing month', month, year);
     const {files} = parseDirectoryListing(await client(`${year}/${month}`));
     if (files.length === 0) {
@@ -95,25 +102,30 @@ async function processMonth(baseDir, client, year, month) {
     await mkdir(`${baseDir}/${year}/${monthNum}`, {
         recursive: true
     });
-    for (const file in files) {
+    for (const [file, date] of Object.entries(files)) {
+        dates[`${baseDir}-${year}-${month}-${file}`] = date;
         const type = classify(file);
         if (type === 'res') {
             console.info('Skipping', file, 'as it only contains results');
             continue;
         }
+        const markdownFile = `${baseDir}/${year}/${monthNum}/${type}.md`;
+        if (await fileExists(markdownFile)) {
+            console.info('Skipping', file, 'as', markdownFile, 'exists');
+            continue;
+        }
         const url = `${year}/${month}/${file}`;
         console.info('Downloading', url);
-        await pipeline(
-            client.stream(url),
-            createWriteStream(getLocalFilename(baseDir, year, monthNum, file, type))
-        );
-        await writeFile(`${baseDir}/${year}/${monthNum}/${type}.md`, `${url}\n`, {
+        const pdfFile = getLocalFilename(baseDir, year, monthNum, file, type);
+        await pipeline(client.stream(url), createWriteStream(pdfFile));
+        const text = await getText(pdfFile);
+        await writeFile(markdownFile, `${url}\n${SEPARATOR}\n${text}`, {
             encoding: 'utf-8'
         });
     }
 }
 
-async function processYear(baseDir, client, year) {
+async function processYear(baseDir, dates, client, year) {
     if (isNaN(year)) {
         console.error('Year cannot be parsed!');
         return;
@@ -121,11 +133,11 @@ async function processYear(baseDir, client, year) {
     console.info('Processing year', year);
     const {directories} = parseDirectoryListing(await client(`${year}`));
     for (const month in directories) {
-        await processMonth(baseDir, client, year, month);
+        await processMonth(baseDir, dates, client, year, month);
     }
 }
 
-async function processSubject(baseDir) {
+async function processSubject(baseDir, dates) {
     console.info('Processing subject', baseDir);
     const {baseUrl} = await readJSON(`${baseDir}/meta.json`);
     await mkdir(`doc/${baseDir}`, {
@@ -138,22 +150,34 @@ async function processSubject(baseDir) {
         method: 'GET',
         prefixUrl: baseUrl,
         resolveBodyOnly: true,
-        retry: 0
+        retry: {
+            limit: 0
+        }
     });
     const {directories} = parseDirectoryListing(await client(''));
     for (const year in directories) {
-        await processYear(baseDir, client, Number(year));
+        await processYear(baseDir, dates, client, Number(year));
     }
+}
+
+async function writeDates(dates) {
+    const fileContent = Object
+        .entries(dates)
+        .map(([file, date]) => `${file}: ${date.toJSON()}`)
+        .join('\n');
+    await writeFile('dates.yml', fileContent);
 }
 
 async function main() {
     const dirArg = process.argv[2];
     if (dirArg && !dirArg.startsWith('--')) {
-        await processSubject(dirArg);
+        await processSubject(dirArg, {});
     } else {
+        const dates = {};
         for (const dir of ALL_DIRECTORIES) {
-            await processSubject(dir);
+            await processSubject(dir, dates);
         }
+        await writeDates(dates);
     }
 }
 
