@@ -14,7 +14,7 @@ prnt=
 year=
 generate=
 subject="os1"
-while getopts ":y:g:p" opt 
+while getopts ":y:g:p" opt
 do
     case $opt in
     y) year="$OPTARG"
@@ -28,7 +28,7 @@ do
         ;;
     esac
 done
-shift $(( $OPTIND - 1 )) 
+shift $(( $OPTIND - 1 ))
 
 [ ! -z "$1" ] && subject="$1"
 

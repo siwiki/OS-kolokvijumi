@@ -16,7 +16,7 @@ Zatim pokrenite sledeće komande:
 $ git clone https://github.com/siwiki/OS-kolokvijumi.git
 $ cd OS-kolokvijumi
 $ npm install
-$ ./combine.sh os1 
+$ ./combine.sh os1
 ```
 (Za OS2 zameniti argument u poslednjoj linija sa `os2`, OS1 se podrazumeva.)
 i dobijate PDF (`os1-web.pdf` odnosno `os2-web.pdf`) i Markdown (`os1-web.md` odnosno `os2-web.md`) dokumente sa svim OS1 odnosno OS2 kolokvijumima. Ukoliko vam treba za štampu, pokrenite umesto poslednje komande:
