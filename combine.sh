@@ -97,5 +97,6 @@ done
 # Cleaning up generated files
 echo -e "-> ${cyan}Cleaning up...${color_reset}"
 rm *.aux *.idx *.ilg *.ind *.log *.tex *.toc os*.md
+rm -rf _minted*
 
 echo -e "\n${green}Complete! ${white}Please report any issues to ${bold}https://github.com/siwiki/OS-kolokvijumi/issues${color_reset}"

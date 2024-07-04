@@ -10,6 +10,7 @@ Prvo je potrebno da imate:
 - [PDFLaTeX](https://www.tug.org/applications/pdftex/)
 - [Git](https://git-scm.com/)
 - [librsvg](https://wiki.gnome.org/Projects/LibRsvg) ili [Inkscape](https://inkscape.org/)
+- [Pygments](https://pygments.org/)
 
 Zatim pokrenite sledeće komande:
 ```console

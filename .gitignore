@@ -6,4 +6,5 @@ os2-*
 node_modules
 rsvg-*
 *_svg-tex.*
+_minted*
 .vscode/*
