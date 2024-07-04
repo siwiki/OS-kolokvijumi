@@ -1,7 +1,7 @@
 2023/avgust/IR, SI Kolokvijum 3 - Avgust 2023 - Resenja.pdf
 --------------------------------------------------------------------------------
 ioblock
-U klasu `BlockIOCache` treba uvesti privatne podatke članove numOfBlocks i hand, oba tipa int i inicijalizovana na 0.
+U klasu `BlockIOCache` treba uvesti privatne podatke članove `numOfBlocks` i `hand`, oba tipa int i inicijalizovana na 0.
 ```cpp
 int BlockIOCache::getFreeEntry() {
     if (numOfBlocks < CACHESIZE) return numOfBlocks++;

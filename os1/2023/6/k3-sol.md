@@ -53,10 +53,10 @@ int main(int argc, const char* argv[]) {
     pid_t pid = fork();
     if (pid < 0) handle_error("Cannot create a child process.");
     if (pid > 0) {
-        write(pipefd[1],argv[1],strlen(argv[1]));
+        write(pipefd[1], argv[1], strlen(argv[1]));
     } else {
         char c;
-        while (read(pipefd[0],&c,1)>0)
+        while (read(pipefd[0], &c, 1) > 0)
             putchar(c);
     }
     close(pipefd[0]);
@@ -73,8 +73,10 @@ void truncate(FCB* fcb) {
     if (!fcb->head) return; // File already empty
     uint32 last = fcb->head;
     uint32 cnt = 1;
-    while (fat[last])
-        last = fat[last], cnt++;
+    while (fat[last]) {
+        last = fat[last];
+        cnt++;
+    }
     fat[last] = freeHead;
     freeHead = fcb->head;
     freeCount += cnt;
