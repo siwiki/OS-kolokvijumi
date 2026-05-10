@@ -4,6 +4,13 @@ import {readFile, readdir, writeFile} from 'fs/promises';
 import {argv} from 'process';
 
 const MONTHS = ['', 'januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
+const MONTH_ALIASES = {
+    'sept-1': 'septembar 1',
+    'sept-2': 'septembar 2',
+    'okt-1': 'oktobar 1',
+    'okt-2': 'oktobar 2',
+    'okt-3': 'oktobar 3'
+};
 const TYPES = {
     k: 'kolokvijum',
     k1: 'prvi kolokvijum',
@@ -88,6 +95,10 @@ function getCategories(option, colloquia) {
         colloquia[option];
 }
 
+function getMonthLabel(month) {
+    return MONTH_ALIASES[month] || MONTHS[month] || month;
+}
+
 async function processDirectory(baseDir) {
     const meta = JSON.parse(await readFile(`${baseDir}/meta.json`, {
         encoding : 'utf-8'
@@ -156,7 +167,7 @@ async function processDirectory(baseDir) {
             .map(
                 ([category, entries]) => `# ${meta.categories[category]}\n${entries.map(
                     ({url, content, year, month, type, task, solutionUrl, keywords}) =>
-                        `## ${task}. zadatak, ${TYPES[type]}, ${MONTHS[month]} ${year}.\n${
+                        `## ${task}. zadatak, ${TYPES[type]}, ${getMonthLabel(month)} ${year}.\n${
                             keywords
                                 .map(kw => `\\index{${meta.keywords[kw]}}`)
                                 .join(' ')
