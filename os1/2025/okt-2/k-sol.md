@@ -1,7 +1,7 @@
 2025/okt-2/Kolokvijum 2025 - 4 - Resenja.pdf
 --------------------------------------------------------------------------------
 buffer
-```
+```cpp
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +44,7 @@ int main() {
 
 --------------------------------------------------------------------------------
 semintr
-```
+```cpp
 class Event {
 public:
   Event (int init=0) : val(init?1:0) {}

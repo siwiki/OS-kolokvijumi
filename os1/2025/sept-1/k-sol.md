@@ -1,7 +1,7 @@
 2025/sept-1/Kolokvijum 2025 - sept1 - Resenja.pdf
 --------------------------------------------------------------------------------
 context
-```
+```cpp
 const short THR_STACK = 5;
 const short THR_PRIV_DATA = 6;
 

@@ -24,8 +24,9 @@ dete završi i onda se i sam završava. Sve greške obraditi gašenjem procesa i
 poruke na standardni izlaz za greške. Pomoć: u implementaciji se može koristiti koncept
 `placement new` jezika C++ kojim se objekat date klase može konstruisati (inicijalizovati
 pozivom konstruktora) u prostoru koji je već alociran i nalazi se na mestu na koje ukazuje
+```cpp
 ptr: new (ptr) T(...).
-Rešenje:
+```
 
 
 --------------------------------------------------------------------------------
@@ -43,7 +44,6 @@ nit za izvršavanje. U redu spremnih uvek se nalazi barem neka nit, makar nit id
 ništa korisno (samo troši procesorsko vreme instrukcijama bez efekta). Klasa Event realizuje
 binarni semafor (događaj) bez ograničenja u pogledu toga koja nit sme da poziva operacije
 signal i `wait`.
-Rešenje:
 
 
 --------------------------------------------------------------------------------

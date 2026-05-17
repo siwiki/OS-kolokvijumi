@@ -8,7 +8,7 @@ RegionDesc u kom polje size sadrži veličinu segmenta. Ova lista je uvek nepraz
 kernel za svaki proces, prilikom njegovog pokretanja, alocira najmanje jedan logički segment
 na najnižim adresama virtuelnog adresnog prostora (počev od adrese 0) koji preslikava u svoj
 memorijski prostor.
-```
+```cpp
 struct RegionDesc {
   byte* addr; size_t size;
   RegionDesc* next;
@@ -26,7 +26,6 @@ deskriptora segmenata datog procesa. Tip byte predstavlja celobrojni tip veliči
 adresibilne jedinice. Ne treba poravnavati adrese i veličine segmenata. Dinamičku alokaciju
 prostora za potrebe struktura jezgra radi funkcija `kmalloc` koja ima isti potpis i dejstvo kao
 standardna C funkcija `malloc`.
-Rešenje:
 
 --------------------------------------------------------------------------------
 
@@ -38,7 +37,7 @@ iz bafera uzima pojedinačne elemente tipa T. Kapacitet bafera je NumOfPkgs pake
 PackageSize elemenata tipa T. Omogućiti uporedne aktivnosti proizvođača i potrošača (dok
 jedan proizvođač uzima element, neki potrošač može da stavlja element, ako su potrebni
 uslovi zadovoljeni).
-```
+```cpp
 template<typename T, int PackageSize, int NumOfPkgs>
 class BoundedBuffer {
 public:
@@ -47,7 +46,6 @@ public:
   T take ();
 };
 ```
-Rešenje:
 
 --------------------------------------------------------------------------------
 

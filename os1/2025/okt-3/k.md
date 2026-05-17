@@ -32,7 +32,7 @@ Odgovor: _______________________________ stranica
 
 semintr
 U Školskom jezgru implementirana je statička operacija klase Thread
-```
+```cpp
 void Thread::yield (Thread* oldRunning, Thread* newRunning);
 ```
 koja obavlja promenu konteksta oduzimajući procesor (tekućoj) niti na koju pokazuje

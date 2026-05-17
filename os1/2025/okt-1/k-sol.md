@@ -1,7 +1,7 @@
 2025/okt-1/Kolokvijum 2025 - okt1 - Resenja.pdf
 --------------------------------------------------------------------------------
 segment
-```
+```cpp
 void* createRegion (RegionDesc* phead, size_t sz) {
   if (!phead || !sz) return nullptr;
   RegionDesc* bestPrev = nullptr;
@@ -28,7 +28,7 @@ void* createRegion (RegionDesc* phead, size_t sz) {
 --------------------------------------------------------------------------------
 
 buffer
-```
+```cpp
 template<typename T, int PackageSize, int NumOfPkgs>
 class BoundedBuffer {
 public:

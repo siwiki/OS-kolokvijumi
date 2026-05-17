@@ -73,7 +73,7 @@ odmah po pozivu operacije `start`). Svake periode treba pozvati apstraktnu opera
 activate koju izvedene klase treba da redefinišu i u njoj implementiraju aktivnost niti u
 svakoj periodičnoj aktivaciji. Nakon poziva operacije stop, nit treba da se zavši prilikom prve
 naredne periodične aktivacije.
-```
+```cpp
 using Timing::Time;
 
 class PeriodicThread : public Thread {
@@ -84,7 +84,6 @@ public:
   ...
 };
 ```
-Rešenje:
 
 
 --------------------------------------------------------------------------------
@@ -155,7 +154,6 @@ int BlockDevice::perform (BlkNo blkNo, void* buffer, int rdwr) {
   return status;
 }
 ```
-Rešenje:
 
 
 --------------------------------------------------------------------------------

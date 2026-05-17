@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 page
 Svaki PMT zauzima tačno jednu stranicu veličine 4 KB = 2^12 B sa ulazima veličine 8 B =
-2^3 B, pa poseduje 2^12/2^3 = 2^9 ulaza za čije adresiranje je potrebno 9 bita. Polje za pomeraj
+2^3 B, pa poseduje $2^{12} \div 2^3 = 2^9$ ulaza za čije adresiranje je potrebno 9 bita. Polje za pomeraj
 unutar virtuelne adrese je 12 bita, pa preostalih 48-12 = 36 bita adresira stranicu. Adresiranje
 najnižeg 1 GB virtuelnog adresnog prostora zahteva 30 bita, od kojih je 12 za pomeraj unutar
 stranice, a preostalih 18 za adresiranje stranice.
@@ -28,7 +28,7 @@ pa bi se mogao očekivati bolji učinak u smislu performansi i korišćenja TLB-
 
 --------------------------------------------------------------------------------
 semintr
-```
+```cpp
 class Event {
 public:
   Event ();

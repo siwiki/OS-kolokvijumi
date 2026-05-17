@@ -25,20 +25,22 @@ niti. Osim toga, kernel omogućava da svaka nit ima i svoj „privatan" region z
 ukoliko ga je alocirao, koji je dozvoljen za pristup samo toj niti; ovaj region smešta u ulaz 6
 MPU-a.
 U klasi Thread, koja implementira nit u ovom kernelu, postoje sledeće nestatičke operacije:
-- void* getStackStart(): vraća početnu adresu memorijskog prostora za stek date niti;
-- void* getStackSize(): vraća veličinu memorijskog prostora za stek date niti;
-- void* getPrivDataStart(): vraća početnu adresu memorijskog prostora za privatne
-  podatke date niti, odnosno 0 ako ovaj prostor nije alociran;
-- void* getPrivDataSize(): vraća veličinu memorijskog prostora za privatne podatke
-  date niti.
+
+- ```void* getStackStart()```: vraća početnu adresu memorijskog prostora za stek date niti;
+
+- ```void* getStackSize()```: vraća veličinu memorijskog prostora za stek date niti;
+
+- ```void* getPrivDataStart()```: vraća početnu adresu memorijskog prostora za privatne podatke date niti, odnosno 0 ako ovaj prostor nije alociran;
+
+- ```void* getPrivDataSize()```: vraća veličinu memorijskog prostora za privatne podatke date niti.
+
 Implementirati operaciju switchMemContext koja menja memorijski kontekst i koju kernel
 poziva kada menja kontekst niti i procesor predaje niti koja je data kao parametar.
-```
+```cpp
 MPU::setRegion (short regionNo, void* startAddr, size_t size, int prot);
 MPU::invalidateRegion (short regionNo);
 void switchMemContext (Thread* toRun);
 ```
-Rešenje:
 
 
 --------------------------------------------------------------------------------
@@ -59,7 +61,6 @@ adresi running. Procedura kernela koja obrađuje sistemski poziv i nakon obrade 
 running upisuje adresu PCB-a novog tekućeg procesa je handle_sys_call.
 Na asembleru procesora picoRISC napisati proceduru za obradu sistemskog poziva i promenu
 konteksta, tako da za obradu sistemskog poziva koristi stek kernela.
-Rešenje:
 
 
 --------------------------------------------------------------------------------
@@ -100,7 +101,7 @@ public:
   int write (BlkNo blkNo, void* buffer);
 };
 ```
-Rešenje:
+:
 
 
 --------------------------------------------------------------------------------

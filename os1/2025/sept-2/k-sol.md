@@ -25,7 +25,7 @@ EF & 110 \\
 --------------------------------------------------------------------------------
 
 thread
-```
+```cpp
 class PeriodicThread : public Thread {
 public:
   PeriodicThread (Time period, Time start = 0)
