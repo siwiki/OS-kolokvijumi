@@ -58,6 +58,8 @@ Svaki element map[i] sadrži broj zauzetih prvih slotova, tj. keširanih blokova
 entries[i]. Funkcija hash je heš funkcija koja preslikava broj bloka u ulaz u mapi. Svaki
 element niza entries[i][j] je struktura tipa CacheEntry u kojoj je polje blkNo broj bloka
 koji je keširan u tom elementu, a polje buf je sadržaj samog keširanog bloka.
+
+
 Na početku složene operacije sa uređajem, kod koji koristi keš najpre traži da je potrebni blok
 učitan pozivom funkcije `getBlock` koja vraća pokazivač na niz bajtova u baferu – učitanom
 bloku. Pošto više ovakvih složenih operacija može biti ugnježdeno, blok iz keša može biti
@@ -65,7 +67,9 @@ izbačen (zamenjen drugim) samo ako ga više niko ne koristi, što se realizuje 
 referenci u polju refCounter strukture CacheEntry. Funkcija `evict(i)` izbacuje jedan
 keširani blok iz punog keša u nizu entries[i], koji može da se izbaci jer nije u upotrebi,
 ukoliko takav može da nađe, oslobađa njegov ulaz i dekrementira map[i], pa vraća njegov
-indeks u tom nizu entries[i]; ako takav ne može da nađe, ova funkcija vraća CACHESIZE.
+indeks u tom nizu entries[i]; ako takav ne može da nađe, ova funkcija vraća `CACHESIZE`.
+
+
 Implementirati funkciju `getBlock` koja treba da obezbedi da je traženi blok u kešu, odnosno
 učita ga ako nije. Ako nema mesta u kešu jer nijedan blok ne može da se izbaci, treba vratiti
 `null`. Ostale članice date klase su implementirane, a na raspolaganju je i funkcija koja učitava
@@ -108,11 +112,11 @@ liste je uvek u ulazu 0 ovog niza, a na sledeći element u listi ukazuje polje n
 (sadrži indeks sledećeg čvora u listi); vrednost 0 u polju next označava kraj liste. Svaki čvor
 sadrži count preslikavanja ključ u vrednost, a najviše njih MAX_KEYS. Ključevi su u nizu
 keys, a njihove odgovarajuće vrednosti u koje se preslikavaju u nizu values.
-a)(5) Korišćenjem POSIX funkcije read za čitanje, realizovati funkciju getNode koja
+1)(5) Korišćenjem POSIX funkcije read za čitanje, realizovati funkciju getNode koja
 obezbeđuje da čvor smešten u dati indeks niza bude učitan u memoriju i vraća pokazivač na
 taj učitan čvor. Parametar fd ove funkcije je deskriptor već otvorenog fajla u kom je zapisana
 mapa. Ignorisati greške, tj. smatrati da su sadržaj fajla i struktura zapisana u njemu ispravni.
-b)(5) Korišenjem realizovane funkcije getNode, implementirati funkciju getValue koja u
+2)(5) Korišenjem realizovane funkcije getNode, implementirati funkciju getValue koja u
 opisanoj mapi koja je u već otvorenom fajlu sa deskriptorom fd pronalazi dati ključ i vraća
 vrednost u koju se taj ključ preslikava. Ukoliko ključ ne pronađe, funkcija treba da vrati -1.
 ```cpp

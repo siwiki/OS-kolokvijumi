@@ -1,30 +1,36 @@
 2025/sept-1/Kolokvijum 2025 - sept1.pdf
 --------------------------------------------------------------------------------
 context
-Neki mikroprocesor za ugrađene (embedded) sisteme ne podržava virtuelni adresni prostor
+Neki mikroprocesor za ugrađene (*embedded*) sisteme ne podržava virtuelni adresni prostor
 niti preslikavanje virtuelnih u fizičke adrese, pa operativni sistem za ovaj procesor ne
 podržava procese, već samo niti, kako je to i karakteristično za ovakve sisteme. Međutim,
-ovaj procesor ima u sebi jedinicu za zaštitu memorije (memory protection unit, MPU) koja
+ovaj procesor ima u sebi *jedinicu za zaštitu memorije* (*memory protection unit, MPU*) koja
 omogućava zaštitu pojedinih regiona operativne memorije na sledeći način.
+
+
 MPU omogućava da se u svakom trenutku u njemu definiše maksimalno 8 ulaza za isto toliko
 definisanih regiona operativne memorije koji se identifikuju brojevima 0..7. Za svaki region
 može se definisati početna adresa, veličina, kao i prava pristupa, redom navedenim
-parametrima operacije MPU::setRegion koja u odgovarajuće registre MPU upisuje
+parametrima operacije `MPU::setRegion` koja u odgovarajuće registre MPU upisuje
 odgovarajuće vrednosti kojima se region konfiguriše. Prava pristupa se definišu postavljanjem
 odgovarajućih bita za koje su definisane bit-maske odgovarajućim simboličkim konstantama:
-O_KX, O_KRD, O_KWR, O_KRW za dozvolu izvršavanja, čitanja, upisa, odnosno i čitanja i upisa,
+`O_KX, O_KRD, O_KWR, O_KRW` za dozvolu izvršavanja, čitanja, upisa, odnosno i čitanja i upisa,
 respektivno, u sistemskom (kernel) režimu rada procesora, kao i odgovarajuće konstante
-O_UX, O_URD, O_UWR, O_URW za korisnički režim rada procesora. Funkcija
-MPU::invalidateRegion invaliduje dati ulaz u MPU.
+`O_UX, O_URD, O_UWR, O_URW` za korisnički režim rada procesora. Funkcija
+`MPU::invalidateRegion` invaliduje dati ulaz u MPU.
+
+
 MPU proverava pristup memoriji tako što za datu generizanu adresu traži prvi definisani
 region (redom po brojevima ulaza) u koji data adresa ulazi (regioni se mogu i preklapati) i na
 osnovu prava pristupa definisanih za taj region odlučuje o dozvoli pristupa toj adresi.
+
+
 Kernel operativnog sistema za ovaj procesor uvek organizuje šest regiona, numerisanih redom
 0..5: kod, podaci i stek kernela, zatim kod, zajednički podaci svih niti i stek tekuće korisničke
 niti. Osim toga, kernel omogućava da svaka nit ima i svoj „privatan" region za podatke,
 ukoliko ga je alocirao, koji je dozvoljen za pristup samo toj niti; ovaj region smešta u ulaz 6
 MPU-a.
-U klasi Thread, koja implementira nit u ovom kernelu, postoje sledeće nestatičke operacije:
+U klasi `Thread`, koja implementira nit u ovom kernelu, postoje sledeće nestatičke operacije:
 
 - ```void* getStackStart()```: vraća početnu adresu memorijskog prostora za stek date niti;
 
@@ -34,7 +40,7 @@ U klasi Thread, koja implementira nit u ovom kernelu, postoje sledeće nestatič
 
 - ```void* getPrivDataSize()```: vraća veličinu memorijskog prostora za privatne podatke date niti.
 
-Implementirati operaciju switchMemContext koja menja memorijski kontekst i koju kernel
+Implementirati operaciju `switchMemContext` koja menja memorijski kontekst i koju kernel
 poziva kada menja kontekst niti i procesor predaje niti koja je data kao parametar.
 ```cpp
 MPU::setRegion (short regionNo, void* startAddr, size_t size, int prot);
@@ -51,14 +57,18 @@ režimu, a registar SSP u privilegovanom režimu rada procesora. Prilikom izvrš
 instrukcije sistemskog poziva, obrade izuzetka ili spoljašnjeg prekida, procesor najpre stavlja
 sadržaj registara PC i PSW, tim redom, na stek na čiji vrh ukazuje SSP, a potom prelazi u
 rutinu za obradu; SP se tom prilikom ne menja.
+
+
 Kernel čuva kontekst tekućeg procesa na sistemskom delu steka koji je alociran za svaki
 proces, a za izvršavanje svog koda za obradu sistemskog poziva koristi poseban, jedinstven
 stek koji pripada samo kernelu. Na taj stek ukazuje globalna promenljiva čija je adresa
-predstavljena simboličkom konstantom kernelSP. U strukturi PCB postoji polje za čuvanje
+predstavljena simboličkom konstantom `kernelSP`. U strukturi PCB postoji polje za čuvanje
 vrednosti vrha steka tekućeg procesa, čiji je pomeraj u odnosu na početak PCB-a definisan
-simboličkom konstantom offsSP. Pokazivač na tekući proces je u globalnoj promenljivoj na
-adresi running. Procedura kernela koja obrađuje sistemski poziv i nakon obrade poziva u
-running upisuje adresu PCB-a novog tekućeg procesa je handle_sys_call.
+simboličkom konstantom `offsSP`. Pokazivač na tekući proces je u globalnoj promenljivoj na
+adresi `running`. Procedura kernela koja obrađuje sistemski poziv i nakon obrade poziva u
+`running` upisuje adresu PCB-a novog tekućeg procesa je `handle_sys_call`.
+
+
 Na asembleru procesora picoRISC napisati proceduru za obradu sistemskog poziva i promenu
 konteksta, tako da za obradu sistemskog poziva koristi stek kernela.
 
@@ -74,10 +84,14 @@ DMA pokreće se pozivom operacije start sa zadatim brojem bloka na disku blkNo, 
 prenos bloka podataka na zadatoj adresi buffer i za odgovarajući smer (rdwr, 0 za čitanje, 1
 za upis). Nakon završenog prenosa, DMA kontroler generiše prekid sa zadatim brojem ulaza
 u IVT, a nakon toga status završene operacije može se očitati pozivom operacije getStatus.
+
+
 Mehanizam prekida omogućava da se u IVT, pored pokazivača na prekidnu rutinu, zada i
 parametar tipa void* koji odgovara svakom ulazu. Taj parametar se dostavlja prekidnoj rutini
 prilikom obrade prekida u tom ulazu. Ulaz u IVT postavlja se na zadatu rutinu isr
 operacijom Interrupts::initIVT.
+
+
 Implementirati klasu BlockDevice, zajedno sa odgovarajućom prekidnom rutinom, koja
 uporednim korisničkim procesima pruža usluge prenosa sa blokovskim uređajem. Pri
 inicijalizaciji, objektu ove klase dostavlja se broj ulaza u IVT koji je dodeljen datom uređaju,
@@ -108,6 +122,7 @@ public:
 
 cmd
 Dat je podsetnik na neke osnovne Unix komande:
+
 - cat: iz svakog fajla koji je naveden kao argument ove komande, redom kojim su oni
   navedeni, učitava znakove i ispisuje ih na standardni izlaz; ukoliko nema argumenata,
   znakove učitava sa standardnog ulaza (dok ne naiđe na znak EOF koji se na konzoli
@@ -119,6 +134,7 @@ Dat je podsetnik na neke osnovne Unix komande:
 
 Izvršavaju se sledeće komande po datom redosledu; napisati te komande ili odgovoriti na
 postavljeno pitanje:
+
 - U postojećem poddirektorijumu b tekućeg direktorijuma napraviti nov tekstualni fajl
   bdoc čiji će sadržaj biti isti kao sadržaj postojećeg tekstualnog fajla adoc u
   roditeljskom direktorijumu tekućeg:

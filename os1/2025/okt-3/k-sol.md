@@ -6,13 +6,13 @@ Svaki PMT zauzima tačno jednu stranicu veličine 4 KB = 2^12 B sa ulazima veli�
 unutar virtuelne adrese je 12 bita, pa preostalih 48-12 = 36 bita adresira stranicu. Adresiranje
 najnižeg 1 GB virtuelnog adresnog prostora zahteva 30 bita, od kojih je 12 za pomeraj unutar
 stranice, a preostalih 18 za adresiranje stranice.
-a)(5) Za 36 bita za broj stranice i po 9 bita za svako polje za adresiranje ulaza unutar PMT-a
+1. (5) Za 36 bita za broj stranice i po 9 bita za svako polje za adresiranje ulaza unutar PMT-a
 svakog nivoa, potrebno je 36/9 = 4 nivoa PMT-a. Za adresiranje 1 GB kernel prostora koji se
 deli između procesa potrebno je i dovoljna jedna stranica za PMT 3. nivoa i 2^9 = 512 stranica
 za PMT-ove 4. nivoa, što je ukupno 513 stranica. Za adresiranje tog prostora i još jedne
 stranice iznad njega, za svaki proces potrebno je alocirati po jedan PMT sva 4 nivoa. Prema
 tome, ukupno je za sve PMT-ove n procesa potrebno 4n + 513 stranica.
-b)(5) Za PMT-ove za adresiranje kernel prostora potrebno je istih 513 stranica za PMT-ove
+2. (5) Za PMT-ove za adresiranje kernel prostora potrebno je istih 513 stranica za PMT-ove
 u dva nivoa koje svi procesi dele kao pod a). Za adresiranje ostatka virtuelnog adresnog
 prostora potrebna je ista organizacija PMT u 4 nivoa kao pod a), samo što se ulazi 0 u
 PMT-ovima 1. i 2. nivoa praktično ne koriste (ne može se iskoristiti za smanjenje broja nivoa

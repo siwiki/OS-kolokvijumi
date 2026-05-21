@@ -29,20 +29,35 @@ redova date tabele ostaviti prazne.)
 Stranica \# (hex) & RWX (bin) \\
 \hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
+\hline
  &  \\
 \hline
 \end{tabular}
@@ -59,12 +74,14 @@ Odgovor (hex): ____________
 
 thread
 U školskom jezgru implementirani su sledeći elementi:
+
 - tip Timing::Time, iza kog se krije dovoljno velik neoznačen celobrojni tip čije
   vrednosti predstavaljaju vremenske intervale izražene u malim jedinicama vremena;
 - operacija Timing::now() koja vraća tekuće vreme tipa Time kao vreme proteklo od
   nekog referentnog trenutka u prošlosti;
 - operacija Timing::sleep(Time) koja uspavljuje tekuću nit do trenutka koji je zadat
   argumentom (trenutak se zadaje kao interval protekao od referentnog trenutka).
+
 Korišćenjem ovih stvari, implementirati klasu PeriodicThread čiji je interfejs dat dole i koja
 treba da implementira periodične niti. Perioda aktivacije niti (kao interval) zadaje se prvim
 argumentom konstruktora. Drugi argument konstruktora je opcioni i ako je različit od nule,
@@ -97,15 +114,21 @@ DMA pokreće se pozivom operacije start sa zadatim brojem bloka na disku blkNo, 
 prenos bloka podataka na zadatoj adresi buffer i za odgovarajući smer (rdwr, 0 za čitanje, 1
 za upis). Nakon završenog prenosa, DMA kontroler generiše prekid sa zadatim brojem ulaza
 u IVT, a nakon toga status završene operacije može se očitati pozivom operacije getStatus.
+
+
 Mehanizam prekida omogućava da se u IVT, pored pokazivača na prekidnu rutinu, zada i
 parametar tipa void* koji odgovara svakom ulazu. Taj parametar se dostavlja prekidnoj rutini
 prilikom obrade prekida u tom ulazu. Ulaz u IVT postavlja se na zadatu rutinu isr
 operacijom Interrupts::initIVT.
+
+
 Dole je data implementacija klase BlockDevice, zajedno sa odgovarajućom prekidnom
 rutinom, koja uporednim korisničkim nitima pruža usluge prenosa sa blokovskim uređajem.
 Pri inicijalizaciji, objektu ove klase dostavlja se broj ulaza u IVT koji je dodeljen datom
 uređaju, kao i drajver tog uređaja. Niti zadaju operacije sa diskom pozivom operacije
 perform. Ova operacija obavlja se jedna po jedna, redom kako su korisničke niti nju pozvale.
+
+
 Prepraviti implementaciju ove klase, bez izmene u interfejsu prema korisničkim nitima, tako
 da se zahtevi korisničkih niti stavljaju u ograničeni bafer, a ne odmah sinhrono obrađuju
 redom. Nit koja je postavila zahtev treba da se suspenduje dok se zahtev ne izvrši. Posebna nit
@@ -186,10 +209,12 @@ typedef struct {
 } FATDirectoryEntry;
 ```
 Prostor na particiji organizuje se u tri dela:
+
 - na početku particije je FAT koji zauzima određen broj blokova;
 - iza toga se nalazi zapis sadržaja korenog direktorijuma koji čini niz od 512 struktura
   FATDirectoryEntry, pa zauzima određen fiksan broj blokova;
 - iza toga se nalaze blokovi u koje se smešta sadržaj fajlova i direktorijuma.
+
 
 Ako se pretpostavi da je ceo FAT učitan i keširan u operativnoj memoriji, a da osim njega
 nijedan više blok korenog direktorijuma ili sadržaja fajlova nije učitan (keširan), kao i da svi

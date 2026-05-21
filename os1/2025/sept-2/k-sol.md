@@ -100,13 +100,13 @@ void BlockDevice::run () {
 --------------------------------------------------------------------------------
 
 fsintr
-a)(5) n+1.
+1. (5) n+1.
 Objašnjenje: najpre se učitava prvi blok zapisa korenog direktorijuma sa unapred poznate
 fiksne lokacije. U njegovom prvom ulazu pronalazi se FCB za dir_1 i tu se nalazi broj prvog
 bloka zapisa njegovog sadržaja. Zatim se učitava taj blok i u njegovom prvom ulazu određuje
 broj prvog bloka zapisa sadržaja dir_2 itd. U n-tom učitanom bloku pronalazi se broj prvog
 bloka zapisa sadržaja dir_n. U tom, n+1-om učitanom bloku, u prvom ulazu, pronalazi se broj
 prvog bloka sadržaja fajla.
-b) 2(n+1), jer se za svaki element staze mora učitati dva bloka, pošto se on nalazi u drugom
+2. 2(n+1), jer se za svaki element staze mora učitati dva bloka, pošto se on nalazi u drugom
 bloku sadržaja (jedan blok sadrži 16 ulaza), a pretraga ulaza je sekvencijalna po nizu ulaza,
 dok se pozicija drugog bloka sa sadržajem dobija iz FAT koji je keširan.
