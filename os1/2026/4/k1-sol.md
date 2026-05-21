@@ -67,6 +67,8 @@ SCStatus extendRegion (RegionDesc* head, size_t startPage, size_t by) {
 ```
 
 **Objašnjenje:**
+
+
 - Prolazimo kroz ulančanu listu dok ne nađemo region koji počinje na traženoj stranici `startPage`
 - Ako nema takvog regiona, vraćamo `illegalArg` (nevalidna vrednost parametra)
 - Određujemo maksimalnu stranicu koju region može dosegnuti:
@@ -109,6 +111,8 @@ int TextSegment::loadPage (Process* pr, Page pg, Frame fr) {
 **Objašnjenje:**
 
 **BSSSegment::loadPage:**
+
+
 - Za BSS segment (inicijalizovan nulama ili neinicijalizovan), pri prvom pristupu stranici (isAccessed() vraća false):
   - Označavamo da je stranica pristupana pomoću setAccessed()
   - Ako je segment inicijalizovan nulama (isZeroInit == true), popunjavamo okvir nulama pomoću writeZeros()
@@ -117,6 +121,8 @@ int TextSegment::loadPage (Process* pr, Page pg, Frame fr) {
 - Pri drugim pristupima stranici (isAccessed() vraća true), stranica je možda izbačena iz memorije, pa je učitavamo iz prostora za zamenu pomoću loadDataPage()
 
 **DataSegment::loadPage:**
+
+
 - Za segment sa inicijalizovanim podacima, pri prvom pristupu:
   - Označavamo da je stranica pristupana
   - Učitavamo stranicu iz exe fajla pomoću loadExePage() jer je podatak inicijalizovan u programu
@@ -124,6 +130,8 @@ int TextSegment::loadPage (Process* pr, Page pg, Frame fr) {
 - Pri drugim pristupima, stranica može biti izbačena, pa je učitavamo iz prostora za zamenu
 
 **TextSegment::loadPage:**
+
+
 - Za segment sa kodom (instrukcijama), svaki put učitavamo stranicu iz exe fajla
 - Kod se nikada ne menja tokom izvršavanja, pa se uvek učitava iz izvršnog fajla
 

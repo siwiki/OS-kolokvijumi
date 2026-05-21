@@ -30,7 +30,7 @@ Odgovor: _______________________________ stranica
 
 --------------------------------------------------------------------------------
 
-semintr
+semimpl
 U Školskom jezgru implementirana je statička operacija klase Thread
 ```cpp
 void Thread::yield (Thread* oldRunning, Thread* newRunning);

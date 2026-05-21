@@ -27,7 +27,7 @@ morao da kešira sve pojedinačne deskriptore za različite procese iako ukazuju
 pa bi se mogao očekivati bolji učinak u smislu performansi i korišćenja TLB-a.
 
 --------------------------------------------------------------------------------
-semintr
+semimpl
 ```cpp
 class Event {
 public:

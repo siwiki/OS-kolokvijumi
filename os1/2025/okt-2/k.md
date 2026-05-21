@@ -8,7 +8,7 @@ deli sa svojom decom pokrenutom pozivom `fork` tako što se u flegovima uključi
 deskriptor postaviti na -1 (ofset je tada nebitan). Sistem će alocirati segment veličine
 zaokružene na ceo broj stranica, veći ili jednak traženoj veličini size. U slučaju neuspeha,
 ovaj sistemski poziv vraća `MAP_FAILED`.
-```
+```cpp
 void* mmap(void* addr, size_t size, int prot, int flags,
            int fd, off_t offset);
 ```
@@ -31,9 +31,9 @@ ptr: new (ptr) T(...).
 
 --------------------------------------------------------------------------------
 
-semintr
+semimpl
 U Školskom jezgru implementirana je statička operacija klase Thread
-```
+```cpp
 void Thread::yield (Thread* oldRunning, Thread* newRunning);
 ```
 koja obavlja promenu konteksta oduzimajući procesor (tekućoj) niti na koju pokazuje

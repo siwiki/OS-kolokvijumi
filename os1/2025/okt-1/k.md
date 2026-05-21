@@ -50,17 +50,19 @@ public:
 --------------------------------------------------------------------------------
 
 ioblock
-Neki program obilazi i obrađuje jedno ogromno kompletno binarno stablo sa n nivoa i tačno
-2^n - 1 čvorova, tako što obilazak počinje od korena i svaki čvor obilazi i čita samo po jednom.
+Neki program obilazi i obrađuje jedno ogromno kompletno binarno stablo sa $n$ nivoa i tačno
+$2^n - 1$ čvorova, tako što obilazak počinje od korena i svaki čvor obilazi i čita samo po jednom.
 Stablo je zapisano kao niz čvorova poput strukture hipa (heap): koreni čvor je u elementu
-niza sa indeksom 0, levo dete čvora sa indeksom i je u elementu sa indeksom 2i+1, a desno
-dete je u elementu sa indeksom 2i+2. Ovaj niz je redom po indeksima zapisan u fajl koji je
+niza sa indeksom 0, levo dete čvora sa indeksom $i$ je u elementu sa indeksom $2i+1$, a desno
+dete je u elementu sa indeksom $2i+2$. Ovaj niz je redom po indeksima zapisan u fajl koji je
 smešten na disku sa blokom u koji staju tačno dva susedna elementa niza (elementi 0 i 1 su u
 jednom bloku, elementi 2 i 3 su u sledećem itd). Ako sistem za svaki fajl kešira uvek jedan i
 samo jedan blok sa njegovim sadržajem, izračunati koliko je operacija učitavanja bloka sa
 diska potrebno izvršiti tokom obrade celog ovog stabla ako je obilazak u sledećem redosledu:
-a)(5) prefiksno, odozgo nadole po dubini (pre-order top-down depth-first);
-b)(5) odozgo nadole po širini (top-down breadth-first).
+
+1. (5) prefiksno, odozgo nadole po dubini (pre-order top-down depth-first);
+2. (5) odozgo nadole po širini (top-down breadth-first).
+
 Odgovor precizno obrazložiti.
 
 --------------------------------------------------------------------------------
